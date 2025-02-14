@@ -1,10 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
 import { hash } from 'bcrypt';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UpdateUserDto } from '../dto/update-user.dto';
-import { USERS_ERROR, UserWithoutPassword } from '../types/user.type';
+import { CreateUserDto } from '../dto/user/create-user.dto';
+import { UpdateUserDto } from '../dto/user/update-user.dto';
+import { UserWithoutPassword } from '../types/user.type';
 import { User } from '@prisma/client';
+import { USER_ERROR } from '../types/errors.type';
 
 @Injectable()
 export class UserService {
@@ -42,7 +43,7 @@ export class UserService {
     });
 
     if (!user) {
-      throw new NotFoundException(USERS_ERROR.NOT_FOUND_BY_ID);
+      throw new NotFoundException(USER_ERROR.NOT_FOUND_BY_ID);
     }
     return user;
   }
@@ -55,7 +56,7 @@ export class UserService {
     });
 
     if (!user) {
-      throw new NotFoundException(USERS_ERROR.NOT_FOUND_BY_EMAIL);
+      throw new NotFoundException(USER_ERROR.NOT_FOUND_BY_EMAIL);
     }
     return user;
   }

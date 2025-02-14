@@ -10,9 +10,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
-import { CreateUserDto } from '../dto/create-user.dto';
+import { CreateUserDto } from '../dto/user/create-user.dto';
 import { UserWithoutPassword } from '../types/user.type';
-import { UpdateUserDto } from '../dto/update-user.dto';
+import { UpdateUserDto } from '../dto/user/update-user.dto';
 import { UserExistsGuard } from '../guards/user-exists.guard';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { ApiBody, ApiOperation } from '@nestjs/swagger';

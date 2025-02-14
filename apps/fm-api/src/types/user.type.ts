@@ -1,6 +1,7 @@
-import { User } from '@prisma/client'
+import { User } from '@prisma/client';
 
-export type UserWithoutPassword = Omit<User, 'password'>
-export interface UerIdPayload {
-  userId: string
+export type UserWithoutPassword = Omit<User, 'password'>;
+
+export interface UserIdPayload {
+  userId: string;
 }

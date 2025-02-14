@@ -1,44 +1,52 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
   UseGuards,
 } from '@nestjs/common';
 import { ProductService } from '../services/product.service';
-import { CreateProductDto } from '../dto/create-product.dto';
-import { UpdateProductDto } from '../dto/update-product.dto';
+import { CreateProductDto } from '../dto/product/create-product.dto';
+import { UpdateProductDto } from '../dto/product/update-product.dto';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+import { ProductExistsGuard } from '../guards/product-exists.guard';
+import { Product } from '@prisma/client';
 
 @Controller('products')
 export class ProductController {
-  constructor(private readonly productsService: ProductService) {}
+  constructor(private readonly productService: ProductService) {}
 
   @Post()
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(createProductDto);
+  @UseGuards(JwtAuthGuard, ProductExistsGuard)
+  create(@Body() createProductDto: CreateProductDto): Promise<Product> {
+    return this.productService.create(createProductDto);
   }
 
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  findAll(): Promise<Product[]> {
+    return this.productService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productsService.findOneById(id);
+  @Get(':productId')
+  findOne(@Param('productId') productId: string): Promise<Product> {
+    return this.productService.findOneById(productId);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productsService.update(id, updateProductDto);
+  @Patch(':productId')
+  @UseGuards(JwtAuthGuard, ProductExistsGuard)
+  update(
+    @Param('productId') productId: string,
+    @Body() updateProductDto: UpdateProductDto,
+  ): Promise<Product> {
+    return this.productService.update(productId, updateProductDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productsService.remove(id);
+  @Delete(':productId')
+  @UseGuards(JwtAuthGuard, ProductExistsGuard)
+  remove(@Param('productId') productId: string): Promise<Product> {
+    return this.productService.remove(productId);
   }
 }

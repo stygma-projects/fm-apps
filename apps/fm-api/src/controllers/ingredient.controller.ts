@@ -6,40 +6,50 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { IngredientService } from '../services/ingredient.service';
-import { CreateIngredientDto } from '../dto/create-ingredient.dto';
-import { UpdateIngredientDto } from '../dto/update-ingredient.dto';
+import { CreateIngredientDto } from '../dto/ingredient/create-ingredient.dto';
+import { UpdateIngredientDto } from '../dto/ingredient/update-ingredient.dto';
+import { Ingredient } from '@prisma/client';
+import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+import { IngredientExistsGuard } from '../guards/ingredient-exists.guard';
 
 @Controller('ingredients')
 export class IngredientController {
-  constructor(private readonly ingredientsService: IngredientService) {}
+  constructor(private readonly ingredientService: IngredientService) {}
 
   @Post()
-  create(@Body() createIngredientDto: CreateIngredientDto) {
-    return this.ingredientsService.create(createIngredientDto);
+  @UseGuards(JwtAuthGuard)
+  create(
+    @Body() createIngredientDto: CreateIngredientDto,
+  ): Promise<Ingredient> {
+    return this.ingredientService.create(createIngredientDto);
   }
 
   @Get()
-  findAll() {
-    return this.ingredientsService.findAll();
+  @UseGuards(JwtAuthGuard, IngredientExistsGuard)
+  findAll(): Promise<Ingredient[]> {
+    return this.ingredientService.findAll();
   }
 
   @Get(':ingredientId')
-  findOne(@Param('ingredientId') ingredientId: string) {
-    return this.ingredientsService.findOne(ingredientId);
+  findOne(@Param('ingredientId') ingredientId: string): Promise<Ingredient> {
+    return this.ingredientService.findOneById(ingredientId);
   }
 
   @Patch(':ingredientId')
+  @UseGuards(JwtAuthGuard, IngredientExistsGuard)
   update(
     @Param('ingredientId') ingredientId: string,
     @Body() updateIngredientDto: UpdateIngredientDto,
-  ) {
-    return this.ingredientsService.update(ingredientId, updateIngredientDto);
+  ): Promise<Ingredient> {
+    return this.ingredientService.update(ingredientId, updateIngredientDto);
   }
 
   @Delete(':ingredientId')
-  remove(@Param('ingredientId') ingredientId: string) {
-    return this.ingredientsService.remove(ingredientId);
+  @UseGuards(JwtAuthGuard, IngredientExistsGuard)
+  remove(@Param('ingredientId') ingredientId: string): Promise<Ingredient> {
+    return this.ingredientService.remove(ingredientId);
   }
 }

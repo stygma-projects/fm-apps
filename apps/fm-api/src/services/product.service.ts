@@ -1,24 +1,25 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateProductDto } from '../dto/create-product.dto';
-import { UpdateProductDto } from '../dto/update-product.dto';
+import { CreateProductDto } from '../dto/product/create-product.dto';
+import { UpdateProductDto } from '../dto/product/update-product.dto';
 import { PrismaService } from './prisma.service';
-import { PRODUCT_ERROR } from '../types/errors.type';
+import { Product } from '@prisma/client';
+import { PRODUCT_ERROR } from '../types/product.type';
 
 @Injectable()
 export class ProductService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createProductDto: CreateProductDto) {
+  create(createProductDto: CreateProductDto): Promise<Product> {
     return this.prisma.product.create({
       data: createProductDto,
     });
   }
 
-  findAll() {
+  findAll(): Promise<Product[]> {
     return this.prisma.product.findMany();
   }
 
-  async findOneById(productId: string) {
+  async findOneById(productId: string): Promise<Product> {
     const product = await this.prisma.product.findUnique({
       where: {
         id: productId,
@@ -30,7 +31,22 @@ export class ProductService {
     return product;
   }
 
-  update(productId: string, updateProductDto: UpdateProductDto) {
+  async findOne(productId?: string, label?: string): Promise<Product> {
+    const product = await this.prisma.product.findFirst({
+      where: {
+        OR: [{ id: productId }, { label }],
+      },
+    });
+    if (!product) {
+      throw new NotFoundException(PRODUCT_ERROR.NOT_FOUND);
+    }
+    return product;
+  }
+
+  update(
+    productId: string,
+    updateProductDto: UpdateProductDto,
+  ): Promise<Product> {
     return this.prisma.product.update({
       where: {
         id: productId,
@@ -39,7 +55,7 @@ export class ProductService {
     });
   }
 
-  remove(productId: string) {
+  remove(productId: string): Promise<Product> {
     return this.prisma.product.delete({
       where: {
         id: productId,

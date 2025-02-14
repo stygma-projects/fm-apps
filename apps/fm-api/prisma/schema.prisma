@@ -12,15 +12,14 @@ datasource db {
 }
 
 model Product {
-  id                  String                @id @default(uuid())
-  label               String                @unique
-  price               Float
-  imageUrl            String?
-  available           Boolean
-  productCategoryId   String
-  productCategory     ProductCategory       @relation(fields: [productCategoryId], references: [id])
-  ingredients         Ingredient[]
-  IngredientInProduct IngredientInProduct[]
+  id                String                @id @default(uuid())
+  label             String                @unique
+  price             Float
+  imageUrl          String?
+  available         Boolean?              @default(true)
+  productCategoryId String
+  productCategory   ProductCategory       @relation(fields: [productCategoryId], references: [id])
+  ingredients       IngredientInProduct[]
 }
 
 model ProductCategory {
@@ -35,9 +34,8 @@ model Ingredient {
   label               String                @unique
   price               Float                 @default(0)
   imageUrl            String?
-  products            Product[]
-  IngredientType      IngredientType?       @relation(fields: [ingredientTypeId], references: [id])
-  ingredientTypeId    String?
+  IngredientType      IngredientType        @relation(fields: [ingredientTypeId], references: [id])
+  ingredientTypeId    String
   IngredientInProduct IngredientInProduct[]
 }
 
