@@ -35,7 +35,6 @@ model Ingredient {
   label               String                @unique
   price               Float                 @default(0)
   imageUrl            String?
-  typeId              Int
   products            Product[]
   IngredientType      IngredientType?       @relation(fields: [ingredientTypeId], references: [id])
   ingredientTypeId    String?
@@ -55,6 +54,7 @@ model IngredientInProduct {
   ingredient   Ingredient            @relation(fields: [ingredientId], references: [id])
   product      Product               @relation(fields: [productId], references: [id])
   composition  IngredientComposition
+  mandatory    Boolean               @default(false)
 }
 
 enum IngredientComposition {

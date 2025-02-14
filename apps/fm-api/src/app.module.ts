@@ -1,23 +1,21 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
+import { UserModule } from './modules/user.module';
+import { AuthModule } from './modules/auth.module';
 import { ConfigModule } from '@nestjs/config';
-import { TodosModule } from './todos/todos.module';
-import { ProductsModule } from './food/products/products.module';
-import { IngredientsModule } from './food/ingredients/ingredients.module';
-import { CategoriesModule } from './food/categories/categories.module';
+import { ProductModule } from './modules/product.module';
+import { IngredientModule } from './modules/ingredient.module';
+import { ProductCategoryModule } from './modules/product-category.module';
 
 @Module({
   imports: [
-    TodosModule,
-    UsersModule,
+    UserModule,
     AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    ProductsModule,
-    IngredientsModule,
-    CategoriesModule,
+    ProductModule,
+    IngredientModule,
+    ProductCategoryModule,
   ],
   controllers: [],
   providers: [],
