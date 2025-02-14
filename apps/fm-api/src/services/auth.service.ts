@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { AuthBody } from '../controllers/auth.controller';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from './user.service';
-import { AUTH_ERROR, LoginResponse } from '../types/auth.type';
+import { AUTH_ERROR, JwtPayload, LoginResponse } from '../types/auth.type';
+import { AuthDto } from '../dto/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +12,7 @@ export class AuthService {
     private readonly userService: UserService,
   ) {}
 
-  async login(authBody: AuthBody): Promise<LoginResponse> {
+  async login(authBody: AuthDto): Promise<LoginResponse> {
     const userFound = await this.userService.findOneByEmail(authBody.email);
     const isPasswordMatching = await compare(
       authBody.password,
@@ -21,7 +21,10 @@ export class AuthService {
     if (!isPasswordMatching) {
       throw new BadRequestException(AUTH_ERROR.WRONG_PASSWORD);
     }
-    const jwtPayload = { userId: userFound.id, role: userFound.role };
+    const jwtPayload: JwtPayload = {
+      userId: userFound.id,
+      role: userFound.role,
+    };
     return {
       access_token: this.jwtService.sign(jwtPayload),
     };

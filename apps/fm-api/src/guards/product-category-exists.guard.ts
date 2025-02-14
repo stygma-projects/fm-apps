@@ -13,7 +13,10 @@ export class ProductCategoryExistsGuard implements CanActivate {
     const productCategoryId = request.params.productCategoryId;
     const label = request.body.label;
 
-    await this.productCategoryService.findOne(productCategoryId, label);
-    return true;
+    const productCategoryFound = await this.productCategoryService.findOne(
+      productCategoryId,
+      label,
+    );
+    return !!productCategoryFound;
   }
 }

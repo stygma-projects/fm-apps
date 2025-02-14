@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { IngredientRequest } from '../types/ingredient.type';
+import { IngredientRequest } from '../types/common.type';
 import { IngredientService } from '../services/ingredient.service';
 
 @Injectable()
@@ -11,7 +11,10 @@ export class IngredientExistsGuard implements CanActivate {
     const ingredientId = request.params.ingredientId;
     const label = request.body.label;
 
-    await this.ingredientService.findOne(ingredientId, label);
-    return true;
+    const ingredientFound = await this.ingredientService.findOne(
+      ingredientId,
+      label,
+    );
+    return !!ingredientFound;
   }
 }

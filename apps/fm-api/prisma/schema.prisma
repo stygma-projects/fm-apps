@@ -16,7 +16,7 @@ model Product {
   label             String                @unique
   price             Float
   imageUrl          String?
-  available         Boolean?              @default(true)
+  available         Boolean               @default(true)
   productCategoryId String
   productCategory   ProductCategory       @relation(fields: [productCategoryId], references: [id])
   ingredients       IngredientInProduct[]
@@ -32,7 +32,7 @@ model ProductCategory {
 model Ingredient {
   id                  String                @id @default(uuid())
   label               String                @unique
-  price               Float                 @default(0)
+  price               Float
   imageUrl            String?
   IngredientType      IngredientType        @relation(fields: [ingredientTypeId], references: [id])
   ingredientTypeId    String
@@ -42,6 +42,7 @@ model Ingredient {
 model IngredientType {
   id          String       @id @default(uuid())
   label       String       @unique
+  imageUrl    String?
   ingredients Ingredient[]
 }
 
@@ -51,7 +52,7 @@ model IngredientInProduct {
   productId    String
   ingredient   Ingredient            @relation(fields: [ingredientId], references: [id])
   product      Product               @relation(fields: [productId], references: [id])
-  composition  IngredientComposition
+  composition  IngredientComposition @default(BASE)
   mandatory    Boolean               @default(false)
 }
 

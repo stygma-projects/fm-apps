@@ -6,6 +6,7 @@ import { ProductModule } from './modules/product.module';
 import { IngredientModule } from './modules/ingredient.module';
 import { ProductCategoryModule } from './modules/product-category.module';
 import { IngredientTypeModule } from './modules/ingredient-type.module';
+import { RemovePasswordInterceptor } from './interceptors/remove-password.interceptor';
 
 @Module({
   imports: [
@@ -20,6 +21,11 @@ import { IngredientTypeModule } from './modules/ingredient-type.module';
     IngredientTypeModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: 'APP_INTERCEPTOR',
+      useClass: RemovePasswordInterceptor,
+    },
+  ],
 })
 export class AppModule {}

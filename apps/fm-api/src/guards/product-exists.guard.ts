@@ -11,7 +11,7 @@ export class ProductExistsGuard implements CanActivate {
     const productId = request.params.productId;
     const label = request.body.label;
 
-    await this.productService.findOne(productId, label);
-    return true;
+    const productFound = await this.productService.findOne(productId, label);
+    return !!productFound;
   }
 }

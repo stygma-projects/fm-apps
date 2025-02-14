@@ -3,7 +3,7 @@ import { CreateIngredientDto } from '../dto/ingredient/create-ingredient.dto';
 import { UpdateIngredientDto } from '../dto/ingredient/update-ingredient.dto';
 import { PrismaService } from './prisma.service';
 import { Ingredient } from '@prisma/client';
-import { INGREDIENT_ERROR } from '../types/ingredient.type';
+import { INGREDIENT_ERROR } from '../types/common.type';
 
 @Injectable()
 export class IngredientService {

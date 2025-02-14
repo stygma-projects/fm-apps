@@ -11,7 +11,10 @@ export class IngredientTypeExistsGuard implements CanActivate {
     const ingredientTypeId = request.params.ingredientTypeId;
     const label = request.body.label;
 
-    await this.ingredientTypeService.findOne(ingredientTypeId, label);
-    return true;
+    const ingredientTypeFound = await this.ingredientTypeService.findOne(
+      ingredientTypeId,
+      label,
+    );
+    return !!ingredientTypeFound;
   }
 }
