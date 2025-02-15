@@ -7,29 +7,29 @@ import {
   IsString,
   IsUrl,
   IsUUID,
-} from 'class-validator';
+} from 'class-validator'
 
 export class CreateProductDto {
   @IsString()
   @IsNotEmpty()
-  label!: string;
+  label!: string
 
   @IsNumber()
   @IsPositive()
   @IsNotEmpty()
-  price!: number;
+  price!: number
 
   @IsString()
   @IsUrl()
   @IsOptional()
-  imageUrl?: string;
+  imageUrl?: string
 
   @IsBoolean()
   @IsOptional()
-  available?: boolean;
+  available?: boolean
 
   @IsString()
   @IsNotEmpty()
   @IsUUID()
-  productCategoryId!: string;
+  productCategoryId!: string
 }

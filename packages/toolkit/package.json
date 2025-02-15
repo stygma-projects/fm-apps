@@ -1,0 +1,22 @@
+{
+  "name": "@fm-monorepo/toolkit",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "exports": {
+    "./tsconfig": "./tsconfig.json",
+    "./eslint": "./eslint.config.js",
+    "./prettier": "./prettier.config.js"
+  },
+  "dependencies": {
+    "@vfourny/node-toolkit": "latest",
+    "typescript-eslint": "^8.24.0"
+  }
+}

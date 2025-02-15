@@ -1,19 +1,27 @@
 {
   "name": "@fm-monorepo/prisma",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "types": "index.d.ts",
   "exports": {
     ".": "./src/index.ts"
   },
-  "dependencies": {
-    "@prisma/client": "latest",
-    "prisma": "latest"
-  },
   "scripts": {
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev --skip-generate",
     "db:reset": "prisma migrate reset --force && npm run db:generate",
-    "db:deploy": "prisma migrate deploy"
+    "db:deploy": "prisma migrate deploy",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@prisma/client": "latest",
+    "prisma": "latest"
+  },
+  "devDependencies": {
+    "@fm-monorepo/toolkit": "*"
   }
 }

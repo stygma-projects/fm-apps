@@ -6,25 +6,25 @@ import {
   IsString,
   IsUrl,
   IsUUID,
-} from 'class-validator';
+} from 'class-validator'
 
 export class CreateIngredientDto {
   @IsString()
   @IsNotEmpty()
-  label!: string;
+  label!: string
 
   @IsNumber()
   @IsPositive()
   @IsNotEmpty()
-  price!: number;
+  price!: number
 
   @IsString()
   @IsUrl()
   @IsOptional()
-  imageUrl?: string;
+  imageUrl?: string
 
   @IsString()
   @IsNotEmpty()
   @IsUUID()
-  ingredientTypeId!: string;
+  ingredientTypeId!: string
 }

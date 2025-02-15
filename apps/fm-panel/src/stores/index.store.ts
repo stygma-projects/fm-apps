@@ -1,3 +1,3 @@
-import useInventoryStore from "./inventory.store.ts";
+import useInventoryStore from './inventory.store.ts'
 
-export { useInventoryStore };
+export { useInventoryStore }

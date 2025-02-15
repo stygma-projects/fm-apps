@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "@vfourny/node-toolkit/tsconfig"
+  ]
+}

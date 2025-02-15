@@ -1,13 +1,13 @@
-import {UserRole} from '@prisma/client';
+import {UserRole} from "@prisma/client";
 
-export type LoginResponse = {
-    access_token: string;
-};
+export interface LoginResponse {
+    access_token: string
+}
 
-export type JwtPayload = {
-    userId: string;
-    role: UserRole;
-};
+export interface JwtPayload {
+    userId: string
+    role: UserRole
+}
 
 export enum AUTH_ERROR {
     WRONG_PASSWORD = 'Wrong password',

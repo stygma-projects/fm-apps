@@ -1,10 +1,10 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator'
 
 export class CreateProductCategoryDto {
   @IsString()
   @IsNotEmpty()
-  label!: string;
+  label!: string
 
   @IsString()
-  imageUrl?: string;
+  imageUrl?: string
 }
