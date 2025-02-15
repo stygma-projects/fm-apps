@@ -7,15 +7,15 @@ import {
   Patch,
   Post,
   UseGuards,
-} from '@nestjs/common';
-import { IngredientService } from '../services/ingredient.service';
-import { CreateIngredientDto } from '../dto/ingredient/create-ingredient.dto';
-import { UpdateIngredientDto } from '../dto/ingredient/update-ingredient.dto';
-import { Ingredient } from '@prisma/client';
-import { JwtAuthGuard } from '../guards/jwt-auth.guard';
-import { IngredientExistsGuard } from '../guards/ingredient-exists.guard';
+} from "@nestjs/common";
+import { IngredientService } from "../services/ingredient.service";
+import { CreateIngredientDto } from "../dto/ingredient/create-ingredient.dto";
+import { UpdateIngredientDto } from "../dto/ingredient/update-ingredient.dto";
+import { JwtAuthGuard } from "../guards/jwt-auth.guard";
+import { IngredientExistsGuard } from "../guards/ingredient-exists.guard";
+import { Ingredient } from "@fm-monorepo/prisma/generated/client";
 
-@Controller('ingredients')
+@Controller("ingredients")
 export class IngredientController {
   constructor(private readonly ingredientService: IngredientService) {}
 
@@ -33,23 +33,23 @@ export class IngredientController {
     return this.ingredientService.findAll();
   }
 
-  @Get(':ingredientId')
-  findOne(@Param('ingredientId') ingredientId: string): Promise<Ingredient> {
+  @Get(":ingredientId")
+  findOne(@Param("ingredientId") ingredientId: string): Promise<Ingredient> {
     return this.ingredientService.findOneById(ingredientId);
   }
 
-  @Patch(':ingredientId')
+  @Patch(":ingredientId")
   @UseGuards(JwtAuthGuard, IngredientExistsGuard)
   update(
-    @Param('ingredientId') ingredientId: string,
+    @Param("ingredientId") ingredientId: string,
     @Body() updateIngredientDto: UpdateIngredientDto,
   ): Promise<Ingredient> {
     return this.ingredientService.update(ingredientId, updateIngredientDto);
   }
 
-  @Delete(':ingredientId')
+  @Delete(":ingredientId")
   @UseGuards(JwtAuthGuard, IngredientExistsGuard)
-  remove(@Param('ingredientId') ingredientId: string): Promise<Ingredient> {
+  remove(@Param("ingredientId") ingredientId: string): Promise<Ingredient> {
     return this.ingredientService.remove(ingredientId);
   }
 }

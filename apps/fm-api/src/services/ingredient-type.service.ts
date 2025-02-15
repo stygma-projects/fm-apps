@@ -1,9 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateIngredientTypeDto } from '../dto/ingredient-type/create-ingredient-type.dto';
-import { UpdateIngredientTypeDto } from '../dto/ingredient-type/update-ingredient-type.dto';
-import { IngredientType } from '@prisma/client';
-import { PrismaService } from './prisma.service';
-import { INGREDIENT_TYPE_ERROR } from '../types/ingredient-type.type';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { CreateIngredientTypeDto } from "../dto/ingredient-type/create-ingredient-type.dto";
+import { UpdateIngredientTypeDto } from "../dto/ingredient-type/update-ingredient-type.dto";
+import { PrismaService } from "./prisma.service";
+import { INGREDIENT_TYPE_ERROR } from "../types/ingredient-type.type";
+import { IngredientType } from "@fm-monorepo/prisma/generated/client";
 
 @Injectable()
 export class IngredientTypeService {

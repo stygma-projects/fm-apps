@@ -1,3 +1,3 @@
-import useProductStore from "./product.store";
+import useInventoryStore from "./inventory.store.ts";
 
-export { useProductStore };
+export { useInventoryStore };

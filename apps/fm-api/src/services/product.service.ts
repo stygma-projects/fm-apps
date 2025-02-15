@@ -1,9 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateProductDto } from '../dto/product/create-product.dto';
-import { UpdateProductDto } from '../dto/product/update-product.dto';
-import { PrismaService } from './prisma.service';
-import { Product } from '@prisma/client';
-import { PRODUCT_ERROR } from '../types/product.type';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { CreateProductDto } from "../dto/product/create-product.dto";
+import { UpdateProductDto } from "../dto/product/update-product.dto";
+import { PrismaService } from "./prisma.service";
+import { PRODUCT_ERROR } from "../types/product.type";
+import { Product } from "@fm-monorepo/prisma/generated/client";
 
 @Injectable()
 export class ProductService {

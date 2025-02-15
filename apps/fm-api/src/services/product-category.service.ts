@@ -1,9 +1,9 @@
-import { CreateProductCategoryDto } from '../dto/product-category/create-product-category.dto';
-import { UpdateProductCategoryDto } from '../dto/product-category/update-product-category.dto';
-import { PrismaService } from './prisma.service';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { ProductCategory } from '@prisma/client';
-import { PRODUCT_CATEGORY_ERROR } from '../types/product-category.type';
+import { CreateProductCategoryDto } from "../dto/product-category/create-product-category.dto";
+import { UpdateProductCategoryDto } from "../dto/product-category/update-product-category.dto";
+import { PrismaService } from "./prisma.service";
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { PRODUCT_CATEGORY_ERROR } from "../types/product-category.type";
+import { ProductCategory } from "@fm-monorepo/prisma/generated/client";
 
 @Injectable()
 export class ProductCategoryService {
