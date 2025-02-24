@@ -1,6 +1,5 @@
-import {PrismaClient} from '@prisma/client'
 import {hash} from 'bcrypt'
-import {UserRole} from "./generated/client";
+import {PrismaClient, UserRole} from "../generated/client";
 
 const prisma = new PrismaClient()
 

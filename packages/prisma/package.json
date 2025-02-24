@@ -18,10 +18,14 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@prisma/client": "latest",
-    "prisma": "latest"
+    "@prisma/client": "latest"
   },
   "devDependencies": {
-    "@fm-monorepo/toolkit": "*"
+    "@fm-monorepo/toolkit": "*",
+    "prisma": "latest",
+    "tsx": "^4.19.3"
+  },
+  "prisma": {
+    "seed": "tsx ./src/seed.ts"
   }
 }

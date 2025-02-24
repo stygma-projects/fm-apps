@@ -26,6 +26,9 @@
     "db:deploy": {
       "cache": false
     },
+    "db:reset": {
+        "cache": false
+    },
     "format": {
       "cache": false
     },

@@ -1,8 +1,9 @@
+
 /**
  * Client
- **/
+**/
 
-import * as runtime from './runtime/library.js'
+import * as runtime from './runtime/library.js';
 import $Types = runtime.Types // general types
 import $Public = runtime.Types.Public
 import $Utils = runtime.Types.Utils
@@ -11,37 +12,35 @@ import $Result = runtime.Types.Result
 
 export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
+
 /**
  * Model Product
- *
+ * 
  */
 export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
 /**
  * Model ProductCategory
- *
+ * 
  */
-export type ProductCategory =
-  $Result.DefaultSelection<Prisma.$ProductCategoryPayload>
+export type ProductCategory = $Result.DefaultSelection<Prisma.$ProductCategoryPayload>
 /**
  * Model Ingredient
- *
+ * 
  */
 export type Ingredient = $Result.DefaultSelection<Prisma.$IngredientPayload>
 /**
  * Model IngredientType
- *
+ * 
  */
-export type IngredientType =
-  $Result.DefaultSelection<Prisma.$IngredientTypePayload>
+export type IngredientType = $Result.DefaultSelection<Prisma.$IngredientTypePayload>
 /**
  * Model IngredientInProduct
- *
+ * 
  */
-export type IngredientInProduct =
-  $Result.DefaultSelection<Prisma.$IngredientInProductPayload>
+export type IngredientInProduct = $Result.DefaultSelection<Prisma.$IngredientInProductPayload>
 /**
  * Model User
- *
+ * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 
@@ -50,19 +49,20 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export namespace $Enums {
   export const IngredientComposition: {
-    BASE: 'BASE'
-    EXTRA: 'EXTRA'
-  }
+  BASE: 'BASE',
+  EXTRA: 'EXTRA'
+};
 
-  export type IngredientComposition =
-    (typeof IngredientComposition)[keyof typeof IngredientComposition]
+export type IngredientComposition = (typeof IngredientComposition)[keyof typeof IngredientComposition]
 
-  export const UserRole: {
-    ADMIN: 'ADMIN'
-    USER: 'USER'
-  }
 
-  export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+export const UserRole: {
+  ADMIN: 'ADMIN',
+  USER: 'USER'
+};
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
 }
 
 export type IngredientComposition = $Enums.IngredientComposition
@@ -89,16 +89,12 @@ export const UserRole: typeof $Enums.UserRole
  */
 export class PrismaClient<
   ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  U = 'log' extends keyof ClientOptions
-    ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition>
-      ? Prisma.GetEvents<ClientOptions['log']>
-      : never
-    : never,
-  ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
+  ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
 > {
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
 
-  /**
+    /**
    * ##  Prisma Client ʲˢ
    *
    * Type-safe database client for TypeScript & Node.js
@@ -113,25 +109,18 @@ export class PrismaClient<
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
    */
 
-  constructor(
-    optionsArg?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>,
-  )
-  $on<V extends U>(
-    eventType: V,
-    callback: (
-      event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent,
-    ) => void,
-  ): void
+  constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
+  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): void;
 
   /**
    * Connect with the database
    */
-  $connect(): $Utils.JsPromise<void>
+  $connect(): $Utils.JsPromise<void>;
 
   /**
    * Disconnect from the database
    */
-  $disconnect(): $Utils.JsPromise<void>
+  $disconnect(): $Utils.JsPromise<void>;
 
   /**
    * Add a middleware
@@ -140,7 +129,7 @@ export class PrismaClient<
    */
   $use(cb: Prisma.Middleware): void
 
-  /**
+/**
    * Executes a prepared raw query and returns the number of affected rows.
    * @example
    * ```
@@ -149,10 +138,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $executeRaw<T = unknown>(
-    query: TemplateStringsArray | Prisma.Sql,
-    ...values: any[]
-  ): Prisma.PrismaPromise<number>
+  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
 
   /**
    * Executes a raw query and returns the number of affected rows.
@@ -164,10 +150,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $executeRawUnsafe<T = unknown>(
-    query: string,
-    ...values: any[]
-  ): Prisma.PrismaPromise<number>
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
 
   /**
    * Performs a prepared raw query and returns the `SELECT` data.
@@ -178,10 +161,7 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $queryRaw<T = unknown>(
-    query: TemplateStringsArray | Prisma.Sql,
-    ...values: any[]
-  ): Prisma.PrismaPromise<T>
+  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
 
   /**
    * Performs a raw query and returns the `SELECT` data.
@@ -193,10 +173,8 @@ export class PrismaClient<
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $queryRawUnsafe<T = unknown>(
-    query: string,
-    ...values: any[]
-  ): Prisma.PrismaPromise<T>
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
+
 
   /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
@@ -208,100 +186,77 @@ export class PrismaClient<
    *   prisma.user.create({ data: { name: 'Alice' } }),
    * ])
    * ```
-   *
+   * 
    * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
-  $transaction<P extends Prisma.PrismaPromise<any>[]>(
-    arg: [...P],
-    options?: { isolationLevel?: Prisma.TransactionIsolationLevel },
-  ): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
 
-  $transaction<R>(
-    fn: (
-      prisma: Omit<PrismaClient, runtime.ITXClientDenyList>,
-    ) => $Utils.JsPromise<R>,
-    options?: {
-      maxWait?: number
-      timeout?: number
-      isolationLevel?: Prisma.TransactionIsolationLevel
-    },
-  ): $Utils.JsPromise<R>
+  $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
 
-  $extends: $Extensions.ExtendsHook<
-    'extends',
-    Prisma.TypeMapCb,
-    ExtArgs,
-    $Utils.Call<
-      Prisma.TypeMapCb,
-      {
-        extArgs: ExtArgs
-      }
-    >,
-    ClientOptions
-  >
 
-  /**
+  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb, ExtArgs, $Utils.Call<Prisma.TypeMapCb, {
+    extArgs: ExtArgs
+  }>, ClientOptions>
+
+      /**
    * `prisma.product`: Exposes CRUD operations for the **Product** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Products
-   * const products = await prisma.product.findMany()
-   * ```
-   */
-  get product(): Prisma.ProductDelegate<ExtArgs, ClientOptions>
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Products
+    * const products = await prisma.product.findMany()
+    * ```
+    */
+  get product(): Prisma.ProductDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.productCategory`: Exposes CRUD operations for the **ProductCategory** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more ProductCategories
-   * const productCategories = await prisma.productCategory.findMany()
-   * ```
-   */
-  get productCategory(): Prisma.ProductCategoryDelegate<ExtArgs, ClientOptions>
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProductCategories
+    * const productCategories = await prisma.productCategory.findMany()
+    * ```
+    */
+  get productCategory(): Prisma.ProductCategoryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.ingredient`: Exposes CRUD operations for the **Ingredient** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Ingredients
-   * const ingredients = await prisma.ingredient.findMany()
-   * ```
-   */
-  get ingredient(): Prisma.IngredientDelegate<ExtArgs, ClientOptions>
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Ingredients
+    * const ingredients = await prisma.ingredient.findMany()
+    * ```
+    */
+  get ingredient(): Prisma.IngredientDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.ingredientType`: Exposes CRUD operations for the **IngredientType** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more IngredientTypes
-   * const ingredientTypes = await prisma.ingredientType.findMany()
-   * ```
-   */
-  get ingredientType(): Prisma.IngredientTypeDelegate<ExtArgs, ClientOptions>
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IngredientTypes
+    * const ingredientTypes = await prisma.ingredientType.findMany()
+    * ```
+    */
+  get ingredientType(): Prisma.IngredientTypeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.ingredientInProduct`: Exposes CRUD operations for the **IngredientInProduct** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more IngredientInProducts
-   * const ingredientInProducts = await prisma.ingredientInProduct.findMany()
-   * ```
-   */
-  get ingredientInProduct(): Prisma.IngredientInProductDelegate<
-    ExtArgs,
-    ClientOptions
-  >
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IngredientInProducts
+    * const ingredientInProducts = await prisma.ingredientInProduct.findMany()
+    * ```
+    */
+  get ingredientInProduct(): Prisma.IngredientInProductDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
-   * ```
-   */
-  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
+    * ```
+    */
+  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -332,6 +287,8 @@ export namespace Prisma {
   export import raw = runtime.raw
   export import Sql = runtime.Sql
 
+
+
   /**
    * Decimal.js
    */
@@ -348,8 +305,8 @@ export namespace Prisma {
   export type MetricHistogramBucket = runtime.MetricHistogramBucket
 
   /**
-   * Extensions
-   */
+  * Extensions
+  */
   export import Extension = $Extensions.UserArgs
   export import getExtensionContext = runtime.Extensions.getExtensionContext
   export import Args = $Public.Args
@@ -371,6 +328,7 @@ export namespace Prisma {
    * Utility Types
    */
 
+
   export import JsonObject = runtime.JsonObject
   export import JsonArray = runtime.JsonArray
   export import JsonValue = runtime.JsonValue
@@ -385,36 +343,36 @@ export namespace Prisma {
    */
   namespace NullTypes {
     /**
-     * Type of `Prisma.DbNull`.
-     *
-     * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
-     *
-     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
-     */
+    * Type of `Prisma.DbNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
     class DbNull {
       private DbNull: never
       private constructor()
     }
 
     /**
-     * Type of `Prisma.JsonNull`.
-     *
-     * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
-     *
-     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
-     */
+    * Type of `Prisma.JsonNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
     class JsonNull {
       private JsonNull: never
       private constructor()
     }
 
     /**
-     * Type of `Prisma.AnyNull`.
-     *
-     * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
-     *
-     * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
-     */
+    * Type of `Prisma.AnyNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
     class AnyNull {
       private AnyNull: never
       private constructor()
@@ -455,24 +413,22 @@ export namespace Prisma {
   /**
    * Get the type of the value, that the Promise holds.
    */
-  export type PromiseType<T extends PromiseLike<any>> =
-    T extends PromiseLike<infer U> ? U : T
+  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infer U> ? U : T;
 
   /**
    * Get the return type of a function which returns a Promise.
    */
-  export type PromiseReturnType<
-    T extends (...args: any) => $Utils.JsPromise<any>,
-  > = PromiseType<ReturnType<T>>
+  export type PromiseReturnType<T extends (...args: any) => $Utils.JsPromise<any>> = PromiseType<ReturnType<T>>
 
   /**
    * From T, pick a set of properties whose keys are in the union K
    */
   type Prisma__Pick<T, K extends keyof T> = {
-    [P in K]: T[P]
-  }
+      [P in K]: T[P];
+  };
 
-  export type Enumerable<T> = T | Array<T>
+
+  export type Enumerable<T> = T | Array<T>;
 
   export type RequiredKeys<T> = {
     [K in keyof T]-?: {} extends Prisma__Pick<T, K> ? never : K
@@ -489,8 +445,8 @@ export namespace Prisma {
    * @desc From `T` pick properties that exist in `U`. Simple version of Intersection
    */
   export type Subset<T, U> = {
-    [key in keyof T]: key extends keyof U ? T[key] : never
-  }
+    [key in keyof T]: key extends keyof U ? T[key] : never;
+  };
 
   /**
    * SelectSubset
@@ -499,11 +455,12 @@ export namespace Prisma {
    */
   export type SelectSubset<T, U> = {
     [key in keyof T]: key extends keyof U ? T[key] : never
-  } & (T extends SelectAndInclude
-    ? 'Please either choose `select` or `include`.'
-    : T extends SelectAndOmit
-      ? 'Please either choose `select` or `omit`.'
-      : {})
+  } &
+    (T extends SelectAndInclude
+      ? 'Please either choose `select` or `include`.'
+      : T extends SelectAndOmit
+        ? 'Please either choose `select` or `omit`.'
+        : {})
 
   /**
    * Subset + Intersection
@@ -511,35 +468,37 @@ export namespace Prisma {
    */
   export type SubsetIntersection<T, U, K> = {
     [key in keyof T]: key extends keyof U ? T[key] : never
-  } & K
+  } &
+    K
 
-  type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never }
+  type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 
   /**
    * XOR is needed to have a real mutually exclusive union type
    * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
    */
-  type XOR<T, U> = T extends object
-    ? U extends object
-      ? (Without<T, U> & U) | (Without<U, T> & T)
-      : U
-    : T
+  type XOR<T, U> =
+    T extends object ?
+    U extends object ?
+      (Without<T, U> & U) | (Without<U, T> & T)
+    : U : T
+
 
   /**
    * Is T a Record?
    */
-  type IsObject<T extends any> =
-    T extends Array<any>
-      ? False
-      : T extends Date
-        ? False
-        : T extends Uint8Array
-          ? False
-          : T extends BigInt
-            ? False
-            : T extends object
-              ? True
-              : False
+  type IsObject<T extends any> = T extends Array<any>
+  ? False
+  : T extends Date
+  ? False
+  : T extends Uint8Array
+  ? False
+  : T extends BigInt
+  ? False
+  : T extends object
+  ? True
+  : False
+
 
   /**
    * If it's T[], return T
@@ -560,7 +519,11 @@ export namespace Prisma {
 
   type EitherLoose<O extends object, K extends Key> = ComputeRaw<__Either<O, K>>
 
-  type _Either<O extends object, K extends Key, strict extends Boolean> = {
+  type _Either<
+    O extends object,
+    K extends Key,
+    strict extends Boolean
+  > = {
     1: EitherStrict<O, K>
     0: EitherLoose<O, K>
   }[strict]
@@ -568,7 +531,7 @@ export namespace Prisma {
   type Either<
     O extends object,
     K extends Key,
-    strict extends Boolean = 1,
+    strict extends Boolean = 1
   > = O extends unknown ? _Either<O, K, strict> : never
 
   export type Union = any
@@ -585,69 +548,50 @@ export namespace Prisma {
     : never
 
   export type Overwrite<O extends object, O1 extends object> = {
-    [K in keyof O]: K extends keyof O1 ? O1[K] : O[K]
-  } & {}
+      [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
+  } & {};
 
-  type _Merge<U extends object> = IntersectOf<
-    Overwrite<
-      U,
-      {
-        [K in keyof U]-?: At<U, K>
-      }
-    >
-  >
+  type _Merge<U extends object> = IntersectOf<Overwrite<U, {
+      [K in keyof U]-?: At<U, K>;
+  }>>;
 
-  type Key = string | number | symbol
-  type AtBasic<O extends object, K extends Key> = K extends keyof O
-    ? O[K]
-    : never
-  type AtStrict<O extends object, K extends Key> = O[K & keyof O]
-  type AtLoose<O extends object, K extends Key> = O extends unknown
-    ? AtStrict<O, K>
-    : never
-  export type At<
-    O extends object,
-    K extends Key,
-    strict extends Boolean = 1,
-  > = {
-    1: AtStrict<O, K>
-    0: AtLoose<O, K>
-  }[strict]
+  type Key = string | number | symbol;
+  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never;
+  type AtStrict<O extends object, K extends Key> = O[K & keyof O];
+  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never;
+  export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
+      1: AtStrict<O, K>;
+      0: AtLoose<O, K>;
+  }[strict];
 
-  export type ComputeRaw<A extends any> = A extends Function
-    ? A
-    : {
-        [K in keyof A]: A[K]
-      } & {}
+  export type ComputeRaw<A extends any> = A extends Function ? A : {
+    [K in keyof A]: A[K];
+  } & {};
 
   export type OptionalFlat<O> = {
-    [K in keyof O]?: O[K]
-  } & {}
+    [K in keyof O]?: O[K];
+  } & {};
 
   type _Record<K extends keyof any, T> = {
-    [P in K]: T
-  }
+    [P in K]: T;
+  };
 
   // cause typescript not to expand types and preserve names
-  type NoExpand<T> = T extends unknown ? T : never
+  type NoExpand<T> = T extends unknown ? T : never;
 
   // this type assumes the passed object is entirely optional
   type AtLeast<O extends object, K extends string> = NoExpand<
     O extends unknown
-      ?
-          | (K extends keyof O ? { [P in K]: O[P] } & O : O)
-          | ({ [P in keyof O as P extends K ? K : never]-?: O[P] } & O)
-      : never
-  >
+    ? | (K extends keyof O ? { [P in K]: O[P] } & O : O)
+      | {[P in keyof O as P extends K ? K : never]-?: O[P]} & O
+    : never>;
 
-  type _Strict<U, _U = U> = U extends unknown
-    ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>>
-    : never
+  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
 
-  export type Strict<U extends object> = ComputeRaw<_Strict<U>>
+  export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
   /** End Helper Types for "Merge" **/
 
-  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>
+  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>;
 
   /**
   A [[Boolean]]
@@ -672,8 +616,8 @@ export namespace Prisma {
   export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
     ? 0 // anything `never` is false
     : A1 extends A2
-      ? 1
-      : 0
+    ? 1
+    : 0
 
   export type Has<U extends Union, U1 extends Union> = Not<
     Extends<Exclude<U1, U>, U1>
@@ -692,23 +636,25 @@ export namespace Prisma {
 
   export type Keys<U extends Union> = U extends unknown ? keyof U : never
 
-  type Cast<A, B> = A extends B ? A : B
+  type Cast<A, B> = A extends B ? A : B;
 
-  export const type: unique symbol
+  export const type: unique symbol;
+
+
 
   /**
    * Used by group by
    */
 
-  export type GetScalarType<T, O> = O extends object
-    ? {
-        [P in keyof T]: P extends keyof O ? O[P] : never
-      }
-    : never
+  export type GetScalarType<T, O> = O extends object ? {
+    [P in keyof T]: P extends keyof O
+      ? O[P]
+      : never
+  } : never
 
   type FieldPaths<
     T,
-    U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>,
+    U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>
   > = IsObject<T> extends True ? U : T
 
   type GetHavingFields<T> = {
@@ -720,13 +666,11 @@ export namespace Prisma {
         // based on the brilliant idea of Pierre-Antoine Mills
         // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
         T[K] extends infer TK
-        ? GetHavingFields<
-            UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never
-          >
+        ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
         : never
       : {} extends FieldPaths<T[K]>
-        ? never
-        : K
+      ? never
+      : K
   }[keyof T]
 
   /**
@@ -739,62 +683,42 @@ export namespace Prisma {
   /**
    * Like `Pick`, but additionally can also accept an array of keys
    */
-  type PickEnumerable<
-    T,
-    K extends Enumerable<keyof T> | keyof T,
-  > = Prisma__Pick<T, MaybeTupleToUnion<K>>
+  type PickEnumerable<T, K extends Enumerable<keyof T> | keyof T> = Prisma__Pick<T, MaybeTupleToUnion<K>>
 
   /**
    * Exclude all keys with underscores
    */
-  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}`
-    ? never
-    : T
+  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
+
 
   export type FieldRef<Model, FieldType> = runtime.FieldRef<Model, FieldType>
 
-  type FieldRefInputType<Model, FieldType> = Model extends never
-    ? never
-    : FieldRef<Model, FieldType>
+  type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>
+
 
   export const ModelName: {
-    Product: 'Product'
-    ProductCategory: 'ProductCategory'
-    Ingredient: 'Ingredient'
-    IngredientType: 'IngredientType'
-    IngredientInProduct: 'IngredientInProduct'
+    Product: 'Product',
+    ProductCategory: 'ProductCategory',
+    Ingredient: 'Ingredient',
+    IngredientType: 'IngredientType',
+    IngredientInProduct: 'IngredientInProduct',
     User: 'User'
-  }
+  };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
+
 
   export type Datasources = {
     db?: Datasource
   }
 
-  interface TypeMapCb
-    extends $Utils.Fn<
-      { extArgs: $Extensions.InternalArgs; clientOptions: PrismaClientOptions },
-      $Utils.Record<string, any>
-    > {
-    returns: Prisma.TypeMap<
-      this['params']['extArgs'],
-      this['params']['clientOptions']
-    >
+  interface TypeMapCb extends $Utils.Fn<{extArgs: $Extensions.InternalArgs, clientOptions: PrismaClientOptions }, $Utils.Record<string, any>> {
+    returns: Prisma.TypeMap<this['params']['extArgs'], this['params']['clientOptions']>
   }
 
-  export type TypeMap<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > = {
+  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps:
-        | 'product'
-        | 'productCategory'
-        | 'ingredient'
-        | 'ingredientType'
-        | 'ingredientInProduct'
-        | 'user'
+      modelProps: "product" | "productCategory" | "ingredient" | "ingredientType" | "ingredientInProduct" | "user"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -926,9 +850,7 @@ export namespace Prisma {
           }
           count: {
             args: Prisma.ProductCategoryCountArgs<ExtArgs>
-            result:
-              | $Utils.Optional<ProductCategoryCountAggregateOutputType>
-              | number
+            result: $Utils.Optional<ProductCategoryCountAggregateOutputType> | number
           }
         }
       }
@@ -1060,9 +982,7 @@ export namespace Prisma {
           }
           count: {
             args: Prisma.IngredientTypeCountArgs<ExtArgs>
-            result:
-              | $Utils.Optional<IngredientTypeCountAggregateOutputType>
-              | number
+            result: $Utils.Optional<IngredientTypeCountAggregateOutputType> | number
           }
         }
       }
@@ -1128,9 +1048,7 @@ export namespace Prisma {
           }
           count: {
             args: Prisma.IngredientInProductCountArgs<ExtArgs>
-            result:
-              | $Utils.Optional<IngredientInProductCountAggregateOutputType>
-              | number
+            result: $Utils.Optional<IngredientInProductCountAggregateOutputType> | number
           }
         }
       }
@@ -1206,29 +1124,25 @@ export namespace Prisma {
       payload: any
       operations: {
         $executeRaw: {
-          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]]
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
           result: any
         }
         $executeRawUnsafe: {
-          args: [query: string, ...values: any[]]
+          args: [query: string, ...values: any[]],
           result: any
         }
         $queryRaw: {
-          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]]
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
           result: any
         }
         $queryRawUnsafe: {
-          args: [query: string, ...values: any[]]
+          args: [query: string, ...values: any[]],
           result: any
         }
       }
     }
   }
-  export const defineExtension: $Extensions.ExtendsHook<
-    'define',
-    Prisma.TypeMapCb,
-    $Extensions.DefaultArgs
-  >
+  export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
   export type DefaultPrismaClient = PrismaClient
   export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
   export interface PrismaClientOptions {
@@ -1249,7 +1163,7 @@ export namespace Prisma {
      * ```
      * // Defaults to stdout
      * log: ['query', 'info', 'warn', 'error']
-     *
+     * 
      * // Emit as events
      * log: [
      *   { emit: 'stdout', level: 'query' },
@@ -1273,7 +1187,7 @@ export namespace Prisma {
     }
     /**
      * Global configuration for omitting model fields by default.
-     *
+     * 
      * @example
      * ```
      * const prisma = new PrismaClient({
@@ -1303,20 +1217,10 @@ export namespace Prisma {
     emit: 'stdout' | 'event'
   }
 
-  export type GetLogType<T extends LogLevel | LogDefinition> =
-    T extends LogDefinition
-      ? T['emit'] extends 'event'
-        ? T['level']
-        : never
-      : never
-  export type GetEvents<T extends any> =
-    T extends Array<LogLevel | LogDefinition>
-      ?
-          | GetLogType<T[0]>
-          | GetLogType<T[1]>
-          | GetLogType<T[2]>
-          | GetLogType<T[3]>
-      : never
+  export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition ? T['emit'] extends 'event' ? T['level'] : never : never
+  export type GetEvents<T extends any> = T extends Array<LogLevel | LogDefinition> ?
+    GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
+    : never
 
   export type QueryEvent = {
     timestamp: Date
@@ -1332,6 +1236,7 @@ export namespace Prisma {
     target: string
   }
   /* End Types for Logging */
+
 
   export type PrismaAction =
     | 'findUnique'
@@ -1376,17 +1281,12 @@ export namespace Prisma {
   ) => $Utils.JsPromise<T>
 
   // tested in getLogLevel.test.ts
-  export function getLogLevel(
-    log: Array<LogLevel | LogDefinition>,
-  ): LogLevel | undefined
+  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
 
   /**
    * `PrismaClient` proxy available in interactive transactions.
    */
-  export type TransactionClient = Omit<
-    Prisma.DefaultPrismaClient,
-    runtime.ITXClientDenyList
-  >
+  export type TransactionClient = Omit<Prisma.DefaultPrismaClient, runtime.ITXClientDenyList>
 
   export type Datasource = {
     url?: string
@@ -1396,6 +1296,7 @@ export namespace Prisma {
    * Count Types
    */
 
+
   /**
    * Count Type ProductCountOutputType
    */
@@ -1404,9 +1305,7 @@ export namespace Prisma {
     ingredients: number
   }
 
-  export type ProductCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ingredients?: boolean | ProductCountOutputTypeCountIngredientsArgs
   }
 
@@ -1414,9 +1313,7 @@ export namespace Prisma {
   /**
    * ProductCountOutputType without action
    */
-  export type ProductCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCountOutputType
      */
@@ -1426,11 +1323,10 @@ export namespace Prisma {
   /**
    * ProductCountOutputType without action
    */
-  export type ProductCountOutputTypeCountIngredientsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCountOutputTypeCountIngredientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IngredientInProductWhereInput
   }
+
 
   /**
    * Count Type ProductCategoryCountOutputType
@@ -1440,9 +1336,7 @@ export namespace Prisma {
     products: number
   }
 
-  export type ProductCategoryCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | ProductCategoryCountOutputTypeCountProductsArgs
   }
 
@@ -1450,9 +1344,7 @@ export namespace Prisma {
   /**
    * ProductCategoryCountOutputType without action
    */
-  export type ProductCategoryCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCategoryCountOutputType
      */
@@ -1462,11 +1354,10 @@ export namespace Prisma {
   /**
    * ProductCategoryCountOutputType without action
    */
-  export type ProductCategoryCountOutputTypeCountProductsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductWhereInput
   }
+
 
   /**
    * Count Type IngredientCountOutputType
@@ -1476,21 +1367,15 @@ export namespace Prisma {
     IngredientInProduct: number
   }
 
-  export type IngredientCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    IngredientInProduct?:
-      | boolean
-      | IngredientCountOutputTypeCountIngredientInProductArgs
+  export type IngredientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    IngredientInProduct?: boolean | IngredientCountOutputTypeCountIngredientInProductArgs
   }
 
   // Custom InputTypes
   /**
    * IngredientCountOutputType without action
    */
-  export type IngredientCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientCountOutputType
      */
@@ -1500,11 +1385,10 @@ export namespace Prisma {
   /**
    * IngredientCountOutputType without action
    */
-  export type IngredientCountOutputTypeCountIngredientInProductArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientCountOutputTypeCountIngredientInProductArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IngredientInProductWhereInput
   }
+
 
   /**
    * Count Type IngredientTypeCountOutputType
@@ -1514,9 +1398,7 @@ export namespace Prisma {
     ingredients: number
   }
 
-  export type IngredientTypeCountOutputTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ingredients?: boolean | IngredientTypeCountOutputTypeCountIngredientsArgs
   }
 
@@ -1524,9 +1406,7 @@ export namespace Prisma {
   /**
    * IngredientTypeCountOutputType without action
    */
-  export type IngredientTypeCountOutputTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientTypeCountOutputType
      */
@@ -1536,11 +1416,10 @@ export namespace Prisma {
   /**
    * IngredientTypeCountOutputType without action
    */
-  export type IngredientTypeCountOutputTypeCountIngredientsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeCountOutputTypeCountIngredientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IngredientWhereInput
   }
+
 
   /**
    * Models
@@ -1594,6 +1473,7 @@ export namespace Prisma {
     _all: number
   }
 
+
   export type ProductAvgAggregateInputType = {
     price?: true
   }
@@ -1630,86 +1510,81 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type ProductAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Product to aggregate.
      */
     where?: ProductWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Products to fetch.
      */
-    orderBy?:
-      | ProductOrderByWithRelationInput
-      | ProductOrderByWithRelationInput[]
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ProductWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Products from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Products.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned Products
-     **/
+    **/
     _count?: true | ProductCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
-     **/
+    **/
     _avg?: ProductAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
-     **/
+    **/
     _sum?: ProductSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
-     **/
+    **/
     _min?: ProductMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
-     **/
+    **/
     _max?: ProductMaxAggregateInputType
   }
 
   export type GetProductAggregateType<T extends ProductAggregateArgs> = {
-    [P in keyof T & keyof AggregateProduct]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateProduct]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateProduct[P]>
       : GetScalarType<T[P], AggregateProduct[P]>
   }
 
-  export type ProductGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+
+
+
+  export type ProductGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductWhereInput
-    orderBy?:
-      | ProductOrderByWithAggregationInput
-      | ProductOrderByWithAggregationInput[]
+    orderBy?: ProductOrderByWithAggregationInput | ProductOrderByWithAggregationInput[]
     by: ProductScalarFieldEnum[] | ProductScalarFieldEnum
     having?: ProductScalarWhereWithAggregatesInput
     take?: number
@@ -1735,11 +1610,11 @@ export namespace Prisma {
     _max: ProductMaxAggregateOutputType | null
   }
 
-  type GetProductGroupByPayload<T extends ProductGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<ProductGroupByOutputType, T['by']> & {
-          [P in keyof T & keyof ProductGroupByOutputType]: P extends '_count'
+  type GetProductGroupByPayload<T extends ProductGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], ProductGroupByOutputType[P]>
@@ -1748,22 +1623,20 @@ export namespace Prisma {
       >
     >
 
-  export type ProductSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      label?: boolean
-      price?: boolean
-      imageUrl?: boolean
-      available?: boolean
-      productCategoryId?: boolean
-      productCategory?: boolean | ProductCategoryDefaultArgs<ExtArgs>
-      ingredients?: boolean | Product$ingredientsArgs<ExtArgs>
-      _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
-    },
-    ExtArgs['result']['product']
-  >
+
+  export type ProductSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    label?: boolean
+    price?: boolean
+    imageUrl?: boolean
+    available?: boolean
+    productCategoryId?: boolean
+    productCategory?: boolean | ProductCategoryDefaultArgs<ExtArgs>
+    ingredients?: boolean | Product$ingredientsArgs<ExtArgs>
+    _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["product"]>
+
+
 
   export type ProductSelectScalar = {
     id?: boolean
@@ -1774,60 +1647,39 @@ export namespace Prisma {
     productCategoryId?: boolean
   }
 
-  export type ProductOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    'id' | 'label' | 'price' | 'imageUrl' | 'available' | 'productCategoryId',
-    ExtArgs['result']['product']
-  >
-  export type ProductInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label" | "price" | "imageUrl" | "available" | "productCategoryId", ExtArgs["result"]["product"]>
+  export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     productCategory?: boolean | ProductCategoryDefaultArgs<ExtArgs>
     ingredients?: boolean | Product$ingredientsArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }
 
-  export type $ProductPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    name: 'Product'
+  export type $ProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Product"
     objects: {
       productCategory: Prisma.$ProductCategoryPayload<ExtArgs>
       ingredients: Prisma.$IngredientInProductPayload<ExtArgs>[]
     }
-    scalars: $Extensions.GetPayloadResult<
-      {
-        id: string
-        label: string
-        price: number
-        imageUrl: string | null
-        available: boolean
-        productCategoryId: string
-      },
-      ExtArgs['result']['product']
-    >
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      label: string
+      price: number
+      imageUrl: string | null
+      available: boolean
+      productCategoryId: string
+    }, ExtArgs["result"]["product"]>
     composites: {}
   }
 
-  type ProductGetPayload<
-    S extends boolean | null | undefined | ProductDefaultArgs,
-  > = $Result.GetResult<Prisma.$ProductPayload, S>
+  type ProductGetPayload<S extends boolean | null | undefined | ProductDefaultArgs> = $Result.GetResult<Prisma.$ProductPayload, S>
 
-  type ProductCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<ProductFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-    select?: ProductCountAggregateInputType | true
-  }
-
-  export interface ProductDelegate<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>['model']['Product']
-      meta: { name: 'Product' }
+  type ProductCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProductFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductCountAggregateInputType | true
     }
+
+  export interface ProductDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Product'], meta: { name: 'Product' } }
     /**
      * Find zero or one Product that matches the filter.
      * @param {ProductFindUniqueArgs} args - Arguments to find a Product
@@ -1839,19 +1691,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends ProductFindUniqueArgs>(
-      args: SelectSubset<T, ProductFindUniqueArgs<ExtArgs>>,
-    ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        'findUnique',
-        ClientOptions
-      > | null,
-      null,
-      ExtArgs,
-      ClientOptions
-    >
+    findUnique<T extends ProductFindUniqueArgs>(args: SelectSubset<T, ProductFindUniqueArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find one Product that matches the filter or throw an error with `error.code='P2025'`
@@ -1865,19 +1705,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ProductFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, ProductFindUniqueOrThrowArgs<ExtArgs>>,
-    ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    findUniqueOrThrow<T extends ProductFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find the first Product that matches the filter.
@@ -1892,19 +1720,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends ProductFindFirstArgs>(
-      args?: SelectSubset<T, ProductFindFirstArgs<ExtArgs>>,
-    ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        'findFirst',
-        ClientOptions
-      > | null,
-      null,
-      ExtArgs,
-      ClientOptions
-    >
+    findFirst<T extends ProductFindFirstArgs>(args?: SelectSubset<T, ProductFindFirstArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find the first Product that matches the filter or
@@ -1920,19 +1736,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends ProductFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, ProductFindFirstOrThrowArgs<ExtArgs>>,
-    ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        'findFirstOrThrow',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    findFirstOrThrow<T extends ProductFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find zero or more Products that matches the filter.
@@ -1942,24 +1746,15 @@ export namespace Prisma {
      * @example
      * // Get all Products
      * const products = await prisma.product.findMany()
-     *
+     * 
      * // Get first 10 Products
      * const products = await prisma.product.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const productWithIdOnly = await prisma.product.findMany({ select: { id: true } })
-     *
+     * 
      */
-    findMany<T extends ProductFindManyArgs>(
-      args?: SelectSubset<T, ProductFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        'findMany',
-        ClientOptions
-      >
-    >
+    findMany<T extends ProductFindManyArgs>(args?: SelectSubset<T, ProductFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
      * Create a Product.
@@ -1971,21 +1766,9 @@ export namespace Prisma {
      *     // ... data to create a Product
      *   }
      * })
-     *
+     * 
      */
-    create<T extends ProductCreateArgs>(
-      args: SelectSubset<T, ProductCreateArgs<ExtArgs>>,
-    ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        'create',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    create<T extends ProductCreateArgs>(args: SelectSubset<T, ProductCreateArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Create many Products.
@@ -1997,11 +1780,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
-    createMany<T extends ProductCreateManyArgs>(
-      args?: SelectSubset<T, ProductCreateManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ProductCreateManyArgs>(args?: SelectSubset<T, ProductCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a Product.
@@ -2013,21 +1794,9 @@ export namespace Prisma {
      *     // ... filter to delete one Product
      *   }
      * })
-     *
+     * 
      */
-    delete<T extends ProductDeleteArgs>(
-      args: SelectSubset<T, ProductDeleteArgs<ExtArgs>>,
-    ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        'delete',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    delete<T extends ProductDeleteArgs>(args: SelectSubset<T, ProductDeleteArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Update one Product.
@@ -2042,21 +1811,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    update<T extends ProductUpdateArgs>(
-      args: SelectSubset<T, ProductUpdateArgs<ExtArgs>>,
-    ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        'update',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    update<T extends ProductUpdateArgs>(args: SelectSubset<T, ProductUpdateArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Delete zero or more Products.
@@ -2068,11 +1825,9 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
-    deleteMany<T extends ProductDeleteManyArgs>(
-      args?: SelectSubset<T, ProductDeleteManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ProductDeleteManyArgs>(args?: SelectSubset<T, ProductDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Products.
@@ -2089,11 +1844,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    updateMany<T extends ProductUpdateManyArgs>(
-      args: SelectSubset<T, ProductUpdateManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ProductUpdateManyArgs>(args: SelectSubset<T, ProductUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Product.
@@ -2112,19 +1865,8 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends ProductUpsertArgs>(
-      args: SelectSubset<T, ProductUpsertArgs<ExtArgs>>,
-    ): Prisma__ProductClient<
-      $Result.GetResult<
-        Prisma.$ProductPayload<ExtArgs>,
-        T,
-        'upsert',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    upsert<T extends ProductUpsertArgs>(args: SelectSubset<T, ProductUpsertArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
 
     /**
      * Count the number of Products.
@@ -2138,7 +1880,7 @@ export namespace Prisma {
      *     // ... the filter for the Products we want to count
      *   }
      * })
-     **/
+    **/
     count<T extends ProductCountArgs>(
       args?: Subset<T, ProductCountArgs>,
     ): Prisma.PrismaPromise<
@@ -2172,10 +1914,8 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-     **/
-    aggregate<T extends ProductAggregateArgs>(
-      args: Subset<T, ProductAggregateArgs>,
-    ): Prisma.PrismaPromise<GetProductAggregateType<T>>
+    **/
+    aggregate<T extends ProductAggregateArgs>(args: Subset<T, ProductAggregateArgs>): Prisma.PrismaPromise<GetProductAggregateType<T>>
 
     /**
      * Group by Product.
@@ -2193,8 +1933,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
-     **/
+     * 
+    **/
     groupBy<
       T extends ProductGroupByArgs,
       HasSelectOrTake extends Or<
@@ -2204,65 +1944,59 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: ProductGroupByArgs['orderBy'] }
         : { orderBy?: ProductGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T['orderBy']>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-        ? `Error: "by" must not be empty.`
-        : HavingValid extends False
-          ? {
-              [P in HavingFields]: P extends ByFields
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
                 ? never
-                : P extends string
-                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      'Field ',
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ]
-            }[HavingFields]
-          : 'take' extends Keys<T>
-            ? 'orderBy' extends Keys<T>
-              ? ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "take", you also need to provide "orderBy"'
-            : 'skip' extends Keys<T>
-              ? 'orderBy' extends Keys<T>
-                ? ByValid extends True
-                  ? {}
-                  : {
-                      [P in OrderFields]: P extends ByFields
-                        ? never
-                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                    }[OrderFields]
-                : 'Error: If you provide "skip", you also need to provide "orderBy"'
-              : ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields],
-    >(
-      args: SubsetIntersection<T, ProductGroupByArgs, OrderByArg> & InputErrors,
-    ): {} extends InputErrors
-      ? GetProductGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>
-    /**
-     * Fields of the Product model
-     */
-    readonly fields: ProductFieldRefs
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProductGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Product model
+   */
+  readonly fields: ProductFieldRefs;
   }
 
   /**
@@ -2271,65 +2005,23 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ProductClient<
-    T,
-    Null = never,
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise'
-    productCategory<T extends ProductCategoryDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, ProductCategoryDefaultArgs<ExtArgs>>,
-    ): Prisma__ProductCategoryClient<
-      | $Result.GetResult<
-          Prisma.$ProductCategoryPayload<ExtArgs>,
-          T,
-          'findUniqueOrThrow',
-          ClientOptions
-        >
-      | Null,
-      Null,
-      ExtArgs,
-      ClientOptions
-    >
-    ingredients<T extends Product$ingredientsArgs<ExtArgs> = {}>(
-      args?: Subset<T, Product$ingredientsArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$IngredientInProductPayload<ExtArgs>,
-          T,
-          'findMany',
-          ClientOptions
-        >
-      | Null
-    >
+  export interface Prisma__ProductClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    productCategory<T extends ProductCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductCategoryDefaultArgs<ExtArgs>>): Prisma__ProductCategoryClient<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    ingredients<T extends Product$ingredientsArgs<ExtArgs> = {}>(args?: Subset<T, Product$ingredientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredientInProductPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
-    ): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
-    ): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -2339,25 +2031,27 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
+
+
+
   /**
    * Fields of the Product model
-   */
+   */ 
   interface ProductFieldRefs {
-    readonly id: FieldRef<'Product', 'String'>
-    readonly label: FieldRef<'Product', 'String'>
-    readonly price: FieldRef<'Product', 'Float'>
-    readonly imageUrl: FieldRef<'Product', 'String'>
-    readonly available: FieldRef<'Product', 'Boolean'>
-    readonly productCategoryId: FieldRef<'Product', 'String'>
+    readonly id: FieldRef<"Product", 'String'>
+    readonly label: FieldRef<"Product", 'String'>
+    readonly price: FieldRef<"Product", 'Float'>
+    readonly imageUrl: FieldRef<"Product", 'String'>
+    readonly available: FieldRef<"Product", 'Boolean'>
+    readonly productCategoryId: FieldRef<"Product", 'String'>
   }
+    
 
   // Custom InputTypes
   /**
    * Product findUnique
    */
-  export type ProductFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -2379,9 +2073,7 @@ export namespace Prisma {
   /**
    * Product findUniqueOrThrow
    */
-  export type ProductFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -2403,9 +2095,7 @@ export namespace Prisma {
   /**
    * Product findFirst
    */
-  export type ProductFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -2424,33 +2114,31 @@ export namespace Prisma {
     where?: ProductWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Products to fetch.
      */
-    orderBy?:
-      | ProductOrderByWithRelationInput
-      | ProductOrderByWithRelationInput[]
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for Products.
      */
     cursor?: ProductWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Products from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Products.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of Products.
      */
     distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
@@ -2459,9 +2147,7 @@ export namespace Prisma {
   /**
    * Product findFirstOrThrow
    */
-  export type ProductFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -2480,33 +2166,31 @@ export namespace Prisma {
     where?: ProductWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Products to fetch.
      */
-    orderBy?:
-      | ProductOrderByWithRelationInput
-      | ProductOrderByWithRelationInput[]
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for Products.
      */
     cursor?: ProductWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Products from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Products.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of Products.
      */
     distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
@@ -2515,9 +2199,7 @@ export namespace Prisma {
   /**
    * Product findMany
    */
-  export type ProductFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -2536,27 +2218,25 @@ export namespace Prisma {
     where?: ProductWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Products to fetch.
      */
-    orderBy?:
-      | ProductOrderByWithRelationInput
-      | ProductOrderByWithRelationInput[]
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing Products.
      */
     cursor?: ProductWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Products from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Products.
      */
     skip?: number
@@ -2566,9 +2246,7 @@ export namespace Prisma {
   /**
    * Product create
    */
-  export type ProductCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -2590,9 +2268,7 @@ export namespace Prisma {
   /**
    * Product createMany
    */
-  export type ProductCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Products.
      */
@@ -2603,9 +2279,7 @@ export namespace Prisma {
   /**
    * Product update
    */
-  export type ProductUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -2631,9 +2305,7 @@ export namespace Prisma {
   /**
    * Product updateMany
    */
-  export type ProductUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Products.
      */
@@ -2651,9 +2323,7 @@ export namespace Prisma {
   /**
    * Product upsert
    */
-  export type ProductUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -2683,9 +2353,7 @@ export namespace Prisma {
   /**
    * Product delete
    */
-  export type ProductDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -2707,9 +2375,7 @@ export namespace Prisma {
   /**
    * Product deleteMany
    */
-  export type ProductDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Products to delete
      */
@@ -2723,9 +2389,7 @@ export namespace Prisma {
   /**
    * Product.ingredients
    */
-  export type Product$ingredientsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Product$ingredientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientInProduct
      */
@@ -2739,23 +2403,17 @@ export namespace Prisma {
      */
     include?: IngredientInProductInclude<ExtArgs> | null
     where?: IngredientInProductWhereInput
-    orderBy?:
-      | IngredientInProductOrderByWithRelationInput
-      | IngredientInProductOrderByWithRelationInput[]
+    orderBy?: IngredientInProductOrderByWithRelationInput | IngredientInProductOrderByWithRelationInput[]
     cursor?: IngredientInProductWhereUniqueInput
     take?: number
     skip?: number
-    distinct?:
-      | IngredientInProductScalarFieldEnum
-      | IngredientInProductScalarFieldEnum[]
+    distinct?: IngredientInProductScalarFieldEnum | IngredientInProductScalarFieldEnum[]
   }
 
   /**
    * Product without action
    */
-  export type ProductDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -2769,6 +2427,7 @@ export namespace Prisma {
      */
     include?: ProductInclude<ExtArgs> | null
   }
+
 
   /**
    * Model ProductCategory
@@ -2799,6 +2458,7 @@ export namespace Prisma {
     _all: number
   }
 
+
   export type ProductCategoryMinAggregateInputType = {
     id?: true
     label?: true
@@ -2818,78 +2478,69 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type ProductCategoryAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which ProductCategory to aggregate.
      */
     where?: ProductCategoryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ProductCategories to fetch.
      */
-    orderBy?:
-      | ProductCategoryOrderByWithRelationInput
-      | ProductCategoryOrderByWithRelationInput[]
+    orderBy?: ProductCategoryOrderByWithRelationInput | ProductCategoryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: ProductCategoryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ProductCategories from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ProductCategories.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned ProductCategories
-     **/
+    **/
     _count?: true | ProductCategoryCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
-     **/
+    **/
     _min?: ProductCategoryMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
-     **/
+    **/
     _max?: ProductCategoryMaxAggregateInputType
   }
 
-  export type GetProductCategoryAggregateType<
-    T extends ProductCategoryAggregateArgs,
-  > = {
-    [P in keyof T & keyof AggregateProductCategory]: P extends
-      | '_count'
-      | 'count'
+  export type GetProductCategoryAggregateType<T extends ProductCategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateProductCategory]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateProductCategory[P]>
       : GetScalarType<T[P], AggregateProductCategory[P]>
   }
 
-  export type ProductCategoryGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+
+
+
+  export type ProductCategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductCategoryWhereInput
-    orderBy?:
-      | ProductCategoryOrderByWithAggregationInput
-      | ProductCategoryOrderByWithAggregationInput[]
+    orderBy?: ProductCategoryOrderByWithAggregationInput | ProductCategoryOrderByWithAggregationInput[]
     by: ProductCategoryScalarFieldEnum[] | ProductCategoryScalarFieldEnum
     having?: ProductCategoryScalarWhereWithAggregatesInput
     take?: number
@@ -2908,12 +2559,11 @@ export namespace Prisma {
     _max: ProductCategoryMaxAggregateOutputType | null
   }
 
-  type GetProductCategoryGroupByPayload<T extends ProductCategoryGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<ProductCategoryGroupByOutputType, T['by']> & {
-          [P in keyof T &
-            keyof ProductCategoryGroupByOutputType]: P extends '_count'
+  type GetProductCategoryGroupByPayload<T extends ProductCategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductCategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductCategoryGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], ProductCategoryGroupByOutputType[P]>
@@ -2922,18 +2572,16 @@ export namespace Prisma {
       >
     >
 
-  export type ProductCategorySelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      label?: boolean
-      imageUrl?: boolean
-      products?: boolean | ProductCategory$productsArgs<ExtArgs>
-      _count?: boolean | ProductCategoryCountOutputTypeDefaultArgs<ExtArgs>
-    },
-    ExtArgs['result']['productCategory']
-  >
+
+  export type ProductCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    label?: boolean
+    imageUrl?: boolean
+    products?: boolean | ProductCategory$productsArgs<ExtArgs>
+    _count?: boolean | ProductCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productCategory"]>
+
+
 
   export type ProductCategorySelectScalar = {
     id?: boolean
@@ -2941,58 +2589,34 @@ export namespace Prisma {
     imageUrl?: boolean
   }
 
-  export type ProductCategoryOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    'id' | 'label' | 'imageUrl',
-    ExtArgs['result']['productCategory']
-  >
-  export type ProductCategoryInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label" | "imageUrl", ExtArgs["result"]["productCategory"]>
+  export type ProductCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | ProductCategory$productsArgs<ExtArgs>
     _count?: boolean | ProductCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
 
-  export type $ProductCategoryPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    name: 'ProductCategory'
+  export type $ProductCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProductCategory"
     objects: {
       products: Prisma.$ProductPayload<ExtArgs>[]
     }
-    scalars: $Extensions.GetPayloadResult<
-      {
-        id: string
-        label: string
-        imageUrl: string | null
-      },
-      ExtArgs['result']['productCategory']
-    >
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      label: string
+      imageUrl: string | null
+    }, ExtArgs["result"]["productCategory"]>
     composites: {}
   }
 
-  type ProductCategoryGetPayload<
-    S extends boolean | null | undefined | ProductCategoryDefaultArgs,
-  > = $Result.GetResult<Prisma.$ProductCategoryPayload, S>
+  type ProductCategoryGetPayload<S extends boolean | null | undefined | ProductCategoryDefaultArgs> = $Result.GetResult<Prisma.$ProductCategoryPayload, S>
 
-  type ProductCategoryCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<
-    ProductCategoryFindManyArgs,
-    'select' | 'include' | 'distinct' | 'omit'
-  > & {
-    select?: ProductCategoryCountAggregateInputType | true
-  }
-
-  export interface ProductCategoryDelegate<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>['model']['ProductCategory']
-      meta: { name: 'ProductCategory' }
+  type ProductCategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProductCategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductCategoryCountAggregateInputType | true
     }
+
+  export interface ProductCategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProductCategory'], meta: { name: 'ProductCategory' } }
     /**
      * Find zero or one ProductCategory that matches the filter.
      * @param {ProductCategoryFindUniqueArgs} args - Arguments to find a ProductCategory
@@ -3004,19 +2628,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends ProductCategoryFindUniqueArgs>(
-      args: SelectSubset<T, ProductCategoryFindUniqueArgs<ExtArgs>>,
-    ): Prisma__ProductCategoryClient<
-      $Result.GetResult<
-        Prisma.$ProductCategoryPayload<ExtArgs>,
-        T,
-        'findUnique',
-        ClientOptions
-      > | null,
-      null,
-      ExtArgs,
-      ClientOptions
-    >
+    findUnique<T extends ProductCategoryFindUniqueArgs>(args: SelectSubset<T, ProductCategoryFindUniqueArgs<ExtArgs>>): Prisma__ProductCategoryClient<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find one ProductCategory that matches the filter or throw an error with `error.code='P2025'`
@@ -3030,19 +2642,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ProductCategoryFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, ProductCategoryFindUniqueOrThrowArgs<ExtArgs>>,
-    ): Prisma__ProductCategoryClient<
-      $Result.GetResult<
-        Prisma.$ProductCategoryPayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    findUniqueOrThrow<T extends ProductCategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductCategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductCategoryClient<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find the first ProductCategory that matches the filter.
@@ -3057,19 +2657,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends ProductCategoryFindFirstArgs>(
-      args?: SelectSubset<T, ProductCategoryFindFirstArgs<ExtArgs>>,
-    ): Prisma__ProductCategoryClient<
-      $Result.GetResult<
-        Prisma.$ProductCategoryPayload<ExtArgs>,
-        T,
-        'findFirst',
-        ClientOptions
-      > | null,
-      null,
-      ExtArgs,
-      ClientOptions
-    >
+    findFirst<T extends ProductCategoryFindFirstArgs>(args?: SelectSubset<T, ProductCategoryFindFirstArgs<ExtArgs>>): Prisma__ProductCategoryClient<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find the first ProductCategory that matches the filter or
@@ -3085,19 +2673,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends ProductCategoryFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, ProductCategoryFindFirstOrThrowArgs<ExtArgs>>,
-    ): Prisma__ProductCategoryClient<
-      $Result.GetResult<
-        Prisma.$ProductCategoryPayload<ExtArgs>,
-        T,
-        'findFirstOrThrow',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    findFirstOrThrow<T extends ProductCategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductCategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductCategoryClient<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find zero or more ProductCategories that matches the filter.
@@ -3107,24 +2683,15 @@ export namespace Prisma {
      * @example
      * // Get all ProductCategories
      * const productCategories = await prisma.productCategory.findMany()
-     *
+     * 
      * // Get first 10 ProductCategories
      * const productCategories = await prisma.productCategory.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const productCategoryWithIdOnly = await prisma.productCategory.findMany({ select: { id: true } })
-     *
+     * 
      */
-    findMany<T extends ProductCategoryFindManyArgs>(
-      args?: SelectSubset<T, ProductCategoryFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$ProductCategoryPayload<ExtArgs>,
-        T,
-        'findMany',
-        ClientOptions
-      >
-    >
+    findMany<T extends ProductCategoryFindManyArgs>(args?: SelectSubset<T, ProductCategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
      * Create a ProductCategory.
@@ -3136,21 +2703,9 @@ export namespace Prisma {
      *     // ... data to create a ProductCategory
      *   }
      * })
-     *
+     * 
      */
-    create<T extends ProductCategoryCreateArgs>(
-      args: SelectSubset<T, ProductCategoryCreateArgs<ExtArgs>>,
-    ): Prisma__ProductCategoryClient<
-      $Result.GetResult<
-        Prisma.$ProductCategoryPayload<ExtArgs>,
-        T,
-        'create',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    create<T extends ProductCategoryCreateArgs>(args: SelectSubset<T, ProductCategoryCreateArgs<ExtArgs>>): Prisma__ProductCategoryClient<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Create many ProductCategories.
@@ -3162,11 +2717,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
-    createMany<T extends ProductCategoryCreateManyArgs>(
-      args?: SelectSubset<T, ProductCategoryCreateManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ProductCategoryCreateManyArgs>(args?: SelectSubset<T, ProductCategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a ProductCategory.
@@ -3178,21 +2731,9 @@ export namespace Prisma {
      *     // ... filter to delete one ProductCategory
      *   }
      * })
-     *
+     * 
      */
-    delete<T extends ProductCategoryDeleteArgs>(
-      args: SelectSubset<T, ProductCategoryDeleteArgs<ExtArgs>>,
-    ): Prisma__ProductCategoryClient<
-      $Result.GetResult<
-        Prisma.$ProductCategoryPayload<ExtArgs>,
-        T,
-        'delete',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    delete<T extends ProductCategoryDeleteArgs>(args: SelectSubset<T, ProductCategoryDeleteArgs<ExtArgs>>): Prisma__ProductCategoryClient<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Update one ProductCategory.
@@ -3207,21 +2748,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    update<T extends ProductCategoryUpdateArgs>(
-      args: SelectSubset<T, ProductCategoryUpdateArgs<ExtArgs>>,
-    ): Prisma__ProductCategoryClient<
-      $Result.GetResult<
-        Prisma.$ProductCategoryPayload<ExtArgs>,
-        T,
-        'update',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    update<T extends ProductCategoryUpdateArgs>(args: SelectSubset<T, ProductCategoryUpdateArgs<ExtArgs>>): Prisma__ProductCategoryClient<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Delete zero or more ProductCategories.
@@ -3233,11 +2762,9 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
-    deleteMany<T extends ProductCategoryDeleteManyArgs>(
-      args?: SelectSubset<T, ProductCategoryDeleteManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ProductCategoryDeleteManyArgs>(args?: SelectSubset<T, ProductCategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more ProductCategories.
@@ -3254,11 +2781,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    updateMany<T extends ProductCategoryUpdateManyArgs>(
-      args: SelectSubset<T, ProductCategoryUpdateManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ProductCategoryUpdateManyArgs>(args: SelectSubset<T, ProductCategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one ProductCategory.
@@ -3277,19 +2802,8 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends ProductCategoryUpsertArgs>(
-      args: SelectSubset<T, ProductCategoryUpsertArgs<ExtArgs>>,
-    ): Prisma__ProductCategoryClient<
-      $Result.GetResult<
-        Prisma.$ProductCategoryPayload<ExtArgs>,
-        T,
-        'upsert',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    upsert<T extends ProductCategoryUpsertArgs>(args: SelectSubset<T, ProductCategoryUpsertArgs<ExtArgs>>): Prisma__ProductCategoryClient<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
 
     /**
      * Count the number of ProductCategories.
@@ -3303,7 +2817,7 @@ export namespace Prisma {
      *     // ... the filter for the ProductCategories we want to count
      *   }
      * })
-     **/
+    **/
     count<T extends ProductCategoryCountArgs>(
       args?: Subset<T, ProductCategoryCountArgs>,
     ): Prisma.PrismaPromise<
@@ -3337,10 +2851,8 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-     **/
-    aggregate<T extends ProductCategoryAggregateArgs>(
-      args: Subset<T, ProductCategoryAggregateArgs>,
-    ): Prisma.PrismaPromise<GetProductCategoryAggregateType<T>>
+    **/
+    aggregate<T extends ProductCategoryAggregateArgs>(args: Subset<T, ProductCategoryAggregateArgs>): Prisma.PrismaPromise<GetProductCategoryAggregateType<T>>
 
     /**
      * Group by ProductCategory.
@@ -3358,8 +2870,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
-     **/
+     * 
+    **/
     groupBy<
       T extends ProductCategoryGroupByArgs,
       HasSelectOrTake extends Or<
@@ -3369,66 +2881,59 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: ProductCategoryGroupByArgs['orderBy'] }
         : { orderBy?: ProductCategoryGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T['orderBy']>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-        ? `Error: "by" must not be empty.`
-        : HavingValid extends False
-          ? {
-              [P in HavingFields]: P extends ByFields
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
                 ? never
-                : P extends string
-                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      'Field ',
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ]
-            }[HavingFields]
-          : 'take' extends Keys<T>
-            ? 'orderBy' extends Keys<T>
-              ? ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "take", you also need to provide "orderBy"'
-            : 'skip' extends Keys<T>
-              ? 'orderBy' extends Keys<T>
-                ? ByValid extends True
-                  ? {}
-                  : {
-                      [P in OrderFields]: P extends ByFields
-                        ? never
-                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                    }[OrderFields]
-                : 'Error: If you provide "skip", you also need to provide "orderBy"'
-              : ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields],
-    >(
-      args: SubsetIntersection<T, ProductCategoryGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetProductCategoryGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>
-    /**
-     * Fields of the ProductCategory model
-     */
-    readonly fields: ProductCategoryFieldRefs
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProductCategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProductCategory model
+   */
+  readonly fields: ProductCategoryFieldRefs;
   }
 
   /**
@@ -3437,51 +2942,22 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ProductCategoryClient<
-    T,
-    Null = never,
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise'
-    products<T extends ProductCategory$productsArgs<ExtArgs> = {}>(
-      args?: Subset<T, ProductCategory$productsArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$ProductPayload<ExtArgs>,
-          T,
-          'findMany',
-          ClientOptions
-        >
-      | Null
-    >
+  export interface Prisma__ProductCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    products<T extends ProductCategory$productsArgs<ExtArgs> = {}>(args?: Subset<T, ProductCategory$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
-    ): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
-    ): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -3491,22 +2967,24 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
+
+
+
   /**
    * Fields of the ProductCategory model
-   */
+   */ 
   interface ProductCategoryFieldRefs {
-    readonly id: FieldRef<'ProductCategory', 'String'>
-    readonly label: FieldRef<'ProductCategory', 'String'>
-    readonly imageUrl: FieldRef<'ProductCategory', 'String'>
+    readonly id: FieldRef<"ProductCategory", 'String'>
+    readonly label: FieldRef<"ProductCategory", 'String'>
+    readonly imageUrl: FieldRef<"ProductCategory", 'String'>
   }
+    
 
   // Custom InputTypes
   /**
    * ProductCategory findUnique
    */
-  export type ProductCategoryFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCategory
      */
@@ -3528,9 +3006,7 @@ export namespace Prisma {
   /**
    * ProductCategory findUniqueOrThrow
    */
-  export type ProductCategoryFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCategory
      */
@@ -3552,9 +3028,7 @@ export namespace Prisma {
   /**
    * ProductCategory findFirst
    */
-  export type ProductCategoryFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCategory
      */
@@ -3573,33 +3047,31 @@ export namespace Prisma {
     where?: ProductCategoryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ProductCategories to fetch.
      */
-    orderBy?:
-      | ProductCategoryOrderByWithRelationInput
-      | ProductCategoryOrderByWithRelationInput[]
+    orderBy?: ProductCategoryOrderByWithRelationInput | ProductCategoryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ProductCategories.
      */
     cursor?: ProductCategoryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ProductCategories from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ProductCategories.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ProductCategories.
      */
     distinct?: ProductCategoryScalarFieldEnum | ProductCategoryScalarFieldEnum[]
@@ -3608,9 +3080,7 @@ export namespace Prisma {
   /**
    * ProductCategory findFirstOrThrow
    */
-  export type ProductCategoryFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCategory
      */
@@ -3629,33 +3099,31 @@ export namespace Prisma {
     where?: ProductCategoryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ProductCategories to fetch.
      */
-    orderBy?:
-      | ProductCategoryOrderByWithRelationInput
-      | ProductCategoryOrderByWithRelationInput[]
+    orderBy?: ProductCategoryOrderByWithRelationInput | ProductCategoryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for ProductCategories.
      */
     cursor?: ProductCategoryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ProductCategories from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ProductCategories.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of ProductCategories.
      */
     distinct?: ProductCategoryScalarFieldEnum | ProductCategoryScalarFieldEnum[]
@@ -3664,9 +3132,7 @@ export namespace Prisma {
   /**
    * ProductCategory findMany
    */
-  export type ProductCategoryFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCategory
      */
@@ -3685,27 +3151,25 @@ export namespace Prisma {
     where?: ProductCategoryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of ProductCategories to fetch.
      */
-    orderBy?:
-      | ProductCategoryOrderByWithRelationInput
-      | ProductCategoryOrderByWithRelationInput[]
+    orderBy?: ProductCategoryOrderByWithRelationInput | ProductCategoryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing ProductCategories.
      */
     cursor?: ProductCategoryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` ProductCategories from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` ProductCategories.
      */
     skip?: number
@@ -3715,9 +3179,7 @@ export namespace Prisma {
   /**
    * ProductCategory create
    */
-  export type ProductCategoryCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCategory
      */
@@ -3739,9 +3201,7 @@ export namespace Prisma {
   /**
    * ProductCategory createMany
    */
-  export type ProductCategoryCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many ProductCategories.
      */
@@ -3752,9 +3212,7 @@ export namespace Prisma {
   /**
    * ProductCategory update
    */
-  export type ProductCategoryUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCategory
      */
@@ -3780,16 +3238,11 @@ export namespace Prisma {
   /**
    * ProductCategory updateMany
    */
-  export type ProductCategoryUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update ProductCategories.
      */
-    data: XOR<
-      ProductCategoryUpdateManyMutationInput,
-      ProductCategoryUncheckedUpdateManyInput
-    >
+    data: XOR<ProductCategoryUpdateManyMutationInput, ProductCategoryUncheckedUpdateManyInput>
     /**
      * Filter which ProductCategories to update
      */
@@ -3803,9 +3256,7 @@ export namespace Prisma {
   /**
    * ProductCategory upsert
    */
-  export type ProductCategoryUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCategory
      */
@@ -3835,9 +3286,7 @@ export namespace Prisma {
   /**
    * ProductCategory delete
    */
-  export type ProductCategoryDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCategory
      */
@@ -3859,9 +3308,7 @@ export namespace Prisma {
   /**
    * ProductCategory deleteMany
    */
-  export type ProductCategoryDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which ProductCategories to delete
      */
@@ -3875,9 +3322,7 @@ export namespace Prisma {
   /**
    * ProductCategory.products
    */
-  export type ProductCategory$productsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategory$productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Product
      */
@@ -3891,9 +3336,7 @@ export namespace Prisma {
      */
     include?: ProductInclude<ExtArgs> | null
     where?: ProductWhereInput
-    orderBy?:
-      | ProductOrderByWithRelationInput
-      | ProductOrderByWithRelationInput[]
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
     cursor?: ProductWhereUniqueInput
     take?: number
     skip?: number
@@ -3903,9 +3346,7 @@ export namespace Prisma {
   /**
    * ProductCategory without action
    */
-  export type ProductCategoryDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type ProductCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ProductCategory
      */
@@ -3919,6 +3360,7 @@ export namespace Prisma {
      */
     include?: ProductCategoryInclude<ExtArgs> | null
   }
+
 
   /**
    * Model Ingredient
@@ -3965,6 +3407,7 @@ export namespace Prisma {
     _all: number
   }
 
+
   export type IngredientAvgAggregateInputType = {
     price?: true
   }
@@ -3998,86 +3441,81 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type IngredientAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Ingredient to aggregate.
      */
     where?: IngredientWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Ingredients to fetch.
      */
-    orderBy?:
-      | IngredientOrderByWithRelationInput
-      | IngredientOrderByWithRelationInput[]
+    orderBy?: IngredientOrderByWithRelationInput | IngredientOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: IngredientWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Ingredients from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Ingredients.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned Ingredients
-     **/
+    **/
     _count?: true | IngredientCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to average
-     **/
+    **/
     _avg?: IngredientAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to sum
-     **/
+    **/
     _sum?: IngredientSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
-     **/
+    **/
     _min?: IngredientMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
-     **/
+    **/
     _max?: IngredientMaxAggregateInputType
   }
 
   export type GetIngredientAggregateType<T extends IngredientAggregateArgs> = {
-    [P in keyof T & keyof AggregateIngredient]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateIngredient]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateIngredient[P]>
       : GetScalarType<T[P], AggregateIngredient[P]>
   }
 
-  export type IngredientGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+
+
+
+  export type IngredientGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IngredientWhereInput
-    orderBy?:
-      | IngredientOrderByWithAggregationInput
-      | IngredientOrderByWithAggregationInput[]
+    orderBy?: IngredientOrderByWithAggregationInput | IngredientOrderByWithAggregationInput[]
     by: IngredientScalarFieldEnum[] | IngredientScalarFieldEnum
     having?: IngredientScalarWhereWithAggregatesInput
     take?: number
@@ -4102,11 +3540,11 @@ export namespace Prisma {
     _max: IngredientMaxAggregateOutputType | null
   }
 
-  type GetIngredientGroupByPayload<T extends IngredientGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<IngredientGroupByOutputType, T['by']> & {
-          [P in keyof T & keyof IngredientGroupByOutputType]: P extends '_count'
+  type GetIngredientGroupByPayload<T extends IngredientGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IngredientGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IngredientGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], IngredientGroupByOutputType[P]>
@@ -4115,23 +3553,19 @@ export namespace Prisma {
       >
     >
 
-  export type IngredientSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      label?: boolean
-      price?: boolean
-      imageUrl?: boolean
-      ingredientTypeId?: boolean
-      IngredientType?: boolean | IngredientTypeDefaultArgs<ExtArgs>
-      IngredientInProduct?:
-        | boolean
-        | Ingredient$IngredientInProductArgs<ExtArgs>
-      _count?: boolean | IngredientCountOutputTypeDefaultArgs<ExtArgs>
-    },
-    ExtArgs['result']['ingredient']
-  >
+
+  export type IngredientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    label?: boolean
+    price?: boolean
+    imageUrl?: boolean
+    ingredientTypeId?: boolean
+    IngredientType?: boolean | IngredientTypeDefaultArgs<ExtArgs>
+    IngredientInProduct?: boolean | Ingredient$IngredientInProductArgs<ExtArgs>
+    _count?: boolean | IngredientCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ingredient"]>
+
+
 
   export type IngredientSelectScalar = {
     id?: boolean
@@ -4141,62 +3575,38 @@ export namespace Prisma {
     ingredientTypeId?: boolean
   }
 
-  export type IngredientOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    'id' | 'label' | 'price' | 'imageUrl' | 'ingredientTypeId',
-    ExtArgs['result']['ingredient']
-  >
-  export type IngredientInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label" | "price" | "imageUrl" | "ingredientTypeId", ExtArgs["result"]["ingredient"]>
+  export type IngredientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     IngredientType?: boolean | IngredientTypeDefaultArgs<ExtArgs>
     IngredientInProduct?: boolean | Ingredient$IngredientInProductArgs<ExtArgs>
     _count?: boolean | IngredientCountOutputTypeDefaultArgs<ExtArgs>
   }
 
-  export type $IngredientPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    name: 'Ingredient'
+  export type $IngredientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Ingredient"
     objects: {
       IngredientType: Prisma.$IngredientTypePayload<ExtArgs>
       IngredientInProduct: Prisma.$IngredientInProductPayload<ExtArgs>[]
     }
-    scalars: $Extensions.GetPayloadResult<
-      {
-        id: string
-        label: string
-        price: number
-        imageUrl: string | null
-        ingredientTypeId: string
-      },
-      ExtArgs['result']['ingredient']
-    >
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      label: string
+      price: number
+      imageUrl: string | null
+      ingredientTypeId: string
+    }, ExtArgs["result"]["ingredient"]>
     composites: {}
   }
 
-  type IngredientGetPayload<
-    S extends boolean | null | undefined | IngredientDefaultArgs,
-  > = $Result.GetResult<Prisma.$IngredientPayload, S>
+  type IngredientGetPayload<S extends boolean | null | undefined | IngredientDefaultArgs> = $Result.GetResult<Prisma.$IngredientPayload, S>
 
-  type IngredientCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<
-    IngredientFindManyArgs,
-    'select' | 'include' | 'distinct' | 'omit'
-  > & {
-    select?: IngredientCountAggregateInputType | true
-  }
-
-  export interface IngredientDelegate<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>['model']['Ingredient']
-      meta: { name: 'Ingredient' }
+  type IngredientCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IngredientFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IngredientCountAggregateInputType | true
     }
+
+  export interface IngredientDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Ingredient'], meta: { name: 'Ingredient' } }
     /**
      * Find zero or one Ingredient that matches the filter.
      * @param {IngredientFindUniqueArgs} args - Arguments to find a Ingredient
@@ -4208,19 +3618,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends IngredientFindUniqueArgs>(
-      args: SelectSubset<T, IngredientFindUniqueArgs<ExtArgs>>,
-    ): Prisma__IngredientClient<
-      $Result.GetResult<
-        Prisma.$IngredientPayload<ExtArgs>,
-        T,
-        'findUnique',
-        ClientOptions
-      > | null,
-      null,
-      ExtArgs,
-      ClientOptions
-    >
+    findUnique<T extends IngredientFindUniqueArgs>(args: SelectSubset<T, IngredientFindUniqueArgs<ExtArgs>>): Prisma__IngredientClient<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find one Ingredient that matches the filter or throw an error with `error.code='P2025'`
@@ -4234,19 +3632,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends IngredientFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, IngredientFindUniqueOrThrowArgs<ExtArgs>>,
-    ): Prisma__IngredientClient<
-      $Result.GetResult<
-        Prisma.$IngredientPayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    findUniqueOrThrow<T extends IngredientFindUniqueOrThrowArgs>(args: SelectSubset<T, IngredientFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IngredientClient<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find the first Ingredient that matches the filter.
@@ -4261,19 +3647,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends IngredientFindFirstArgs>(
-      args?: SelectSubset<T, IngredientFindFirstArgs<ExtArgs>>,
-    ): Prisma__IngredientClient<
-      $Result.GetResult<
-        Prisma.$IngredientPayload<ExtArgs>,
-        T,
-        'findFirst',
-        ClientOptions
-      > | null,
-      null,
-      ExtArgs,
-      ClientOptions
-    >
+    findFirst<T extends IngredientFindFirstArgs>(args?: SelectSubset<T, IngredientFindFirstArgs<ExtArgs>>): Prisma__IngredientClient<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find the first Ingredient that matches the filter or
@@ -4289,19 +3663,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends IngredientFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, IngredientFindFirstOrThrowArgs<ExtArgs>>,
-    ): Prisma__IngredientClient<
-      $Result.GetResult<
-        Prisma.$IngredientPayload<ExtArgs>,
-        T,
-        'findFirstOrThrow',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    findFirstOrThrow<T extends IngredientFindFirstOrThrowArgs>(args?: SelectSubset<T, IngredientFindFirstOrThrowArgs<ExtArgs>>): Prisma__IngredientClient<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find zero or more Ingredients that matches the filter.
@@ -4311,24 +3673,15 @@ export namespace Prisma {
      * @example
      * // Get all Ingredients
      * const ingredients = await prisma.ingredient.findMany()
-     *
+     * 
      * // Get first 10 Ingredients
      * const ingredients = await prisma.ingredient.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const ingredientWithIdOnly = await prisma.ingredient.findMany({ select: { id: true } })
-     *
+     * 
      */
-    findMany<T extends IngredientFindManyArgs>(
-      args?: SelectSubset<T, IngredientFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$IngredientPayload<ExtArgs>,
-        T,
-        'findMany',
-        ClientOptions
-      >
-    >
+    findMany<T extends IngredientFindManyArgs>(args?: SelectSubset<T, IngredientFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
      * Create a Ingredient.
@@ -4340,21 +3693,9 @@ export namespace Prisma {
      *     // ... data to create a Ingredient
      *   }
      * })
-     *
+     * 
      */
-    create<T extends IngredientCreateArgs>(
-      args: SelectSubset<T, IngredientCreateArgs<ExtArgs>>,
-    ): Prisma__IngredientClient<
-      $Result.GetResult<
-        Prisma.$IngredientPayload<ExtArgs>,
-        T,
-        'create',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    create<T extends IngredientCreateArgs>(args: SelectSubset<T, IngredientCreateArgs<ExtArgs>>): Prisma__IngredientClient<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Create many Ingredients.
@@ -4366,11 +3707,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
-    createMany<T extends IngredientCreateManyArgs>(
-      args?: SelectSubset<T, IngredientCreateManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends IngredientCreateManyArgs>(args?: SelectSubset<T, IngredientCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a Ingredient.
@@ -4382,21 +3721,9 @@ export namespace Prisma {
      *     // ... filter to delete one Ingredient
      *   }
      * })
-     *
+     * 
      */
-    delete<T extends IngredientDeleteArgs>(
-      args: SelectSubset<T, IngredientDeleteArgs<ExtArgs>>,
-    ): Prisma__IngredientClient<
-      $Result.GetResult<
-        Prisma.$IngredientPayload<ExtArgs>,
-        T,
-        'delete',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    delete<T extends IngredientDeleteArgs>(args: SelectSubset<T, IngredientDeleteArgs<ExtArgs>>): Prisma__IngredientClient<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Update one Ingredient.
@@ -4411,21 +3738,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    update<T extends IngredientUpdateArgs>(
-      args: SelectSubset<T, IngredientUpdateArgs<ExtArgs>>,
-    ): Prisma__IngredientClient<
-      $Result.GetResult<
-        Prisma.$IngredientPayload<ExtArgs>,
-        T,
-        'update',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    update<T extends IngredientUpdateArgs>(args: SelectSubset<T, IngredientUpdateArgs<ExtArgs>>): Prisma__IngredientClient<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Delete zero or more Ingredients.
@@ -4437,11 +3752,9 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
-    deleteMany<T extends IngredientDeleteManyArgs>(
-      args?: SelectSubset<T, IngredientDeleteManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends IngredientDeleteManyArgs>(args?: SelectSubset<T, IngredientDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Ingredients.
@@ -4458,11 +3771,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    updateMany<T extends IngredientUpdateManyArgs>(
-      args: SelectSubset<T, IngredientUpdateManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends IngredientUpdateManyArgs>(args: SelectSubset<T, IngredientUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Ingredient.
@@ -4481,19 +3792,8 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends IngredientUpsertArgs>(
-      args: SelectSubset<T, IngredientUpsertArgs<ExtArgs>>,
-    ): Prisma__IngredientClient<
-      $Result.GetResult<
-        Prisma.$IngredientPayload<ExtArgs>,
-        T,
-        'upsert',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    upsert<T extends IngredientUpsertArgs>(args: SelectSubset<T, IngredientUpsertArgs<ExtArgs>>): Prisma__IngredientClient<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
 
     /**
      * Count the number of Ingredients.
@@ -4507,7 +3807,7 @@ export namespace Prisma {
      *     // ... the filter for the Ingredients we want to count
      *   }
      * })
-     **/
+    **/
     count<T extends IngredientCountArgs>(
       args?: Subset<T, IngredientCountArgs>,
     ): Prisma.PrismaPromise<
@@ -4541,10 +3841,8 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-     **/
-    aggregate<T extends IngredientAggregateArgs>(
-      args: Subset<T, IngredientAggregateArgs>,
-    ): Prisma.PrismaPromise<GetIngredientAggregateType<T>>
+    **/
+    aggregate<T extends IngredientAggregateArgs>(args: Subset<T, IngredientAggregateArgs>): Prisma.PrismaPromise<GetIngredientAggregateType<T>>
 
     /**
      * Group by Ingredient.
@@ -4562,8 +3860,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
-     **/
+     * 
+    **/
     groupBy<
       T extends IngredientGroupByArgs,
       HasSelectOrTake extends Or<
@@ -4573,66 +3871,59 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: IngredientGroupByArgs['orderBy'] }
         : { orderBy?: IngredientGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T['orderBy']>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-        ? `Error: "by" must not be empty.`
-        : HavingValid extends False
-          ? {
-              [P in HavingFields]: P extends ByFields
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
                 ? never
-                : P extends string
-                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      'Field ',
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ]
-            }[HavingFields]
-          : 'take' extends Keys<T>
-            ? 'orderBy' extends Keys<T>
-              ? ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "take", you also need to provide "orderBy"'
-            : 'skip' extends Keys<T>
-              ? 'orderBy' extends Keys<T>
-                ? ByValid extends True
-                  ? {}
-                  : {
-                      [P in OrderFields]: P extends ByFields
-                        ? never
-                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                    }[OrderFields]
-                : 'Error: If you provide "skip", you also need to provide "orderBy"'
-              : ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields],
-    >(
-      args: SubsetIntersection<T, IngredientGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetIngredientGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>
-    /**
-     * Fields of the Ingredient model
-     */
-    readonly fields: IngredientFieldRefs
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IngredientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIngredientGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Ingredient model
+   */
+  readonly fields: IngredientFieldRefs;
   }
 
   /**
@@ -4641,67 +3932,23 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__IngredientClient<
-    T,
-    Null = never,
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise'
-    IngredientType<T extends IngredientTypeDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, IngredientTypeDefaultArgs<ExtArgs>>,
-    ): Prisma__IngredientTypeClient<
-      | $Result.GetResult<
-          Prisma.$IngredientTypePayload<ExtArgs>,
-          T,
-          'findUniqueOrThrow',
-          ClientOptions
-        >
-      | Null,
-      Null,
-      ExtArgs,
-      ClientOptions
-    >
-    IngredientInProduct<
-      T extends Ingredient$IngredientInProductArgs<ExtArgs> = {},
-    >(
-      args?: Subset<T, Ingredient$IngredientInProductArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$IngredientInProductPayload<ExtArgs>,
-          T,
-          'findMany',
-          ClientOptions
-        >
-      | Null
-    >
+  export interface Prisma__IngredientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    IngredientType<T extends IngredientTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, IngredientTypeDefaultArgs<ExtArgs>>): Prisma__IngredientTypeClient<$Result.GetResult<Prisma.$IngredientTypePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    IngredientInProduct<T extends Ingredient$IngredientInProductArgs<ExtArgs> = {}>(args?: Subset<T, Ingredient$IngredientInProductArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredientInProductPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
-    ): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
-    ): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -4711,24 +3958,26 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
+
+
+
   /**
    * Fields of the Ingredient model
-   */
+   */ 
   interface IngredientFieldRefs {
-    readonly id: FieldRef<'Ingredient', 'String'>
-    readonly label: FieldRef<'Ingredient', 'String'>
-    readonly price: FieldRef<'Ingredient', 'Float'>
-    readonly imageUrl: FieldRef<'Ingredient', 'String'>
-    readonly ingredientTypeId: FieldRef<'Ingredient', 'String'>
+    readonly id: FieldRef<"Ingredient", 'String'>
+    readonly label: FieldRef<"Ingredient", 'String'>
+    readonly price: FieldRef<"Ingredient", 'Float'>
+    readonly imageUrl: FieldRef<"Ingredient", 'String'>
+    readonly ingredientTypeId: FieldRef<"Ingredient", 'String'>
   }
+    
 
   // Custom InputTypes
   /**
    * Ingredient findUnique
    */
-  export type IngredientFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Ingredient
      */
@@ -4750,9 +3999,7 @@ export namespace Prisma {
   /**
    * Ingredient findUniqueOrThrow
    */
-  export type IngredientFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Ingredient
      */
@@ -4774,9 +4021,7 @@ export namespace Prisma {
   /**
    * Ingredient findFirst
    */
-  export type IngredientFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Ingredient
      */
@@ -4795,33 +4040,31 @@ export namespace Prisma {
     where?: IngredientWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Ingredients to fetch.
      */
-    orderBy?:
-      | IngredientOrderByWithRelationInput
-      | IngredientOrderByWithRelationInput[]
+    orderBy?: IngredientOrderByWithRelationInput | IngredientOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for Ingredients.
      */
     cursor?: IngredientWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Ingredients from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Ingredients.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of Ingredients.
      */
     distinct?: IngredientScalarFieldEnum | IngredientScalarFieldEnum[]
@@ -4830,9 +4073,7 @@ export namespace Prisma {
   /**
    * Ingredient findFirstOrThrow
    */
-  export type IngredientFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Ingredient
      */
@@ -4851,33 +4092,31 @@ export namespace Prisma {
     where?: IngredientWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Ingredients to fetch.
      */
-    orderBy?:
-      | IngredientOrderByWithRelationInput
-      | IngredientOrderByWithRelationInput[]
+    orderBy?: IngredientOrderByWithRelationInput | IngredientOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for Ingredients.
      */
     cursor?: IngredientWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Ingredients from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Ingredients.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of Ingredients.
      */
     distinct?: IngredientScalarFieldEnum | IngredientScalarFieldEnum[]
@@ -4886,9 +4125,7 @@ export namespace Prisma {
   /**
    * Ingredient findMany
    */
-  export type IngredientFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Ingredient
      */
@@ -4907,27 +4144,25 @@ export namespace Prisma {
     where?: IngredientWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Ingredients to fetch.
      */
-    orderBy?:
-      | IngredientOrderByWithRelationInput
-      | IngredientOrderByWithRelationInput[]
+    orderBy?: IngredientOrderByWithRelationInput | IngredientOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing Ingredients.
      */
     cursor?: IngredientWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Ingredients from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Ingredients.
      */
     skip?: number
@@ -4937,9 +4172,7 @@ export namespace Prisma {
   /**
    * Ingredient create
    */
-  export type IngredientCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Ingredient
      */
@@ -4961,9 +4194,7 @@ export namespace Prisma {
   /**
    * Ingredient createMany
    */
-  export type IngredientCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Ingredients.
      */
@@ -4974,9 +4205,7 @@ export namespace Prisma {
   /**
    * Ingredient update
    */
-  export type IngredientUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Ingredient
      */
@@ -5002,16 +4231,11 @@ export namespace Prisma {
   /**
    * Ingredient updateMany
    */
-  export type IngredientUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Ingredients.
      */
-    data: XOR<
-      IngredientUpdateManyMutationInput,
-      IngredientUncheckedUpdateManyInput
-    >
+    data: XOR<IngredientUpdateManyMutationInput, IngredientUncheckedUpdateManyInput>
     /**
      * Filter which Ingredients to update
      */
@@ -5025,9 +4249,7 @@ export namespace Prisma {
   /**
    * Ingredient upsert
    */
-  export type IngredientUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Ingredient
      */
@@ -5057,9 +4279,7 @@ export namespace Prisma {
   /**
    * Ingredient delete
    */
-  export type IngredientDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Ingredient
      */
@@ -5081,9 +4301,7 @@ export namespace Prisma {
   /**
    * Ingredient deleteMany
    */
-  export type IngredientDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Ingredients to delete
      */
@@ -5097,9 +4315,7 @@ export namespace Prisma {
   /**
    * Ingredient.IngredientInProduct
    */
-  export type Ingredient$IngredientInProductArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type Ingredient$IngredientInProductArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientInProduct
      */
@@ -5113,23 +4329,17 @@ export namespace Prisma {
      */
     include?: IngredientInProductInclude<ExtArgs> | null
     where?: IngredientInProductWhereInput
-    orderBy?:
-      | IngredientInProductOrderByWithRelationInput
-      | IngredientInProductOrderByWithRelationInput[]
+    orderBy?: IngredientInProductOrderByWithRelationInput | IngredientInProductOrderByWithRelationInput[]
     cursor?: IngredientInProductWhereUniqueInput
     take?: number
     skip?: number
-    distinct?:
-      | IngredientInProductScalarFieldEnum
-      | IngredientInProductScalarFieldEnum[]
+    distinct?: IngredientInProductScalarFieldEnum | IngredientInProductScalarFieldEnum[]
   }
 
   /**
    * Ingredient without action
    */
-  export type IngredientDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Ingredient
      */
@@ -5143,6 +4353,7 @@ export namespace Prisma {
      */
     include?: IngredientInclude<ExtArgs> | null
   }
+
 
   /**
    * Model IngredientType
@@ -5173,6 +4384,7 @@ export namespace Prisma {
     _all: number
   }
 
+
   export type IngredientTypeMinAggregateInputType = {
     id?: true
     label?: true
@@ -5192,76 +4404,69 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type IngredientTypeAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which IngredientType to aggregate.
      */
     where?: IngredientTypeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of IngredientTypes to fetch.
      */
-    orderBy?:
-      | IngredientTypeOrderByWithRelationInput
-      | IngredientTypeOrderByWithRelationInput[]
+    orderBy?: IngredientTypeOrderByWithRelationInput | IngredientTypeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: IngredientTypeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` IngredientTypes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` IngredientTypes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned IngredientTypes
-     **/
+    **/
     _count?: true | IngredientTypeCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
-     **/
+    **/
     _min?: IngredientTypeMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
-     **/
+    **/
     _max?: IngredientTypeMaxAggregateInputType
   }
 
-  export type GetIngredientTypeAggregateType<
-    T extends IngredientTypeAggregateArgs,
-  > = {
-    [P in keyof T & keyof AggregateIngredientType]: P extends '_count' | 'count'
+  export type GetIngredientTypeAggregateType<T extends IngredientTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateIngredientType]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateIngredientType[P]>
       : GetScalarType<T[P], AggregateIngredientType[P]>
   }
 
-  export type IngredientTypeGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+
+
+
+  export type IngredientTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IngredientTypeWhereInput
-    orderBy?:
-      | IngredientTypeOrderByWithAggregationInput
-      | IngredientTypeOrderByWithAggregationInput[]
+    orderBy?: IngredientTypeOrderByWithAggregationInput | IngredientTypeOrderByWithAggregationInput[]
     by: IngredientTypeScalarFieldEnum[] | IngredientTypeScalarFieldEnum
     having?: IngredientTypeScalarWhereWithAggregatesInput
     take?: number
@@ -5280,12 +4485,11 @@ export namespace Prisma {
     _max: IngredientTypeMaxAggregateOutputType | null
   }
 
-  type GetIngredientTypeGroupByPayload<T extends IngredientTypeGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickEnumerable<IngredientTypeGroupByOutputType, T['by']> & {
-          [P in keyof T &
-            keyof IngredientTypeGroupByOutputType]: P extends '_count'
+  type GetIngredientTypeGroupByPayload<T extends IngredientTypeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IngredientTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IngredientTypeGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], IngredientTypeGroupByOutputType[P]>
@@ -5294,18 +4498,16 @@ export namespace Prisma {
       >
     >
 
-  export type IngredientTypeSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      label?: boolean
-      imageUrl?: boolean
-      ingredients?: boolean | IngredientType$ingredientsArgs<ExtArgs>
-      _count?: boolean | IngredientTypeCountOutputTypeDefaultArgs<ExtArgs>
-    },
-    ExtArgs['result']['ingredientType']
-  >
+
+  export type IngredientTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    label?: boolean
+    imageUrl?: boolean
+    ingredients?: boolean | IngredientType$ingredientsArgs<ExtArgs>
+    _count?: boolean | IngredientTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ingredientType"]>
+
+
 
   export type IngredientTypeSelectScalar = {
     id?: boolean
@@ -5313,58 +4515,34 @@ export namespace Prisma {
     imageUrl?: boolean
   }
 
-  export type IngredientTypeOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    'id' | 'label' | 'imageUrl',
-    ExtArgs['result']['ingredientType']
-  >
-  export type IngredientTypeInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label" | "imageUrl", ExtArgs["result"]["ingredientType"]>
+  export type IngredientTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ingredients?: boolean | IngredientType$ingredientsArgs<ExtArgs>
     _count?: boolean | IngredientTypeCountOutputTypeDefaultArgs<ExtArgs>
   }
 
-  export type $IngredientTypePayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    name: 'IngredientType'
+  export type $IngredientTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IngredientType"
     objects: {
       ingredients: Prisma.$IngredientPayload<ExtArgs>[]
     }
-    scalars: $Extensions.GetPayloadResult<
-      {
-        id: string
-        label: string
-        imageUrl: string | null
-      },
-      ExtArgs['result']['ingredientType']
-    >
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      label: string
+      imageUrl: string | null
+    }, ExtArgs["result"]["ingredientType"]>
     composites: {}
   }
 
-  type IngredientTypeGetPayload<
-    S extends boolean | null | undefined | IngredientTypeDefaultArgs,
-  > = $Result.GetResult<Prisma.$IngredientTypePayload, S>
+  type IngredientTypeGetPayload<S extends boolean | null | undefined | IngredientTypeDefaultArgs> = $Result.GetResult<Prisma.$IngredientTypePayload, S>
 
-  type IngredientTypeCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<
-    IngredientTypeFindManyArgs,
-    'select' | 'include' | 'distinct' | 'omit'
-  > & {
-    select?: IngredientTypeCountAggregateInputType | true
-  }
-
-  export interface IngredientTypeDelegate<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>['model']['IngredientType']
-      meta: { name: 'IngredientType' }
+  type IngredientTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IngredientTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IngredientTypeCountAggregateInputType | true
     }
+
+  export interface IngredientTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IngredientType'], meta: { name: 'IngredientType' } }
     /**
      * Find zero or one IngredientType that matches the filter.
      * @param {IngredientTypeFindUniqueArgs} args - Arguments to find a IngredientType
@@ -5376,19 +4554,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends IngredientTypeFindUniqueArgs>(
-      args: SelectSubset<T, IngredientTypeFindUniqueArgs<ExtArgs>>,
-    ): Prisma__IngredientTypeClient<
-      $Result.GetResult<
-        Prisma.$IngredientTypePayload<ExtArgs>,
-        T,
-        'findUnique',
-        ClientOptions
-      > | null,
-      null,
-      ExtArgs,
-      ClientOptions
-    >
+    findUnique<T extends IngredientTypeFindUniqueArgs>(args: SelectSubset<T, IngredientTypeFindUniqueArgs<ExtArgs>>): Prisma__IngredientTypeClient<$Result.GetResult<Prisma.$IngredientTypePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find one IngredientType that matches the filter or throw an error with `error.code='P2025'`
@@ -5402,19 +4568,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends IngredientTypeFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, IngredientTypeFindUniqueOrThrowArgs<ExtArgs>>,
-    ): Prisma__IngredientTypeClient<
-      $Result.GetResult<
-        Prisma.$IngredientTypePayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    findUniqueOrThrow<T extends IngredientTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, IngredientTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IngredientTypeClient<$Result.GetResult<Prisma.$IngredientTypePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find the first IngredientType that matches the filter.
@@ -5429,19 +4583,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends IngredientTypeFindFirstArgs>(
-      args?: SelectSubset<T, IngredientTypeFindFirstArgs<ExtArgs>>,
-    ): Prisma__IngredientTypeClient<
-      $Result.GetResult<
-        Prisma.$IngredientTypePayload<ExtArgs>,
-        T,
-        'findFirst',
-        ClientOptions
-      > | null,
-      null,
-      ExtArgs,
-      ClientOptions
-    >
+    findFirst<T extends IngredientTypeFindFirstArgs>(args?: SelectSubset<T, IngredientTypeFindFirstArgs<ExtArgs>>): Prisma__IngredientTypeClient<$Result.GetResult<Prisma.$IngredientTypePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find the first IngredientType that matches the filter or
@@ -5457,19 +4599,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends IngredientTypeFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, IngredientTypeFindFirstOrThrowArgs<ExtArgs>>,
-    ): Prisma__IngredientTypeClient<
-      $Result.GetResult<
-        Prisma.$IngredientTypePayload<ExtArgs>,
-        T,
-        'findFirstOrThrow',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    findFirstOrThrow<T extends IngredientTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, IngredientTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__IngredientTypeClient<$Result.GetResult<Prisma.$IngredientTypePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find zero or more IngredientTypes that matches the filter.
@@ -5479,24 +4609,15 @@ export namespace Prisma {
      * @example
      * // Get all IngredientTypes
      * const ingredientTypes = await prisma.ingredientType.findMany()
-     *
+     * 
      * // Get first 10 IngredientTypes
      * const ingredientTypes = await prisma.ingredientType.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const ingredientTypeWithIdOnly = await prisma.ingredientType.findMany({ select: { id: true } })
-     *
+     * 
      */
-    findMany<T extends IngredientTypeFindManyArgs>(
-      args?: SelectSubset<T, IngredientTypeFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$IngredientTypePayload<ExtArgs>,
-        T,
-        'findMany',
-        ClientOptions
-      >
-    >
+    findMany<T extends IngredientTypeFindManyArgs>(args?: SelectSubset<T, IngredientTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredientTypePayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
      * Create a IngredientType.
@@ -5508,21 +4629,9 @@ export namespace Prisma {
      *     // ... data to create a IngredientType
      *   }
      * })
-     *
+     * 
      */
-    create<T extends IngredientTypeCreateArgs>(
-      args: SelectSubset<T, IngredientTypeCreateArgs<ExtArgs>>,
-    ): Prisma__IngredientTypeClient<
-      $Result.GetResult<
-        Prisma.$IngredientTypePayload<ExtArgs>,
-        T,
-        'create',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    create<T extends IngredientTypeCreateArgs>(args: SelectSubset<T, IngredientTypeCreateArgs<ExtArgs>>): Prisma__IngredientTypeClient<$Result.GetResult<Prisma.$IngredientTypePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Create many IngredientTypes.
@@ -5534,11 +4643,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
-    createMany<T extends IngredientTypeCreateManyArgs>(
-      args?: SelectSubset<T, IngredientTypeCreateManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends IngredientTypeCreateManyArgs>(args?: SelectSubset<T, IngredientTypeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a IngredientType.
@@ -5550,21 +4657,9 @@ export namespace Prisma {
      *     // ... filter to delete one IngredientType
      *   }
      * })
-     *
+     * 
      */
-    delete<T extends IngredientTypeDeleteArgs>(
-      args: SelectSubset<T, IngredientTypeDeleteArgs<ExtArgs>>,
-    ): Prisma__IngredientTypeClient<
-      $Result.GetResult<
-        Prisma.$IngredientTypePayload<ExtArgs>,
-        T,
-        'delete',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    delete<T extends IngredientTypeDeleteArgs>(args: SelectSubset<T, IngredientTypeDeleteArgs<ExtArgs>>): Prisma__IngredientTypeClient<$Result.GetResult<Prisma.$IngredientTypePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Update one IngredientType.
@@ -5579,21 +4674,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    update<T extends IngredientTypeUpdateArgs>(
-      args: SelectSubset<T, IngredientTypeUpdateArgs<ExtArgs>>,
-    ): Prisma__IngredientTypeClient<
-      $Result.GetResult<
-        Prisma.$IngredientTypePayload<ExtArgs>,
-        T,
-        'update',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    update<T extends IngredientTypeUpdateArgs>(args: SelectSubset<T, IngredientTypeUpdateArgs<ExtArgs>>): Prisma__IngredientTypeClient<$Result.GetResult<Prisma.$IngredientTypePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Delete zero or more IngredientTypes.
@@ -5605,11 +4688,9 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
-    deleteMany<T extends IngredientTypeDeleteManyArgs>(
-      args?: SelectSubset<T, IngredientTypeDeleteManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends IngredientTypeDeleteManyArgs>(args?: SelectSubset<T, IngredientTypeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more IngredientTypes.
@@ -5626,11 +4707,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    updateMany<T extends IngredientTypeUpdateManyArgs>(
-      args: SelectSubset<T, IngredientTypeUpdateManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends IngredientTypeUpdateManyArgs>(args: SelectSubset<T, IngredientTypeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one IngredientType.
@@ -5649,19 +4728,8 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends IngredientTypeUpsertArgs>(
-      args: SelectSubset<T, IngredientTypeUpsertArgs<ExtArgs>>,
-    ): Prisma__IngredientTypeClient<
-      $Result.GetResult<
-        Prisma.$IngredientTypePayload<ExtArgs>,
-        T,
-        'upsert',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    upsert<T extends IngredientTypeUpsertArgs>(args: SelectSubset<T, IngredientTypeUpsertArgs<ExtArgs>>): Prisma__IngredientTypeClient<$Result.GetResult<Prisma.$IngredientTypePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
 
     /**
      * Count the number of IngredientTypes.
@@ -5675,7 +4743,7 @@ export namespace Prisma {
      *     // ... the filter for the IngredientTypes we want to count
      *   }
      * })
-     **/
+    **/
     count<T extends IngredientTypeCountArgs>(
       args?: Subset<T, IngredientTypeCountArgs>,
     ): Prisma.PrismaPromise<
@@ -5709,10 +4777,8 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-     **/
-    aggregate<T extends IngredientTypeAggregateArgs>(
-      args: Subset<T, IngredientTypeAggregateArgs>,
-    ): Prisma.PrismaPromise<GetIngredientTypeAggregateType<T>>
+    **/
+    aggregate<T extends IngredientTypeAggregateArgs>(args: Subset<T, IngredientTypeAggregateArgs>): Prisma.PrismaPromise<GetIngredientTypeAggregateType<T>>
 
     /**
      * Group by IngredientType.
@@ -5730,8 +4796,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
-     **/
+     * 
+    **/
     groupBy<
       T extends IngredientTypeGroupByArgs,
       HasSelectOrTake extends Or<
@@ -5741,66 +4807,59 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: IngredientTypeGroupByArgs['orderBy'] }
         : { orderBy?: IngredientTypeGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T['orderBy']>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-        ? `Error: "by" must not be empty.`
-        : HavingValid extends False
-          ? {
-              [P in HavingFields]: P extends ByFields
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
                 ? never
-                : P extends string
-                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      'Field ',
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ]
-            }[HavingFields]
-          : 'take' extends Keys<T>
-            ? 'orderBy' extends Keys<T>
-              ? ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "take", you also need to provide "orderBy"'
-            : 'skip' extends Keys<T>
-              ? 'orderBy' extends Keys<T>
-                ? ByValid extends True
-                  ? {}
-                  : {
-                      [P in OrderFields]: P extends ByFields
-                        ? never
-                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                    }[OrderFields]
-                : 'Error: If you provide "skip", you also need to provide "orderBy"'
-              : ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields],
-    >(
-      args: SubsetIntersection<T, IngredientTypeGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetIngredientTypeGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>
-    /**
-     * Fields of the IngredientType model
-     */
-    readonly fields: IngredientTypeFieldRefs
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IngredientTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIngredientTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IngredientType model
+   */
+  readonly fields: IngredientTypeFieldRefs;
   }
 
   /**
@@ -5809,51 +4868,22 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__IngredientTypeClient<
-    T,
-    Null = never,
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise'
-    ingredients<T extends IngredientType$ingredientsArgs<ExtArgs> = {}>(
-      args?: Subset<T, IngredientType$ingredientsArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      | $Result.GetResult<
-          Prisma.$IngredientPayload<ExtArgs>,
-          T,
-          'findMany',
-          ClientOptions
-        >
-      | Null
-    >
+  export interface Prisma__IngredientTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    ingredients<T extends IngredientType$ingredientsArgs<ExtArgs> = {}>(args?: Subset<T, IngredientType$ingredientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
-    ): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
-    ): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -5863,22 +4893,24 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
+
+
+
   /**
    * Fields of the IngredientType model
-   */
+   */ 
   interface IngredientTypeFieldRefs {
-    readonly id: FieldRef<'IngredientType', 'String'>
-    readonly label: FieldRef<'IngredientType', 'String'>
-    readonly imageUrl: FieldRef<'IngredientType', 'String'>
+    readonly id: FieldRef<"IngredientType", 'String'>
+    readonly label: FieldRef<"IngredientType", 'String'>
+    readonly imageUrl: FieldRef<"IngredientType", 'String'>
   }
+    
 
   // Custom InputTypes
   /**
    * IngredientType findUnique
    */
-  export type IngredientTypeFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientType
      */
@@ -5900,9 +4932,7 @@ export namespace Prisma {
   /**
    * IngredientType findUniqueOrThrow
    */
-  export type IngredientTypeFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientType
      */
@@ -5924,9 +4954,7 @@ export namespace Prisma {
   /**
    * IngredientType findFirst
    */
-  export type IngredientTypeFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientType
      */
@@ -5945,33 +4973,31 @@ export namespace Prisma {
     where?: IngredientTypeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of IngredientTypes to fetch.
      */
-    orderBy?:
-      | IngredientTypeOrderByWithRelationInput
-      | IngredientTypeOrderByWithRelationInput[]
+    orderBy?: IngredientTypeOrderByWithRelationInput | IngredientTypeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for IngredientTypes.
      */
     cursor?: IngredientTypeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` IngredientTypes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` IngredientTypes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of IngredientTypes.
      */
     distinct?: IngredientTypeScalarFieldEnum | IngredientTypeScalarFieldEnum[]
@@ -5980,9 +5006,7 @@ export namespace Prisma {
   /**
    * IngredientType findFirstOrThrow
    */
-  export type IngredientTypeFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientType
      */
@@ -6001,33 +5025,31 @@ export namespace Prisma {
     where?: IngredientTypeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of IngredientTypes to fetch.
      */
-    orderBy?:
-      | IngredientTypeOrderByWithRelationInput
-      | IngredientTypeOrderByWithRelationInput[]
+    orderBy?: IngredientTypeOrderByWithRelationInput | IngredientTypeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for IngredientTypes.
      */
     cursor?: IngredientTypeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` IngredientTypes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` IngredientTypes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of IngredientTypes.
      */
     distinct?: IngredientTypeScalarFieldEnum | IngredientTypeScalarFieldEnum[]
@@ -6036,9 +5058,7 @@ export namespace Prisma {
   /**
    * IngredientType findMany
    */
-  export type IngredientTypeFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientType
      */
@@ -6057,27 +5077,25 @@ export namespace Prisma {
     where?: IngredientTypeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of IngredientTypes to fetch.
      */
-    orderBy?:
-      | IngredientTypeOrderByWithRelationInput
-      | IngredientTypeOrderByWithRelationInput[]
+    orderBy?: IngredientTypeOrderByWithRelationInput | IngredientTypeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing IngredientTypes.
      */
     cursor?: IngredientTypeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` IngredientTypes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` IngredientTypes.
      */
     skip?: number
@@ -6087,9 +5105,7 @@ export namespace Prisma {
   /**
    * IngredientType create
    */
-  export type IngredientTypeCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientType
      */
@@ -6111,9 +5127,7 @@ export namespace Prisma {
   /**
    * IngredientType createMany
    */
-  export type IngredientTypeCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many IngredientTypes.
      */
@@ -6124,9 +5138,7 @@ export namespace Prisma {
   /**
    * IngredientType update
    */
-  export type IngredientTypeUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientType
      */
@@ -6152,16 +5164,11 @@ export namespace Prisma {
   /**
    * IngredientType updateMany
    */
-  export type IngredientTypeUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update IngredientTypes.
      */
-    data: XOR<
-      IngredientTypeUpdateManyMutationInput,
-      IngredientTypeUncheckedUpdateManyInput
-    >
+    data: XOR<IngredientTypeUpdateManyMutationInput, IngredientTypeUncheckedUpdateManyInput>
     /**
      * Filter which IngredientTypes to update
      */
@@ -6175,9 +5182,7 @@ export namespace Prisma {
   /**
    * IngredientType upsert
    */
-  export type IngredientTypeUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientType
      */
@@ -6207,9 +5212,7 @@ export namespace Prisma {
   /**
    * IngredientType delete
    */
-  export type IngredientTypeDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientType
      */
@@ -6231,9 +5234,7 @@ export namespace Prisma {
   /**
    * IngredientType deleteMany
    */
-  export type IngredientTypeDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which IngredientTypes to delete
      */
@@ -6247,9 +5248,7 @@ export namespace Prisma {
   /**
    * IngredientType.ingredients
    */
-  export type IngredientType$ingredientsArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientType$ingredientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Ingredient
      */
@@ -6263,9 +5262,7 @@ export namespace Prisma {
      */
     include?: IngredientInclude<ExtArgs> | null
     where?: IngredientWhereInput
-    orderBy?:
-      | IngredientOrderByWithRelationInput
-      | IngredientOrderByWithRelationInput[]
+    orderBy?: IngredientOrderByWithRelationInput | IngredientOrderByWithRelationInput[]
     cursor?: IngredientWhereUniqueInput
     take?: number
     skip?: number
@@ -6275,9 +5272,7 @@ export namespace Prisma {
   /**
    * IngredientType without action
    */
-  export type IngredientTypeDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientType
      */
@@ -6291,6 +5286,7 @@ export namespace Prisma {
      */
     include?: IngredientTypeInclude<ExtArgs> | null
   }
+
 
   /**
    * Model IngredientInProduct
@@ -6327,6 +5323,7 @@ export namespace Prisma {
     _all: number
   }
 
+
   export type IngredientInProductMinAggregateInputType = {
     id?: true
     ingredientId?: true
@@ -6352,81 +5349,70 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type IngredientInProductAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which IngredientInProduct to aggregate.
      */
     where?: IngredientInProductWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of IngredientInProducts to fetch.
      */
-    orderBy?:
-      | IngredientInProductOrderByWithRelationInput
-      | IngredientInProductOrderByWithRelationInput[]
+    orderBy?: IngredientInProductOrderByWithRelationInput | IngredientInProductOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: IngredientInProductWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` IngredientInProducts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` IngredientInProducts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned IngredientInProducts
-     **/
+    **/
     _count?: true | IngredientInProductCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
-     **/
+    **/
     _min?: IngredientInProductMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
-     **/
+    **/
     _max?: IngredientInProductMaxAggregateInputType
   }
 
-  export type GetIngredientInProductAggregateType<
-    T extends IngredientInProductAggregateArgs,
-  > = {
-    [P in keyof T & keyof AggregateIngredientInProduct]: P extends
-      | '_count'
-      | 'count'
+  export type GetIngredientInProductAggregateType<T extends IngredientInProductAggregateArgs> = {
+        [P in keyof T & keyof AggregateIngredientInProduct]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateIngredientInProduct[P]>
       : GetScalarType<T[P], AggregateIngredientInProduct[P]>
   }
 
-  export type IngredientInProductGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+
+
+
+  export type IngredientInProductGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IngredientInProductWhereInput
-    orderBy?:
-      | IngredientInProductOrderByWithAggregationInput
-      | IngredientInProductOrderByWithAggregationInput[]
-    by:
-      | IngredientInProductScalarFieldEnum[]
-      | IngredientInProductScalarFieldEnum
+    orderBy?: IngredientInProductOrderByWithAggregationInput | IngredientInProductOrderByWithAggregationInput[]
+    by: IngredientInProductScalarFieldEnum[] | IngredientInProductScalarFieldEnum
     having?: IngredientInProductScalarWhereWithAggregatesInput
     take?: number
     skip?: number
@@ -6446,35 +5432,31 @@ export namespace Prisma {
     _max: IngredientInProductMaxAggregateOutputType | null
   }
 
-  type GetIngredientInProductGroupByPayload<
-    T extends IngredientInProductGroupByArgs,
-  > = Prisma.PrismaPromise<
+  type GetIngredientInProductGroupByPayload<T extends IngredientInProductGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<IngredientInProductGroupByOutputType, T['by']> & {
-        [P in keyof T &
-          keyof IngredientInProductGroupByOutputType]: P extends '_count'
-          ? T[P] extends boolean
-            ? number
+      PickEnumerable<IngredientInProductGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IngredientInProductGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IngredientInProductGroupByOutputType[P]>
             : GetScalarType<T[P], IngredientInProductGroupByOutputType[P]>
-          : GetScalarType<T[P], IngredientInProductGroupByOutputType[P]>
-      }
+        }
+      >
     >
-  >
 
-  export type IngredientInProductSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      ingredientId?: boolean
-      productId?: boolean
-      composition?: boolean
-      mandatory?: boolean
-      ingredient?: boolean | IngredientDefaultArgs<ExtArgs>
-      product?: boolean | ProductDefaultArgs<ExtArgs>
-    },
-    ExtArgs['result']['ingredientInProduct']
-  >
+
+  export type IngredientInProductSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ingredientId?: boolean
+    productId?: boolean
+    composition?: boolean
+    mandatory?: boolean
+    ingredient?: boolean | IngredientDefaultArgs<ExtArgs>
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ingredientInProduct"]>
+
+
 
   export type IngredientInProductSelectScalar = {
     id?: boolean
@@ -6484,61 +5466,37 @@ export namespace Prisma {
     mandatory?: boolean
   }
 
-  export type IngredientInProductOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    'id' | 'ingredientId' | 'productId' | 'composition' | 'mandatory',
-    ExtArgs['result']['ingredientInProduct']
-  >
-  export type IngredientInProductInclude<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ingredientId" | "productId" | "composition" | "mandatory", ExtArgs["result"]["ingredientInProduct"]>
+  export type IngredientInProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ingredient?: boolean | IngredientDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
   }
 
-  export type $IngredientInProductPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    name: 'IngredientInProduct'
+  export type $IngredientInProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IngredientInProduct"
     objects: {
       ingredient: Prisma.$IngredientPayload<ExtArgs>
       product: Prisma.$ProductPayload<ExtArgs>
     }
-    scalars: $Extensions.GetPayloadResult<
-      {
-        id: string
-        ingredientId: string
-        productId: string
-        composition: $Enums.IngredientComposition
-        mandatory: boolean
-      },
-      ExtArgs['result']['ingredientInProduct']
-    >
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      ingredientId: string
+      productId: string
+      composition: $Enums.IngredientComposition
+      mandatory: boolean
+    }, ExtArgs["result"]["ingredientInProduct"]>
     composites: {}
   }
 
-  type IngredientInProductGetPayload<
-    S extends boolean | null | undefined | IngredientInProductDefaultArgs,
-  > = $Result.GetResult<Prisma.$IngredientInProductPayload, S>
+  type IngredientInProductGetPayload<S extends boolean | null | undefined | IngredientInProductDefaultArgs> = $Result.GetResult<Prisma.$IngredientInProductPayload, S>
 
-  type IngredientInProductCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<
-    IngredientInProductFindManyArgs,
-    'select' | 'include' | 'distinct' | 'omit'
-  > & {
-    select?: IngredientInProductCountAggregateInputType | true
-  }
-
-  export interface IngredientInProductDelegate<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>['model']['IngredientInProduct']
-      meta: { name: 'IngredientInProduct' }
+  type IngredientInProductCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IngredientInProductFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IngredientInProductCountAggregateInputType | true
     }
+
+  export interface IngredientInProductDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IngredientInProduct'], meta: { name: 'IngredientInProduct' } }
     /**
      * Find zero or one IngredientInProduct that matches the filter.
      * @param {IngredientInProductFindUniqueArgs} args - Arguments to find a IngredientInProduct
@@ -6550,19 +5508,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends IngredientInProductFindUniqueArgs>(
-      args: SelectSubset<T, IngredientInProductFindUniqueArgs<ExtArgs>>,
-    ): Prisma__IngredientInProductClient<
-      $Result.GetResult<
-        Prisma.$IngredientInProductPayload<ExtArgs>,
-        T,
-        'findUnique',
-        ClientOptions
-      > | null,
-      null,
-      ExtArgs,
-      ClientOptions
-    >
+    findUnique<T extends IngredientInProductFindUniqueArgs>(args: SelectSubset<T, IngredientInProductFindUniqueArgs<ExtArgs>>): Prisma__IngredientInProductClient<$Result.GetResult<Prisma.$IngredientInProductPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find one IngredientInProduct that matches the filter or throw an error with `error.code='P2025'`
@@ -6576,19 +5522,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends IngredientInProductFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, IngredientInProductFindUniqueOrThrowArgs<ExtArgs>>,
-    ): Prisma__IngredientInProductClient<
-      $Result.GetResult<
-        Prisma.$IngredientInProductPayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    findUniqueOrThrow<T extends IngredientInProductFindUniqueOrThrowArgs>(args: SelectSubset<T, IngredientInProductFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IngredientInProductClient<$Result.GetResult<Prisma.$IngredientInProductPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find the first IngredientInProduct that matches the filter.
@@ -6603,19 +5537,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends IngredientInProductFindFirstArgs>(
-      args?: SelectSubset<T, IngredientInProductFindFirstArgs<ExtArgs>>,
-    ): Prisma__IngredientInProductClient<
-      $Result.GetResult<
-        Prisma.$IngredientInProductPayload<ExtArgs>,
-        T,
-        'findFirst',
-        ClientOptions
-      > | null,
-      null,
-      ExtArgs,
-      ClientOptions
-    >
+    findFirst<T extends IngredientInProductFindFirstArgs>(args?: SelectSubset<T, IngredientInProductFindFirstArgs<ExtArgs>>): Prisma__IngredientInProductClient<$Result.GetResult<Prisma.$IngredientInProductPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find the first IngredientInProduct that matches the filter or
@@ -6631,19 +5553,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends IngredientInProductFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, IngredientInProductFindFirstOrThrowArgs<ExtArgs>>,
-    ): Prisma__IngredientInProductClient<
-      $Result.GetResult<
-        Prisma.$IngredientInProductPayload<ExtArgs>,
-        T,
-        'findFirstOrThrow',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    findFirstOrThrow<T extends IngredientInProductFindFirstOrThrowArgs>(args?: SelectSubset<T, IngredientInProductFindFirstOrThrowArgs<ExtArgs>>): Prisma__IngredientInProductClient<$Result.GetResult<Prisma.$IngredientInProductPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find zero or more IngredientInProducts that matches the filter.
@@ -6653,24 +5563,15 @@ export namespace Prisma {
      * @example
      * // Get all IngredientInProducts
      * const ingredientInProducts = await prisma.ingredientInProduct.findMany()
-     *
+     * 
      * // Get first 10 IngredientInProducts
      * const ingredientInProducts = await prisma.ingredientInProduct.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const ingredientInProductWithIdOnly = await prisma.ingredientInProduct.findMany({ select: { id: true } })
-     *
+     * 
      */
-    findMany<T extends IngredientInProductFindManyArgs>(
-      args?: SelectSubset<T, IngredientInProductFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$IngredientInProductPayload<ExtArgs>,
-        T,
-        'findMany',
-        ClientOptions
-      >
-    >
+    findMany<T extends IngredientInProductFindManyArgs>(args?: SelectSubset<T, IngredientInProductFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredientInProductPayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
      * Create a IngredientInProduct.
@@ -6682,21 +5583,9 @@ export namespace Prisma {
      *     // ... data to create a IngredientInProduct
      *   }
      * })
-     *
+     * 
      */
-    create<T extends IngredientInProductCreateArgs>(
-      args: SelectSubset<T, IngredientInProductCreateArgs<ExtArgs>>,
-    ): Prisma__IngredientInProductClient<
-      $Result.GetResult<
-        Prisma.$IngredientInProductPayload<ExtArgs>,
-        T,
-        'create',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    create<T extends IngredientInProductCreateArgs>(args: SelectSubset<T, IngredientInProductCreateArgs<ExtArgs>>): Prisma__IngredientInProductClient<$Result.GetResult<Prisma.$IngredientInProductPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Create many IngredientInProducts.
@@ -6708,11 +5597,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
-    createMany<T extends IngredientInProductCreateManyArgs>(
-      args?: SelectSubset<T, IngredientInProductCreateManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends IngredientInProductCreateManyArgs>(args?: SelectSubset<T, IngredientInProductCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a IngredientInProduct.
@@ -6724,21 +5611,9 @@ export namespace Prisma {
      *     // ... filter to delete one IngredientInProduct
      *   }
      * })
-     *
+     * 
      */
-    delete<T extends IngredientInProductDeleteArgs>(
-      args: SelectSubset<T, IngredientInProductDeleteArgs<ExtArgs>>,
-    ): Prisma__IngredientInProductClient<
-      $Result.GetResult<
-        Prisma.$IngredientInProductPayload<ExtArgs>,
-        T,
-        'delete',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    delete<T extends IngredientInProductDeleteArgs>(args: SelectSubset<T, IngredientInProductDeleteArgs<ExtArgs>>): Prisma__IngredientInProductClient<$Result.GetResult<Prisma.$IngredientInProductPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Update one IngredientInProduct.
@@ -6753,21 +5628,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    update<T extends IngredientInProductUpdateArgs>(
-      args: SelectSubset<T, IngredientInProductUpdateArgs<ExtArgs>>,
-    ): Prisma__IngredientInProductClient<
-      $Result.GetResult<
-        Prisma.$IngredientInProductPayload<ExtArgs>,
-        T,
-        'update',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    update<T extends IngredientInProductUpdateArgs>(args: SelectSubset<T, IngredientInProductUpdateArgs<ExtArgs>>): Prisma__IngredientInProductClient<$Result.GetResult<Prisma.$IngredientInProductPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Delete zero or more IngredientInProducts.
@@ -6779,11 +5642,9 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
-    deleteMany<T extends IngredientInProductDeleteManyArgs>(
-      args?: SelectSubset<T, IngredientInProductDeleteManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends IngredientInProductDeleteManyArgs>(args?: SelectSubset<T, IngredientInProductDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more IngredientInProducts.
@@ -6800,11 +5661,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    updateMany<T extends IngredientInProductUpdateManyArgs>(
-      args: SelectSubset<T, IngredientInProductUpdateManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends IngredientInProductUpdateManyArgs>(args: SelectSubset<T, IngredientInProductUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one IngredientInProduct.
@@ -6823,19 +5682,8 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends IngredientInProductUpsertArgs>(
-      args: SelectSubset<T, IngredientInProductUpsertArgs<ExtArgs>>,
-    ): Prisma__IngredientInProductClient<
-      $Result.GetResult<
-        Prisma.$IngredientInProductPayload<ExtArgs>,
-        T,
-        'upsert',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    upsert<T extends IngredientInProductUpsertArgs>(args: SelectSubset<T, IngredientInProductUpsertArgs<ExtArgs>>): Prisma__IngredientInProductClient<$Result.GetResult<Prisma.$IngredientInProductPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
 
     /**
      * Count the number of IngredientInProducts.
@@ -6849,17 +5697,14 @@ export namespace Prisma {
      *     // ... the filter for the IngredientInProducts we want to count
      *   }
      * })
-     **/
+    **/
     count<T extends IngredientInProductCountArgs>(
       args?: Subset<T, IngredientInProductCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<
-              T['select'],
-              IngredientInProductCountAggregateOutputType
-            >
+          : GetScalarType<T['select'], IngredientInProductCountAggregateOutputType>
         : number
     >
 
@@ -6886,10 +5731,8 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-     **/
-    aggregate<T extends IngredientInProductAggregateArgs>(
-      args: Subset<T, IngredientInProductAggregateArgs>,
-    ): Prisma.PrismaPromise<GetIngredientInProductAggregateType<T>>
+    **/
+    aggregate<T extends IngredientInProductAggregateArgs>(args: Subset<T, IngredientInProductAggregateArgs>): Prisma.PrismaPromise<GetIngredientInProductAggregateType<T>>
 
     /**
      * Group by IngredientInProduct.
@@ -6907,8 +5750,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
-     **/
+     * 
+    **/
     groupBy<
       T extends IngredientInProductGroupByArgs,
       HasSelectOrTake extends Or<
@@ -6918,66 +5761,59 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: IngredientInProductGroupByArgs['orderBy'] }
         : { orderBy?: IngredientInProductGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T['orderBy']>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-        ? `Error: "by" must not be empty.`
-        : HavingValid extends False
-          ? {
-              [P in HavingFields]: P extends ByFields
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
                 ? never
-                : P extends string
-                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      'Field ',
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ]
-            }[HavingFields]
-          : 'take' extends Keys<T>
-            ? 'orderBy' extends Keys<T>
-              ? ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "take", you also need to provide "orderBy"'
-            : 'skip' extends Keys<T>
-              ? 'orderBy' extends Keys<T>
-                ? ByValid extends True
-                  ? {}
-                  : {
-                      [P in OrderFields]: P extends ByFields
-                        ? never
-                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                    }[OrderFields]
-                : 'Error: If you provide "skip", you also need to provide "orderBy"'
-              : ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields],
-    >(
-      args: SubsetIntersection<T, IngredientInProductGroupByArgs, OrderByArg> &
-        InputErrors,
-    ): {} extends InputErrors
-      ? GetIngredientInProductGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>
-    /**
-     * Fields of the IngredientInProduct model
-     */
-    readonly fields: IngredientInProductFieldRefs
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IngredientInProductGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIngredientInProductGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IngredientInProduct model
+   */
+  readonly fields: IngredientInProductFieldRefs;
   }
 
   /**
@@ -6986,68 +5822,23 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__IngredientInProductClient<
-    T,
-    Null = never,
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise'
-    ingredient<T extends IngredientDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, IngredientDefaultArgs<ExtArgs>>,
-    ): Prisma__IngredientClient<
-      | $Result.GetResult<
-          Prisma.$IngredientPayload<ExtArgs>,
-          T,
-          'findUniqueOrThrow',
-          ClientOptions
-        >
-      | Null,
-      Null,
-      ExtArgs,
-      ClientOptions
-    >
-    product<T extends ProductDefaultArgs<ExtArgs> = {}>(
-      args?: Subset<T, ProductDefaultArgs<ExtArgs>>,
-    ): Prisma__ProductClient<
-      | $Result.GetResult<
-          Prisma.$ProductPayload<ExtArgs>,
-          T,
-          'findUniqueOrThrow',
-          ClientOptions
-        >
-      | Null,
-      Null,
-      ExtArgs,
-      ClientOptions
-    >
+  export interface Prisma__IngredientInProductClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    ingredient<T extends IngredientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, IngredientDefaultArgs<ExtArgs>>): Prisma__IngredientClient<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
-    ): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
-    ): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -7057,27 +5848,26 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
+
+
+
   /**
    * Fields of the IngredientInProduct model
-   */
+   */ 
   interface IngredientInProductFieldRefs {
-    readonly id: FieldRef<'IngredientInProduct', 'String'>
-    readonly ingredientId: FieldRef<'IngredientInProduct', 'String'>
-    readonly productId: FieldRef<'IngredientInProduct', 'String'>
-    readonly composition: FieldRef<
-      'IngredientInProduct',
-      'IngredientComposition'
-    >
-    readonly mandatory: FieldRef<'IngredientInProduct', 'Boolean'>
+    readonly id: FieldRef<"IngredientInProduct", 'String'>
+    readonly ingredientId: FieldRef<"IngredientInProduct", 'String'>
+    readonly productId: FieldRef<"IngredientInProduct", 'String'>
+    readonly composition: FieldRef<"IngredientInProduct", 'IngredientComposition'>
+    readonly mandatory: FieldRef<"IngredientInProduct", 'Boolean'>
   }
+    
 
   // Custom InputTypes
   /**
    * IngredientInProduct findUnique
    */
-  export type IngredientInProductFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientInProduct
      */
@@ -7099,9 +5889,7 @@ export namespace Prisma {
   /**
    * IngredientInProduct findUniqueOrThrow
    */
-  export type IngredientInProductFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientInProduct
      */
@@ -7123,9 +5911,7 @@ export namespace Prisma {
   /**
    * IngredientInProduct findFirst
    */
-  export type IngredientInProductFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientInProduct
      */
@@ -7144,46 +5930,40 @@ export namespace Prisma {
     where?: IngredientInProductWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of IngredientInProducts to fetch.
      */
-    orderBy?:
-      | IngredientInProductOrderByWithRelationInput
-      | IngredientInProductOrderByWithRelationInput[]
+    orderBy?: IngredientInProductOrderByWithRelationInput | IngredientInProductOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for IngredientInProducts.
      */
     cursor?: IngredientInProductWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` IngredientInProducts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` IngredientInProducts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of IngredientInProducts.
      */
-    distinct?:
-      | IngredientInProductScalarFieldEnum
-      | IngredientInProductScalarFieldEnum[]
+    distinct?: IngredientInProductScalarFieldEnum | IngredientInProductScalarFieldEnum[]
   }
 
   /**
    * IngredientInProduct findFirstOrThrow
    */
-  export type IngredientInProductFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientInProduct
      */
@@ -7202,46 +5982,40 @@ export namespace Prisma {
     where?: IngredientInProductWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of IngredientInProducts to fetch.
      */
-    orderBy?:
-      | IngredientInProductOrderByWithRelationInput
-      | IngredientInProductOrderByWithRelationInput[]
+    orderBy?: IngredientInProductOrderByWithRelationInput | IngredientInProductOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for IngredientInProducts.
      */
     cursor?: IngredientInProductWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` IngredientInProducts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` IngredientInProducts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of IngredientInProducts.
      */
-    distinct?:
-      | IngredientInProductScalarFieldEnum
-      | IngredientInProductScalarFieldEnum[]
+    distinct?: IngredientInProductScalarFieldEnum | IngredientInProductScalarFieldEnum[]
   }
 
   /**
    * IngredientInProduct findMany
    */
-  export type IngredientInProductFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientInProduct
      */
@@ -7260,41 +6034,35 @@ export namespace Prisma {
     where?: IngredientInProductWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of IngredientInProducts to fetch.
      */
-    orderBy?:
-      | IngredientInProductOrderByWithRelationInput
-      | IngredientInProductOrderByWithRelationInput[]
+    orderBy?: IngredientInProductOrderByWithRelationInput | IngredientInProductOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing IngredientInProducts.
      */
     cursor?: IngredientInProductWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` IngredientInProducts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` IngredientInProducts.
      */
     skip?: number
-    distinct?:
-      | IngredientInProductScalarFieldEnum
-      | IngredientInProductScalarFieldEnum[]
+    distinct?: IngredientInProductScalarFieldEnum | IngredientInProductScalarFieldEnum[]
   }
 
   /**
    * IngredientInProduct create
    */
-  export type IngredientInProductCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientInProduct
      */
@@ -7310,33 +6078,24 @@ export namespace Prisma {
     /**
      * The data needed to create a IngredientInProduct.
      */
-    data: XOR<
-      IngredientInProductCreateInput,
-      IngredientInProductUncheckedCreateInput
-    >
+    data: XOR<IngredientInProductCreateInput, IngredientInProductUncheckedCreateInput>
   }
 
   /**
    * IngredientInProduct createMany
    */
-  export type IngredientInProductCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many IngredientInProducts.
      */
-    data:
-      | IngredientInProductCreateManyInput
-      | IngredientInProductCreateManyInput[]
+    data: IngredientInProductCreateManyInput | IngredientInProductCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
    * IngredientInProduct update
    */
-  export type IngredientInProductUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientInProduct
      */
@@ -7352,10 +6111,7 @@ export namespace Prisma {
     /**
      * The data needed to update a IngredientInProduct.
      */
-    data: XOR<
-      IngredientInProductUpdateInput,
-      IngredientInProductUncheckedUpdateInput
-    >
+    data: XOR<IngredientInProductUpdateInput, IngredientInProductUncheckedUpdateInput>
     /**
      * Choose, which IngredientInProduct to update.
      */
@@ -7365,16 +6121,11 @@ export namespace Prisma {
   /**
    * IngredientInProduct updateMany
    */
-  export type IngredientInProductUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update IngredientInProducts.
      */
-    data: XOR<
-      IngredientInProductUpdateManyMutationInput,
-      IngredientInProductUncheckedUpdateManyInput
-    >
+    data: XOR<IngredientInProductUpdateManyMutationInput, IngredientInProductUncheckedUpdateManyInput>
     /**
      * Filter which IngredientInProducts to update
      */
@@ -7388,9 +6139,7 @@ export namespace Prisma {
   /**
    * IngredientInProduct upsert
    */
-  export type IngredientInProductUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientInProduct
      */
@@ -7410,25 +6159,17 @@ export namespace Prisma {
     /**
      * In case the IngredientInProduct found by the `where` argument doesn't exist, create a new IngredientInProduct with this data.
      */
-    create: XOR<
-      IngredientInProductCreateInput,
-      IngredientInProductUncheckedCreateInput
-    >
+    create: XOR<IngredientInProductCreateInput, IngredientInProductUncheckedCreateInput>
     /**
      * In case the IngredientInProduct was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<
-      IngredientInProductUpdateInput,
-      IngredientInProductUncheckedUpdateInput
-    >
+    update: XOR<IngredientInProductUpdateInput, IngredientInProductUncheckedUpdateInput>
   }
 
   /**
    * IngredientInProduct delete
    */
-  export type IngredientInProductDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientInProduct
      */
@@ -7450,9 +6191,7 @@ export namespace Prisma {
   /**
    * IngredientInProduct deleteMany
    */
-  export type IngredientInProductDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which IngredientInProducts to delete
      */
@@ -7466,9 +6205,7 @@ export namespace Prisma {
   /**
    * IngredientInProduct without action
    */
-  export type IngredientInProductDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type IngredientInProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the IngredientInProduct
      */
@@ -7482,6 +6219,7 @@ export namespace Prisma {
      */
     include?: IngredientInProductInclude<ExtArgs> | null
   }
+
 
   /**
    * Model User
@@ -7521,6 +6259,7 @@ export namespace Prisma {
     _all: number
   }
 
+
   export type UserMinAggregateInputType = {
     id?: true
     email?: true
@@ -7549,72 +6288,69 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type UserAggregateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which User to aggregate.
      */
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Users to fetch.
      */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the start position
      */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Count returned Users
-     **/
+    **/
     _count?: true | UserCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the minimum value
-     **/
+    **/
     _min?: UserMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
+     * 
      * Select which fields to find the maximum value
-     **/
+    **/
     _max?: UserMaxAggregateInputType
   }
 
   export type GetUserAggregateType<T extends UserAggregateArgs> = {
-    [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateUser[P]>
       : GetScalarType<T[P], AggregateUser[P]>
   }
 
-  export type UserGroupByArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+
+
+
+  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
-    orderBy?:
-      | UserOrderByWithAggregationInput
-      | UserOrderByWithAggregationInput[]
+    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
     by: UserScalarFieldEnum[] | UserScalarFieldEnum
     having?: UserScalarWhereWithAggregatesInput
     take?: number
@@ -7638,29 +6374,28 @@ export namespace Prisma {
 
   type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UserGroupByOutputType, T['by']> & {
-        [P in keyof T & keyof UserGroupByOutputType]: P extends '_count'
-          ? T[P] extends boolean
-            ? number
+      PickEnumerable<UserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserGroupByOutputType[P]>
             : GetScalarType<T[P], UserGroupByOutputType[P]>
-          : GetScalarType<T[P], UserGroupByOutputType[P]>
-      }
+        }
+      >
     >
-  >
 
-  export type UserSelect<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetSelect<
-    {
-      id?: boolean
-      email?: boolean
-      firstName?: boolean
-      lastName?: boolean
-      password?: boolean
-      role?: boolean
-    },
-    ExtArgs['result']['user']
-  >
+
+  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    password?: boolean
+    role?: boolean
+  }, ExtArgs["result"]["user"]>
+
+
 
   export type UserSelectScalar = {
     id?: boolean
@@ -7671,49 +6406,31 @@ export namespace Prisma {
     role?: boolean
   }
 
-  export type UserOmit<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = $Extensions.GetOmit<
-    'id' | 'email' | 'firstName' | 'lastName' | 'password' | 'role',
-    ExtArgs['result']['user']
-  >
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstName" | "lastName" | "password" | "role", ExtArgs["result"]["user"]>
 
-  export type $UserPayload<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
-    name: 'User'
+  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "User"
     objects: {}
-    scalars: $Extensions.GetPayloadResult<
-      {
-        id: string
-        email: string
-        firstName: string
-        lastName: string
-        password: string
-        role: $Enums.UserRole
-      },
-      ExtArgs['result']['user']
-    >
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email: string
+      firstName: string
+      lastName: string
+      password: string
+      role: $Enums.UserRole
+    }, ExtArgs["result"]["user"]>
     composites: {}
   }
 
-  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> =
-    $Result.GetResult<Prisma.$UserPayload, S>
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
 
-  type UserCountArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-    select?: UserCountAggregateInputType | true
-  }
-
-  export interface UserDelegate<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > {
-    [K: symbol]: {
-      types: Prisma.TypeMap<ExtArgs>['model']['User']
-      meta: { name: 'User' }
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserCountAggregateInputType | true
     }
+
+  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
     /**
      * Find zero or one User that matches the filter.
      * @param {UserFindUniqueArgs} args - Arguments to find a User
@@ -7725,19 +6442,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends UserFindUniqueArgs>(
-      args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>,
-    ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        'findUnique',
-        ClientOptions
-      > | null,
-      null,
-      ExtArgs,
-      ClientOptions
-    >
+    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find one User that matches the filter or throw an error with `error.code='P2025'`
@@ -7751,19 +6456,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(
-      args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>,
-    ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        'findUniqueOrThrow',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find the first User that matches the filter.
@@ -7778,19 +6471,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends UserFindFirstArgs>(
-      args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>,
-    ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        'findFirst',
-        ClientOptions
-      > | null,
-      null,
-      ExtArgs,
-      ClientOptions
-    >
+    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find the first User that matches the filter or
@@ -7806,19 +6487,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>,
-    ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        'findFirstOrThrow',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find zero or more Users that matches the filter.
@@ -7828,24 +6497,15 @@ export namespace Prisma {
      * @example
      * // Get all Users
      * const users = await prisma.user.findMany()
-     *
+     * 
      * // Get first 10 Users
      * const users = await prisma.user.findMany({ take: 10 })
-     *
+     * 
      * // Only select the `id`
      * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
-     *
+     * 
      */
-    findMany<T extends UserFindManyArgs>(
-      args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        'findMany',
-        ClientOptions
-      >
-    >
+    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
      * Create a User.
@@ -7857,21 +6517,9 @@ export namespace Prisma {
      *     // ... data to create a User
      *   }
      * })
-     *
+     * 
      */
-    create<T extends UserCreateArgs>(
-      args: SelectSubset<T, UserCreateArgs<ExtArgs>>,
-    ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        'create',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Create many Users.
@@ -7883,11 +6531,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *
+     *     
      */
-    createMany<T extends UserCreateManyArgs>(
-      args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a User.
@@ -7899,21 +6545,9 @@ export namespace Prisma {
      *     // ... filter to delete one User
      *   }
      * })
-     *
+     * 
      */
-    delete<T extends UserDeleteArgs>(
-      args: SelectSubset<T, UserDeleteArgs<ExtArgs>>,
-    ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        'delete',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Update one User.
@@ -7928,21 +6562,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    update<T extends UserUpdateArgs>(
-      args: SelectSubset<T, UserUpdateArgs<ExtArgs>>,
-    ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        'update',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Delete zero or more Users.
@@ -7954,11 +6576,9 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     *
+     * 
      */
-    deleteMany<T extends UserDeleteManyArgs>(
-      args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Users.
@@ -7975,11 +6595,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     *
+     * 
      */
-    updateMany<T extends UserUpdateManyArgs>(
-      args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>,
-    ): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one User.
@@ -7998,19 +6616,8 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends UserUpsertArgs>(
-      args: SelectSubset<T, UserUpsertArgs<ExtArgs>>,
-    ): Prisma__UserClient<
-      $Result.GetResult<
-        Prisma.$UserPayload<ExtArgs>,
-        T,
-        'upsert',
-        ClientOptions
-      >,
-      never,
-      ExtArgs,
-      ClientOptions
-    >
+    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
 
     /**
      * Count the number of Users.
@@ -8024,7 +6631,7 @@ export namespace Prisma {
      *     // ... the filter for the Users we want to count
      *   }
      * })
-     **/
+    **/
     count<T extends UserCountArgs>(
       args?: Subset<T, UserCountArgs>,
     ): Prisma.PrismaPromise<
@@ -8058,10 +6665,8 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-     **/
-    aggregate<T extends UserAggregateArgs>(
-      args: Subset<T, UserAggregateArgs>,
-    ): Prisma.PrismaPromise<GetUserAggregateType<T>>
+    **/
+    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
 
     /**
      * Group by User.
@@ -8079,8 +6684,8 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     *
-     **/
+     * 
+    **/
     groupBy<
       T extends UserGroupByArgs,
       HasSelectOrTake extends Or<
@@ -8090,65 +6695,59 @@ export namespace Prisma {
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: UserGroupByArgs['orderBy'] }
         : { orderBy?: UserGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T['orderBy']>>
-      >,
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
       HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-        ? `Error: "by" must not be empty.`
-        : HavingValid extends False
-          ? {
-              [P in HavingFields]: P extends ByFields
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
                 ? never
-                : P extends string
-                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-                  : [
-                      Error,
-                      'Field ',
-                      P,
-                      ` in "having" needs to be provided in "by"`,
-                    ]
-            }[HavingFields]
-          : 'take' extends Keys<T>
-            ? 'orderBy' extends Keys<T>
-              ? ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields]
-              : 'Error: If you provide "take", you also need to provide "orderBy"'
-            : 'skip' extends Keys<T>
-              ? 'orderBy' extends Keys<T>
-                ? ByValid extends True
-                  ? {}
-                  : {
-                      [P in OrderFields]: P extends ByFields
-                        ? never
-                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                    }[OrderFields]
-                : 'Error: If you provide "skip", you also need to provide "orderBy"'
-              : ByValid extends True
-                ? {}
-                : {
-                    [P in OrderFields]: P extends ByFields
-                      ? never
-                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-                  }[OrderFields],
-    >(
-      args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors,
-    ): {} extends InputErrors
-      ? GetUserGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>
-    /**
-     * Fields of the User model
-     */
-    readonly fields: UserFieldRefs
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the User model
+   */
+  readonly fields: UserFieldRefs;
   }
 
   /**
@@ -8157,40 +6756,21 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__UserClient<
-    T,
-    Null = never,
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-    ClientOptions = {},
-  > extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise'
+  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null,
-    ): $Utils.JsPromise<TResult1 | TResult2>
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null,
-    ): $Utils.JsPromise<T | TResult>
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
@@ -8200,25 +6780,27 @@ export namespace Prisma {
     finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
   }
 
+
+
+
   /**
    * Fields of the User model
-   */
+   */ 
   interface UserFieldRefs {
-    readonly id: FieldRef<'User', 'String'>
-    readonly email: FieldRef<'User', 'String'>
-    readonly firstName: FieldRef<'User', 'String'>
-    readonly lastName: FieldRef<'User', 'String'>
-    readonly password: FieldRef<'User', 'String'>
-    readonly role: FieldRef<'User', 'UserRole'>
+    readonly id: FieldRef<"User", 'String'>
+    readonly email: FieldRef<"User", 'String'>
+    readonly firstName: FieldRef<"User", 'String'>
+    readonly lastName: FieldRef<"User", 'String'>
+    readonly password: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'UserRole'>
   }
+    
 
   // Custom InputTypes
   /**
    * User findUnique
    */
-  export type UserFindUniqueArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -8236,9 +6818,7 @@ export namespace Prisma {
   /**
    * User findUniqueOrThrow
    */
-  export type UserFindUniqueOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -8256,9 +6836,7 @@ export namespace Prisma {
   /**
    * User findFirst
    */
-  export type UserFindFirstArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -8273,31 +6851,31 @@ export namespace Prisma {
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Users to fetch.
      */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for Users.
      */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of Users.
      */
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
@@ -8306,9 +6884,7 @@ export namespace Prisma {
   /**
    * User findFirstOrThrow
    */
-  export type UserFindFirstOrThrowArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -8323,31 +6899,31 @@ export namespace Prisma {
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Users to fetch.
      */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for searching for Users.
      */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
+     * 
      * Filter by unique combinations of Users.
      */
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
@@ -8356,9 +6932,7 @@ export namespace Prisma {
   /**
    * User findMany
    */
-  export type UserFindManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -8373,25 +6947,25 @@ export namespace Prisma {
     where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
+     * 
      * Determine the order of Users to fetch.
      */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
+     * 
      * Sets the position for listing Users.
      */
     cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
+     * 
      * Skip the first `n` Users.
      */
     skip?: number
@@ -8401,9 +6975,7 @@ export namespace Prisma {
   /**
    * User create
    */
-  export type UserCreateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -8421,9 +6993,7 @@ export namespace Prisma {
   /**
    * User createMany
    */
-  export type UserCreateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Users.
      */
@@ -8434,9 +7004,7 @@ export namespace Prisma {
   /**
    * User update
    */
-  export type UserUpdateArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -8458,9 +7026,7 @@ export namespace Prisma {
   /**
    * User updateMany
    */
-  export type UserUpdateManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Users.
      */
@@ -8478,9 +7044,7 @@ export namespace Prisma {
   /**
    * User upsert
    */
-  export type UserUpsertArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -8506,9 +7070,7 @@ export namespace Prisma {
   /**
    * User delete
    */
-  export type UserDeleteArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -8526,9 +7088,7 @@ export namespace Prisma {
   /**
    * User deleteMany
    */
-  export type UserDeleteManyArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Users to delete
      */
@@ -8542,9 +7102,7 @@ export namespace Prisma {
   /**
    * User without action
    */
-  export type UserDefaultArgs<
-    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
-  > = {
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -8555,224 +7113,220 @@ export namespace Prisma {
     omit?: UserOmit<ExtArgs> | null
   }
 
+
   /**
    * Enums
    */
 
   export const TransactionIsolationLevel: {
-    ReadUncommitted: 'ReadUncommitted'
-    ReadCommitted: 'ReadCommitted'
-    RepeatableRead: 'RepeatableRead'
+    ReadUncommitted: 'ReadUncommitted',
+    ReadCommitted: 'ReadCommitted',
+    RepeatableRead: 'RepeatableRead',
     Serializable: 'Serializable'
-  }
+  };
 
-  export type TransactionIsolationLevel =
-    (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+  export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
 
   export const ProductScalarFieldEnum: {
-    id: 'id'
-    label: 'label'
-    price: 'price'
-    imageUrl: 'imageUrl'
-    available: 'available'
+    id: 'id',
+    label: 'label',
+    price: 'price',
+    imageUrl: 'imageUrl',
+    available: 'available',
     productCategoryId: 'productCategoryId'
-  }
+  };
 
-  export type ProductScalarFieldEnum =
-    (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+  export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
 
   export const ProductCategoryScalarFieldEnum: {
-    id: 'id'
-    label: 'label'
+    id: 'id',
+    label: 'label',
     imageUrl: 'imageUrl'
-  }
+  };
 
-  export type ProductCategoryScalarFieldEnum =
-    (typeof ProductCategoryScalarFieldEnum)[keyof typeof ProductCategoryScalarFieldEnum]
+  export type ProductCategoryScalarFieldEnum = (typeof ProductCategoryScalarFieldEnum)[keyof typeof ProductCategoryScalarFieldEnum]
+
 
   export const IngredientScalarFieldEnum: {
-    id: 'id'
-    label: 'label'
-    price: 'price'
-    imageUrl: 'imageUrl'
+    id: 'id',
+    label: 'label',
+    price: 'price',
+    imageUrl: 'imageUrl',
     ingredientTypeId: 'ingredientTypeId'
-  }
+  };
 
-  export type IngredientScalarFieldEnum =
-    (typeof IngredientScalarFieldEnum)[keyof typeof IngredientScalarFieldEnum]
+  export type IngredientScalarFieldEnum = (typeof IngredientScalarFieldEnum)[keyof typeof IngredientScalarFieldEnum]
+
 
   export const IngredientTypeScalarFieldEnum: {
-    id: 'id'
-    label: 'label'
+    id: 'id',
+    label: 'label',
     imageUrl: 'imageUrl'
-  }
+  };
 
-  export type IngredientTypeScalarFieldEnum =
-    (typeof IngredientTypeScalarFieldEnum)[keyof typeof IngredientTypeScalarFieldEnum]
+  export type IngredientTypeScalarFieldEnum = (typeof IngredientTypeScalarFieldEnum)[keyof typeof IngredientTypeScalarFieldEnum]
+
 
   export const IngredientInProductScalarFieldEnum: {
-    id: 'id'
-    ingredientId: 'ingredientId'
-    productId: 'productId'
-    composition: 'composition'
+    id: 'id',
+    ingredientId: 'ingredientId',
+    productId: 'productId',
+    composition: 'composition',
     mandatory: 'mandatory'
-  }
+  };
 
-  export type IngredientInProductScalarFieldEnum =
-    (typeof IngredientInProductScalarFieldEnum)[keyof typeof IngredientInProductScalarFieldEnum]
+  export type IngredientInProductScalarFieldEnum = (typeof IngredientInProductScalarFieldEnum)[keyof typeof IngredientInProductScalarFieldEnum]
+
 
   export const UserScalarFieldEnum: {
-    id: 'id'
-    email: 'email'
-    firstName: 'firstName'
-    lastName: 'lastName'
-    password: 'password'
+    id: 'id',
+    email: 'email',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    password: 'password',
     role: 'role'
-  }
+  };
 
-  export type UserScalarFieldEnum =
-    (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
 
   export const SortOrder: {
-    asc: 'asc'
+    asc: 'asc',
     desc: 'desc'
-  }
+  };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
+
   export const NullsOrder: {
-    first: 'first'
+    first: 'first',
     last: 'last'
-  }
+  };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
-  export const ProductOrderByRelevanceFieldEnum: {
-    id: 'id'
-    label: 'label'
-    imageUrl: 'imageUrl'
-    productCategoryId: 'productCategoryId'
-  }
 
-  export type ProductOrderByRelevanceFieldEnum =
-    (typeof ProductOrderByRelevanceFieldEnum)[keyof typeof ProductOrderByRelevanceFieldEnum]
+  export const ProductOrderByRelevanceFieldEnum: {
+    id: 'id',
+    label: 'label',
+    imageUrl: 'imageUrl',
+    productCategoryId: 'productCategoryId'
+  };
+
+  export type ProductOrderByRelevanceFieldEnum = (typeof ProductOrderByRelevanceFieldEnum)[keyof typeof ProductOrderByRelevanceFieldEnum]
+
 
   export const ProductCategoryOrderByRelevanceFieldEnum: {
-    id: 'id'
-    label: 'label'
+    id: 'id',
+    label: 'label',
     imageUrl: 'imageUrl'
-  }
+  };
 
-  export type ProductCategoryOrderByRelevanceFieldEnum =
-    (typeof ProductCategoryOrderByRelevanceFieldEnum)[keyof typeof ProductCategoryOrderByRelevanceFieldEnum]
+  export type ProductCategoryOrderByRelevanceFieldEnum = (typeof ProductCategoryOrderByRelevanceFieldEnum)[keyof typeof ProductCategoryOrderByRelevanceFieldEnum]
+
 
   export const IngredientOrderByRelevanceFieldEnum: {
-    id: 'id'
-    label: 'label'
-    imageUrl: 'imageUrl'
+    id: 'id',
+    label: 'label',
+    imageUrl: 'imageUrl',
     ingredientTypeId: 'ingredientTypeId'
-  }
+  };
 
-  export type IngredientOrderByRelevanceFieldEnum =
-    (typeof IngredientOrderByRelevanceFieldEnum)[keyof typeof IngredientOrderByRelevanceFieldEnum]
+  export type IngredientOrderByRelevanceFieldEnum = (typeof IngredientOrderByRelevanceFieldEnum)[keyof typeof IngredientOrderByRelevanceFieldEnum]
+
 
   export const IngredientTypeOrderByRelevanceFieldEnum: {
-    id: 'id'
-    label: 'label'
+    id: 'id',
+    label: 'label',
     imageUrl: 'imageUrl'
-  }
+  };
 
-  export type IngredientTypeOrderByRelevanceFieldEnum =
-    (typeof IngredientTypeOrderByRelevanceFieldEnum)[keyof typeof IngredientTypeOrderByRelevanceFieldEnum]
+  export type IngredientTypeOrderByRelevanceFieldEnum = (typeof IngredientTypeOrderByRelevanceFieldEnum)[keyof typeof IngredientTypeOrderByRelevanceFieldEnum]
+
 
   export const IngredientInProductOrderByRelevanceFieldEnum: {
-    id: 'id'
-    ingredientId: 'ingredientId'
+    id: 'id',
+    ingredientId: 'ingredientId',
     productId: 'productId'
-  }
+  };
 
-  export type IngredientInProductOrderByRelevanceFieldEnum =
-    (typeof IngredientInProductOrderByRelevanceFieldEnum)[keyof typeof IngredientInProductOrderByRelevanceFieldEnum]
+  export type IngredientInProductOrderByRelevanceFieldEnum = (typeof IngredientInProductOrderByRelevanceFieldEnum)[keyof typeof IngredientInProductOrderByRelevanceFieldEnum]
+
 
   export const UserOrderByRelevanceFieldEnum: {
-    id: 'id'
-    email: 'email'
-    firstName: 'firstName'
-    lastName: 'lastName'
+    id: 'id',
+    email: 'email',
+    firstName: 'firstName',
+    lastName: 'lastName',
     password: 'password'
-  }
+  };
 
-  export type UserOrderByRelevanceFieldEnum =
-    (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+  export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
 
   /**
-   * Field references
+   * Field references 
    */
+
 
   /**
    * Reference to a field of type 'String'
    */
-  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'String'
-  >
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
 
   /**
    * Reference to a field of type 'Float'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'Float'
-  >
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
 
   /**
    * Reference to a field of type 'Boolean'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'Boolean'
-  >
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
 
   /**
    * Reference to a field of type 'IngredientComposition'
    */
-  export type EnumIngredientCompositionFieldRefInput<$PrismaModel> =
-    FieldRefInputType<$PrismaModel, 'IngredientComposition'>
+  export type EnumIngredientCompositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IngredientComposition'>
+    
+
 
   /**
    * Reference to a field of type 'UserRole'
    */
-  export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'UserRole'
-  >
+  export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
+    
+
 
   /**
    * Reference to a field of type 'Int'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<
-    $PrismaModel,
-    'Int'
-  >
-
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
   /**
    * Deep Input Types
    */
+
 
   export type ProductWhereInput = {
     AND?: ProductWhereInput | ProductWhereInput[]
     OR?: ProductWhereInput[]
     NOT?: ProductWhereInput | ProductWhereInput[]
-    id?: StringFilter<'Product'> | string
-    label?: StringFilter<'Product'> | string
-    price?: FloatFilter<'Product'> | number
-    imageUrl?: StringNullableFilter<'Product'> | string | null
-    available?: BoolFilter<'Product'> | boolean
-    productCategoryId?: StringFilter<'Product'> | string
-    productCategory?: XOR<
-      ProductCategoryScalarRelationFilter,
-      ProductCategoryWhereInput
-    >
+    id?: StringFilter<"Product"> | string
+    label?: StringFilter<"Product"> | string
+    price?: FloatFilter<"Product"> | number
+    imageUrl?: StringNullableFilter<"Product"> | string | null
+    available?: BoolFilter<"Product"> | boolean
+    productCategoryId?: StringFilter<"Product"> | string
+    productCategory?: XOR<ProductCategoryScalarRelationFilter, ProductCategoryWhereInput>
     ingredients?: IngredientInProductListRelationFilter
   }
 
@@ -8788,25 +7342,19 @@ export namespace Prisma {
     _relevance?: ProductOrderByRelevanceInput
   }
 
-  export type ProductWhereUniqueInput = Prisma.AtLeast<
-    {
-      id?: string
-      label?: string
-      AND?: ProductWhereInput | ProductWhereInput[]
-      OR?: ProductWhereInput[]
-      NOT?: ProductWhereInput | ProductWhereInput[]
-      price?: FloatFilter<'Product'> | number
-      imageUrl?: StringNullableFilter<'Product'> | string | null
-      available?: BoolFilter<'Product'> | boolean
-      productCategoryId?: StringFilter<'Product'> | string
-      productCategory?: XOR<
-        ProductCategoryScalarRelationFilter,
-        ProductCategoryWhereInput
-      >
-      ingredients?: IngredientInProductListRelationFilter
-    },
-    'id' | 'label'
-  >
+  export type ProductWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    label?: string
+    AND?: ProductWhereInput | ProductWhereInput[]
+    OR?: ProductWhereInput[]
+    NOT?: ProductWhereInput | ProductWhereInput[]
+    price?: FloatFilter<"Product"> | number
+    imageUrl?: StringNullableFilter<"Product"> | string | null
+    available?: BoolFilter<"Product"> | boolean
+    productCategoryId?: StringFilter<"Product"> | string
+    productCategory?: XOR<ProductCategoryScalarRelationFilter, ProductCategoryWhereInput>
+    ingredients?: IngredientInProductListRelationFilter
+  }, "id" | "label">
 
   export type ProductOrderByWithAggregationInput = {
     id?: SortOrder
@@ -8823,28 +7371,24 @@ export namespace Prisma {
   }
 
   export type ProductScalarWhereWithAggregatesInput = {
-    AND?:
-      | ProductScalarWhereWithAggregatesInput
-      | ProductScalarWhereWithAggregatesInput[]
+    AND?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[]
     OR?: ProductScalarWhereWithAggregatesInput[]
-    NOT?:
-      | ProductScalarWhereWithAggregatesInput
-      | ProductScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<'Product'> | string
-    label?: StringWithAggregatesFilter<'Product'> | string
-    price?: FloatWithAggregatesFilter<'Product'> | number
-    imageUrl?: StringNullableWithAggregatesFilter<'Product'> | string | null
-    available?: BoolWithAggregatesFilter<'Product'> | boolean
-    productCategoryId?: StringWithAggregatesFilter<'Product'> | string
+    NOT?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Product"> | string
+    label?: StringWithAggregatesFilter<"Product"> | string
+    price?: FloatWithAggregatesFilter<"Product"> | number
+    imageUrl?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    available?: BoolWithAggregatesFilter<"Product"> | boolean
+    productCategoryId?: StringWithAggregatesFilter<"Product"> | string
   }
 
   export type ProductCategoryWhereInput = {
     AND?: ProductCategoryWhereInput | ProductCategoryWhereInput[]
     OR?: ProductCategoryWhereInput[]
     NOT?: ProductCategoryWhereInput | ProductCategoryWhereInput[]
-    id?: StringFilter<'ProductCategory'> | string
-    label?: StringFilter<'ProductCategory'> | string
-    imageUrl?: StringNullableFilter<'ProductCategory'> | string | null
+    id?: StringFilter<"ProductCategory"> | string
+    label?: StringFilter<"ProductCategory"> | string
+    imageUrl?: StringNullableFilter<"ProductCategory"> | string | null
     products?: ProductListRelationFilter
   }
 
@@ -8856,18 +7400,15 @@ export namespace Prisma {
     _relevance?: ProductCategoryOrderByRelevanceInput
   }
 
-  export type ProductCategoryWhereUniqueInput = Prisma.AtLeast<
-    {
-      id?: string
-      label?: string
-      AND?: ProductCategoryWhereInput | ProductCategoryWhereInput[]
-      OR?: ProductCategoryWhereInput[]
-      NOT?: ProductCategoryWhereInput | ProductCategoryWhereInput[]
-      imageUrl?: StringNullableFilter<'ProductCategory'> | string | null
-      products?: ProductListRelationFilter
-    },
-    'id' | 'label'
-  >
+  export type ProductCategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    label?: string
+    AND?: ProductCategoryWhereInput | ProductCategoryWhereInput[]
+    OR?: ProductCategoryWhereInput[]
+    NOT?: ProductCategoryWhereInput | ProductCategoryWhereInput[]
+    imageUrl?: StringNullableFilter<"ProductCategory"> | string | null
+    products?: ProductListRelationFilter
+  }, "id" | "label">
 
   export type ProductCategoryOrderByWithAggregationInput = {
     id?: SortOrder
@@ -8879,34 +7420,24 @@ export namespace Prisma {
   }
 
   export type ProductCategoryScalarWhereWithAggregatesInput = {
-    AND?:
-      | ProductCategoryScalarWhereWithAggregatesInput
-      | ProductCategoryScalarWhereWithAggregatesInput[]
+    AND?: ProductCategoryScalarWhereWithAggregatesInput | ProductCategoryScalarWhereWithAggregatesInput[]
     OR?: ProductCategoryScalarWhereWithAggregatesInput[]
-    NOT?:
-      | ProductCategoryScalarWhereWithAggregatesInput
-      | ProductCategoryScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<'ProductCategory'> | string
-    label?: StringWithAggregatesFilter<'ProductCategory'> | string
-    imageUrl?:
-      | StringNullableWithAggregatesFilter<'ProductCategory'>
-      | string
-      | null
+    NOT?: ProductCategoryScalarWhereWithAggregatesInput | ProductCategoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ProductCategory"> | string
+    label?: StringWithAggregatesFilter<"ProductCategory"> | string
+    imageUrl?: StringNullableWithAggregatesFilter<"ProductCategory"> | string | null
   }
 
   export type IngredientWhereInput = {
     AND?: IngredientWhereInput | IngredientWhereInput[]
     OR?: IngredientWhereInput[]
     NOT?: IngredientWhereInput | IngredientWhereInput[]
-    id?: StringFilter<'Ingredient'> | string
-    label?: StringFilter<'Ingredient'> | string
-    price?: FloatFilter<'Ingredient'> | number
-    imageUrl?: StringNullableFilter<'Ingredient'> | string | null
-    ingredientTypeId?: StringFilter<'Ingredient'> | string
-    IngredientType?: XOR<
-      IngredientTypeScalarRelationFilter,
-      IngredientTypeWhereInput
-    >
+    id?: StringFilter<"Ingredient"> | string
+    label?: StringFilter<"Ingredient"> | string
+    price?: FloatFilter<"Ingredient"> | number
+    imageUrl?: StringNullableFilter<"Ingredient"> | string | null
+    ingredientTypeId?: StringFilter<"Ingredient"> | string
+    IngredientType?: XOR<IngredientTypeScalarRelationFilter, IngredientTypeWhereInput>
     IngredientInProduct?: IngredientInProductListRelationFilter
   }
 
@@ -8921,24 +7452,18 @@ export namespace Prisma {
     _relevance?: IngredientOrderByRelevanceInput
   }
 
-  export type IngredientWhereUniqueInput = Prisma.AtLeast<
-    {
-      id?: string
-      label?: string
-      AND?: IngredientWhereInput | IngredientWhereInput[]
-      OR?: IngredientWhereInput[]
-      NOT?: IngredientWhereInput | IngredientWhereInput[]
-      price?: FloatFilter<'Ingredient'> | number
-      imageUrl?: StringNullableFilter<'Ingredient'> | string | null
-      ingredientTypeId?: StringFilter<'Ingredient'> | string
-      IngredientType?: XOR<
-        IngredientTypeScalarRelationFilter,
-        IngredientTypeWhereInput
-      >
-      IngredientInProduct?: IngredientInProductListRelationFilter
-    },
-    'id' | 'label'
-  >
+  export type IngredientWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    label?: string
+    AND?: IngredientWhereInput | IngredientWhereInput[]
+    OR?: IngredientWhereInput[]
+    NOT?: IngredientWhereInput | IngredientWhereInput[]
+    price?: FloatFilter<"Ingredient"> | number
+    imageUrl?: StringNullableFilter<"Ingredient"> | string | null
+    ingredientTypeId?: StringFilter<"Ingredient"> | string
+    IngredientType?: XOR<IngredientTypeScalarRelationFilter, IngredientTypeWhereInput>
+    IngredientInProduct?: IngredientInProductListRelationFilter
+  }, "id" | "label">
 
   export type IngredientOrderByWithAggregationInput = {
     id?: SortOrder
@@ -8954,27 +7479,23 @@ export namespace Prisma {
   }
 
   export type IngredientScalarWhereWithAggregatesInput = {
-    AND?:
-      | IngredientScalarWhereWithAggregatesInput
-      | IngredientScalarWhereWithAggregatesInput[]
+    AND?: IngredientScalarWhereWithAggregatesInput | IngredientScalarWhereWithAggregatesInput[]
     OR?: IngredientScalarWhereWithAggregatesInput[]
-    NOT?:
-      | IngredientScalarWhereWithAggregatesInput
-      | IngredientScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<'Ingredient'> | string
-    label?: StringWithAggregatesFilter<'Ingredient'> | string
-    price?: FloatWithAggregatesFilter<'Ingredient'> | number
-    imageUrl?: StringNullableWithAggregatesFilter<'Ingredient'> | string | null
-    ingredientTypeId?: StringWithAggregatesFilter<'Ingredient'> | string
+    NOT?: IngredientScalarWhereWithAggregatesInput | IngredientScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Ingredient"> | string
+    label?: StringWithAggregatesFilter<"Ingredient"> | string
+    price?: FloatWithAggregatesFilter<"Ingredient"> | number
+    imageUrl?: StringNullableWithAggregatesFilter<"Ingredient"> | string | null
+    ingredientTypeId?: StringWithAggregatesFilter<"Ingredient"> | string
   }
 
   export type IngredientTypeWhereInput = {
     AND?: IngredientTypeWhereInput | IngredientTypeWhereInput[]
     OR?: IngredientTypeWhereInput[]
     NOT?: IngredientTypeWhereInput | IngredientTypeWhereInput[]
-    id?: StringFilter<'IngredientType'> | string
-    label?: StringFilter<'IngredientType'> | string
-    imageUrl?: StringNullableFilter<'IngredientType'> | string | null
+    id?: StringFilter<"IngredientType"> | string
+    label?: StringFilter<"IngredientType"> | string
+    imageUrl?: StringNullableFilter<"IngredientType"> | string | null
     ingredients?: IngredientListRelationFilter
   }
 
@@ -8986,18 +7507,15 @@ export namespace Prisma {
     _relevance?: IngredientTypeOrderByRelevanceInput
   }
 
-  export type IngredientTypeWhereUniqueInput = Prisma.AtLeast<
-    {
-      id?: string
-      label?: string
-      AND?: IngredientTypeWhereInput | IngredientTypeWhereInput[]
-      OR?: IngredientTypeWhereInput[]
-      NOT?: IngredientTypeWhereInput | IngredientTypeWhereInput[]
-      imageUrl?: StringNullableFilter<'IngredientType'> | string | null
-      ingredients?: IngredientListRelationFilter
-    },
-    'id' | 'label'
-  >
+  export type IngredientTypeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    label?: string
+    AND?: IngredientTypeWhereInput | IngredientTypeWhereInput[]
+    OR?: IngredientTypeWhereInput[]
+    NOT?: IngredientTypeWhereInput | IngredientTypeWhereInput[]
+    imageUrl?: StringNullableFilter<"IngredientType"> | string | null
+    ingredients?: IngredientListRelationFilter
+  }, "id" | "label">
 
   export type IngredientTypeOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9009,32 +7527,23 @@ export namespace Prisma {
   }
 
   export type IngredientTypeScalarWhereWithAggregatesInput = {
-    AND?:
-      | IngredientTypeScalarWhereWithAggregatesInput
-      | IngredientTypeScalarWhereWithAggregatesInput[]
+    AND?: IngredientTypeScalarWhereWithAggregatesInput | IngredientTypeScalarWhereWithAggregatesInput[]
     OR?: IngredientTypeScalarWhereWithAggregatesInput[]
-    NOT?:
-      | IngredientTypeScalarWhereWithAggregatesInput
-      | IngredientTypeScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<'IngredientType'> | string
-    label?: StringWithAggregatesFilter<'IngredientType'> | string
-    imageUrl?:
-      | StringNullableWithAggregatesFilter<'IngredientType'>
-      | string
-      | null
+    NOT?: IngredientTypeScalarWhereWithAggregatesInput | IngredientTypeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"IngredientType"> | string
+    label?: StringWithAggregatesFilter<"IngredientType"> | string
+    imageUrl?: StringNullableWithAggregatesFilter<"IngredientType"> | string | null
   }
 
   export type IngredientInProductWhereInput = {
     AND?: IngredientInProductWhereInput | IngredientInProductWhereInput[]
     OR?: IngredientInProductWhereInput[]
     NOT?: IngredientInProductWhereInput | IngredientInProductWhereInput[]
-    id?: StringFilter<'IngredientInProduct'> | string
-    ingredientId?: StringFilter<'IngredientInProduct'> | string
-    productId?: StringFilter<'IngredientInProduct'> | string
-    composition?:
-      | EnumIngredientCompositionFilter<'IngredientInProduct'>
-      | $Enums.IngredientComposition
-    mandatory?: BoolFilter<'IngredientInProduct'> | boolean
+    id?: StringFilter<"IngredientInProduct"> | string
+    ingredientId?: StringFilter<"IngredientInProduct"> | string
+    productId?: StringFilter<"IngredientInProduct"> | string
+    composition?: EnumIngredientCompositionFilter<"IngredientInProduct"> | $Enums.IngredientComposition
+    mandatory?: BoolFilter<"IngredientInProduct"> | boolean
     ingredient?: XOR<IngredientScalarRelationFilter, IngredientWhereInput>
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
   }
@@ -9050,23 +7559,18 @@ export namespace Prisma {
     _relevance?: IngredientInProductOrderByRelevanceInput
   }
 
-  export type IngredientInProductWhereUniqueInput = Prisma.AtLeast<
-    {
-      id?: string
-      AND?: IngredientInProductWhereInput | IngredientInProductWhereInput[]
-      OR?: IngredientInProductWhereInput[]
-      NOT?: IngredientInProductWhereInput | IngredientInProductWhereInput[]
-      ingredientId?: StringFilter<'IngredientInProduct'> | string
-      productId?: StringFilter<'IngredientInProduct'> | string
-      composition?:
-        | EnumIngredientCompositionFilter<'IngredientInProduct'>
-        | $Enums.IngredientComposition
-      mandatory?: BoolFilter<'IngredientInProduct'> | boolean
-      ingredient?: XOR<IngredientScalarRelationFilter, IngredientWhereInput>
-      product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
-    },
-    'id'
-  >
+  export type IngredientInProductWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: IngredientInProductWhereInput | IngredientInProductWhereInput[]
+    OR?: IngredientInProductWhereInput[]
+    NOT?: IngredientInProductWhereInput | IngredientInProductWhereInput[]
+    ingredientId?: StringFilter<"IngredientInProduct"> | string
+    productId?: StringFilter<"IngredientInProduct"> | string
+    composition?: EnumIngredientCompositionFilter<"IngredientInProduct"> | $Enums.IngredientComposition
+    mandatory?: BoolFilter<"IngredientInProduct"> | boolean
+    ingredient?: XOR<IngredientScalarRelationFilter, IngredientWhereInput>
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+  }, "id">
 
   export type IngredientInProductOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9080,32 +7584,26 @@ export namespace Prisma {
   }
 
   export type IngredientInProductScalarWhereWithAggregatesInput = {
-    AND?:
-      | IngredientInProductScalarWhereWithAggregatesInput
-      | IngredientInProductScalarWhereWithAggregatesInput[]
+    AND?: IngredientInProductScalarWhereWithAggregatesInput | IngredientInProductScalarWhereWithAggregatesInput[]
     OR?: IngredientInProductScalarWhereWithAggregatesInput[]
-    NOT?:
-      | IngredientInProductScalarWhereWithAggregatesInput
-      | IngredientInProductScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<'IngredientInProduct'> | string
-    ingredientId?: StringWithAggregatesFilter<'IngredientInProduct'> | string
-    productId?: StringWithAggregatesFilter<'IngredientInProduct'> | string
-    composition?:
-      | EnumIngredientCompositionWithAggregatesFilter<'IngredientInProduct'>
-      | $Enums.IngredientComposition
-    mandatory?: BoolWithAggregatesFilter<'IngredientInProduct'> | boolean
+    NOT?: IngredientInProductScalarWhereWithAggregatesInput | IngredientInProductScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"IngredientInProduct"> | string
+    ingredientId?: StringWithAggregatesFilter<"IngredientInProduct"> | string
+    productId?: StringWithAggregatesFilter<"IngredientInProduct"> | string
+    composition?: EnumIngredientCompositionWithAggregatesFilter<"IngredientInProduct"> | $Enums.IngredientComposition
+    mandatory?: BoolWithAggregatesFilter<"IngredientInProduct"> | boolean
   }
 
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    id?: StringFilter<'User'> | string
-    email?: StringFilter<'User'> | string
-    firstName?: StringFilter<'User'> | string
-    lastName?: StringFilter<'User'> | string
-    password?: StringFilter<'User'> | string
-    role?: EnumUserRoleFilter<'User'> | $Enums.UserRole
+    id?: StringFilter<"User"> | string
+    email?: StringFilter<"User"> | string
+    firstName?: StringFilter<"User"> | string
+    lastName?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
   }
 
   export type UserOrderByWithRelationInput = {
@@ -9118,20 +7616,17 @@ export namespace Prisma {
     _relevance?: UserOrderByRelevanceInput
   }
 
-  export type UserWhereUniqueInput = Prisma.AtLeast<
-    {
-      id?: string
-      email?: string
-      AND?: UserWhereInput | UserWhereInput[]
-      OR?: UserWhereInput[]
-      NOT?: UserWhereInput | UserWhereInput[]
-      firstName?: StringFilter<'User'> | string
-      lastName?: StringFilter<'User'> | string
-      password?: StringFilter<'User'> | string
-      role?: EnumUserRoleFilter<'User'> | $Enums.UserRole
-    },
-    'id' | 'email'
-  >
+  export type UserWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    email?: string
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    firstName?: StringFilter<"User"> | string
+    lastName?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+  }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9146,19 +7641,15 @@ export namespace Prisma {
   }
 
   export type UserScalarWhereWithAggregatesInput = {
-    AND?:
-      | UserScalarWhereWithAggregatesInput
-      | UserScalarWhereWithAggregatesInput[]
+    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     OR?: UserScalarWhereWithAggregatesInput[]
-    NOT?:
-      | UserScalarWhereWithAggregatesInput
-      | UserScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<'User'> | string
-    email?: StringWithAggregatesFilter<'User'> | string
-    firstName?: StringWithAggregatesFilter<'User'> | string
-    lastName?: StringWithAggregatesFilter<'User'> | string
-    password?: StringWithAggregatesFilter<'User'> | string
-    role?: EnumUserRoleWithAggregatesFilter<'User'> | $Enums.UserRole
+    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"User"> | string
+    email?: StringWithAggregatesFilter<"User"> | string
+    firstName?: StringWithAggregatesFilter<"User"> | string
+    lastName?: StringWithAggregatesFilter<"User"> | string
+    password?: StringWithAggregatesFilter<"User"> | string
+    role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   }
 
   export type ProductCreateInput = {
@@ -9396,9 +7887,7 @@ export namespace Prisma {
 
   export type IngredientInProductUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    composition?:
-      | EnumIngredientCompositionFieldUpdateOperationsInput
-      | $Enums.IngredientComposition
+    composition?: EnumIngredientCompositionFieldUpdateOperationsInput | $Enums.IngredientComposition
     mandatory?: BoolFieldUpdateOperationsInput | boolean
     ingredient?: IngredientUpdateOneRequiredWithoutIngredientInProductNestedInput
     product?: ProductUpdateOneRequiredWithoutIngredientsNestedInput
@@ -9408,9 +7897,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     ingredientId?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
-    composition?:
-      | EnumIngredientCompositionFieldUpdateOperationsInput
-      | $Enums.IngredientComposition
+    composition?: EnumIngredientCompositionFieldUpdateOperationsInput | $Enums.IngredientComposition
     mandatory?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -9424,9 +7911,7 @@ export namespace Prisma {
 
   export type IngredientInProductUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    composition?:
-      | EnumIngredientCompositionFieldUpdateOperationsInput
-      | $Enums.IngredientComposition
+    composition?: EnumIngredientCompositionFieldUpdateOperationsInput | $Enums.IngredientComposition
     mandatory?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -9434,9 +7919,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     ingredientId?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
-    composition?:
-      | EnumIngredientCompositionFieldUpdateOperationsInput
-      | $Enums.IngredientComposition
+    composition?: EnumIngredientCompositionFieldUpdateOperationsInput | $Enums.IngredientComposition
     mandatory?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -9570,9 +8053,7 @@ export namespace Prisma {
   }
 
   export type ProductOrderByRelevanceInput = {
-    fields:
-      | ProductOrderByRelevanceFieldEnum
-      | ProductOrderByRelevanceFieldEnum[]
+    fields: ProductOrderByRelevanceFieldEnum | ProductOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
@@ -9683,9 +8164,7 @@ export namespace Prisma {
   }
 
   export type ProductCategoryOrderByRelevanceInput = {
-    fields:
-      | ProductCategoryOrderByRelevanceFieldEnum
-      | ProductCategoryOrderByRelevanceFieldEnum[]
+    fields: ProductCategoryOrderByRelevanceFieldEnum | ProductCategoryOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
@@ -9714,9 +8193,7 @@ export namespace Prisma {
   }
 
   export type IngredientOrderByRelevanceInput = {
-    fields:
-      | IngredientOrderByRelevanceFieldEnum
-      | IngredientOrderByRelevanceFieldEnum[]
+    fields: IngredientOrderByRelevanceFieldEnum | IngredientOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
@@ -9764,9 +8241,7 @@ export namespace Prisma {
   }
 
   export type IngredientTypeOrderByRelevanceInput = {
-    fields:
-      | IngredientTypeOrderByRelevanceFieldEnum
-      | IngredientTypeOrderByRelevanceFieldEnum[]
+    fields: IngredientTypeOrderByRelevanceFieldEnum | IngredientTypeOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
@@ -9790,14 +8265,10 @@ export namespace Prisma {
   }
 
   export type EnumIngredientCompositionFilter<$PrismaModel = never> = {
-    equals?:
-      | $Enums.IngredientComposition
-      | EnumIngredientCompositionFieldRefInput<$PrismaModel>
+    equals?: $Enums.IngredientComposition | EnumIngredientCompositionFieldRefInput<$PrismaModel>
     in?: $Enums.IngredientComposition[]
     notIn?: $Enums.IngredientComposition[]
-    not?:
-      | NestedEnumIngredientCompositionFilter<$PrismaModel>
-      | $Enums.IngredientComposition
+    not?: NestedEnumIngredientCompositionFilter<$PrismaModel> | $Enums.IngredientComposition
   }
 
   export type IngredientScalarRelationFilter = {
@@ -9811,9 +8282,7 @@ export namespace Prisma {
   }
 
   export type IngredientInProductOrderByRelevanceInput = {
-    fields:
-      | IngredientInProductOrderByRelevanceFieldEnum
-      | IngredientInProductOrderByRelevanceFieldEnum[]
+    fields: IngredientInProductOrderByRelevanceFieldEnum | IngredientInProductOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
@@ -9842,17 +8311,11 @@ export namespace Prisma {
     mandatory?: SortOrder
   }
 
-  export type EnumIngredientCompositionWithAggregatesFilter<
-    $PrismaModel = never,
-  > = {
-    equals?:
-      | $Enums.IngredientComposition
-      | EnumIngredientCompositionFieldRefInput<$PrismaModel>
+  export type EnumIngredientCompositionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IngredientComposition | EnumIngredientCompositionFieldRefInput<$PrismaModel>
     in?: $Enums.IngredientComposition[]
     notIn?: $Enums.IngredientComposition[]
-    not?:
-      | NestedEnumIngredientCompositionWithAggregatesFilter<$PrismaModel>
-      | $Enums.IngredientComposition
+    not?: NestedEnumIngredientCompositionWithAggregatesFilter<$PrismaModel> | $Enums.IngredientComposition
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumIngredientCompositionFilter<$PrismaModel>
     _max?: NestedEnumIngredientCompositionFilter<$PrismaModel>
@@ -9909,48 +8372,24 @@ export namespace Prisma {
   }
 
   export type ProductCategoryCreateNestedOneWithoutProductsInput = {
-    create?: XOR<
-      ProductCategoryCreateWithoutProductsInput,
-      ProductCategoryUncheckedCreateWithoutProductsInput
-    >
+    create?: XOR<ProductCategoryCreateWithoutProductsInput, ProductCategoryUncheckedCreateWithoutProductsInput>
     connectOrCreate?: ProductCategoryCreateOrConnectWithoutProductsInput
     connect?: ProductCategoryWhereUniqueInput
   }
 
   export type IngredientInProductCreateNestedManyWithoutProductInput = {
-    create?:
-      | XOR<
-          IngredientInProductCreateWithoutProductInput,
-          IngredientInProductUncheckedCreateWithoutProductInput
-        >
-      | IngredientInProductCreateWithoutProductInput[]
-      | IngredientInProductUncheckedCreateWithoutProductInput[]
-    connectOrCreate?:
-      | IngredientInProductCreateOrConnectWithoutProductInput
-      | IngredientInProductCreateOrConnectWithoutProductInput[]
+    create?: XOR<IngredientInProductCreateWithoutProductInput, IngredientInProductUncheckedCreateWithoutProductInput> | IngredientInProductCreateWithoutProductInput[] | IngredientInProductUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: IngredientInProductCreateOrConnectWithoutProductInput | IngredientInProductCreateOrConnectWithoutProductInput[]
     createMany?: IngredientInProductCreateManyProductInputEnvelope
-    connect?:
-      | IngredientInProductWhereUniqueInput
-      | IngredientInProductWhereUniqueInput[]
+    connect?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
   }
 
-  export type IngredientInProductUncheckedCreateNestedManyWithoutProductInput =
-    {
-      create?:
-        | XOR<
-            IngredientInProductCreateWithoutProductInput,
-            IngredientInProductUncheckedCreateWithoutProductInput
-          >
-        | IngredientInProductCreateWithoutProductInput[]
-        | IngredientInProductUncheckedCreateWithoutProductInput[]
-      connectOrCreate?:
-        | IngredientInProductCreateOrConnectWithoutProductInput
-        | IngredientInProductCreateOrConnectWithoutProductInput[]
-      createMany?: IngredientInProductCreateManyProductInputEnvelope
-      connect?:
-        | IngredientInProductWhereUniqueInput
-        | IngredientInProductWhereUniqueInput[]
-    }
+  export type IngredientInProductUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<IngredientInProductCreateWithoutProductInput, IngredientInProductUncheckedCreateWithoutProductInput> | IngredientInProductCreateWithoutProductInput[] | IngredientInProductUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: IngredientInProductCreateOrConnectWithoutProductInput | IngredientInProductCreateOrConnectWithoutProductInput[]
+    createMany?: IngredientInProductCreateManyProductInputEnvelope
+    connect?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+  }
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
@@ -9973,423 +8412,189 @@ export namespace Prisma {
   }
 
   export type ProductCategoryUpdateOneRequiredWithoutProductsNestedInput = {
-    create?: XOR<
-      ProductCategoryCreateWithoutProductsInput,
-      ProductCategoryUncheckedCreateWithoutProductsInput
-    >
+    create?: XOR<ProductCategoryCreateWithoutProductsInput, ProductCategoryUncheckedCreateWithoutProductsInput>
     connectOrCreate?: ProductCategoryCreateOrConnectWithoutProductsInput
     upsert?: ProductCategoryUpsertWithoutProductsInput
     connect?: ProductCategoryWhereUniqueInput
-    update?: XOR<
-      XOR<
-        ProductCategoryUpdateToOneWithWhereWithoutProductsInput,
-        ProductCategoryUpdateWithoutProductsInput
-      >,
-      ProductCategoryUncheckedUpdateWithoutProductsInput
-    >
+    update?: XOR<XOR<ProductCategoryUpdateToOneWithWhereWithoutProductsInput, ProductCategoryUpdateWithoutProductsInput>, ProductCategoryUncheckedUpdateWithoutProductsInput>
   }
 
   export type IngredientInProductUpdateManyWithoutProductNestedInput = {
-    create?:
-      | XOR<
-          IngredientInProductCreateWithoutProductInput,
-          IngredientInProductUncheckedCreateWithoutProductInput
-        >
-      | IngredientInProductCreateWithoutProductInput[]
-      | IngredientInProductUncheckedCreateWithoutProductInput[]
-    connectOrCreate?:
-      | IngredientInProductCreateOrConnectWithoutProductInput
-      | IngredientInProductCreateOrConnectWithoutProductInput[]
-    upsert?:
-      | IngredientInProductUpsertWithWhereUniqueWithoutProductInput
-      | IngredientInProductUpsertWithWhereUniqueWithoutProductInput[]
+    create?: XOR<IngredientInProductCreateWithoutProductInput, IngredientInProductUncheckedCreateWithoutProductInput> | IngredientInProductCreateWithoutProductInput[] | IngredientInProductUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: IngredientInProductCreateOrConnectWithoutProductInput | IngredientInProductCreateOrConnectWithoutProductInput[]
+    upsert?: IngredientInProductUpsertWithWhereUniqueWithoutProductInput | IngredientInProductUpsertWithWhereUniqueWithoutProductInput[]
     createMany?: IngredientInProductCreateManyProductInputEnvelope
-    set?:
-      | IngredientInProductWhereUniqueInput
-      | IngredientInProductWhereUniqueInput[]
-    disconnect?:
-      | IngredientInProductWhereUniqueInput
-      | IngredientInProductWhereUniqueInput[]
-    delete?:
-      | IngredientInProductWhereUniqueInput
-      | IngredientInProductWhereUniqueInput[]
-    connect?:
-      | IngredientInProductWhereUniqueInput
-      | IngredientInProductWhereUniqueInput[]
-    update?:
-      | IngredientInProductUpdateWithWhereUniqueWithoutProductInput
-      | IngredientInProductUpdateWithWhereUniqueWithoutProductInput[]
-    updateMany?:
-      | IngredientInProductUpdateManyWithWhereWithoutProductInput
-      | IngredientInProductUpdateManyWithWhereWithoutProductInput[]
-    deleteMany?:
-      | IngredientInProductScalarWhereInput
-      | IngredientInProductScalarWhereInput[]
+    set?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    disconnect?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    delete?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    connect?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    update?: IngredientInProductUpdateWithWhereUniqueWithoutProductInput | IngredientInProductUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: IngredientInProductUpdateManyWithWhereWithoutProductInput | IngredientInProductUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: IngredientInProductScalarWhereInput | IngredientInProductScalarWhereInput[]
   }
 
-  export type IngredientInProductUncheckedUpdateManyWithoutProductNestedInput =
-    {
-      create?:
-        | XOR<
-            IngredientInProductCreateWithoutProductInput,
-            IngredientInProductUncheckedCreateWithoutProductInput
-          >
-        | IngredientInProductCreateWithoutProductInput[]
-        | IngredientInProductUncheckedCreateWithoutProductInput[]
-      connectOrCreate?:
-        | IngredientInProductCreateOrConnectWithoutProductInput
-        | IngredientInProductCreateOrConnectWithoutProductInput[]
-      upsert?:
-        | IngredientInProductUpsertWithWhereUniqueWithoutProductInput
-        | IngredientInProductUpsertWithWhereUniqueWithoutProductInput[]
-      createMany?: IngredientInProductCreateManyProductInputEnvelope
-      set?:
-        | IngredientInProductWhereUniqueInput
-        | IngredientInProductWhereUniqueInput[]
-      disconnect?:
-        | IngredientInProductWhereUniqueInput
-        | IngredientInProductWhereUniqueInput[]
-      delete?:
-        | IngredientInProductWhereUniqueInput
-        | IngredientInProductWhereUniqueInput[]
-      connect?:
-        | IngredientInProductWhereUniqueInput
-        | IngredientInProductWhereUniqueInput[]
-      update?:
-        | IngredientInProductUpdateWithWhereUniqueWithoutProductInput
-        | IngredientInProductUpdateWithWhereUniqueWithoutProductInput[]
-      updateMany?:
-        | IngredientInProductUpdateManyWithWhereWithoutProductInput
-        | IngredientInProductUpdateManyWithWhereWithoutProductInput[]
-      deleteMany?:
-        | IngredientInProductScalarWhereInput
-        | IngredientInProductScalarWhereInput[]
-    }
+  export type IngredientInProductUncheckedUpdateManyWithoutProductNestedInput = {
+    create?: XOR<IngredientInProductCreateWithoutProductInput, IngredientInProductUncheckedCreateWithoutProductInput> | IngredientInProductCreateWithoutProductInput[] | IngredientInProductUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: IngredientInProductCreateOrConnectWithoutProductInput | IngredientInProductCreateOrConnectWithoutProductInput[]
+    upsert?: IngredientInProductUpsertWithWhereUniqueWithoutProductInput | IngredientInProductUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: IngredientInProductCreateManyProductInputEnvelope
+    set?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    disconnect?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    delete?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    connect?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    update?: IngredientInProductUpdateWithWhereUniqueWithoutProductInput | IngredientInProductUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: IngredientInProductUpdateManyWithWhereWithoutProductInput | IngredientInProductUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: IngredientInProductScalarWhereInput | IngredientInProductScalarWhereInput[]
+  }
 
   export type ProductCreateNestedManyWithoutProductCategoryInput = {
-    create?:
-      | XOR<
-          ProductCreateWithoutProductCategoryInput,
-          ProductUncheckedCreateWithoutProductCategoryInput
-        >
-      | ProductCreateWithoutProductCategoryInput[]
-      | ProductUncheckedCreateWithoutProductCategoryInput[]
-    connectOrCreate?:
-      | ProductCreateOrConnectWithoutProductCategoryInput
-      | ProductCreateOrConnectWithoutProductCategoryInput[]
+    create?: XOR<ProductCreateWithoutProductCategoryInput, ProductUncheckedCreateWithoutProductCategoryInput> | ProductCreateWithoutProductCategoryInput[] | ProductUncheckedCreateWithoutProductCategoryInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutProductCategoryInput | ProductCreateOrConnectWithoutProductCategoryInput[]
     createMany?: ProductCreateManyProductCategoryInputEnvelope
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
   }
 
   export type ProductUncheckedCreateNestedManyWithoutProductCategoryInput = {
-    create?:
-      | XOR<
-          ProductCreateWithoutProductCategoryInput,
-          ProductUncheckedCreateWithoutProductCategoryInput
-        >
-      | ProductCreateWithoutProductCategoryInput[]
-      | ProductUncheckedCreateWithoutProductCategoryInput[]
-    connectOrCreate?:
-      | ProductCreateOrConnectWithoutProductCategoryInput
-      | ProductCreateOrConnectWithoutProductCategoryInput[]
+    create?: XOR<ProductCreateWithoutProductCategoryInput, ProductUncheckedCreateWithoutProductCategoryInput> | ProductCreateWithoutProductCategoryInput[] | ProductUncheckedCreateWithoutProductCategoryInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutProductCategoryInput | ProductCreateOrConnectWithoutProductCategoryInput[]
     createMany?: ProductCreateManyProductCategoryInputEnvelope
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
   }
 
   export type ProductUpdateManyWithoutProductCategoryNestedInput = {
-    create?:
-      | XOR<
-          ProductCreateWithoutProductCategoryInput,
-          ProductUncheckedCreateWithoutProductCategoryInput
-        >
-      | ProductCreateWithoutProductCategoryInput[]
-      | ProductUncheckedCreateWithoutProductCategoryInput[]
-    connectOrCreate?:
-      | ProductCreateOrConnectWithoutProductCategoryInput
-      | ProductCreateOrConnectWithoutProductCategoryInput[]
-    upsert?:
-      | ProductUpsertWithWhereUniqueWithoutProductCategoryInput
-      | ProductUpsertWithWhereUniqueWithoutProductCategoryInput[]
+    create?: XOR<ProductCreateWithoutProductCategoryInput, ProductUncheckedCreateWithoutProductCategoryInput> | ProductCreateWithoutProductCategoryInput[] | ProductUncheckedCreateWithoutProductCategoryInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutProductCategoryInput | ProductCreateOrConnectWithoutProductCategoryInput[]
+    upsert?: ProductUpsertWithWhereUniqueWithoutProductCategoryInput | ProductUpsertWithWhereUniqueWithoutProductCategoryInput[]
     createMany?: ProductCreateManyProductCategoryInputEnvelope
     set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
     disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
     delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    update?:
-      | ProductUpdateWithWhereUniqueWithoutProductCategoryInput
-      | ProductUpdateWithWhereUniqueWithoutProductCategoryInput[]
-    updateMany?:
-      | ProductUpdateManyWithWhereWithoutProductCategoryInput
-      | ProductUpdateManyWithWhereWithoutProductCategoryInput[]
+    update?: ProductUpdateWithWhereUniqueWithoutProductCategoryInput | ProductUpdateWithWhereUniqueWithoutProductCategoryInput[]
+    updateMany?: ProductUpdateManyWithWhereWithoutProductCategoryInput | ProductUpdateManyWithWhereWithoutProductCategoryInput[]
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
   export type ProductUncheckedUpdateManyWithoutProductCategoryNestedInput = {
-    create?:
-      | XOR<
-          ProductCreateWithoutProductCategoryInput,
-          ProductUncheckedCreateWithoutProductCategoryInput
-        >
-      | ProductCreateWithoutProductCategoryInput[]
-      | ProductUncheckedCreateWithoutProductCategoryInput[]
-    connectOrCreate?:
-      | ProductCreateOrConnectWithoutProductCategoryInput
-      | ProductCreateOrConnectWithoutProductCategoryInput[]
-    upsert?:
-      | ProductUpsertWithWhereUniqueWithoutProductCategoryInput
-      | ProductUpsertWithWhereUniqueWithoutProductCategoryInput[]
+    create?: XOR<ProductCreateWithoutProductCategoryInput, ProductUncheckedCreateWithoutProductCategoryInput> | ProductCreateWithoutProductCategoryInput[] | ProductUncheckedCreateWithoutProductCategoryInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutProductCategoryInput | ProductCreateOrConnectWithoutProductCategoryInput[]
+    upsert?: ProductUpsertWithWhereUniqueWithoutProductCategoryInput | ProductUpsertWithWhereUniqueWithoutProductCategoryInput[]
     createMany?: ProductCreateManyProductCategoryInputEnvelope
     set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
     disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
     delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    update?:
-      | ProductUpdateWithWhereUniqueWithoutProductCategoryInput
-      | ProductUpdateWithWhereUniqueWithoutProductCategoryInput[]
-    updateMany?:
-      | ProductUpdateManyWithWhereWithoutProductCategoryInput
-      | ProductUpdateManyWithWhereWithoutProductCategoryInput[]
+    update?: ProductUpdateWithWhereUniqueWithoutProductCategoryInput | ProductUpdateWithWhereUniqueWithoutProductCategoryInput[]
+    updateMany?: ProductUpdateManyWithWhereWithoutProductCategoryInput | ProductUpdateManyWithWhereWithoutProductCategoryInput[]
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
   export type IngredientTypeCreateNestedOneWithoutIngredientsInput = {
-    create?: XOR<
-      IngredientTypeCreateWithoutIngredientsInput,
-      IngredientTypeUncheckedCreateWithoutIngredientsInput
-    >
+    create?: XOR<IngredientTypeCreateWithoutIngredientsInput, IngredientTypeUncheckedCreateWithoutIngredientsInput>
     connectOrCreate?: IngredientTypeCreateOrConnectWithoutIngredientsInput
     connect?: IngredientTypeWhereUniqueInput
   }
 
   export type IngredientInProductCreateNestedManyWithoutIngredientInput = {
-    create?:
-      | XOR<
-          IngredientInProductCreateWithoutIngredientInput,
-          IngredientInProductUncheckedCreateWithoutIngredientInput
-        >
-      | IngredientInProductCreateWithoutIngredientInput[]
-      | IngredientInProductUncheckedCreateWithoutIngredientInput[]
-    connectOrCreate?:
-      | IngredientInProductCreateOrConnectWithoutIngredientInput
-      | IngredientInProductCreateOrConnectWithoutIngredientInput[]
+    create?: XOR<IngredientInProductCreateWithoutIngredientInput, IngredientInProductUncheckedCreateWithoutIngredientInput> | IngredientInProductCreateWithoutIngredientInput[] | IngredientInProductUncheckedCreateWithoutIngredientInput[]
+    connectOrCreate?: IngredientInProductCreateOrConnectWithoutIngredientInput | IngredientInProductCreateOrConnectWithoutIngredientInput[]
     createMany?: IngredientInProductCreateManyIngredientInputEnvelope
-    connect?:
-      | IngredientInProductWhereUniqueInput
-      | IngredientInProductWhereUniqueInput[]
+    connect?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
   }
 
-  export type IngredientInProductUncheckedCreateNestedManyWithoutIngredientInput =
-    {
-      create?:
-        | XOR<
-            IngredientInProductCreateWithoutIngredientInput,
-            IngredientInProductUncheckedCreateWithoutIngredientInput
-          >
-        | IngredientInProductCreateWithoutIngredientInput[]
-        | IngredientInProductUncheckedCreateWithoutIngredientInput[]
-      connectOrCreate?:
-        | IngredientInProductCreateOrConnectWithoutIngredientInput
-        | IngredientInProductCreateOrConnectWithoutIngredientInput[]
-      createMany?: IngredientInProductCreateManyIngredientInputEnvelope
-      connect?:
-        | IngredientInProductWhereUniqueInput
-        | IngredientInProductWhereUniqueInput[]
-    }
+  export type IngredientInProductUncheckedCreateNestedManyWithoutIngredientInput = {
+    create?: XOR<IngredientInProductCreateWithoutIngredientInput, IngredientInProductUncheckedCreateWithoutIngredientInput> | IngredientInProductCreateWithoutIngredientInput[] | IngredientInProductUncheckedCreateWithoutIngredientInput[]
+    connectOrCreate?: IngredientInProductCreateOrConnectWithoutIngredientInput | IngredientInProductCreateOrConnectWithoutIngredientInput[]
+    createMany?: IngredientInProductCreateManyIngredientInputEnvelope
+    connect?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+  }
 
   export type IngredientTypeUpdateOneRequiredWithoutIngredientsNestedInput = {
-    create?: XOR<
-      IngredientTypeCreateWithoutIngredientsInput,
-      IngredientTypeUncheckedCreateWithoutIngredientsInput
-    >
+    create?: XOR<IngredientTypeCreateWithoutIngredientsInput, IngredientTypeUncheckedCreateWithoutIngredientsInput>
     connectOrCreate?: IngredientTypeCreateOrConnectWithoutIngredientsInput
     upsert?: IngredientTypeUpsertWithoutIngredientsInput
     connect?: IngredientTypeWhereUniqueInput
-    update?: XOR<
-      XOR<
-        IngredientTypeUpdateToOneWithWhereWithoutIngredientsInput,
-        IngredientTypeUpdateWithoutIngredientsInput
-      >,
-      IngredientTypeUncheckedUpdateWithoutIngredientsInput
-    >
+    update?: XOR<XOR<IngredientTypeUpdateToOneWithWhereWithoutIngredientsInput, IngredientTypeUpdateWithoutIngredientsInput>, IngredientTypeUncheckedUpdateWithoutIngredientsInput>
   }
 
   export type IngredientInProductUpdateManyWithoutIngredientNestedInput = {
-    create?:
-      | XOR<
-          IngredientInProductCreateWithoutIngredientInput,
-          IngredientInProductUncheckedCreateWithoutIngredientInput
-        >
-      | IngredientInProductCreateWithoutIngredientInput[]
-      | IngredientInProductUncheckedCreateWithoutIngredientInput[]
-    connectOrCreate?:
-      | IngredientInProductCreateOrConnectWithoutIngredientInput
-      | IngredientInProductCreateOrConnectWithoutIngredientInput[]
-    upsert?:
-      | IngredientInProductUpsertWithWhereUniqueWithoutIngredientInput
-      | IngredientInProductUpsertWithWhereUniqueWithoutIngredientInput[]
+    create?: XOR<IngredientInProductCreateWithoutIngredientInput, IngredientInProductUncheckedCreateWithoutIngredientInput> | IngredientInProductCreateWithoutIngredientInput[] | IngredientInProductUncheckedCreateWithoutIngredientInput[]
+    connectOrCreate?: IngredientInProductCreateOrConnectWithoutIngredientInput | IngredientInProductCreateOrConnectWithoutIngredientInput[]
+    upsert?: IngredientInProductUpsertWithWhereUniqueWithoutIngredientInput | IngredientInProductUpsertWithWhereUniqueWithoutIngredientInput[]
     createMany?: IngredientInProductCreateManyIngredientInputEnvelope
-    set?:
-      | IngredientInProductWhereUniqueInput
-      | IngredientInProductWhereUniqueInput[]
-    disconnect?:
-      | IngredientInProductWhereUniqueInput
-      | IngredientInProductWhereUniqueInput[]
-    delete?:
-      | IngredientInProductWhereUniqueInput
-      | IngredientInProductWhereUniqueInput[]
-    connect?:
-      | IngredientInProductWhereUniqueInput
-      | IngredientInProductWhereUniqueInput[]
-    update?:
-      | IngredientInProductUpdateWithWhereUniqueWithoutIngredientInput
-      | IngredientInProductUpdateWithWhereUniqueWithoutIngredientInput[]
-    updateMany?:
-      | IngredientInProductUpdateManyWithWhereWithoutIngredientInput
-      | IngredientInProductUpdateManyWithWhereWithoutIngredientInput[]
-    deleteMany?:
-      | IngredientInProductScalarWhereInput
-      | IngredientInProductScalarWhereInput[]
+    set?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    disconnect?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    delete?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    connect?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    update?: IngredientInProductUpdateWithWhereUniqueWithoutIngredientInput | IngredientInProductUpdateWithWhereUniqueWithoutIngredientInput[]
+    updateMany?: IngredientInProductUpdateManyWithWhereWithoutIngredientInput | IngredientInProductUpdateManyWithWhereWithoutIngredientInput[]
+    deleteMany?: IngredientInProductScalarWhereInput | IngredientInProductScalarWhereInput[]
   }
 
-  export type IngredientInProductUncheckedUpdateManyWithoutIngredientNestedInput =
-    {
-      create?:
-        | XOR<
-            IngredientInProductCreateWithoutIngredientInput,
-            IngredientInProductUncheckedCreateWithoutIngredientInput
-          >
-        | IngredientInProductCreateWithoutIngredientInput[]
-        | IngredientInProductUncheckedCreateWithoutIngredientInput[]
-      connectOrCreate?:
-        | IngredientInProductCreateOrConnectWithoutIngredientInput
-        | IngredientInProductCreateOrConnectWithoutIngredientInput[]
-      upsert?:
-        | IngredientInProductUpsertWithWhereUniqueWithoutIngredientInput
-        | IngredientInProductUpsertWithWhereUniqueWithoutIngredientInput[]
-      createMany?: IngredientInProductCreateManyIngredientInputEnvelope
-      set?:
-        | IngredientInProductWhereUniqueInput
-        | IngredientInProductWhereUniqueInput[]
-      disconnect?:
-        | IngredientInProductWhereUniqueInput
-        | IngredientInProductWhereUniqueInput[]
-      delete?:
-        | IngredientInProductWhereUniqueInput
-        | IngredientInProductWhereUniqueInput[]
-      connect?:
-        | IngredientInProductWhereUniqueInput
-        | IngredientInProductWhereUniqueInput[]
-      update?:
-        | IngredientInProductUpdateWithWhereUniqueWithoutIngredientInput
-        | IngredientInProductUpdateWithWhereUniqueWithoutIngredientInput[]
-      updateMany?:
-        | IngredientInProductUpdateManyWithWhereWithoutIngredientInput
-        | IngredientInProductUpdateManyWithWhereWithoutIngredientInput[]
-      deleteMany?:
-        | IngredientInProductScalarWhereInput
-        | IngredientInProductScalarWhereInput[]
-    }
+  export type IngredientInProductUncheckedUpdateManyWithoutIngredientNestedInput = {
+    create?: XOR<IngredientInProductCreateWithoutIngredientInput, IngredientInProductUncheckedCreateWithoutIngredientInput> | IngredientInProductCreateWithoutIngredientInput[] | IngredientInProductUncheckedCreateWithoutIngredientInput[]
+    connectOrCreate?: IngredientInProductCreateOrConnectWithoutIngredientInput | IngredientInProductCreateOrConnectWithoutIngredientInput[]
+    upsert?: IngredientInProductUpsertWithWhereUniqueWithoutIngredientInput | IngredientInProductUpsertWithWhereUniqueWithoutIngredientInput[]
+    createMany?: IngredientInProductCreateManyIngredientInputEnvelope
+    set?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    disconnect?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    delete?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    connect?: IngredientInProductWhereUniqueInput | IngredientInProductWhereUniqueInput[]
+    update?: IngredientInProductUpdateWithWhereUniqueWithoutIngredientInput | IngredientInProductUpdateWithWhereUniqueWithoutIngredientInput[]
+    updateMany?: IngredientInProductUpdateManyWithWhereWithoutIngredientInput | IngredientInProductUpdateManyWithWhereWithoutIngredientInput[]
+    deleteMany?: IngredientInProductScalarWhereInput | IngredientInProductScalarWhereInput[]
+  }
 
   export type IngredientCreateNestedManyWithoutIngredientTypeInput = {
-    create?:
-      | XOR<
-          IngredientCreateWithoutIngredientTypeInput,
-          IngredientUncheckedCreateWithoutIngredientTypeInput
-        >
-      | IngredientCreateWithoutIngredientTypeInput[]
-      | IngredientUncheckedCreateWithoutIngredientTypeInput[]
-    connectOrCreate?:
-      | IngredientCreateOrConnectWithoutIngredientTypeInput
-      | IngredientCreateOrConnectWithoutIngredientTypeInput[]
+    create?: XOR<IngredientCreateWithoutIngredientTypeInput, IngredientUncheckedCreateWithoutIngredientTypeInput> | IngredientCreateWithoutIngredientTypeInput[] | IngredientUncheckedCreateWithoutIngredientTypeInput[]
+    connectOrCreate?: IngredientCreateOrConnectWithoutIngredientTypeInput | IngredientCreateOrConnectWithoutIngredientTypeInput[]
     createMany?: IngredientCreateManyIngredientTypeInputEnvelope
     connect?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
   }
 
   export type IngredientUncheckedCreateNestedManyWithoutIngredientTypeInput = {
-    create?:
-      | XOR<
-          IngredientCreateWithoutIngredientTypeInput,
-          IngredientUncheckedCreateWithoutIngredientTypeInput
-        >
-      | IngredientCreateWithoutIngredientTypeInput[]
-      | IngredientUncheckedCreateWithoutIngredientTypeInput[]
-    connectOrCreate?:
-      | IngredientCreateOrConnectWithoutIngredientTypeInput
-      | IngredientCreateOrConnectWithoutIngredientTypeInput[]
+    create?: XOR<IngredientCreateWithoutIngredientTypeInput, IngredientUncheckedCreateWithoutIngredientTypeInput> | IngredientCreateWithoutIngredientTypeInput[] | IngredientUncheckedCreateWithoutIngredientTypeInput[]
+    connectOrCreate?: IngredientCreateOrConnectWithoutIngredientTypeInput | IngredientCreateOrConnectWithoutIngredientTypeInput[]
     createMany?: IngredientCreateManyIngredientTypeInputEnvelope
     connect?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
   }
 
   export type IngredientUpdateManyWithoutIngredientTypeNestedInput = {
-    create?:
-      | XOR<
-          IngredientCreateWithoutIngredientTypeInput,
-          IngredientUncheckedCreateWithoutIngredientTypeInput
-        >
-      | IngredientCreateWithoutIngredientTypeInput[]
-      | IngredientUncheckedCreateWithoutIngredientTypeInput[]
-    connectOrCreate?:
-      | IngredientCreateOrConnectWithoutIngredientTypeInput
-      | IngredientCreateOrConnectWithoutIngredientTypeInput[]
-    upsert?:
-      | IngredientUpsertWithWhereUniqueWithoutIngredientTypeInput
-      | IngredientUpsertWithWhereUniqueWithoutIngredientTypeInput[]
+    create?: XOR<IngredientCreateWithoutIngredientTypeInput, IngredientUncheckedCreateWithoutIngredientTypeInput> | IngredientCreateWithoutIngredientTypeInput[] | IngredientUncheckedCreateWithoutIngredientTypeInput[]
+    connectOrCreate?: IngredientCreateOrConnectWithoutIngredientTypeInput | IngredientCreateOrConnectWithoutIngredientTypeInput[]
+    upsert?: IngredientUpsertWithWhereUniqueWithoutIngredientTypeInput | IngredientUpsertWithWhereUniqueWithoutIngredientTypeInput[]
     createMany?: IngredientCreateManyIngredientTypeInputEnvelope
     set?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
     disconnect?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
     delete?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
     connect?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
-    update?:
-      | IngredientUpdateWithWhereUniqueWithoutIngredientTypeInput
-      | IngredientUpdateWithWhereUniqueWithoutIngredientTypeInput[]
-    updateMany?:
-      | IngredientUpdateManyWithWhereWithoutIngredientTypeInput
-      | IngredientUpdateManyWithWhereWithoutIngredientTypeInput[]
+    update?: IngredientUpdateWithWhereUniqueWithoutIngredientTypeInput | IngredientUpdateWithWhereUniqueWithoutIngredientTypeInput[]
+    updateMany?: IngredientUpdateManyWithWhereWithoutIngredientTypeInput | IngredientUpdateManyWithWhereWithoutIngredientTypeInput[]
     deleteMany?: IngredientScalarWhereInput | IngredientScalarWhereInput[]
   }
 
   export type IngredientUncheckedUpdateManyWithoutIngredientTypeNestedInput = {
-    create?:
-      | XOR<
-          IngredientCreateWithoutIngredientTypeInput,
-          IngredientUncheckedCreateWithoutIngredientTypeInput
-        >
-      | IngredientCreateWithoutIngredientTypeInput[]
-      | IngredientUncheckedCreateWithoutIngredientTypeInput[]
-    connectOrCreate?:
-      | IngredientCreateOrConnectWithoutIngredientTypeInput
-      | IngredientCreateOrConnectWithoutIngredientTypeInput[]
-    upsert?:
-      | IngredientUpsertWithWhereUniqueWithoutIngredientTypeInput
-      | IngredientUpsertWithWhereUniqueWithoutIngredientTypeInput[]
+    create?: XOR<IngredientCreateWithoutIngredientTypeInput, IngredientUncheckedCreateWithoutIngredientTypeInput> | IngredientCreateWithoutIngredientTypeInput[] | IngredientUncheckedCreateWithoutIngredientTypeInput[]
+    connectOrCreate?: IngredientCreateOrConnectWithoutIngredientTypeInput | IngredientCreateOrConnectWithoutIngredientTypeInput[]
+    upsert?: IngredientUpsertWithWhereUniqueWithoutIngredientTypeInput | IngredientUpsertWithWhereUniqueWithoutIngredientTypeInput[]
     createMany?: IngredientCreateManyIngredientTypeInputEnvelope
     set?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
     disconnect?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
     delete?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
     connect?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
-    update?:
-      | IngredientUpdateWithWhereUniqueWithoutIngredientTypeInput
-      | IngredientUpdateWithWhereUniqueWithoutIngredientTypeInput[]
-    updateMany?:
-      | IngredientUpdateManyWithWhereWithoutIngredientTypeInput
-      | IngredientUpdateManyWithWhereWithoutIngredientTypeInput[]
+    update?: IngredientUpdateWithWhereUniqueWithoutIngredientTypeInput | IngredientUpdateWithWhereUniqueWithoutIngredientTypeInput[]
+    updateMany?: IngredientUpdateManyWithWhereWithoutIngredientTypeInput | IngredientUpdateManyWithWhereWithoutIngredientTypeInput[]
     deleteMany?: IngredientScalarWhereInput | IngredientScalarWhereInput[]
   }
 
   export type IngredientCreateNestedOneWithoutIngredientInProductInput = {
-    create?: XOR<
-      IngredientCreateWithoutIngredientInProductInput,
-      IngredientUncheckedCreateWithoutIngredientInProductInput
-    >
+    create?: XOR<IngredientCreateWithoutIngredientInProductInput, IngredientUncheckedCreateWithoutIngredientInProductInput>
     connectOrCreate?: IngredientCreateOrConnectWithoutIngredientInProductInput
     connect?: IngredientWhereUniqueInput
   }
 
   export type ProductCreateNestedOneWithoutIngredientsInput = {
-    create?: XOR<
-      ProductCreateWithoutIngredientsInput,
-      ProductUncheckedCreateWithoutIngredientsInput
-    >
+    create?: XOR<ProductCreateWithoutIngredientsInput, ProductUncheckedCreateWithoutIngredientsInput>
     connectOrCreate?: ProductCreateOrConnectWithoutIngredientsInput
     connect?: ProductWhereUniqueInput
   }
@@ -10398,39 +8603,20 @@ export namespace Prisma {
     set?: $Enums.IngredientComposition
   }
 
-  export type IngredientUpdateOneRequiredWithoutIngredientInProductNestedInput =
-    {
-      create?: XOR<
-        IngredientCreateWithoutIngredientInProductInput,
-        IngredientUncheckedCreateWithoutIngredientInProductInput
-      >
-      connectOrCreate?: IngredientCreateOrConnectWithoutIngredientInProductInput
-      upsert?: IngredientUpsertWithoutIngredientInProductInput
-      connect?: IngredientWhereUniqueInput
-      update?: XOR<
-        XOR<
-          IngredientUpdateToOneWithWhereWithoutIngredientInProductInput,
-          IngredientUpdateWithoutIngredientInProductInput
-        >,
-        IngredientUncheckedUpdateWithoutIngredientInProductInput
-      >
-    }
+  export type IngredientUpdateOneRequiredWithoutIngredientInProductNestedInput = {
+    create?: XOR<IngredientCreateWithoutIngredientInProductInput, IngredientUncheckedCreateWithoutIngredientInProductInput>
+    connectOrCreate?: IngredientCreateOrConnectWithoutIngredientInProductInput
+    upsert?: IngredientUpsertWithoutIngredientInProductInput
+    connect?: IngredientWhereUniqueInput
+    update?: XOR<XOR<IngredientUpdateToOneWithWhereWithoutIngredientInProductInput, IngredientUpdateWithoutIngredientInProductInput>, IngredientUncheckedUpdateWithoutIngredientInProductInput>
+  }
 
   export type ProductUpdateOneRequiredWithoutIngredientsNestedInput = {
-    create?: XOR<
-      ProductCreateWithoutIngredientsInput,
-      ProductUncheckedCreateWithoutIngredientsInput
-    >
+    create?: XOR<ProductCreateWithoutIngredientsInput, ProductUncheckedCreateWithoutIngredientsInput>
     connectOrCreate?: ProductCreateOrConnectWithoutIngredientsInput
     upsert?: ProductUpsertWithoutIngredientsInput
     connect?: ProductWhereUniqueInput
-    update?: XOR<
-      XOR<
-        ProductUpdateToOneWithWhereWithoutIngredientsInput,
-        ProductUpdateWithoutIngredientsInput
-      >,
-      ProductUncheckedUpdateWithoutIngredientsInput
-    >
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutIngredientsInput, ProductUpdateWithoutIngredientsInput>, ProductUncheckedUpdateWithoutIngredientsInput>
   }
 
   export type EnumUserRoleFieldUpdateOperationsInput = {
@@ -10566,27 +8752,17 @@ export namespace Prisma {
   }
 
   export type NestedEnumIngredientCompositionFilter<$PrismaModel = never> = {
-    equals?:
-      | $Enums.IngredientComposition
-      | EnumIngredientCompositionFieldRefInput<$PrismaModel>
+    equals?: $Enums.IngredientComposition | EnumIngredientCompositionFieldRefInput<$PrismaModel>
     in?: $Enums.IngredientComposition[]
     notIn?: $Enums.IngredientComposition[]
-    not?:
-      | NestedEnumIngredientCompositionFilter<$PrismaModel>
-      | $Enums.IngredientComposition
+    not?: NestedEnumIngredientCompositionFilter<$PrismaModel> | $Enums.IngredientComposition
   }
 
-  export type NestedEnumIngredientCompositionWithAggregatesFilter<
-    $PrismaModel = never,
-  > = {
-    equals?:
-      | $Enums.IngredientComposition
-      | EnumIngredientCompositionFieldRefInput<$PrismaModel>
+  export type NestedEnumIngredientCompositionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IngredientComposition | EnumIngredientCompositionFieldRefInput<$PrismaModel>
     in?: $Enums.IngredientComposition[]
     notIn?: $Enums.IngredientComposition[]
-    not?:
-      | NestedEnumIngredientCompositionWithAggregatesFilter<$PrismaModel>
-      | $Enums.IngredientComposition
+    not?: NestedEnumIngredientCompositionWithAggregatesFilter<$PrismaModel> | $Enums.IngredientComposition
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumIngredientCompositionFilter<$PrismaModel>
     _max?: NestedEnumIngredientCompositionFilter<$PrismaModel>
@@ -10623,10 +8799,7 @@ export namespace Prisma {
 
   export type ProductCategoryCreateOrConnectWithoutProductsInput = {
     where: ProductCategoryWhereUniqueInput
-    create: XOR<
-      ProductCategoryCreateWithoutProductsInput,
-      ProductCategoryUncheckedCreateWithoutProductsInput
-    >
+    create: XOR<ProductCategoryCreateWithoutProductsInput, ProductCategoryUncheckedCreateWithoutProductsInput>
   }
 
   export type IngredientInProductCreateWithoutProductInput = {
@@ -10645,37 +8818,23 @@ export namespace Prisma {
 
   export type IngredientInProductCreateOrConnectWithoutProductInput = {
     where: IngredientInProductWhereUniqueInput
-    create: XOR<
-      IngredientInProductCreateWithoutProductInput,
-      IngredientInProductUncheckedCreateWithoutProductInput
-    >
+    create: XOR<IngredientInProductCreateWithoutProductInput, IngredientInProductUncheckedCreateWithoutProductInput>
   }
 
   export type IngredientInProductCreateManyProductInputEnvelope = {
-    data:
-      | IngredientInProductCreateManyProductInput
-      | IngredientInProductCreateManyProductInput[]
+    data: IngredientInProductCreateManyProductInput | IngredientInProductCreateManyProductInput[]
     skipDuplicates?: boolean
   }
 
   export type ProductCategoryUpsertWithoutProductsInput = {
-    update: XOR<
-      ProductCategoryUpdateWithoutProductsInput,
-      ProductCategoryUncheckedUpdateWithoutProductsInput
-    >
-    create: XOR<
-      ProductCategoryCreateWithoutProductsInput,
-      ProductCategoryUncheckedCreateWithoutProductsInput
-    >
+    update: XOR<ProductCategoryUpdateWithoutProductsInput, ProductCategoryUncheckedUpdateWithoutProductsInput>
+    create: XOR<ProductCategoryCreateWithoutProductsInput, ProductCategoryUncheckedCreateWithoutProductsInput>
     where?: ProductCategoryWhereInput
   }
 
   export type ProductCategoryUpdateToOneWithWhereWithoutProductsInput = {
     where?: ProductCategoryWhereInput
-    data: XOR<
-      ProductCategoryUpdateWithoutProductsInput,
-      ProductCategoryUncheckedUpdateWithoutProductsInput
-    >
+    data: XOR<ProductCategoryUpdateWithoutProductsInput, ProductCategoryUncheckedUpdateWithoutProductsInput>
   }
 
   export type ProductCategoryUpdateWithoutProductsInput = {
@@ -10692,47 +8851,29 @@ export namespace Prisma {
 
   export type IngredientInProductUpsertWithWhereUniqueWithoutProductInput = {
     where: IngredientInProductWhereUniqueInput
-    update: XOR<
-      IngredientInProductUpdateWithoutProductInput,
-      IngredientInProductUncheckedUpdateWithoutProductInput
-    >
-    create: XOR<
-      IngredientInProductCreateWithoutProductInput,
-      IngredientInProductUncheckedCreateWithoutProductInput
-    >
+    update: XOR<IngredientInProductUpdateWithoutProductInput, IngredientInProductUncheckedUpdateWithoutProductInput>
+    create: XOR<IngredientInProductCreateWithoutProductInput, IngredientInProductUncheckedCreateWithoutProductInput>
   }
 
   export type IngredientInProductUpdateWithWhereUniqueWithoutProductInput = {
     where: IngredientInProductWhereUniqueInput
-    data: XOR<
-      IngredientInProductUpdateWithoutProductInput,
-      IngredientInProductUncheckedUpdateWithoutProductInput
-    >
+    data: XOR<IngredientInProductUpdateWithoutProductInput, IngredientInProductUncheckedUpdateWithoutProductInput>
   }
 
   export type IngredientInProductUpdateManyWithWhereWithoutProductInput = {
     where: IngredientInProductScalarWhereInput
-    data: XOR<
-      IngredientInProductUpdateManyMutationInput,
-      IngredientInProductUncheckedUpdateManyWithoutProductInput
-    >
+    data: XOR<IngredientInProductUpdateManyMutationInput, IngredientInProductUncheckedUpdateManyWithoutProductInput>
   }
 
   export type IngredientInProductScalarWhereInput = {
-    AND?:
-      | IngredientInProductScalarWhereInput
-      | IngredientInProductScalarWhereInput[]
+    AND?: IngredientInProductScalarWhereInput | IngredientInProductScalarWhereInput[]
     OR?: IngredientInProductScalarWhereInput[]
-    NOT?:
-      | IngredientInProductScalarWhereInput
-      | IngredientInProductScalarWhereInput[]
-    id?: StringFilter<'IngredientInProduct'> | string
-    ingredientId?: StringFilter<'IngredientInProduct'> | string
-    productId?: StringFilter<'IngredientInProduct'> | string
-    composition?:
-      | EnumIngredientCompositionFilter<'IngredientInProduct'>
-      | $Enums.IngredientComposition
-    mandatory?: BoolFilter<'IngredientInProduct'> | boolean
+    NOT?: IngredientInProductScalarWhereInput | IngredientInProductScalarWhereInput[]
+    id?: StringFilter<"IngredientInProduct"> | string
+    ingredientId?: StringFilter<"IngredientInProduct"> | string
+    productId?: StringFilter<"IngredientInProduct"> | string
+    composition?: EnumIngredientCompositionFilter<"IngredientInProduct"> | $Enums.IngredientComposition
+    mandatory?: BoolFilter<"IngredientInProduct"> | boolean
   }
 
   export type ProductCreateWithoutProductCategoryInput = {
@@ -10755,57 +8896,40 @@ export namespace Prisma {
 
   export type ProductCreateOrConnectWithoutProductCategoryInput = {
     where: ProductWhereUniqueInput
-    create: XOR<
-      ProductCreateWithoutProductCategoryInput,
-      ProductUncheckedCreateWithoutProductCategoryInput
-    >
+    create: XOR<ProductCreateWithoutProductCategoryInput, ProductUncheckedCreateWithoutProductCategoryInput>
   }
 
   export type ProductCreateManyProductCategoryInputEnvelope = {
-    data:
-      | ProductCreateManyProductCategoryInput
-      | ProductCreateManyProductCategoryInput[]
+    data: ProductCreateManyProductCategoryInput | ProductCreateManyProductCategoryInput[]
     skipDuplicates?: boolean
   }
 
   export type ProductUpsertWithWhereUniqueWithoutProductCategoryInput = {
     where: ProductWhereUniqueInput
-    update: XOR<
-      ProductUpdateWithoutProductCategoryInput,
-      ProductUncheckedUpdateWithoutProductCategoryInput
-    >
-    create: XOR<
-      ProductCreateWithoutProductCategoryInput,
-      ProductUncheckedCreateWithoutProductCategoryInput
-    >
+    update: XOR<ProductUpdateWithoutProductCategoryInput, ProductUncheckedUpdateWithoutProductCategoryInput>
+    create: XOR<ProductCreateWithoutProductCategoryInput, ProductUncheckedCreateWithoutProductCategoryInput>
   }
 
   export type ProductUpdateWithWhereUniqueWithoutProductCategoryInput = {
     where: ProductWhereUniqueInput
-    data: XOR<
-      ProductUpdateWithoutProductCategoryInput,
-      ProductUncheckedUpdateWithoutProductCategoryInput
-    >
+    data: XOR<ProductUpdateWithoutProductCategoryInput, ProductUncheckedUpdateWithoutProductCategoryInput>
   }
 
   export type ProductUpdateManyWithWhereWithoutProductCategoryInput = {
     where: ProductScalarWhereInput
-    data: XOR<
-      ProductUpdateManyMutationInput,
-      ProductUncheckedUpdateManyWithoutProductCategoryInput
-    >
+    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutProductCategoryInput>
   }
 
   export type ProductScalarWhereInput = {
     AND?: ProductScalarWhereInput | ProductScalarWhereInput[]
     OR?: ProductScalarWhereInput[]
     NOT?: ProductScalarWhereInput | ProductScalarWhereInput[]
-    id?: StringFilter<'Product'> | string
-    label?: StringFilter<'Product'> | string
-    price?: FloatFilter<'Product'> | number
-    imageUrl?: StringNullableFilter<'Product'> | string | null
-    available?: BoolFilter<'Product'> | boolean
-    productCategoryId?: StringFilter<'Product'> | string
+    id?: StringFilter<"Product"> | string
+    label?: StringFilter<"Product"> | string
+    price?: FloatFilter<"Product"> | number
+    imageUrl?: StringNullableFilter<"Product"> | string | null
+    available?: BoolFilter<"Product"> | boolean
+    productCategoryId?: StringFilter<"Product"> | string
   }
 
   export type IngredientTypeCreateWithoutIngredientsInput = {
@@ -10822,10 +8946,7 @@ export namespace Prisma {
 
   export type IngredientTypeCreateOrConnectWithoutIngredientsInput = {
     where: IngredientTypeWhereUniqueInput
-    create: XOR<
-      IngredientTypeCreateWithoutIngredientsInput,
-      IngredientTypeUncheckedCreateWithoutIngredientsInput
-    >
+    create: XOR<IngredientTypeCreateWithoutIngredientsInput, IngredientTypeUncheckedCreateWithoutIngredientsInput>
   }
 
   export type IngredientInProductCreateWithoutIngredientInput = {
@@ -10844,37 +8965,23 @@ export namespace Prisma {
 
   export type IngredientInProductCreateOrConnectWithoutIngredientInput = {
     where: IngredientInProductWhereUniqueInput
-    create: XOR<
-      IngredientInProductCreateWithoutIngredientInput,
-      IngredientInProductUncheckedCreateWithoutIngredientInput
-    >
+    create: XOR<IngredientInProductCreateWithoutIngredientInput, IngredientInProductUncheckedCreateWithoutIngredientInput>
   }
 
   export type IngredientInProductCreateManyIngredientInputEnvelope = {
-    data:
-      | IngredientInProductCreateManyIngredientInput
-      | IngredientInProductCreateManyIngredientInput[]
+    data: IngredientInProductCreateManyIngredientInput | IngredientInProductCreateManyIngredientInput[]
     skipDuplicates?: boolean
   }
 
   export type IngredientTypeUpsertWithoutIngredientsInput = {
-    update: XOR<
-      IngredientTypeUpdateWithoutIngredientsInput,
-      IngredientTypeUncheckedUpdateWithoutIngredientsInput
-    >
-    create: XOR<
-      IngredientTypeCreateWithoutIngredientsInput,
-      IngredientTypeUncheckedCreateWithoutIngredientsInput
-    >
+    update: XOR<IngredientTypeUpdateWithoutIngredientsInput, IngredientTypeUncheckedUpdateWithoutIngredientsInput>
+    create: XOR<IngredientTypeCreateWithoutIngredientsInput, IngredientTypeUncheckedCreateWithoutIngredientsInput>
     where?: IngredientTypeWhereInput
   }
 
   export type IngredientTypeUpdateToOneWithWhereWithoutIngredientsInput = {
     where?: IngredientTypeWhereInput
-    data: XOR<
-      IngredientTypeUpdateWithoutIngredientsInput,
-      IngredientTypeUncheckedUpdateWithoutIngredientsInput
-    >
+    data: XOR<IngredientTypeUpdateWithoutIngredientsInput, IngredientTypeUncheckedUpdateWithoutIngredientsInput>
   }
 
   export type IngredientTypeUpdateWithoutIngredientsInput = {
@@ -10891,30 +8998,18 @@ export namespace Prisma {
 
   export type IngredientInProductUpsertWithWhereUniqueWithoutIngredientInput = {
     where: IngredientInProductWhereUniqueInput
-    update: XOR<
-      IngredientInProductUpdateWithoutIngredientInput,
-      IngredientInProductUncheckedUpdateWithoutIngredientInput
-    >
-    create: XOR<
-      IngredientInProductCreateWithoutIngredientInput,
-      IngredientInProductUncheckedCreateWithoutIngredientInput
-    >
+    update: XOR<IngredientInProductUpdateWithoutIngredientInput, IngredientInProductUncheckedUpdateWithoutIngredientInput>
+    create: XOR<IngredientInProductCreateWithoutIngredientInput, IngredientInProductUncheckedCreateWithoutIngredientInput>
   }
 
   export type IngredientInProductUpdateWithWhereUniqueWithoutIngredientInput = {
     where: IngredientInProductWhereUniqueInput
-    data: XOR<
-      IngredientInProductUpdateWithoutIngredientInput,
-      IngredientInProductUncheckedUpdateWithoutIngredientInput
-    >
+    data: XOR<IngredientInProductUpdateWithoutIngredientInput, IngredientInProductUncheckedUpdateWithoutIngredientInput>
   }
 
   export type IngredientInProductUpdateManyWithWhereWithoutIngredientInput = {
     where: IngredientInProductScalarWhereInput
-    data: XOR<
-      IngredientInProductUpdateManyMutationInput,
-      IngredientInProductUncheckedUpdateManyWithoutIngredientInput
-    >
+    data: XOR<IngredientInProductUpdateManyMutationInput, IngredientInProductUncheckedUpdateManyWithoutIngredientInput>
   }
 
   export type IngredientCreateWithoutIngredientTypeInput = {
@@ -10935,56 +9030,39 @@ export namespace Prisma {
 
   export type IngredientCreateOrConnectWithoutIngredientTypeInput = {
     where: IngredientWhereUniqueInput
-    create: XOR<
-      IngredientCreateWithoutIngredientTypeInput,
-      IngredientUncheckedCreateWithoutIngredientTypeInput
-    >
+    create: XOR<IngredientCreateWithoutIngredientTypeInput, IngredientUncheckedCreateWithoutIngredientTypeInput>
   }
 
   export type IngredientCreateManyIngredientTypeInputEnvelope = {
-    data:
-      | IngredientCreateManyIngredientTypeInput
-      | IngredientCreateManyIngredientTypeInput[]
+    data: IngredientCreateManyIngredientTypeInput | IngredientCreateManyIngredientTypeInput[]
     skipDuplicates?: boolean
   }
 
   export type IngredientUpsertWithWhereUniqueWithoutIngredientTypeInput = {
     where: IngredientWhereUniqueInput
-    update: XOR<
-      IngredientUpdateWithoutIngredientTypeInput,
-      IngredientUncheckedUpdateWithoutIngredientTypeInput
-    >
-    create: XOR<
-      IngredientCreateWithoutIngredientTypeInput,
-      IngredientUncheckedCreateWithoutIngredientTypeInput
-    >
+    update: XOR<IngredientUpdateWithoutIngredientTypeInput, IngredientUncheckedUpdateWithoutIngredientTypeInput>
+    create: XOR<IngredientCreateWithoutIngredientTypeInput, IngredientUncheckedCreateWithoutIngredientTypeInput>
   }
 
   export type IngredientUpdateWithWhereUniqueWithoutIngredientTypeInput = {
     where: IngredientWhereUniqueInput
-    data: XOR<
-      IngredientUpdateWithoutIngredientTypeInput,
-      IngredientUncheckedUpdateWithoutIngredientTypeInput
-    >
+    data: XOR<IngredientUpdateWithoutIngredientTypeInput, IngredientUncheckedUpdateWithoutIngredientTypeInput>
   }
 
   export type IngredientUpdateManyWithWhereWithoutIngredientTypeInput = {
     where: IngredientScalarWhereInput
-    data: XOR<
-      IngredientUpdateManyMutationInput,
-      IngredientUncheckedUpdateManyWithoutIngredientTypeInput
-    >
+    data: XOR<IngredientUpdateManyMutationInput, IngredientUncheckedUpdateManyWithoutIngredientTypeInput>
   }
 
   export type IngredientScalarWhereInput = {
     AND?: IngredientScalarWhereInput | IngredientScalarWhereInput[]
     OR?: IngredientScalarWhereInput[]
     NOT?: IngredientScalarWhereInput | IngredientScalarWhereInput[]
-    id?: StringFilter<'Ingredient'> | string
-    label?: StringFilter<'Ingredient'> | string
-    price?: FloatFilter<'Ingredient'> | number
-    imageUrl?: StringNullableFilter<'Ingredient'> | string | null
-    ingredientTypeId?: StringFilter<'Ingredient'> | string
+    id?: StringFilter<"Ingredient"> | string
+    label?: StringFilter<"Ingredient"> | string
+    price?: FloatFilter<"Ingredient"> | number
+    imageUrl?: StringNullableFilter<"Ingredient"> | string | null
+    ingredientTypeId?: StringFilter<"Ingredient"> | string
   }
 
   export type IngredientCreateWithoutIngredientInProductInput = {
@@ -11005,10 +9083,7 @@ export namespace Prisma {
 
   export type IngredientCreateOrConnectWithoutIngredientInProductInput = {
     where: IngredientWhereUniqueInput
-    create: XOR<
-      IngredientCreateWithoutIngredientInProductInput,
-      IngredientUncheckedCreateWithoutIngredientInProductInput
-    >
+    create: XOR<IngredientCreateWithoutIngredientInProductInput, IngredientUncheckedCreateWithoutIngredientInProductInput>
   }
 
   export type ProductCreateWithoutIngredientsInput = {
@@ -11031,30 +9106,18 @@ export namespace Prisma {
 
   export type ProductCreateOrConnectWithoutIngredientsInput = {
     where: ProductWhereUniqueInput
-    create: XOR<
-      ProductCreateWithoutIngredientsInput,
-      ProductUncheckedCreateWithoutIngredientsInput
-    >
+    create: XOR<ProductCreateWithoutIngredientsInput, ProductUncheckedCreateWithoutIngredientsInput>
   }
 
   export type IngredientUpsertWithoutIngredientInProductInput = {
-    update: XOR<
-      IngredientUpdateWithoutIngredientInProductInput,
-      IngredientUncheckedUpdateWithoutIngredientInProductInput
-    >
-    create: XOR<
-      IngredientCreateWithoutIngredientInProductInput,
-      IngredientUncheckedCreateWithoutIngredientInProductInput
-    >
+    update: XOR<IngredientUpdateWithoutIngredientInProductInput, IngredientUncheckedUpdateWithoutIngredientInProductInput>
+    create: XOR<IngredientCreateWithoutIngredientInProductInput, IngredientUncheckedCreateWithoutIngredientInProductInput>
     where?: IngredientWhereInput
   }
 
   export type IngredientUpdateToOneWithWhereWithoutIngredientInProductInput = {
     where?: IngredientWhereInput
-    data: XOR<
-      IngredientUpdateWithoutIngredientInProductInput,
-      IngredientUncheckedUpdateWithoutIngredientInProductInput
-    >
+    data: XOR<IngredientUpdateWithoutIngredientInProductInput, IngredientUncheckedUpdateWithoutIngredientInProductInput>
   }
 
   export type IngredientUpdateWithoutIngredientInProductInput = {
@@ -11074,23 +9137,14 @@ export namespace Prisma {
   }
 
   export type ProductUpsertWithoutIngredientsInput = {
-    update: XOR<
-      ProductUpdateWithoutIngredientsInput,
-      ProductUncheckedUpdateWithoutIngredientsInput
-    >
-    create: XOR<
-      ProductCreateWithoutIngredientsInput,
-      ProductUncheckedCreateWithoutIngredientsInput
-    >
+    update: XOR<ProductUpdateWithoutIngredientsInput, ProductUncheckedUpdateWithoutIngredientsInput>
+    create: XOR<ProductCreateWithoutIngredientsInput, ProductUncheckedCreateWithoutIngredientsInput>
     where?: ProductWhereInput
   }
 
   export type ProductUpdateToOneWithWhereWithoutIngredientsInput = {
     where?: ProductWhereInput
-    data: XOR<
-      ProductUpdateWithoutIngredientsInput,
-      ProductUncheckedUpdateWithoutIngredientsInput
-    >
+    data: XOR<ProductUpdateWithoutIngredientsInput, ProductUncheckedUpdateWithoutIngredientsInput>
   }
 
   export type ProductUpdateWithoutIngredientsInput = {
@@ -11120,9 +9174,7 @@ export namespace Prisma {
 
   export type IngredientInProductUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
-    composition?:
-      | EnumIngredientCompositionFieldUpdateOperationsInput
-      | $Enums.IngredientComposition
+    composition?: EnumIngredientCompositionFieldUpdateOperationsInput | $Enums.IngredientComposition
     mandatory?: BoolFieldUpdateOperationsInput | boolean
     ingredient?: IngredientUpdateOneRequiredWithoutIngredientInProductNestedInput
   }
@@ -11130,18 +9182,14 @@ export namespace Prisma {
   export type IngredientInProductUncheckedUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     ingredientId?: StringFieldUpdateOperationsInput | string
-    composition?:
-      | EnumIngredientCompositionFieldUpdateOperationsInput
-      | $Enums.IngredientComposition
+    composition?: EnumIngredientCompositionFieldUpdateOperationsInput | $Enums.IngredientComposition
     mandatory?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type IngredientInProductUncheckedUpdateManyWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     ingredientId?: StringFieldUpdateOperationsInput | string
-    composition?:
-      | EnumIngredientCompositionFieldUpdateOperationsInput
-      | $Enums.IngredientComposition
+    composition?: EnumIngredientCompositionFieldUpdateOperationsInput | $Enums.IngredientComposition
     mandatory?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -11188,9 +9236,7 @@ export namespace Prisma {
 
   export type IngredientInProductUpdateWithoutIngredientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    composition?:
-      | EnumIngredientCompositionFieldUpdateOperationsInput
-      | $Enums.IngredientComposition
+    composition?: EnumIngredientCompositionFieldUpdateOperationsInput | $Enums.IngredientComposition
     mandatory?: BoolFieldUpdateOperationsInput | boolean
     product?: ProductUpdateOneRequiredWithoutIngredientsNestedInput
   }
@@ -11198,18 +9244,14 @@ export namespace Prisma {
   export type IngredientInProductUncheckedUpdateWithoutIngredientInput = {
     id?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
-    composition?:
-      | EnumIngredientCompositionFieldUpdateOperationsInput
-      | $Enums.IngredientComposition
+    composition?: EnumIngredientCompositionFieldUpdateOperationsInput | $Enums.IngredientComposition
     mandatory?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type IngredientInProductUncheckedUpdateManyWithoutIngredientInput = {
     id?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
-    composition?:
-      | EnumIngredientCompositionFieldUpdateOperationsInput
-      | $Enums.IngredientComposition
+    composition?: EnumIngredientCompositionFieldUpdateOperationsInput | $Enums.IngredientComposition
     mandatory?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -11242,6 +9284,8 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
+
+
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
