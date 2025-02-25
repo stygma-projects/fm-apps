@@ -4,7 +4,7 @@ import {hash} from 'bcrypt'
 import {CreateUserDto} from '../dto/user/create-user.dto'
 import {UpdateUserDto} from '../dto/user/update-user.dto'
 import {USER_ERROR, UserWithoutPassword} from '../types/user.type'
-import {User} from '@prisma/client'
+import {User} from  "@fm-monorepo/db";
 
 @Injectable()
 export class UserService {

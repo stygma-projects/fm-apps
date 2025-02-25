@@ -4,7 +4,7 @@ import {CreateIngredientTypeDto} from '../dto/ingredient-type/create-ingredient-
 import {UpdateIngredientTypeDto} from '../dto/ingredient-type/update-ingredient-type.dto'
 import {IngredientTypeExistsGuard} from '../guards/ingredient-type-exists.guard'
 import {JwtAuthGuard} from '../guards/jwt-auth.guard'
-import {IngredientType} from '@prisma/client'
+import {IngredientType} from  "@fm-monorepo/db";
 
 @Controller('ingredient-types')
 export class IngredientTypeController {

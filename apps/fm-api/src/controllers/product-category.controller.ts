@@ -4,7 +4,7 @@ import {CreateProductCategoryDto} from '../dto/product-category/create-product-c
 import {UpdateProductCategoryDto} from '../dto/product-category/update-product-category.dto'
 import {ProductCategoryExistsGuard} from '../guards/product-category-exists.guard'
 import {JwtAuthGuard} from '../guards/jwt-auth.guard'
-import {ProductCategory} from '@prisma/client'
+import {ProductCategory} from  "@fm-monorepo/db";
 
 @Controller('product-categories')
 export class ProductCategoryController {

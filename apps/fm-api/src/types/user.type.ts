@@ -1,7 +1,7 @@
 import {Request} from 'express'
 import {UpdateUserDto} from '../dto/user/update-user.dto'
 import {CreateUserDto} from '../dto/user/create-user.dto'
-import {User} from "@prisma/client";
+import {User} from "@fm-monorepo/db";
 
 export type UserRequest = Request<
     {

@@ -3,7 +3,7 @@ import {CreateProductDto} from '../dto/product/create-product.dto'
 import {UpdateProductDto} from '../dto/product/update-product.dto'
 import {PrismaService} from './prisma.service'
 import {PRODUCT_ERROR} from '../types/product.type'
-import {Product} from '@prisma/client'
+import {Product} from  "@fm-monorepo/db";
 
 @Injectable()
 export class ProductService {

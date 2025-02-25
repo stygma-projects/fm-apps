@@ -1,5 +1,5 @@
 import {IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, MinLength,} from 'class-validator'
-import {UserRole} from "@prisma/client";
+import {UserRole} from  "@fm-monorepo/db";
 
 
 export class CreateUserDto {

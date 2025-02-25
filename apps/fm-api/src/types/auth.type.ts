@@ -1,4 +1,4 @@
-import {UserRole} from "@prisma/client";
+import {UserRole} from  "@fm-monorepo/db";
 
 export interface LoginResponse {
     access_token: string

@@ -4,7 +4,7 @@ import {CreateProductDto} from '../dto/product/create-product.dto'
 import {UpdateProductDto} from '../dto/product/update-product.dto'
 import {JwtAuthGuard} from '../guards/jwt-auth.guard'
 import {ProductExistsGuard} from '../guards/product-exists.guard'
-import {Product} from '@prisma/client'
+import {Product} from  "@fm-monorepo/db";
 
 @Controller('products')
 export class ProductController {

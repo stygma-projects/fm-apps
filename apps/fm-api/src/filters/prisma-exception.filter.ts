@@ -1,6 +1,6 @@
 import {ArgumentsHost, Catch, ExceptionFilter} from '@nestjs/common'
 import {Request, Response} from 'express'
-import {Prisma} from "@prisma/client";
+import {Prisma} from  "@fm-monorepo/db";
 
 @Catch(
     Prisma.PrismaClientKnownRequestError,

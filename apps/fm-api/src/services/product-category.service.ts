@@ -3,7 +3,7 @@ import {UpdateProductCategoryDto} from '../dto/product-category/update-product-c
 import {PrismaService} from './prisma.service'
 import {Injectable, NotFoundException} from '@nestjs/common'
 import {PRODUCT_CATEGORY_ERROR} from '../types/product-category.type'
-import {ProductCategory} from '@prisma/client'
+import {ProductCategory} from  "@fm-monorepo/db";
 
 @Injectable()
 export class ProductCategoryService {

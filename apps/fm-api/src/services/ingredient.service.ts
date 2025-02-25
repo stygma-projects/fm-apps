@@ -3,7 +3,7 @@ import {CreateIngredientDto} from '../dto/ingredient/create-ingredient.dto'
 import {UpdateIngredientDto} from '../dto/ingredient/update-ingredient.dto'
 import {PrismaService} from './prisma.service'
 import {INGREDIENT_ERROR} from '../types/common.type'
-import {Ingredient} from '@prisma/client'
+import {Ingredient} from  "@fm-monorepo/db";
 
 @Injectable()
 export class IngredientService {
