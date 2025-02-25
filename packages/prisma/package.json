@@ -2,8 +2,8 @@
   "name": "@fm-monorepo/prisma",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "src/index.ts",
+  "types": "src/index.d.ts",
   "exports": {
     ".": "./src/index.ts"
   },
