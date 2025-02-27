@@ -14,8 +14,7 @@
     "db:deploy": "prisma migrate deploy",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@prisma/client": "latest"

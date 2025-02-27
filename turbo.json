@@ -32,9 +32,6 @@
     "format": {
       "cache": false
     },
-    "format:check": {
-      "cache": false
-    },
     "lint": {
       "cache": false
     },
