@@ -1,12 +1,19 @@
-import {publicProcedure, router} from './trpc';
-import prisma from "./prisma";
+import {router} from './trpc';
+import {
+    ingredientCategoryRouter,
+    orderRouter,
+    productRouter,
+    ingredientRouter, userRouter,
+    productCategoryRouter
+} from './router';
 
 const appRouter = router({
-    productCategoryList:publicProcedure.query(async ()=>{
-        const users = await prisma.productCategory.findMany();
-    })
+    productCategory: productCategoryRouter,
+    product: productRouter,
+    ingredient: ingredientRouter,
+    ingredientCategory: ingredientCategoryRouter,
+    order: orderRouter,
+    user: userRouter,
 });
 
-// Export type router type signature,
-// NOT the router itself.
 export type AppRouter = typeof appRouter;

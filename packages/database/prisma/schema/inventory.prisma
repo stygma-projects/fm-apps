@@ -1,13 +1,13 @@
 model Product {
-  id                String                @id @default(uuid())
-  label             String                @unique
-  price             Float
-  imageUrl          String?
-  available         Boolean               @default(true)
-  productCategoryId String
-  productCategory   ProductCategory       @relation(fields: [productCategoryId], references: [id])
-  ingredients       IngredientInProduct[]
-  Order             Order[]
+  id          String                @id @default(uuid())
+  label       String                @unique
+  price       Float
+  imageUrl    String?
+  available   Boolean               @default(true)
+  categoryId  String
+  category    ProductCategory       @relation(fields: [categoryId], references: [id])
+  ingredients IngredientInProduct[]
+  Order       Order[]
 }
 
 model ProductCategory {
@@ -22,12 +22,12 @@ model Ingredient {
   label               String                @unique
   price               Float
   imageUrl            String?
-  IngredientType      IngredientType        @relation(fields: [ingredientTypeId], references: [id])
-  ingredientTypeId    String
+  category            IngredientCategory    @relation(fields: [categoryId], references: [id])
+  categoryId          String
   IngredientInProduct IngredientInProduct[]
 }
 
-model IngredientType {
+model IngredientCategory {
   id          String       @id @default(uuid())
   label       String       @unique
   imageUrl    String?
