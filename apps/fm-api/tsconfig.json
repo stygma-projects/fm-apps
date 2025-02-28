@@ -1,9 +1,0 @@
-{
-  "extends": [
-    "@fm-monorepo/toolkit/tsconfig"
-  ],
-  "compilerOptions": {
-    "module": "commonjs",
-    "experimentalDecorators": true
-  }
-}

@@ -1,8 +1,11 @@
-import { initTRPC } from '@trpc/server';
+import {inferAsyncReturnType, initTRPC} from '@trpc/server';
+import {createContext} from './context';
 
-// Créer une instance tRPC avec le contexte
-const t = initTRPC.create();
+export type Context = inferAsyncReturnType<typeof createContext>;
 
-// Export des helpers
+const t = initTRPC.context<Context>().create();
+
+export const middleware = t.middleware;
 export const router = t.router;
+
 export const publicProcedure = t.procedure;

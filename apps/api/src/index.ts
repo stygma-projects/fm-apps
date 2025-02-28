@@ -1,19 +1,20 @@
-import {router} from './trpc';
-import {
-    ingredientCategoryRouter,
-    orderRouter,
-    productRouter,
-    ingredientRouter, userRouter,
-    productCategoryRouter
-} from './router';
+import cors from 'cors';
+import express from 'express';
+import * as trpcExpress from '@trpc/server/adapters/express';
 
-const appRouter = router({
-    productCategory: productCategoryRouter,
-    product: productRouter,
-    ingredient: ingredientRouter,
-    ingredientCategory: ingredientCategoryRouter,
-    order: orderRouter,
-    user: userRouter,
-});
+import {appRouter} from './router';
+import {createContext} from './context';
 
-export type AppRouter = typeof appRouter;
+const app = express();
+
+app.use(cors());
+
+app.use(
+    '/trpc',
+    trpcExpress.createExpressMiddleware({
+        router: appRouter,
+        createContext,
+    })
+);
+
+app.listen(3000)

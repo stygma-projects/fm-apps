@@ -1,24 +1,10 @@
-import {hash} from 'bcrypt'
-import {PrismaClient, UserRole} from "../generated/client";
+import {PrismaClient} from "../generated/client";
 
 const prisma = new PrismaClient()
 
 async function main() {
-    // Insert admin user
-    const passwordHash = await hash('admin', 10)
-
-    await prisma.user.create({
-        data: {
-            email: 'vfourny@gmail.com',
-            firstName: 'Valentin',
-            lastName: 'Fourny',
-            password: passwordHash,
-            role: UserRole.ADMIN,
-        },
-    })
-
     // Insert ingredient types
-    await prisma.ingredientType.createMany({
+    await prisma.ingredientCategory.createMany({
         data: [
             {label: 'Légumes'},
             {label: 'Produits laitier'},
