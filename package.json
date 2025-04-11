@@ -14,7 +14,8 @@
     "db:generate": "turbo db:generate",
     "db:migrate": "turbo db:migrate",
     "db:deploy": "turbo db:deploy",
-    "db:reset": "turbo db:reset"
+    "db:reset": "turbo db:reset",
+    "clean": "turbo clean && rm -rf node_modules"
   },
   "devDependencies": {
     "turbo": "^2.4.1",

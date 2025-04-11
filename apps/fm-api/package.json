@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf dist",
     "dev": "tsx watch src/index.ts",
     "lint": "eslint src",
-    "start": "node dist/index.js"
+    "clean": "rm -rf dist && rm -rf node_modules"
   },
   "dependencies": {
     "@fm-monorepo/trpc": "*",
