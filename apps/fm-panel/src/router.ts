@@ -1,10 +1,9 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import InventoryPage from './pages/Inventory.page.vue'
-import DashboardPage from './pages/Dashboard.page.vue'
+import SignUpPage from './pages/SignUp.page.vue'
 
 const routes = [
-    {path: '/', component: DashboardPage},
-    {path: '/inventory', component: InventoryPage},
+    {path: '/', component: SignUpPage},
+    {path: '/sign-up', component: SignUpPage},
 ]
 
 export const router = createRouter({

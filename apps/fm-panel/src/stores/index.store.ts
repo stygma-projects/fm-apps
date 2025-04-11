@@ -1,3 +1,3 @@
-import useInventoryStore from './inventory.store.ts'
+import useUserStore from './user.store.ts'
 
-export { useInventoryStore }
+export { useUserStore }
