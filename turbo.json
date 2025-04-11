@@ -17,6 +17,27 @@
         "^build"
       ]
     },
+    "test": {
+      "cache": false,
+      "dependsOn": [
+        "^db:generate",
+        "^build"
+      ]
+    },
+    "test:watch": {
+      "cache": false,
+      "dependsOn": [
+        "^db:generate",
+        "^build"
+      ]
+    },
+    "test:coverage": {
+      "cache": false,
+      "dependsOn": [
+        "^db:generate",
+        "^build"
+      ]
+    },
     "db:generate": {
       "cache": false
     },
@@ -28,7 +49,7 @@
       "cache": false
     },
     "db:reset": {
-        "cache": false
+      "cache": false
     },
     "format": {
       "cache": false

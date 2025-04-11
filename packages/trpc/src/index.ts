@@ -1,7 +1,9 @@
-import {userRouter} from "./routes/user.router";
+import {productCategoryRouter} from "./routes/inventory/productCategory.route";
 
 import { initTRPC} from '@trpc/server';
 import * as trpcExpress from "@trpc/server/adapters/express";
+import { ingredientCategoryRouter } from './routes/inventory/ingredientCategory.route';
+import { inventoryRouter } from './routes/inventory/inventory.route';
 
 export const createContext = ({ req, res }: trpcExpress.CreateExpressContextOptions) => ({})
 
@@ -13,7 +15,9 @@ export const router = t.router;
 export const publicProcedure = t.procedure;
 
 export const appRouter = router({
-    user: userRouter,
+    ingredientCategory: ingredientCategoryRouter,
+    productCategory: productCategoryRouter,
+    inventory: inventoryRouter,
 });
 
 export type AppRouter = typeof appRouter;
