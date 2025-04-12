@@ -1,3 +1,3 @@
-import useUserStore from './user.store.ts'
+import useProductCategoryStore from './productCategory.store.ts'
 
-export { useUserStore }
+export { useProductCategoryStore }
