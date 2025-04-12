@@ -37,19 +37,16 @@ import {ref} from "vue";
 const email = ref('');
 const password = ref('');
 
-const getUsers = () => trpc.user.list.query();
+const getProductCategories = () => trpc.inventory.productCategory.list.query();
 const {
   data,
-} = useQuery('getUsers', getUsers, {
+} = useQuery('getProductCategories', getProductCategories, {
   refetchOnWindowFocus: false,
 });
 
-const addUser = () => trpc.user.create.mutate({
-  email:email.value,
-  password:password.value,
-  firstName: 'John',
-  lastName: 'Doe',
+const addProductCategory = () => trpc.inventory.productCategory.create.mutate({
+  name: 'Product Category',
 });
 
-const { error: addUserHasError, mutate, reset } = useMutation('addUser', addUser);
+const { mutate } = useMutation('addProductCategory', addProductCategory);
 </script>
