@@ -6,9 +6,3 @@ export const useFetchProductCategories = () => {
     trpc.inventory.productCategory.list.query(),
   )
 }
-
-export const useFetchProductCategory = (id: string) => {
-  return useQuery('productCategory', () =>
-    trpc.inventory.productCategory.get.query(id),
-  )
-}

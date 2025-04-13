@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import SignUpPage from './pages/SignUp.page.vue'
+import DefaultLayout from './layouts/Default.layout.vue'
+import DashboardPage from './pages/Dashboard.page.vue'
 
 const routes = [
-  { path: '/', component: SignUpPage },
-  { path: '/sign-up', component: SignUpPage },
+  { path: '/', component: DefaultLayout, children:[
+    { path: '/', component: DashboardPage },
+  ] },
 ]
 
 export const router = createRouter({
