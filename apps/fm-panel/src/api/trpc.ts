@@ -1,12 +1,12 @@
+import { createTRPCProxyClient, httpBatchLink } from '@trpc/client'
+import type { AppRouter } from '@fm-monorepo/trpc'
 
-import {createTRPCClient, httpLink} from '@trpc/client';
-import type {AppRouter} from "@fm-monorepo/trpc";
-
-export const trpc = createTRPCClient<AppRouter>({
-    links: [
-        httpLink({
-            url: 'http://localhost:3000/trpc',
-        }),
-    ],
-});
-
+export const trpc = createTRPCProxyClient<AppRouter>({
+  links: [
+    httpBatchLink({
+      url: 'http://localhost:3000/trpc',
+      // Vous pouvez ajouter des options supplémentaires ici si nécessaire
+      // headers: () => ({ ... }),
+    }),
+  ],
+})

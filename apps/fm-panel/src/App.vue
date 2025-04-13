@@ -1,12 +1,9 @@
 <template>
-    {{data}}
+  {{ data }}
 </template>
 
 <script lang="ts" setup>
-import { useFetchProductCategories } from './composables/productCategory.composable';
+import { useFetchProductCategories } from './composables/productCategory.composable'
 
-const {
-  data,
-} = useFetchProductCategories();
-
+const { data } = useFetchProductCategories()
 </script>

@@ -5,7 +5,9 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx watch src/index.ts",
-    "lint": "eslint src",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
     "clean": "rm -rf dist && rm -rf node_modules"
   },
   "dependencies": {

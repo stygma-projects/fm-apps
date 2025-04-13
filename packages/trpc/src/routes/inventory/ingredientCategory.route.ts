@@ -1,42 +1,58 @@
-import { router, publicProcedure } from '../../index';
-import { z } from 'zod';
-import prisma from '../../libs/prisma';
+import { router, publicProcedure } from '../../index'
+import { z } from 'zod'
+import prisma from '../../libs/prisma'
 
 export const ingredientCategoryRouter = router({
-    list: publicProcedure.query(async () => {
-        return await prisma.ingredientCategory.findMany();
-    }),
-    getById: publicProcedure.input(z.object({
+  list: publicProcedure.query(async () => {
+    return await prisma.ingredientCategory.findMany()
+  }),
+  getById: publicProcedure
+    .input(
+      z.object({
         id: z.string(),
-    })).query(async ({ input }) => {
-        const { id } = input;
-        return await prisma.ingredientCategory.findUnique({ where: { id } });
+      }),
+    )
+    .query(async ({ input }) => {
+      const { id } = input
+      return await prisma.ingredientCategory.findUnique({ where: { id } })
     }),
-    create: publicProcedure.input(z.object({
+  create: publicProcedure
+    .input(
+      z.object({
         label: z.string().min(2),
         imageUrl: z.string().optional(),
-    })).mutation(async ({ input }) => {
-        return await prisma.ingredientCategory.create({
-            data: input
-        });
+      }),
+    )
+    .mutation(async ({ input }) => {
+      return await prisma.ingredientCategory.create({
+        data: input,
+      })
     }),
-    update: publicProcedure.input(z.object({
+  update: publicProcedure
+    .input(
+      z.object({
         id: z.string(),
         label: z.string().min(2).optional(),
         imageUrl: z.string().optional(),
-    })).mutation(async ({ input }) => {
-        const { id, ...data } = input;
-        return await prisma.ingredientCategory.update({
-            where: { id },
-            data
-        });
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const { id, ...data } = input
+      return await prisma.ingredientCategory.update({
+        where: { id },
+        data,
+      })
     }),
-    delete: publicProcedure.input(z.object({
+  delete: publicProcedure
+    .input(
+      z.object({
         id: z.string(),
-    })).mutation(async ({ input }) => {
-        const { id } = input;
-        return await prisma.ingredientCategory.delete({
-            where: { id }
-        });
-    })
-});
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const { id } = input
+      return await prisma.ingredientCategory.delete({
+        where: { id },
+      })
+    }),
+})

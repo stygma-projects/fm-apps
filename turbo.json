@@ -31,13 +31,6 @@
         "^build"
       ]
     },
-    "test:coverage": {
-      "cache": false,
-      "dependsOn": [
-        "^db:generate",
-        "^build"
-      ]
-    },
     "db:generate": {
       "cache": false
     },
