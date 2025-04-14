@@ -105,6 +105,12 @@ Pour vérifier les types, vous pouvez utiliser la commande suivante :
 npm run type-check
 ```
 
+### Ajouts de nouvelles requêtes trpc
+
+Pour ajouter une nouvelle requête trpc ou un nouveau router il faut modifier le package `@fm-monorepo/trpc` et ajouter le nouveau router dans le fichier `src/server/routers/index.ts`. Vous pouvez ensuite le configurer en vous basant sur les exemples déjà présents.
+
+> Attention il n'est normalement pas nécessaire de modifier l'app `fm-api`. ELle ne sert qu'à instancier un serveur trpc et à l'exposer. Sauf cas exceptionnel vous ne toucherez pas à cette application.
+
 ### Utilisation de prisma
 
 Si vous avez modifié votre schéma prisma, vous pouvez appliquer les changements à la base de données avec la commande suivante :
