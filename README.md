@@ -66,23 +66,46 @@ La commande va lancer les applications contenus dans le dossier `apps` et le ser
 
 ## Apps
 
-### fm-api
+- `fm-api` : Serveur express qui permet d'accéder aux requêtes trpc.
+- `fm-panel` : Application vue 3 qui permet de gérer l'inventaire et l'adminsitration du contexte Friterie Mollien
+- `fm-orders` : Application vue 3 qui permet de gérer les commandes en cours pour les cuisiniers.
+- `fm-customers` : Application Nuxt qui permet de gérer les commandes des clients.
 
-L'application `fm-api` est un serveur express qui permet d'accéder aux requêtes `trpc`.
+## Packages
 
-### fm-panel
+- `@fm-monorepo/toolkit` : Package de configuration pour linting, formatting, etc.
+- `@fm-monorepo/db` : Package de configuration pour la base de données.
+- `@fm-monorepo/trpc` : Package de configuration pour les requêtes trpc.
 
-L'application `fm-panel` est une application vue 3 qui permet de gérer l'inventaire et l'adminsitration du contexte Friterie Mollien
+## Outils de développement
 
-### fm-order
+### Linter et formatter
 
-L'application `fm-order` est une application vue 3 qui permet de gérer les commandes en cours pour les cuisiniers.
+Pour lancer le linter sans corriger les erreurs, vous pouvez utiliser la commande suivante :
 
-### fm-customer
+```bash
+npm run lint
+```
 
-L'application `fm-customer` est une application Nuxt qui permet de gérer les commandes des clients.
+Pour lancer le linter avec la correction des erreurs, vous pouvez utiliser la commande suivante :
 
-## Utilisation de prisma
+```bash
+npm run lint:fix
+```
+
+Pour formater le code, vous pouvez utiliser la commande suivante :
+
+```bash
+npm run format
+```
+
+Pour vérifier les types, vous pouvez utiliser la commande suivante :
+
+```bash
+npm run type-check
+```
+
+### Utilisation de prisma
 
 Si vous avez modifié votre schéma prisma, vous pouvez appliquer les changements à la base de données avec la commande suivante :
 
