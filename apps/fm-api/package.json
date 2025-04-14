@@ -8,11 +8,12 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
+    "type-check": "tsc --noEmit",
     "clean": "rm -rf dist && rm -rf node_modules"
   },
   "dependencies": {
     "@fm-monorepo/trpc": "*",
-    "@trpc/server": "^11.0.4",
+    "@trpc/server": "^10.45.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.21.2"

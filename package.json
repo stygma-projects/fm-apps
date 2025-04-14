@@ -6,6 +6,7 @@
     "dev": "turbo dev",
     "test": "turbo test",
     "test:watch": "turbo test:watch",
+    "type-check": "turbo type-check",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "format": "turbo format",
