@@ -8,6 +8,7 @@
     ".": "./src/index.ts"
   },
   "scripts": {
+    "build": "tsc",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:reset": "prisma migrate reset --force && npm run db:generate",
@@ -15,6 +16,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
+    "type-check": "tsc --noEmit",
     "clean": "rm -rf node_modules && rm -rf generated"
   },
   "dependencies": {
@@ -23,7 +25,8 @@
   "devDependencies": {
     "@fm-monorepo/toolkit": "*",
     "prisma": "latest",
-    "tsx": "^4.19.3"
+    "tsx": "^4.19.3",
+    "typescript": "^5.3.3"
   },
   "prisma": {
     "seed": "tsx ./src/seed.ts"
