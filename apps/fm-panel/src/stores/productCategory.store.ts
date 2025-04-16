@@ -1,3 +1,5 @@
 import { defineStore } from 'pinia'
 
-export default defineStore('productCategory', () => {})
+export default defineStore('productCategory', () => {
+    return {}
+})

@@ -1,12 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DefaultLayout from './layouts/Default.layout.vue'
-import DashboardPage from './pages/Dashboard.page.vue'
+import PanelDashboardPage from './pages/PanelDashboard.page.vue'
 
 const routes = [
   {
     path: '/',
-    component: DefaultLayout,
-    children: [{ path: '/', component: DashboardPage }],
+    children: [{ path: '/', component: PanelDashboardPage }],
   },
 ]
 
