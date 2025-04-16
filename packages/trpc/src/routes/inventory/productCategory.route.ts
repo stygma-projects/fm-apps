@@ -24,10 +24,9 @@ export const productCategoryRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
-        return await prisma.productCategory.create({
-          data: input,
-        })
-
+      return await prisma.productCategory.create({
+        data: input,
+      })
     }),
   update: publicProcedure
     .input(
@@ -39,10 +38,10 @@ export const productCategoryRouter = router({
     )
     .mutation(async ({ input }) => {
       const { id, ...data } = input
-        return await prisma.productCategory.update({
-          where: { id },
-          data,
-        })
+      return await prisma.productCategory.update({
+        where: { id },
+        data,
+      })
     }),
   delete: publicProcedure
     .input(
@@ -51,8 +50,8 @@ export const productCategoryRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
-        return await prisma.productCategory.delete({
-          where: { id: input.id },
-        })
+      return await prisma.productCategory.delete({
+        where: { id: input.id },
+      })
     }),
 })

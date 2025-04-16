@@ -5,8 +5,8 @@ export const createContext = ({
   req,
   res,
 }: trpcExpress.CreateExpressContextOptions) => ({
-    req,
-    res,
+  req,
+  res,
 })
 
 type Context = Awaited<ReturnType<typeof createContext>>

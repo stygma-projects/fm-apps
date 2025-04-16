@@ -6,50 +6,48 @@ import eslintPluginVue from 'eslint-plugin-vue'
 import eslintConfigPrettier from 'eslint-config-prettier'
 
 const vueFilesConfig = {
-    name: 'eslint-config-node-tools/vue',
-    extends: [
-        ...eslintPluginVue.configs['flat/recommended']
-    ],
-    files: ['**/*.{ts,vue}'],
-    languageOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        globals: globals.browser,
-        parserOptions: {
-            parser: typescriptEslint.parser,
-        },
+  name: 'eslint-config-node-tools/vue',
+  extends: [...eslintPluginVue.configs['flat/recommended']],
+  files: ['**/*.{ts,vue}'],
+  languageOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    globals: globals.browser,
+    parserOptions: {
+      parser: typescriptEslint.parser,
     },
-    rules: {},
+  },
+  rules: {},
 }
 
 const defaultConfig = {
-    name: 'eslint-config-node-tools/default',
-    languageOptions: {
-        globals: {
-            ...globals.node,
-        },
+  name: 'eslint-config-node-tools/default',
+  languageOptions: {
+    globals: {
+      ...globals.node,
     },
-    rules: {},
+  },
+  rules: {},
 }
 
 const customConfig = {
-    name: 'eslint-config-node-tools/custom-config',
-    rules: {
-        'no-console': ['error'],
-        'no-debugger': ['error'],
-    },
+  name: 'eslint-config-node-tools/custom-config',
+  rules: {
+    'no-console': ['error'],
+    'no-debugger': ['error'],
+  },
 }
 
 export default tseslint.config(
-    eslintJS.configs.recommended,
-    ...tseslint.configs.recommended,
-    ...tseslint.configs.strict,
-    ...tseslint.configs.stylistic,
-    vueFilesConfig,
-    defaultConfig,
-    customConfig,
-    eslintConfigPrettier,
-    {
-        ignores: ['node_modules', 'dist', '.nuxt', 'coverage', '.output'],
-    },
+  eslintJS.configs.recommended,
+  ...tseslint.configs.recommended,
+  ...tseslint.configs.strict,
+  ...tseslint.configs.stylistic,
+  vueFilesConfig,
+  defaultConfig,
+  customConfig,
+  eslintConfigPrettier,
+  {
+    ignores: ['node_modules', 'dist', '.nuxt', 'coverage', '.output'],
+  },
 )
