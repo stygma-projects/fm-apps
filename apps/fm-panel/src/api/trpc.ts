@@ -1,5 +1,5 @@
 import { createTRPCProxyClient, httpBatchLink } from '@trpc/client'
-import type { AppRouter } from '@fm-monorepo/trpc'
+import type { AppRouter } from '@fm-apps/trpc'
 
 export const trpc = createTRPCProxyClient<AppRouter>({
   links: [

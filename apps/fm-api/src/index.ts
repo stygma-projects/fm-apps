@@ -1,7 +1,7 @@
 import cors from 'cors'
 import express from 'express'
 import * as trpcExpress from '@trpc/server/adapters/express'
-import { appRouter, createContext } from '@fm-monorepo/trpc'
+import { appRouter, createContext } from '@fm-apps/trpc'
 
 const app = express()
 

@@ -1,3 +1,3 @@
 export default {
-    extends: ['@fm-monorepo/toolkit/commitlint'],
+  extends: ['@fm-apps/toolkit/commitlint'],
 }

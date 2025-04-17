@@ -1,5 +1,5 @@
 {
-  "name": "@fm-monorepo",
+  "name": "@fm-apps",
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -9,7 +9,7 @@
     "type-check": "turbo type-check",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
-    "format": "turbo format",
+    "format": "prettier --write .",
     "db:generate": "turbo db:generate",
     "db:migrate": "turbo db:migrate",
     "db:deploy": "turbo db:deploy",
@@ -18,7 +18,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@fm-monorepo/toolkit": "*",
+    "@fm-apps/toolkit": "*",
     "husky": "^9.1.7",
     "turbo": "^2.4.1"
   },

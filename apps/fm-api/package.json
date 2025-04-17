@@ -1,5 +1,5 @@
 {
-  "name": "@fm-monorepo/fm-api",
+  "name": "@fm-apps/fm-api",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -8,19 +8,18 @@
     "dev": "tsx watch src/index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --write .",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist && rm -rf node_modules"
   },
   "dependencies": {
-    "@fm-monorepo/trpc": "*",
+    "@fm-apps/trpc": "*",
     "@trpc/server": "^10.45.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.21.2"
   },
   "devDependencies": {
-    "@fm-monorepo/toolkit": "*",
+    "@fm-apps/toolkit": "*",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^20.10.6",

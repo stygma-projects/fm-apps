@@ -1,4 +1,4 @@
-import { PrismaClient } from '@fm-monorepo/db'
+import { PrismaClient } from '@fm-apps/db'
 
 const prisma = new PrismaClient()
 

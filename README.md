@@ -5,7 +5,7 @@
 Commencer par cloner le repo :
 
 ```bash
-git clone git@github.com:fm-monorepo/fm-monorepo.git
+git clone git@github.com:fm-apps/fm-apps.git
 ```
 
 ### Installer les dépendances
@@ -16,7 +16,7 @@ Vérifier que vous avez bien la version de node indiquée dans le fichier `packa
 npm install
 ```
 
-### Créationd du conteneur de la base de données
+### Création du conteneur de la base de données
 
 Pour créer votre base de données il vous suffit de lancer le conteneur docker depuis le fichier `docker-compose.yml` situé dans le root du projet. Pour cela il suffit d'exécuter la commande suivante :
 
@@ -73,9 +73,9 @@ La commande va lancer les applications contenus dans le dossier `apps` et le ser
 
 ## Packages
 
-- `@fm-monorepo/toolkit` : Package de configuration pour linting, formatting, etc.
-- `@fm-monorepo/db` : Package de configuration pour la base de données.
-- `@fm-monorepo/trpc` : Package de configuration pour les requêtes trpc.
+- `@fm-apps/toolkit` : Package de configuration pour linting, formatting, etc.
+- `@fm-apps/db` : Package de configuration pour la base de données.
+- `@fm-apps/trpc` : Package de configuration pour les requêtes trpc.
 
 ## Outils de développement
 
@@ -105,9 +105,21 @@ Pour vérifier les types, vous pouvez utiliser la commande suivante :
 npm run type-check
 ```
 
+### Commits
+
+Pour les commits un githook est présent et s'assure de la qualité du commit message, nous utilisons le format suivant :
+
+```
+<type>(<scope>:<subscope>): <description>
+```
+
+La liste des types suit celle du conventional commit angular et les scopes correspondent aux packages et apps du monorepo. Vous trouverez leur définition dans `packages/toolkit/commitlint.config.js`.
+
+Le subscore est libre et permet de détailler un composant du scope. Par exemple (`api:orders`) pour indiquer que le commit concerne la partie orders de l'api.
+
 ### Ajouts de nouvelles requêtes trpc
 
-Pour ajouter une nouvelle requête trpc ou un nouveau router il faut modifier le package `@fm-monorepo/trpc` et ajouter le nouveau router dans le fichier `src/server/routers/index.ts`. Vous pouvez ensuite le configurer en vous basant sur les exemples déjà présents.
+Pour ajouter une nouvelle requête trpc ou un nouveau router il faut modifier le package `@fm-apps/trpc` et ajouter le nouveau router dans le fichier `src/server/routers/index.ts`. Vous pouvez ensuite le configurer en vous basant sur les exemples déjà présents.
 
 > Attention il n'est normalement pas nécessaire de modifier l'app `fm-api`. ELle ne sert qu'à instancier un serveur trpc et à l'exposer. Sauf cas exceptionnel vous ne toucherez pas à cette application.
 
@@ -118,13 +130,9 @@ Si vous avez modifié votre schéma prisma, vous pouvez appliquer les changement
 ```bash
 npm run db:migrate
 ```
- > Durant la phase de développement, vous pouvez aussi utiliser la commande push. Cependant attention cette commande ne crée pas les fichiers de migration.
- 
- ```bash
- npm run db:push
- ```
 
+> Durant la phase de développement, vous pouvez aussi utiliser la commande push. Cependant attention cette commande ne crée pas les fichiers de migration.
 
-
-
-
+```bash
+npm run db:push
+```

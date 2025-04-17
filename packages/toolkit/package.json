@@ -1,5 +1,5 @@
 {
-  "name": "@fm-monorepo/toolkit",
+  "name": "@fm-apps/toolkit",
   "version": "0.0.1",
   "type": "module",
   "description": "",
@@ -7,7 +7,6 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --write .",
     "clean": "rm -rf node_modules"
   },
   "exports": {

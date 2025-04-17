@@ -3,33 +3,20 @@
   "ui": "tui",
   "tasks": {
     "build": {
-      "dependsOn": [
-        "^db:deploy",
-        "^db:generate",
-        "^build"
-      ]
+      "dependsOn": ["^db:generate", "^build"]
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "dependsOn": [
-        "^db:generate",
-        "^build"
-      ]
+      "dependsOn": ["^db:generate", "^build"]
     },
     "test": {
       "cache": false,
-      "dependsOn": [
-        "^db:generate",
-        "^build"
-      ]
+      "dependsOn": ["^build"]
     },
     "test:watch": {
       "cache": false,
-      "dependsOn": [
-        "^db:generate",
-        "^build"
-      ]
+      "dependsOn": ["^build"]
     },
     "db:generate": {
       "cache": false
@@ -44,18 +31,9 @@
     "db:reset": {
       "cache": false
     },
-    "format": {
-      "cache": false
-    },
-    "lint": {
-      "cache": false
-    },
-    "lint:fix": {
-      "cache": false
-    },
-    "type-check": {
-      "cache": false
-    },
+    "lint": {},
+    "lint:fix": {},
+    "type-check": {},
     "clean": {
       "cache": false
     }

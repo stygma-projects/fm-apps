@@ -1,5 +1,5 @@
 {
-  "name": "@fm-monorepo/fm-panel",
+  "name": "@fm-apps/fm-panel",
   "private": true,
   "type": "module",
   "version": "0.0.0",
@@ -10,11 +10,10 @@
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --write .",
     "clean": "rm -rf dist && rm -rf node_modules"
   },
   "dependencies": {
-    "@fm-monorepo/trpc": "*",
+    "@fm-apps/trpc": "*",
     "@primeuix/themes": "^1.0.3",
     "@tailwindcss/vite": "^4.0.6",
     "@trpc/client": "^10.45.0",
@@ -27,7 +26,7 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@fm-monorepo/toolkit": "*",
+    "@fm-apps/toolkit": "*",
     "@primevue/auto-import-resolver": "^4.3.3",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
