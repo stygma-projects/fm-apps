@@ -1,5 +1,5 @@
 {
-  "name": "@fm-monorepo/toolkit",
+  "name": "@fm-monorepo",
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -18,9 +18,9 @@
     "prepare": "husky"
   },
   "devDependencies": {
+    "@fm-monorepo/toolkit": "*",
     "husky": "^9.1.7",
-    "turbo": "^2.4.1",
-    "vitest-mock-extended": "^3.1.0"
+    "turbo": "^2.4.1"
   },
   "engines": {
     "node": "22.12.0"

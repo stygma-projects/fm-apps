@@ -13,4 +13,4 @@ services:
     ports:
       - "3306:3306"  # Mapping du port MySQL (hôte:conteneur)
     volumes:
-      - ./temp/mysql_fm_data:/var/lib/mysql
+      - ./.cache/mysql_fm_data:/var/lib/mysql
