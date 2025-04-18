@@ -18,7 +18,7 @@
     "./commitlint": "./commitlint.config.js"
   },
   "dependencies": {
-    "@vfourny/node-toolkit": "1.0.11",
+    "@vfourny/node-toolkit": "1.0.12",
     "typescript-eslint": "^8.24.0"
   },
   "devDependencies": {
