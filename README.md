@@ -52,7 +52,7 @@ Cette commande va :
 - Créer la base de données
 - Générer le client prisma
 - Appliquer les migrations
-- Insérer les données initiale
+- Insérer les données initiales
 
 ### Démarrage du projet
 
@@ -135,4 +135,14 @@ npm run db:migrate
 
 ```bash
 npm run db:push
+```
+
+### Utilisation de PrimeVue
+
+Les applications Vue3 et Nuxt du repose se basent sur PrimeVue. Pour utiliser les composants de PrimeVue, vous devez préfixer vos composants avec `PrimeNomDeMonComposant`. Par exemple pour utiliser le composant `Button`, vous devez l'importer comme ceci :
+
+```vue  
+<template>
+  <PrimeButton label="Mon bouton" />
+</template>
 ```

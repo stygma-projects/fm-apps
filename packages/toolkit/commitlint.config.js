@@ -8,6 +8,7 @@ const scopes = [
   'toolkit',
   'trpc',
   'fm-apps',
+    'ui'
 ]
 
 export default createCommitlintMonorepoConfig({

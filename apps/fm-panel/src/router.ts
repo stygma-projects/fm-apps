@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import PanelDashboardPage from './pages/PanelDashboard.page.vue'
+import InventoryDashboardPage from './pages/InventoryDashboard.page.vue'
+import MainTemplateLayout from './layouts/MainTemplate.layout.vue'
 
 const routes = [
   {
     path: '/',
-    children: [{ path: '/', component: PanelDashboardPage }],
+    component: MainTemplateLayout,
+    children: [{ path: '/', component: InventoryDashboardPage }],
   },
 ]
 

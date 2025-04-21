@@ -10,8 +10,19 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppSidebar: typeof import('./src/components/AppSidebar.vue')['default']
     Button: typeof import('primevue/button')['default']
+    Menu: typeof import('primevue/menu')['default']
+    PButton: typeof import('primevue/button')['default']
+    PrimeButton: typeof import('primevue/button')['default']
+    PrimeDrawer: typeof import('primevue/drawer')['default']
+    PrimeMenu: typeof import('primevue/menu')['default']
+    PrimeSidebar: typeof import('primevue/sidebar')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sidebar: typeof import('primevue/sidebar')['default']
+    Toast: typeof import('primevue/toast')['default']
     TopBar: typeof import('./src/components/TopBar.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    StyleClass: typeof import('primevue/styleclass')['default']
   }
 }
