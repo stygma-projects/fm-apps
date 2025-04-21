@@ -19,20 +19,23 @@
     <div class="flex flex-grow overflow-hidden">
       <div
         :class="{ 'w-64': sidebarVisible, 'w-0': !sidebarVisible }"
-        class="bg-gray-100 shadow-md transition-all duration-300 z-0 overflow-y-auto"
+        class="bg-gray-100 shadow-md transition-all duration-300 z-0 overflow-y-auto flex-shrink-0"
       >
         <div :class="{ hidden: !sidebarVisible }" class="p-4">
-          <ul class="mt-4">
-            <li
-              v-for="(item, index) in menuItems[0].items"
-              :key="index"
-              class="flex items-center p-2 hover:bg-gray-200 rounded-md"
-            >
-              <router-link :to="item.to">
-                <span class="ml-2">{{ item.label }}</span>
-              </router-link>
-            </li>
-          </ul>
+          <div v-for="(item, itemIndex) in menuItems" :key="itemIndex">
+            <h2 class="text-lg font-semibold">{{ item.category }}</h2>
+            <ul class="mt-4">
+              <li
+                v-for="(subcategory, subcategoryIndex) in item.subcategory"
+                :key="subcategoryIndex"
+                class="flex items-center p-2 hover:bg-gray-200 rounded-md"
+              >
+                <router-link :to="subcategory.to">
+                  <span class="ml-2">{{ subcategory.label }}</span>
+                </router-link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -56,10 +59,11 @@ const appName = ref<string>(t('appName'))
 
 const menuItems = ref([
   {
-    items: [
+    category: t('sidebarMenu.inventory.label'),
+    subcategory: [
       {
-        label: t('sidebarMenu.inventory'),
-        to: 'inventory',
+        label: t('sidebarMenu.inventory.subCategories.productCategories'),
+        to: 'product-categories',
       },
     ],
   },

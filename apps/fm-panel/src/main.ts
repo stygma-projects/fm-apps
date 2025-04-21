@@ -27,6 +27,7 @@ app.use(i18n)
 app.use(PrimeVue, {
   theme: {
     preset: Aura,
+    darkMode: false,
   },
 })
 

@@ -13,7 +13,7 @@ git clone git@github.com:fm-apps/fm-apps.git
 Vérifier que vous avez bien la version de node indiquée dans le fichier `package.json` puis installer les dépendances :
 
 ```bash
-npm install
+npm ci
 ```
 
 ### Création du conteneur de la base de données

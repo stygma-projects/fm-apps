@@ -1,6 +1,6 @@
-import { router, publicProcedure } from '../../index'
 import { z } from 'zod'
 import prisma from '../../libs/prisma'
+import { publicProcedure, router } from '../../trpc'
 
 export const ingredientCategoryRouter = router({
   list: publicProcedure.query(async () => {

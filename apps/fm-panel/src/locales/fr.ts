@@ -1,6 +1,11 @@
 export const fr = {
   appName: 'FM Panel',
   sidebarMenu: {
-    inventory: 'Inventaire',
+    inventory: {
+      label: 'Inventaire',
+      subCategories: {
+        productCategories: 'Catégories de produits',
+      },
+    },
   },
 }
