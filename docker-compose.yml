@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_fm_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root # À changer pour votre environnement
+      MYSQL_DATABASE: fm-db # Nom de votre base de données
+      MYSQL_USER: user # Nom d'utilisateur pour la connexion
+      MYSQL_PASSWORD: user # Mot de passe pour l'utilisateur
+    ports:
+      - '3306:3306' # Mapping du port MySQL (hôte:conteneur)
+    volumes:
+      - ./.cache/mysql_fm_data:/var/lib/mysql

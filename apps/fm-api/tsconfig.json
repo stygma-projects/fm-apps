@@ -1,0 +1,10 @@
+// apps/fm-api/tsconfig.json
+{
+  "extends": "@fm-apps/toolkit/tsconfig.node",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

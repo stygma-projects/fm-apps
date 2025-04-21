@@ -1,0 +1,15 @@
+// apps/fm-api/tsconfig.json
+{
+  "extends": "@fm-apps/toolkit/tsconfig.node",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "module": "CommonJS",
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,50 @@
+model Product {
+  id          String                @id @default(uuid())
+  label       String                @unique
+  price       Float
+  imageUrl    String?
+  available   Boolean               @default(true)
+  categoryId  String
+  category    ProductCategory       @relation(fields: [categoryId], references: [id])
+  ingredients IngredientInProduct[]
+  Order       Order[]
+}
+
+model ProductCategory {
+  id       String    @id @default(uuid())
+  label    String    @unique
+  imageUrl String?
+  products Product[]
+}
+
+model Ingredient {
+  id                  String                @id @default(uuid())
+  label               String                @unique
+  price               Float
+  imageUrl            String?
+  category            IngredientCategory    @relation(fields: [categoryId], references: [id])
+  categoryId          String
+  IngredientInProduct IngredientInProduct[]
+}
+
+model IngredientCategory {
+  id          String       @id @default(uuid())
+  label       String       @unique
+  imageUrl    String?
+  ingredients Ingredient[]
+}
+
+model IngredientInProduct {
+  id           String                @id @default(uuid())
+  ingredientId String
+  productId    String
+  ingredient   Ingredient            @relation(fields: [ingredientId], references: [id])
+  product      Product               @relation(fields: [productId], references: [id])
+  composition  IngredientComposition @default(BASE)
+  mandatory    Boolean               @default(false)
+}
+
+enum IngredientComposition {
+  BASE
+  EXTRA
+}

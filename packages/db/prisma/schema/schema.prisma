@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder"]
+  output          = "../../generated/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  firstName String
+  lastName  String
+  password  String
+  role      UserRole @default(CUSTOMER)
+  Order     Order[]
+}
+
+enum UserRole {
+  ADMIN
+  USER
+  CUSTOMER
+}
+
+model Order {
+  id               String           @id @default(uuid())
+  userId           String
+  user             User             @relation(fields: [userId], references: [id])
+  products         Product[]
+  type             OrderType
+  status           OrderStatus      @default(PENDING)
+  withdrawalMethod WithdrawalMethod
+  terminalId       Int?
+  price            Float
+  createdAt        DateTime         @default(now())
+}
+
+enum OrderType {
+  DELIVERY
+  PICKUP
+  TERMINALS
+}
+
+enum OrderStatus {
+  PENDING
+  IN_PROGRESS
+  DELIVERED
+  CANCELED
+}
+
+enum WithdrawalMethod {
+  CASH
+  CARD
+}

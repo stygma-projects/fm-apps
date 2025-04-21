@@ -1,0 +1,13 @@
+name: PR
+
+on:
+  pull_request:
+    branches:
+      - main
+      - next
+
+run-name: 'PR - ${{ github.event.pull_request.title }}'
+
+jobs:
+  build:
+    uses: stygma-projects/.github/.github/workflows/build.yml
