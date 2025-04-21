@@ -7,14 +7,14 @@ import PrimeVue from 'primevue/config'
 import Aura from '@primeuix/themes/aura'
 import { VueQueryPlugin } from 'vue-query'
 import { createI18n } from 'vue-i18n'
-import {fr} from "./locales/fr.ts";
+import { fr } from './locales/fr.ts'
 
 const i18n = createI18n({
   locale: 'fr',
   fallbackLocale: 'fr',
-  messages:{
-    fr: fr
-  }
+  messages: {
+    fr: fr,
+  },
 })
 
 const pinia = createPinia()

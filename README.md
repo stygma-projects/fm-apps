@@ -141,7 +141,7 @@ npm run db:push
 
 Les applications Vue3 et Nuxt du repose se basent sur PrimeVue. Pour utiliser les composants de PrimeVue, vous devez préfixer vos composants avec `PrimeNomDeMonComposant`. Par exemple pour utiliser le composant `Button`, vous devez l'importer comme ceci :
 
-```vue  
+```vue
 <template>
   <PrimeButton label="Mon bouton" />
 </template>

@@ -32,7 +32,7 @@
       "cache": false
     },
     "db:push": {
-        "cache": false
+      "cache": false
     },
     "lint": {},
     "lint:fix": {},
