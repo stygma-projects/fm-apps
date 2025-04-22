@@ -11,3 +11,7 @@ run-name: 'PR - ${{ github.event.pull_request.title }}'
 jobs:
   build:
     uses: stygma-projects/.github/.github/workflows/build.yml@main
+    with:
+      is_build: true
+      is_type_checked: false
+      is_tested: false
