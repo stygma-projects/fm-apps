@@ -18,22 +18,26 @@ npm ci
 
 ### Création du conteneur de la base de données
 
-Pour créer votre base de données il vous suffit de lancer le conteneur docker depuis le fichier `docker-compose.yml` situé dans le root du projet. Pour cela il suffit d'exécuter la commande suivante :
+Pour créer votre base de données il vous suffit de lancer le conteneur docker depuis le fichier `docker-compose.yml`
+situé dans le root du projet. Pour cela il suffit d'exécuter la commande suivante :
 
 ```bash
 docker-compose up
 ```
 
-Si vous avez installé docker desktop, vous pourrez désormais suivre l état du conteneur ou le lancer depuis l'application.
+Si vous avez installé docker desktop, vous pourrez désormais suivre l état du conteneur ou le lancer depuis
+l'application.
 
-Pour accéder à la base de données, vous pouvez vous connecter à l'interface de votre gestionnaire de base de données et vous connecter à la base de données `fm_db` avec les identifiants suivants :
+Pour accéder à la base de données, vous pouvez vous connecter à l'interface de votre gestionnaire de base de données et
+vous connecter à la base de données `fm_db` avec les identifiants suivants :
 
 - Host : `localhost`
 - Port : `3306`
 - Username : `root`
 - Password : `root`
 
-De plus pour que votre application puisse accéder à la base de données, vous devez ajouter les informations de connexion dans le fichier `.env` du dossier `packages/db`.
+De plus pour que votre application puisse accéder à la base de données, vous devez ajouter les informations de connexion
+dans le fichier `.env` du dossier `packages/db`.
 
 ```bash
 DATABASE_URL="mysql://root:root@localhost:3306/fm_db"
@@ -113,25 +117,34 @@ Pour les commits un githook est présent et s'assure de la qualité du commit me
 <type>(<scope>:<subscope>): <description>
 ```
 
-La liste des types suit celle du conventional commit angular et les scopes correspondent aux packages et apps du monorepo. Vous trouverez leur définition dans `packages/toolkit/commitlint.config.js`.
+La liste des types suit celle du conventional commit angular et les scopes correspondent aux packages et apps du
+monorepo. Vous trouverez leur définition dans `packages/toolkit/commitlint.config.js`.
 
-Le subscore est libre et permet de détailler un composant du scope. Par exemple (`api:orders`) pour indiquer que le commit concerne la partie orders de l'api.
+Le subscope est libre et permet de détailler un composant du scope. Par exemple (`api:orders`) pour indiquer que le
+commit concerne la partie orders de l'api.
+
+> Exemple : `feat(trpc:orders): add new route to get orders by id`
 
 ### Ajouts de nouvelles requêtes trpc
 
-Pour ajouter une nouvelle requête trpc ou un nouveau router il faut modifier le package `@fm-apps/trpc` et ajouter le nouveau router dans le fichier `src/server/routers/index.ts`. Vous pouvez ensuite le configurer en vous basant sur les exemples déjà présents.
+Pour ajouter une nouvelle requête trpc ou un nouveau router il faut modifier le package `@fm-apps/trpc` et ajouter le
+nouveau router dans le fichier `src/server/routers/index.ts`. Vous pouvez ensuite le configurer en vous basant sur les
+exemples déjà présents.
 
-> Attention il n'est normalement pas nécessaire de modifier l'app `fm-api`. ELle ne sert qu'à instancier un serveur trpc et à l'exposer. Sauf cas exceptionnel vous ne toucherez pas à cette application.
+> Attention il n'est normalement pas nécessaire de modifier l'app `fm-api`. ELle ne sert qu'à instancier un serveur trpc
+> et à l'exposer. Sauf cas exceptionnel vous ne toucherez pas à cette application.
 
 ### Utilisation de prisma
 
-Si vous avez modifié votre schéma prisma, vous pouvez appliquer les changements à la base de données avec la commande suivante :
+Si vous avez modifié votre schéma prisma, vous pouvez appliquer les changements à la base de données avec la commande
+suivante :
 
 ```bash
 npm run db:migrate
 ```
 
-> Durant la phase de développement, vous pouvez aussi utiliser la commande push. Cependant attention cette commande ne crée pas les fichiers de migration.
+> Durant la phase de développement, vous pouvez aussi utiliser la commande push. Cependant attention cette commande ne
+> crée pas les fichiers de migration.
 
 ```bash
 npm run db:push
@@ -139,10 +152,13 @@ npm run db:push
 
 ### Utilisation de PrimeVue
 
-Les applications Vue3 et Nuxt du repose se basent sur PrimeVue. Pour utiliser les composants de PrimeVue, vous devez préfixer vos composants avec `PrimeNomDeMonComposant`. Par exemple pour utiliser le composant `Button`, vous devez l'importer comme ceci :
+Les applications Vue3 et Nuxt du repose se basent sur PrimeVue. Pour utiliser les composants de PrimeVue, vous devez
+préfixer vos composants avec `PrimeNomDeMonComposant`. Par exemple pour utiliser le composant `Button`, vous devez
+l'importer comme ceci :
 
 ```vue
+
 <template>
-  <PrimeButton label="Mon bouton" />
+  <PrimeButton label="Mon bouton"/>
 </template>
 ```
