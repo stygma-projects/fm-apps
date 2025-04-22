@@ -11,6 +11,7 @@
     "db:reset": "prisma migrate reset --force && npm run db:generate",
     "db:deploy": "prisma migrate deploy",
     "db:push": "prisma db push",
+    "db:studio": "prisma studio",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "type-check": "tsc --noEmit",
