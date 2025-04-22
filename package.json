@@ -9,7 +9,7 @@
     "type-check": "turbo type-check",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
-    "format": "prettier --write .",
+    "format": "npx prettier --write './!(.cache)/**/*.{js,ts,jsx,tsx,json,css,md}'",
     "db:generate": "turbo db:generate",
     "db:migrate": "turbo db:migrate",
     "db:deploy": "turbo db:deploy",
