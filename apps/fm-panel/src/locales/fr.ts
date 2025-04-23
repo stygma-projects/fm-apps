@@ -41,4 +41,14 @@ export const fr = {
     },
     searchPlaceholder: 'Rechercher...',
   },
+  inventory:{
+    productCategory:{
+      table:{
+        headers:{
+          label:'Nom',
+          imageUrl : 'Image',
+        }
+      }
+    }
+  }
 }
