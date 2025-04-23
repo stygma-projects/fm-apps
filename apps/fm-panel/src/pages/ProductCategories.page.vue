@@ -5,22 +5,21 @@
       <PrimeDataTable 
         ref="dt"
         v-model:selection="selectedProducts"
-        :value="productCategories"
+        :value="mappedProductCategory"
         data-Key="id"
       >
         <PrimeColumn v-for="(column, index) in Object.keys(mappedProductCategory[0] || {})" :key="index" :field="column" :header="column" style="width: 20%">
-          <template #body="slotProps">
-            <img v-if="column === 'imageUrl'" :src="slotProps.data[column]" alt="Nope LOL." class="rounded" style="width: 64px" />
+          <template #body="rowData">
+            <img v-if="column === 'imageUrl'" :src="rowData.data[column]" :alt="'No Image ?'" class="rounded" style="width: 64px" />
             <span v-else>
-              {{ slotProps.data[column] }}
+              {{ rowData.data[column] }}
             </span>
           </template>
         </PrimeColumn>
         <PrimeColumn header="editeur">
-          <template #body="slotProps">
-            {{ slotProps}}
-            <PrimeButton icon="pi pi-pencil" rounded class="mr-2" @click="editProduct(slotProps.data)" />
-            <!-- <PrimeButton icon="pi pi-trash" rounded severity="danger" @click="confirmDeleteProduct(slotProps.data)" /> -->
+          <template #body="rowData">
+            <PrimeButton icon="pi pi-pencil" rounded class="mr-2" @click="editProduct(rowData.data.id)" />
+            <PrimeButton icon="pi pi-trash" rounded severity="danger" />
           </template>
         </PrimeColumn>
       </PrimeDataTable>
@@ -41,7 +40,7 @@
 
       <template #footer>
         <PrimeButton label="Cancel" icon="pi pi-times" text @click="isDialogOpen = false" />
-        <!-- <PrimeButton label="Save" icon="pi pi-check" @click="saveProduct" /> -->
+        <PrimeButton label="Save" icon="pi pi-check" @click="saveProduct" />
       </template>
     </PrimeDialog>
 
@@ -69,18 +68,26 @@ const mappedProductCategory = computed(()=>{
 // Pour afficher/masquer la modale
 const isDialogOpen = ref(false)
 
-// Pour stocker le produit à éditer
-const editableProduct = ({ label: '', imageUrl: '' })
+const currentCategoryProductId = ref('')
 
-function editProduct(product: any) {
-  console.log(product)
-  isDialogOpen.value = true
+// Pour stocker le produit à éditer
+const editableProduct = ref() //productCategories.value[0]
+
+function editProduct(productId: string) {
+  currentCategoryProductId.value = productId
+  if (productCategories.value){
+    const currentCategoryProduct = ref(productCategories.value.find(p => p.id === currentCategoryProductId.value))
+    editableProduct.value = { ...currentCategoryProduct.value }
+    isDialogOpen.value = true
+  }
+  else{
+    console.log('No.')
+  }
 }
 
-// function saveProduct() {
-//   // À adapter selon logique de sauvegarde (API, emit, etc.)
-//   useUpdateProductCategories(editableProduct.value[0])
-//   isDialogOpen.value = false
-// }
+function saveProduct() {
+  useUpdateProductCategories(editableProduct.value)
+  isDialogOpen.value = false
+}
 
 </script>
