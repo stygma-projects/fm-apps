@@ -55,18 +55,18 @@ export const ingredientCategoryRouter = router({
         where: { id },
       })
     }),
-    deleteMany: publicProcedure
+  deleteMany: publicProcedure
     .input(
       z.object({
-        id: z.array(z.string())
-      })
+        ids: z.array(z.string()),
+      }),
     )
-    .mutation(async({ input }) => {
-      const { id } = input
+    .mutation(async ({ input }) => {
+      const { ids } = input
       return await prisma.ingredientCategory.deleteMany({
         where: {
-          id: {in: id}
-        }
+          id: { in: ids },
+        },
       })
-    })
+    }),
 })
