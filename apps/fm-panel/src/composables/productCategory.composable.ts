@@ -1,4 +1,4 @@
-import { useQuery } from 'vue-query'
+import { useMutation, useQuery } from 'vue-query'
 import { trpc } from '../api/trpc'
 import type { ProductCategory } from '@fm-apps/db'
 
@@ -8,8 +8,8 @@ export const useFetchProductCategories = () => {
   )
 }
 
-export const useUpdateProductCategories = (productModel : ProductCategory) => {
-  return useQuery('productCategories', () =>
-    trpc.inventory.productCategory.update.mutate(productModel),
+export const useUpdateProductCategories = () => {
+  return useMutation('updateProductCategories', (productCategory : ProductCategory) =>
+    trpc.inventory.productCategory.update.mutate(productCategory),
   )
 }

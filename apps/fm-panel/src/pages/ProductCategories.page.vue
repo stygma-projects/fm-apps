@@ -18,7 +18,7 @@
         </PrimeColumn>
         <PrimeColumn header="editeur">
           <template #body="rowData">
-            <PrimeButton icon="pi pi-pencil" rounded class="mr-2" @click="editProduct(rowData.data.id)" />
+            <PrimeButton icon="pi pi-pencil" rounded class="mr-2" @click="editProduct(rowData.data)" />
             <PrimeButton icon="pi pi-trash" rounded severity="danger" />
           </template>
         </PrimeColumn>
@@ -53,6 +53,7 @@ import { computed } from 'vue'
 import { useFetchProductCategories, useUpdateProductCategories } from '../composables/productCategory.composable'
 
 const { data:productCategories } = useFetchProductCategories()
+const { mutate:updateProductCategories } = useUpdateProductCategories()
 
 const mappedProductCategory = computed(()=>{
   if (!productCategories.value) return []
@@ -71,22 +72,19 @@ const isDialogOpen = ref(false)
 const currentCategoryProductId = ref('')
 
 // Pour stocker le produit à éditer
-const editableProduct = ref() //productCategories.value[0]
+const editableProduct = ref({
+  label : '',
+  imageUrl : ''
+}) //productCategories.value[0]
 
-function editProduct(productId: string) {
-  currentCategoryProductId.value = productId
-  if (productCategories.value){
-    const currentCategoryProduct = ref(productCategories.value.find(p => p.id === currentCategoryProductId.value))
-    editableProduct.value = { ...currentCategoryProduct.value }
-    isDialogOpen.value = true
-  }
-  else{
-    console.log('No.')
-  }
+function editProduct(product: any) {
+  currentCategoryProductId.value = product.id
+  editableProduct.value = { ...product}
+  isDialogOpen.value = true
 }
 
 function saveProduct() {
-  useUpdateProductCategories(editableProduct.value)
+  updateProductCategories({id : currentCategoryProductId.value, ...editableProduct.value})
   isDialogOpen.value = false
 }
 
