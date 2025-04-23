@@ -2,8 +2,8 @@ import { z } from 'zod'
 import prisma from '../../libs/prisma'
 import { publicProcedure, router } from '../../trpc'
 
-const isExistingCategoryLabel = (label:string)=>{
-  return !! prisma.productCategory.findUnique({
+const isExistingCategoryLabel = (label: string) => {
+  return !!prisma.productCategory.findUnique({
     where: { label },
   })
 }
