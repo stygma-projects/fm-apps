@@ -8,21 +8,21 @@ export const useFetchIngredientCategories = () => {
   )
 }
 export const useUpdateIngredientCategory = () => {
-  return useMutation((data: IngredientCategoryInput) =>
-    trpc.inventory.ingredientCategory.update.mutate(data),
-  )
-}
-export const useDeleteIngredientCategory = () => {
-  return useMutation((data: IngredientCategoryInput) =>
-    trpc.inventory.ingredientCategory.delete.mutate(data),
+  return useMutation((ingredientCategoryInput: IngredientCategoryInput) =>
+    trpc.inventory.ingredientCategory.update.mutate(ingredientCategoryInput),
   )
 }
 export const useCreateIngredientCategory = () => {
-  return useMutation((data: IngredientCategoryInput) =>{
-    if (!data.label) throw new Error("Le label est requis");
+  return useMutation((ingredientCategoryInput: IngredientCategoryInput) => {
+    if (!ingredientCategoryInput.label) throw new Error('Le label est requis')
     return trpc.inventory.ingredientCategory.create.mutate({
-      label: data.label,
-      imageUrl: data.imageUrl
+      label: ingredientCategoryInput.label,
+      imageUrl: ingredientCategoryInput.imageUrl,
     })
   })
+}
+export const useDeleteIngredientCategory = () => {
+  return useMutation((ingredientCategoryInput: IngredientCategoryInput) =>
+    trpc.inventory.ingredientCategory.delete.mutate(ingredientCategoryInput),
+  )
 }
