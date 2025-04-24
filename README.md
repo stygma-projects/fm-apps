@@ -1,6 +1,24 @@
-# FM Monorepo
+## FM Monorepo
 
-## Setup du projet
+### Table des matières
+
+- [Setup du projet](#setup-du-projet)
+  - [Installation des dépendances](#installer-les-dépendances)
+  - [Création du conteneur de la base de données](#création-du-conteneur-de-la-base-de-données)
+  - [Initialisation de la base de données](#initialisation-de-la-base-de-données)
+  - [Bloquer les retours à la ligne (Windows ONLY)](#bloquer-les-retours-à-la-ligne-windows-only)
+- [Démarrage du projet](#démarrage-du-projet)
+- [Structure du projet](#structure-du-projet)
+  - [Apps](#apps)
+  - [Packages](#packages)
+- [Outils de développement](#outils-de-développement)
+  - [Linter et formatter](#linter-et-formatter)
+  - [Commits](#commits)
+  - [Ajouts de nouvelles requêtes trpc](#ajouts-de-nouvelles-requêtes-trpc)
+  - [Utilisation de prisma](#utilisation-de-prisma)
+  - [Utilisation de PrimeVue](#utilisation-de-primevue)
+
+### Setup du projet
 
 Commencer par cloner le repo :
 
@@ -8,7 +26,7 @@ Commencer par cloner le repo :
 git clone git@github.com:fm-apps/fm-apps.git
 ```
 
-### Installer les dépendances
+#### Installer les dépendances
 
 Vérifier que vous avez bien la version de node indiquée dans le fichier `package.json` puis installer les dépendances :
 
@@ -16,7 +34,7 @@ Vérifier que vous avez bien la version de node indiquée dans le fichier `packa
 npm ci
 ```
 
-### Création du conteneur de la base de données
+#### Création du conteneur de la base de données
 
 Pour créer votre base de données il vous suffit de lancer le conteneur docker depuis le fichier `docker-compose.yml`
 situé dans le root du projet. Pour cela il suffit d'exécuter la commande suivante :
@@ -43,7 +61,7 @@ dans le fichier `.env` du dossier `packages/db`.
 DATABASE_URL="mysql://root:root@localhost:3306/fm_db"
 ```
 
-### Initialisation de la base de données
+#### Initialisation de la base de données
 
 Pour initialiser la base de données, vous pouvez utiliser la commande suivante :
 
@@ -57,6 +75,16 @@ Cette commande va :
 - Générer le client prisma
 - Appliquer les migrations
 - Insérer les données initiales
+
+#### Bloquer les retours à la ligne (Windows ONLY)
+
+Créer un fichier `.gitattributes` en indiquant les lignes suivantes :
+
+```bash
+* text=auto eol=lf
+```
+
+Cela permet de s'assurer que les fichiers sont bien en LF et non en CRLF.
 
 ### Démarrage du projet
 
@@ -157,8 +185,7 @@ préfixer vos composants avec `PrimeNomDeMonComposant`. Par exemple pour utilise
 l'importer comme ceci :
 
 ```vue
-
 <template>
-  <PrimeButton label="Mon bouton"/>
+  <PrimeButton label="Mon bouton" />
 </template>
 ```
