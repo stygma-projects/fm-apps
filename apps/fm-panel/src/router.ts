@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainTemplateLayout from './layouts/MainTemplate.layout.vue'
 import ProductCategoriesPage from './pages/ProductCategories.page.vue'
+import IngredientCategoriesPage from './pages/IngredientCategories.page.vue'
 
 const routes = [
   {
@@ -13,6 +14,10 @@ const routes = [
         children: [
           { path: '', redirect: '/inventory/product-categories' },
           { path: 'product-categories', component: ProductCategoriesPage },
+          {
+            path: 'ingredient-categories',
+            component: IngredientCategoriesPage,
+          },
         ],
       },
     ],

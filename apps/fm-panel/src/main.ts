@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/styles/index.css'
 import 'primeicons/primeicons.css'
+import ToastService from 'primevue/toastservice'
 import { createPinia } from 'pinia'
 import { router } from './router.ts'
 import PrimeVue from 'primevue/config'
@@ -25,6 +26,7 @@ app.use(pinia)
 app.use(router)
 app.use(VueQueryPlugin)
 app.use(i18n)
+app.use(ToastService)
 app.use(PrimeVue, {
   theme: {
     preset: Aura,
