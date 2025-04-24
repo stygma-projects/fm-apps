@@ -1,5 +1,4 @@
 <template>
-  <div class="dark:text-white">
     <h1 class="">Catégories de Produits</h1><br/>
     <div>
       <div 
@@ -17,10 +16,10 @@
         <br>
       </div>
     </div>
-  </div>
 </template>
 
 <script lang="ts" setup>
-import { useFetchProductCategories } from '../composables/productCategory.composable'
+import {useFetchProductCategories} from '../composables/productCategory.composable'
+
 const { data } = useFetchProductCategories()
 </script>
