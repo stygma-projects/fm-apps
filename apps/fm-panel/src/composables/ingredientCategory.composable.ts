@@ -12,7 +12,7 @@ export const useUpdateIngredientCategory = () => {
     trpc.inventory.ingredientCategory.update.mutate({
       id: ingredientCategoryInput.id,
       label: ingredientCategoryInput.label,
-      imageUrl: ingredientCategoryInput.imageUrl || undefined,
+      imageUrl: ingredientCategoryInput.imageUrl,
     })
   )
 }
@@ -21,7 +21,7 @@ export const useCreateIngredientCategory = () => {
     if (!ingredientCategoryInput.label) throw new Error('Le label est requis')
     return trpc.inventory.ingredientCategory.create.mutate({
       label: ingredientCategoryInput.label,
-      imageUrl: ingredientCategoryInput.imageUrl || undefined,
+      imageUrl: ingredientCategoryInput.imageUrl,
     })
   })
 }

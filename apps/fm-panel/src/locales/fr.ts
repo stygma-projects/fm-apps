@@ -33,7 +33,7 @@ export const fr = {
     },
     error: {
       nameRequired: 'Le nom est requis.',
-      imageUrlLength: "L'URL de l'image doit contenir au maximum 255 caractères."
+      imageUrlLength: "L'L'URL de l'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte."
     },
     buttons: {
       yes: 'Oui',

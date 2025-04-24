@@ -130,7 +130,7 @@ import { useToast } from 'primevue';
 
 const toast = useToast();
 const { t } = useI18n();
-const { data } = useFetchIngredientCategories();
+const { data, refetch: refetchCategories } = useFetchIngredientCategories();
 const updateCategory = useUpdateIngredientCategory();
 const deleteCategory = useDeleteIngredientCategory();
 const deleteManyCategory = useDeleteManyIngredientCategory();
@@ -177,36 +177,51 @@ const editCategory = (editCategory) => {
 
 const saveCategory = async () => {
   submitted.value = true;
-  if (!category.value.label) {
+
+  const label = category.value.label?.trim();
+  const imageUrl = category.value.imageUrl?.trim();
+
+  if (!label) {
     return toast.add({
       severity: 'error',
       summary: 'Erreur',
       detail: t('ingredientCategories.error.nameRequired'),
       life: 3000
     });
-  } else if (category.value.imageUrl.length > 255) {
-    return toast.add({
-      severity: 'error',
-      summary: 'Erreur',
-      detail: t('ingredientCategories.error.imageUrlLength'),
-      life: 3000
-    });
   }
 
   const payload = {
     id: category.value.id,
-    label: category.value.label,
-    imageUrl: category.value.imageUrl || ''
+    label,
+    imageUrl: imageUrl
   };
 
-  if (isEditing.value && category.value.id) {
+  try {
+    if (isEditing.value && category.value.id) {
     await updateCategory.mutateAsync({ id: category.value.id, ...payload });
-  } else {
-    await createCategory.mutateAsync(payload);
+    } else {
+      await createCategory.mutateAsync(payload);
+    }
+    categoryDialog.value = false;
+    
+    await refetchCategories.value();
+  } catch (error) {
+    if (error && error.message && error.message.includes("The provided value for the column is too long for the column's type")) {
+      return toast.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: 'L\'URL de l\'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte.',
+        life: 3000
+      });
+    } else if (error) {
+      return toast.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: error.message || error,
+        life: 3000
+      });
+    }
   }
-
-  categoryDialog.value = false;
-  window.location.reload();
 };
 
 const confirmDeleteCategory = (categoryToDelete) => {
@@ -217,7 +232,7 @@ const confirmDeleteCategory = (categoryToDelete) => {
 const deleteCurrentCategory = async () => {
   await deleteCategory.mutateAsync({ id: category.value.id });
   deleteCategoryDialog.value = false;
-  window.location.reload()
+  await refetchCategories.value();
 };
 
 const confirmDeleteSelected = () => {
@@ -233,6 +248,6 @@ const deleteSelectedCategories = async () => {
   deleteCategoriesDialog.value = false;
   selectedCategories.value = [];
 
-  window.location.reload();
+  await refetchCategories.value();
 };
 </script>
