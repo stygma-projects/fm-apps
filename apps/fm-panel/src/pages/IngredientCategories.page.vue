@@ -127,12 +127,13 @@
 <script setup>
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useFetchIngredientCategories, useUpdateIngredientCategory, useDeleteIngredientCategory, useCreateIngredientCategory } from '../composables/ingredientCategory.composable';
+import { useFetchIngredientCategories, useUpdateIngredientCategory, useDeleteIngredientCategory, useCreateIngredientCategory, useDeleteManyIngredientCategory } from '../composables/ingredientCategory.composable';
 
 const { t } = useI18n();
 const { data } = useFetchIngredientCategories();
 const updateCategory = useUpdateIngredientCategory();
 const deleteCategory = useDeleteIngredientCategory();
+const deleteManyCategory = useDeleteManyIngredientCategory();
 const createCategory = useCreateIngredientCategory();
 
 const isEditing = ref(false);
@@ -207,13 +208,16 @@ const confirmDeleteSelected = () => {
 };
 
 const deleteSelectedCategories = async () => {
-  for (const item of selectedCategories.value) {
-    // A refaire, pas de suppression multiple
-    await deleteCategory.mutateAsync({ id: item.id });
-  }
+  // Map usage to extract only the id
+  const categoryIds = selectedCategories.value.map(category => category.id);
+
+  await deleteManyCategory.mutateAsync(categoryIds);
+
   deleteCategoriesDialog.value = false;
   selectedCategories.value = [];
 
-  window.location.reload()
+  window.location.reload();
 };
+
+
 </script>

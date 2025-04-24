@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from 'vue-query'
 import { trpc } from '../api/trpc'
-import type { IngredientCategoryInput } from '../types/ingredientCategory.type'
+import type { IngredientCategory } from '@fm-apps/db'
 
 export const useFetchIngredientCategories = () => {
   return useQuery('ingredientCategory', () =>
@@ -8,21 +8,30 @@ export const useFetchIngredientCategories = () => {
   )
 }
 export const useUpdateIngredientCategory = () => {
-  return useMutation((ingredientCategoryInput: IngredientCategoryInput) =>
-    trpc.inventory.ingredientCategory.update.mutate(ingredientCategoryInput),
+  return useMutation((ingredientCategoryInput: IngredientCategory) =>
+    trpc.inventory.ingredientCategory.update.mutate({
+      id: ingredientCategoryInput.id,
+      label: ingredientCategoryInput.label,
+      imageUrl: ingredientCategoryInput.imageUrl || undefined,
+    })
   )
 }
 export const useCreateIngredientCategory = () => {
-  return useMutation((ingredientCategoryInput: IngredientCategoryInput) => {
+  return useMutation((ingredientCategoryInput: IngredientCategory) => {
     if (!ingredientCategoryInput.label) throw new Error('Le label est requis')
     return trpc.inventory.ingredientCategory.create.mutate({
       label: ingredientCategoryInput.label,
-      imageUrl: ingredientCategoryInput.imageUrl,
+      imageUrl: ingredientCategoryInput.imageUrl || undefined,
     })
   })
 }
 export const useDeleteIngredientCategory = () => {
-  return useMutation((ingredientCategoryInput: IngredientCategoryInput) =>
+  return useMutation((ingredientCategoryInput: IngredientCategory) =>
     trpc.inventory.ingredientCategory.delete.mutate(ingredientCategoryInput),
+  )
+}
+export const useDeleteManyIngredientCategory = () => {
+  return useMutation((ids: string[]) =>
+    trpc.inventory.ingredientCategory.deleteMany.mutate({ ids }),
   )
 }
