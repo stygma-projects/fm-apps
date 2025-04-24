@@ -9,7 +9,23 @@ export const useFetchProductCategories = () => {
 }
 
 export const useUpdateProductCategories = () => {
-  return useMutation('updateProductCategories', (productCategory : ProductCategory) =>
-    trpc.inventory.productCategory.update.mutate(productCategory),
+  return useMutation(
+    'updateProductCategories',
+    (productCategory: ProductCategory) =>
+      trpc.inventory.productCategory.update.mutate(productCategory),
+  )
+}
+
+export const useDeleteProductCategory = () => {
+  return useMutation('deleteProductCategory', (a: { id: string }) =>
+    trpc.inventory.productCategory.delete.mutate(a),
+  )
+}
+
+export const useCreateProductCategory = () => {
+  return useMutation(
+    'createProductCategory',
+    (a: { label: string; imageUrl: string | null }) =>
+      trpc.inventory.productCategory.create.mutate(a),
   )
 }
