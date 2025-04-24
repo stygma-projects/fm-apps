@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-screen ">
+  <div class="flex flex-col h-screen">
     <div class="flex items-center p-4 bg-gray-50 shadow-md z-10">
       <button
         aria-label="Menu"
@@ -48,9 +48,9 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from 'vue'
-import {useI18n} from 'vue-i18n'
-import Toast from 'primevue/toast';
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import Toast from 'primevue/toast'
 
 const { t } = useI18n()
 

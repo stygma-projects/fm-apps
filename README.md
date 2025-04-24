@@ -157,8 +157,7 @@ préfixer vos composants avec `PrimeNomDeMonComposant`. Par exemple pour utilise
 l'importer comme ceci :
 
 ```vue
-
 <template>
-  <PrimeButton label="Mon bouton"/>
+  <PrimeButton label="Mon bouton" />
 </template>
 ```
