@@ -20,7 +20,8 @@ model ProductCategory {
 model Ingredient {
   id                  String                @id @default(uuid())
   label               String                @unique
-  price               Float
+  priceExclTax        Float
+  priceIncludingTax   Float
   imageUrl            String?
   category            IngredientCategory    @relation(fields: [categoryId], references: [id])
   categoryId          String
