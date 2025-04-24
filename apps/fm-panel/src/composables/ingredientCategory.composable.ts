@@ -13,7 +13,7 @@ export const useUpdateIngredientCategory = () => {
       id: ingredientCategoryInput.id,
       label: ingredientCategoryInput.label,
       imageUrl: ingredientCategoryInput.imageUrl,
-    })
+    }),
   )
 }
 export const useCreateIngredientCategory = () => {
