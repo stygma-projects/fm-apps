@@ -10,24 +10,27 @@
       >
         <template #header>
           <div class="flex flex-wrap gap-2 items-center justify-between">
-            <h1 class="text-2xl font-bold mb-0 dark:text-white">{{ t('ingredientCategories.title') }}</h1>
+            <h1 class="text-2xl font-bold mb-0">{{ t('ingredientCategories.title') }}</h1>
             <div class="flex items-center">
-              <span class="p-input-icon-left">
-                <i class="pi pi-search" />
-                <PrimeInputText v-model="filters['global'].value" :placeholder="t('ingredientCategories.searchPlaceholder')" class="dark:bg-gray-700 dark:text-white" />
-              </span>
+              <div>
+              <PrimeIconField>
+                <PrimeInputIcon>
+                  <i class="pi pi-search" />
+                </PrimeInputIcon>
+                  <PrimeInputText
+                    v-model="filters['global'].value"
+                    :placeholder="t('ingredientCategories.searchPlaceholder')"
+                  />
+                </PrimeIconField>
+              </div>
               <PrimeButton class="mr-3 ml-3" :label="t('ingredientCategories.actions.new')" outlined rounded @click="openNew">
                 <template #icon>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="p-button-icon w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                  </svg>
+                  <i class="pi pi-plus" style="font-size: 1.2rem;" />
                 </template>
               </PrimeButton>
               <PrimeButton :label="t('ingredientCategories.actions.delete')" outlined rounded severity="danger" :disabled="!selectedCategories || !selectedCategories.length" @click="confirmDeleteSelected">
                 <template #icon>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                  </svg>
+                  <i class="pi pi-times" style="font-size: 1.2rem;" />
                 </template>
               </PrimeButton>
             </div>
@@ -43,23 +46,19 @@
         <PrimeColumn :header="t('ingredientCategories.table.imageUrl')" style="min-width: 12rem">
           <template #body="slotProps">
             <img v-if="slotProps.data.imageUrl" :src="slotProps.data.imageUrl" :alt="slotProps.data.label" class="rounded shadow-sm" style="width: 96px; height: 96px; object-fit: cover;" />
-            <span v-else class="text-gray-500 dark:text-gray-400">{{ t('ingredientCategories.table.noImage') }}</span>
+            <span v-else>{{ t('ingredientCategories.table.noImage') }}</span>
           </template>
         </PrimeColumn>
         <PrimeColumn :exportable="false" :header="t('ingredientCategories.table.action')">
           <template #body="slotProps">
             <PrimeButton outlined rounded class="mr-2" @click="editCategory(slotProps.data)">
               <template #icon>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                </svg>
+                <i class="pi pi-pencil" style="font-size: 1.2rem;" />
               </template>
             </PrimeButton>
             <PrimeButton outlined rounded severity="danger" @click="confirmDeleteCategory(slotProps.data)">
               <template #icon>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
+                <i class="pi pi-times-circle" style="font-size: 1.2rem;" />
               </template>
             </PrimeButton>
           </template>
@@ -75,13 +74,12 @@
         </div>  
 
         <div class="field">
-          <label for="name" class="font-medium dark:text-white mb-2 block">{{ t('ingredientCategories.table.name') }}</label>
-          <PrimeInputText id="name" v-model.trim="category.label" required autofocus :class="{'p-invalid': submitted && !category.label}" class="w-full"/>
-          <small v-if="submitted && !category.label" class="p-error" >{{ t('ingredientCategories.validations.nameRequired') }}</small>
+          <label for="name" class="font-medium mb-2 block">{{ t('ingredientCategories.table.name') }}</label>
+          <PrimeInputText id="name" v-model.trim="category.label" required autofocus class="w-full" />
         </div>
 
         <div class="field">
-          <label for="imageUrl" class="dark:text-white mb-2 block">{{ t('ingredientCategories.table.imageUrl') }}</label>
+          <label for="imageUrl" class="mb-2 block">{{ t('ingredientCategories.table.imageUrl') }}</label>
           <PrimeInputText id="imageUrl" v-model="category.imageUrl" class="w-full" />
         </div>
       </div>
@@ -97,7 +95,7 @@
     <PrimeDialog v-model:visible="deleteCategoryDialog" :style="{ width: '450px' }" header="Confirmation de la suppression" :modal="true">
       <div class="flex items-center justify-center gap-4">
         <div>
-          <p class="mt-2 dark:text-gray-300">{{ t('ingredientCategories.dialogs.confirmDeleteSingle') }}<span class="font-bold">{{ category.label }}</span> ?</p>
+          <p class="mt-2">{{ t('ingredientCategories.dialogs.confirmDeleteSingle') }}<span class="font-bold">{{ category.label }}</span> ?</p>
         </div>
       </div>
       <template #footer>
@@ -111,7 +109,7 @@
     <PrimeDialog v-model:visible="deleteCategoriesDialog" :style="{ width: '450px' }" :header="t('ingredientCategories.dialogs.confirmDeleteTitle')" :modal="true">
       <div class="flex items-center justify-center gap-4">
         <div>
-          <p class="mt-2 dark:text-gray-300">{{ t('ingredientCategories.dialogs.confirmDeleteMultiple') }}</p>
+          <p class="mt-2">{{ t('ingredientCategories.dialogs.confirmDeleteMultiple') }}</p>
         </div>
       </div>
       <template #footer>
@@ -128,7 +126,9 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useFetchIngredientCategories, useUpdateIngredientCategory, useDeleteIngredientCategory, useCreateIngredientCategory, useDeleteManyIngredientCategory } from '../composables/ingredientCategory.composable';
+import { useToast } from 'primevue';
 
+const toast = useToast();
 const { t } = useI18n();
 const { data } = useFetchIngredientCategories();
 const updateCategory = useUpdateIngredientCategory();
@@ -177,8 +177,24 @@ const editCategory = (editCategory) => {
 
 const saveCategory = async () => {
   submitted.value = true;
-  if (!category.value.label) return;
+  if (!category.value.label) {
+    return toast.add({
+      severity: 'error',
+      summary: 'Erreur',
+      detail: t('ingredientCategories.error.nameRequired'),
+      life: 3000
+    });
+  } else if (category.value.imageUrl.length > 255) {
+    return toast.add({
+      severity: 'error',
+      summary: 'Erreur',
+      detail: t('ingredientCategories.error.imageUrlLength'),
+      life: 3000
+    });
+  }
+
   const payload = {
+    id: category.value.id,
     label: category.value.label,
     imageUrl: category.value.imageUrl || ''
   };
@@ -188,6 +204,7 @@ const saveCategory = async () => {
   } else {
     await createCategory.mutateAsync(payload);
   }
+
   categoryDialog.value = false;
   window.location.reload();
 };
@@ -218,6 +235,4 @@ const deleteSelectedCategories = async () => {
 
   window.location.reload();
 };
-
-
 </script>

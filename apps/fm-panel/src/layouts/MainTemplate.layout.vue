@@ -41,6 +41,7 @@
 
       <div class="flex-grow p-8 overflow-y-auto">
         <router-view />
+        <Toast />
       </div>
     </div>
   </div>
@@ -49,6 +50,7 @@
 <script lang="ts" setup>
 import {ref} from 'vue'
 import {useI18n} from 'vue-i18n'
+import Toast from 'primevue/toast';
 
 const { t } = useI18n()
 

@@ -31,8 +31,9 @@ export const fr = {
       confirmDeleteMultiple:
         "Êtes-vous sûr de vouloir supprimer ces catégorie d'ingrédient ?",
     },
-    validations: {
+    error: {
       nameRequired: 'Le nom est requis.',
+      imageUrlLength: "L'URL de l'image doit contenir au maximum 255 caractères."
     },
     buttons: {
       yes: 'Oui',
