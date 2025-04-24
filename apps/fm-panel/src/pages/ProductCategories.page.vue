@@ -1,9 +1,9 @@
 <template>
-  <div class="dark:text-white">
-
+  <div>
+    {{ fr.inventory.productCategory.toolBar.newButton }}
       <PrimeToolbar class="mb-6">
           <template #start>
-              <PrimeButton label="New" icon="pi pi-plus" class="mr-2" @click="startCreation"></PrimeButton>
+              <PrimeButton :label="t.inventory.productCategory.toolBar.newButton" icon="pi pi-plus" class="mr-2" @click="startCreation">{{ fr.inventory.productCategory.table.headers.label }}</PrimeButton>
           </template>
           <template #end>
             <div class="flex flex-wrap gap-2 items-center justify-between">
@@ -35,7 +35,7 @@
         >
           <PrimeColumn v-for="(column, index) in Object.keys(mappedProductCategory[0] || {})" :key="index" :field="column" :header="column" style="width: 35%">
             <template #body="rowData">
-              <img v-if="column === 'imageUrl'" :src="rowData.data[column]" :alt="'No Image ?'" class="rounded" style="width: 128px" />
+              <img v-if="column === 'imageUrl'" :src="rowData.data[column]" alt="" class="rounded" style="width: 128px" />
               <span v-else>
                 {{ rowData.data[column] }}
               </span>
@@ -110,6 +110,7 @@
 </template>
 
 <script lang="ts" setup>
+import {useI18n} from 'vue-i18n'
 import { ref } from 'vue'
 import { computed } from 'vue'
 import { FilterMatchMode } from '@primevue/core/api';
@@ -121,7 +122,9 @@ interface ProductCategory {
   imageUrl: string
 }
 
-const { data:productCategories } = useFetchProductCategories()
+const { t } = useI18n()
+
+const { data:productCategories, refetch } = useFetchProductCategories()
 const { mutate:updateProductCategories } = useUpdateProductCategories()
 const { mutate:deleteProductCategory} = useDeleteProductCategory()
 const { mutate:createProductCategory} = useCreateProductCategory()
@@ -130,6 +133,7 @@ const filters = ref({
     'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
     'label': {value: null, matchMode: FilterMatchMode.CONTAINS},
 });
+
 
 const mappedProductCategory = computed(()=>{
   if (!productCategories.value) return []
@@ -173,13 +177,10 @@ function startEdition(product:ProductCategory) {
   isUpdateDialogOpen.value = true
 }
 
-function editProduct() {
-  updateProductCategories({id : currentCategoryProductId.value, ...editableProduct.value})
+async function editProduct() {
+  await updateProductCategories({id : currentCategoryProductId.value, ...editableProduct.value})
   isUpdateDialogOpen.value = false
-  // const response = useFetchProductCategories()
-  // if (response.data){
-  //   productCategories.value = response.data;
-  // }
+  refetch.value()
 }
 
 function startDeletion(product: ProductCategory){
