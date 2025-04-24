@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/styles/index.css'
+import 'primeicons/primeicons.css'
 import { createPinia } from 'pinia'
 import { router } from './router.ts'
 import PrimeVue from 'primevue/config'
@@ -27,7 +28,9 @@ app.use(i18n)
 app.use(PrimeVue, {
   theme: {
     preset: Aura,
-    darkMode: false,
+    options: {
+      darkModeSelector: false,
+    },
   },
 })
 
