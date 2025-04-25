@@ -4,9 +4,9 @@
       <PrimeDataTable
         ref="dt"
         v-model:selection="selectedCategories"
+        :filters="filters"
         :value="data"
         data-key="id"
-        :filters="filters"
       >
         <template #header>
           <div class="flex flex-wrap gap-2 items-center justify-between">
@@ -26,8 +26,8 @@
                 </PrimeIconField>
               </div>
               <PrimeButton
-                class="mr-3 ml-3"
                 :label="t('ingredientCategories.actions.new')"
+                class="mr-3 ml-3"
                 outlined
                 rounded
                 @click="openNew"
@@ -37,11 +37,11 @@
                 </template>
               </PrimeButton>
               <PrimeButton
+                :disabled="!selectedCategories || !selectedCategories.length"
                 :label="t('ingredientCategories.actions.delete')"
                 outlined
                 rounded
                 severity="danger"
-                :disabled="!selectedCategories || !selectedCategories.length"
                 @click="confirmDeleteSelected"
               >
                 <template #icon>
@@ -53,13 +53,13 @@
         </template>
 
         <PrimeColumn
+          :exportable="false"
           selection-mode="multiple"
           style="width: 3rem"
-          :exportable="false"
         ></PrimeColumn>
         <PrimeColumn
-          field="label"
           :header="t('ingredientCategories.table.name')"
+          field="label"
           sortable
           style="min-width: 12rem"
         >
@@ -74,8 +74,8 @@
           <template #body="slotProps">
             <img
               v-if="slotProps.data.imageUrl"
-              :src="slotProps.data.imageUrl"
               :alt="slotProps.data.label"
+              :src="slotProps.data.imageUrl"
               class="rounded shadow-sm"
               style="width: 96px; height: 96px; object-fit: cover"
             />
@@ -88,9 +88,9 @@
         >
           <template #body="slotProps">
             <PrimeButton
+              class="mr-2"
               outlined
               rounded
-              class="mr-2"
               @click="editCategory(slotProps.data)"
             >
               <template #icon>
@@ -114,17 +114,17 @@
 
     <PrimeDialog
       v-model:visible="categoryDialog"
-      :style="{ width: '450px' }"
       :header="t('ingredientCategories.dialogs.detailsTitle')"
       :modal="true"
+      :style="{ width: '450px' }"
       class="p-fluid"
     >
       <div class="flex flex-col gap-4">
         <div class="flex justify-center mb-2">
           <img
             v-if="category.imageUrl"
-            :src="category.imageUrl"
             :alt="category.label"
+            :src="category.imageUrl"
             class="rounded shadow-md"
             style="width: 250px; height: 200px; object-fit: cover"
           />
@@ -132,20 +132,20 @@
         </div>
 
         <div class="field">
-          <label for="name" class="font-medium mb-2 block">{{
+          <label class="font-medium mb-2 block" for="name">{{
             t('ingredientCategories.table.name')
           }}</label>
           <PrimeInputText
             id="name"
             v-model.trim="category.label"
-            required
             autofocus
             class="w-full"
+            required
           />
         </div>
 
         <div class="field">
-          <label for="imageUrl" class="mb-2 block">{{
+          <label class="mb-2 block" for="imageUrl">{{
             t('ingredientCategories.table.imageUrl')
           }}</label>
           <PrimeInputText
@@ -173,9 +173,9 @@
 
     <PrimeDialog
       v-model:visible="deleteCategoryDialog"
+      :modal="true"
       :style="{ width: '450px' }"
       header="Confirmation de la suppression"
-      :modal="true"
     >
       <div class="flex items-center justify-center gap-4">
         <div>
@@ -203,9 +203,9 @@
 
     <PrimeDialog
       v-model:visible="deleteCategoriesDialog"
-      :style="{ width: '450px' }"
       :header="t('ingredientCategories.dialogs.confirmDeleteTitle')"
       :modal="true"
+      :style="{ width: '450px' }"
     >
       <div class="flex items-center justify-center gap-4">
         <div>
@@ -236,13 +236,14 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import {
+  useCreateIngredientCategory,
+  useDeleteIngredientCategory,
+  useDeleteManyIngredientCategory,
   useFetchIngredientCategories,
   useUpdateIngredientCategory,
-  useDeleteIngredientCategory,
-  useCreateIngredientCategory,
-  useDeleteManyIngredientCategory,
 } from '../composables/ingredientCategory.composable'
 import { useToast } from 'primevue'
+import type { IngredientCategoryInput } from '../types/ingredientCategory.type.ts'
 
 const toast = useToast()
 const { t } = useI18n()
@@ -258,7 +259,7 @@ const filters = ref({
   global: { value: null, matchMode: 'contains' },
 })
 
-const selectedCategories = ref([])
+const selectedCategories = ref<IngredientCategoryInput[]>([])
 const dt = ref(null)
 
 const categoryDialog = ref(false)
@@ -267,14 +268,14 @@ const deleteCategoriesDialog = ref(false)
 
 const submitted = ref(false)
 
-const category = ref({
+const category = ref<IngredientCategoryInput>({
   id: '',
   label: '',
-  imageUrl: undefined,
+  imageUrl: '',
 })
 
 const openNew = () => {
-  category.value = {}
+  category.value = {} as IngredientCategoryInput
   isEditing.value = false
   submitted.value = false
   categoryDialog.value = true
@@ -285,7 +286,7 @@ const hideDialog = () => {
   submitted.value = false
 }
 
-const editCategory = (editCategory) => {
+const editCategory = (editCategory: IngredientCategoryInput) => {
   category.value = { ...editCategory }
   isEditing.value = true
   categoryDialog.value = true
@@ -306,7 +307,7 @@ const saveCategory = async () => {
     })
   }
 
-  const payload = {
+  const payload: IngredientCategoryInput = {
     id: category.value.id,
     label,
     imageUrl: imageUrl,
@@ -314,14 +315,15 @@ const saveCategory = async () => {
 
   try {
     if (isEditing.value && category.value.id) {
-      await updateCategory.mutateAsync({ id: category.value.id, ...payload })
+      await updateCategory.mutateAsync({ ...payload })
     } else {
       await createCategory.mutateAsync(payload)
     }
     categoryDialog.value = false
 
     await refetchCategories.value()
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     if (
       error &&
       error.message &&
@@ -347,13 +349,13 @@ const saveCategory = async () => {
   }
 }
 
-const confirmDeleteCategory = (categoryToDelete) => {
+const confirmDeleteCategory = (categoryToDelete: IngredientCategoryInput) => {
   category.value = categoryToDelete
   deleteCategoryDialog.value = true
 }
 
 const deleteCurrentCategory = async () => {
-  await deleteCategory.mutateAsync({ id: category.value.id })
+  await deleteCategory.mutate(category.value.id)
   deleteCategoryDialog.value = false
   await refetchCategories.value()
 }

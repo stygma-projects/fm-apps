@@ -40,7 +40,9 @@
     },
     "lint": {},
     "lint:fix": {},
-    "type-check": {},
+    "type-check": {
+      "dependsOn": ["^db:generate"]
+    },
     "clean": {
       "cache": false
     }
