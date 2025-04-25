@@ -111,15 +111,9 @@
       </PrimeDialog>
 
       <PrimeDialog v-model:visible="isDeleteManyDialogOpen" :header="t('productCategory.dialogs.deleteManyDialog.title')" :modal="true" class="w-[30rem]">
-        
-        <PrimeDataTable>
-          <PrimeColumn v-for="(column, index) in Object.keys(selectedProducts[0] || {}).filter(key => key !== 'id')" :key="index" :field="column" :header="t(`productCategory.table.headers.${column}`)" style="width: 35%">
-            <template #body="rowData">
-              <img v-if="column === 'imageUrl'" :src="rowData[column]" alt="" class="rounded" style="width: 128px" />
-              <span v-else>
-                {{rowData[column]}}
-              </span>
-            </template>
+        <PrimeDataTable
+        :value="selectedProducts">
+          <PrimeColumn v-for="(column, index) in Object.keys(selectedProducts[0] || {}).filter(key => key === 'label')" :key="index" :field="column" :header="t(`productCategory.table.headers.${column}`)" style="width: 35%">
           </PrimeColumn>
         </PrimeDataTable>
 
