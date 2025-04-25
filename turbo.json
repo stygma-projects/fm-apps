@@ -41,7 +41,7 @@
     "lint": {},
     "lint:fix": {},
     "type-check": {
-      "dependsOn": ["db:generate", "^db:generate"]
+      "dependsOn": ["db:generate", "^db:generate", "^build"]
     },
     "clean": {
       "cache": false
