@@ -8,33 +8,14 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AppSidebar: typeof import('./src/components/AppSidebar.vue')['default']
-    Button: typeof import('primevue/button')['default']
-    Menu: typeof import('primevue/menu')['default']
-    PButton: typeof import('primevue/button')['default']
     PrimeButton: typeof import('primevue/button')['default']
     PrimeColumn: typeof import('primevue/column')['default']
     PrimeDataTable: typeof import('primevue/datatable')['default']
     PrimeDialog: typeof import('primevue/dialog')['default']
-    PrimeDrawer: typeof import('primevue/drawer')['default']
-    PrimeDropdown: typeof import('primevue/dropdown')['default']
-    PrimeFileUpload: typeof import('primevue/fileupload')['default']
     PrimeIconField: typeof import('primevue/iconfield')['default']
     PrimeInputIcon: typeof import('primevue/inputicon')['default']
-    PrimeInputNumber: typeof import('primevue/inputnumber')['default']
     PrimeInputText: typeof import('primevue/inputtext')['default']
-    PrimeMenu: typeof import('primevue/menu')['default']
-    PrimeRadioButton: typeof import('primevue/radiobutton')['default']
-    PrimeSidebar: typeof import('primevue/sidebar')['default']
-    PrimeTextarea: typeof import('primevue/textarea')['default']
-    PrimeToolbar: typeof import('primevue/toolbar')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Sidebar: typeof import('primevue/sidebar')['default']
-    Toast: typeof import('primevue/toast')['default']
-    TopBar: typeof import('./src/components/TopBar.vue')['default']
-  }
-  export interface ComponentCustomProperties {
-    StyleClass: typeof import('primevue/styleclass')['default']
   }
 }

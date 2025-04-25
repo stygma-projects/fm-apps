@@ -1,5 +1,3 @@
-import { PrismaClient } from '@fm-apps/db'
-
-const prisma = new PrismaClient()
+import { prisma } from '@fm-apps/db'
 
 export default prisma
