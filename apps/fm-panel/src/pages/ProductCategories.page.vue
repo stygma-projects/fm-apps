@@ -122,11 +122,11 @@
           <PrimeButton label="Delete" icon="pi pi-check" @click="deleteManyProducts" />
         </template>
       </PrimeDialog>
-
   </div>
 </template>
 
 <script lang="ts" setup>
+
 import {useI18n} from 'vue-i18n'
 import { ref } from 'vue'
 import { computed } from 'vue'

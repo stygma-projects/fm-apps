@@ -8,7 +8,8 @@
     "declarationMap": true,
     "sourceMap": true,
     "module": "ESNext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "composite": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
