@@ -6,6 +6,7 @@ export const fr = {
       subCategories: {
         productCategories: 'Catégories de produits',
         ingredientCategories: "Catégories d'ingrédients",
+        ingredient: 'Ingrédients',
       },
     },
   },
@@ -41,5 +42,23 @@ export const fr = {
       no: 'Non',
     },
     searchPlaceholder: 'Rechercher...',
+  },
+  ingredients: {
+    title: 'Ingrédients',
+    table: {
+      label: "Nom d'ingrédient",
+      priceHt: 'Prix HT',
+      priceTtc: 'Prix TTC',
+      imageUrl: 'Image',
+      noImage: '',
+      action: 'Actions',
+      category: 'Catégorie',
+    },
+
+    search: {
+      searchPlaceholder: 'Rechercher...',
+      searchByName: 'Rechercher par le nom',
+      searchByPriceHt: 'Rechercher par le prix HT',
+    },
   },
 }

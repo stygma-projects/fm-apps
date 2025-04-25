@@ -15,7 +15,12 @@ declare module 'vue' {
     PrimeIconField: typeof import('primevue/iconfield')['default']
     PrimeInputIcon: typeof import('primevue/inputicon')['default']
     PrimeInputText: typeof import('primevue/inputtext')['default']
+    PrimeMenu: typeof import('primevue/menu')['default']
     PrimeMultiSelect: typeof import('primevue/multiselect')['default']
+    PrimeRadioButton: typeof import('primevue/radiobutton')['default']
+    PrimeSidebar: typeof import('primevue/sidebar')['default']
+    PrimeTextarea: typeof import('primevue/textarea')['default']
+    PrimeToolbar: typeof import('primevue/toolbar')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
