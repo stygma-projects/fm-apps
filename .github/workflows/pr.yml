@@ -12,6 +12,6 @@ jobs:
   build:
     uses: stygma-projects/.github/.github/workflows/build.yml@main
     with:
-      is_build: false
-      is_type_checked: false
+      is_build: true
+      is_type_checked: true
       is_tested: false
