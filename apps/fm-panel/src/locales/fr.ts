@@ -33,7 +33,8 @@ export const fr = {
     },
     error: {
       nameRequired: 'Le nom est requis.',
-      imageUrlLength: "L'L'URL de l'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte."
+      imageUrlLength:
+        "L'L'URL de l'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte.",
     },
     buttons: {
       yes: 'Oui',
@@ -41,32 +42,33 @@ export const fr = {
     },
     searchPlaceholder: 'Rechercher...',
   },
-  inventory:{
-    productCategory:{
-      table:{
-        headers:{
-          label:'Nom',
-          imageUrl : 'Image',
-        }
+  productCategory: {
+    table: {
+      headers: {
+        label: 'Nom',
+        imageUrl: 'Image',
       },
-      toolBar:{
-        searchPlaceholder: 'Rechercher',
-        addButton : 'Nouvelle catégorie',
-        deleteManyButton : 'Supprimer',
+    },
+    toolBar: {
+      searchPlaceholder: 'Rechercher',
+      addButton: 'Nouvelle catégorie',
+      deleteManyButton: 'Supprimer',
+    },
+    title: 'Catégories de produits',
+    dialogs: {
+      editDialog: {
+        title: 'Modification de la catégorie de produit',
       },
-      title: 'Catégories de produits',
-      dialogs: {
-        editDialog: {
-          title : 'Modification de la catégorie de produit',
-        },
-        deleteDialog: {
-          title : 'Confirmation de la suppression',
-          message : 'Êtes-vous sûr de vouloir supprimer ?',
-        },
-        createDialog: {
-          title : 'Nouvelle catégorie de produit',
-        },
-      }
-    }
-  }
+      deleteDialog: {
+        title: 'Confirmation de la suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer ?',
+      },
+      createDialog: {
+        title: 'Nouvelle catégorie de produit',
+      },
+      deleteManyDialog: {
+        title: 'Confirmation de la suppression',
+      },
+    },
+  },
 }

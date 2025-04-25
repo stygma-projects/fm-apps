@@ -20,7 +20,7 @@ export const ingredientCategoryRouter = router({
     .input(
       z.object({
         label: z.string().min(2),
-        imageUrl: z.string().optional().nullable()
+        imageUrl: z.string().optional().nullable(),
       }),
     )
     .mutation(async ({ input }) => {

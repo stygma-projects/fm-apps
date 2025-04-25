@@ -8,7 +8,7 @@ export const useFetchProductCategories = () => {
   )
 }
 
-export const useUpdateProductCategories = () => {
+export const useUpdateProductCategory = () => {
   return useMutation(
     'updateProductCategories',
     (productCategory: ProductCategory) =>
@@ -27,5 +27,11 @@ export const useCreateProductCategory = () => {
     'createProductCategory',
     (a: { label: string; imageUrl: string | null }) =>
       trpc.inventory.productCategory.create.mutate(a),
+  )
+}
+
+export const useDeleteManyProductCategories = () => {
+  return useMutation('deleteManyProductCategories', (a: string[]) =>
+    trpc.inventory.productCategory.deleteMany.mutate(a),
   )
 }

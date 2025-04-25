@@ -3,7 +3,7 @@
       <PrimeToolbar class="mb-6">
           <template #start>
               <h1 class="text-2xl font-bold">
-                  {{ t('inventory.productCategory.title') }}
+                  {{ t('productCategory.title') }}
               </h1>
           </template>
           <template #end>
@@ -12,10 +12,10 @@
                     <PrimeInputIcon>
                         <i class="pi pi-search" />
                     </PrimeInputIcon>
-                    <PrimeInputText v-model="filters['label'].value" :placeholder="t('inventory.productCategory.toolBar.searchPlaceholder')" />
+                    <PrimeInputText v-model="filters['label'].value" :placeholder="t('productCategory.toolBar.searchPlaceholder')" />
                 </PrimeIconField>
-                <PrimeButton :label="t('inventory.productCategory.toolBar.addButton')" icon="pi pi-plus" class="mr-2" @click="startCreation"></PrimeButton>
-                <!-- <PrimeButton :hidden="areManySelected" :label="t('inventory.productCategory.toolBar.deleteManyButton')" icon="pi pi-trash" severity="danger" @click="startCreation"></PrimeButton> -->
+                <PrimeButton :hidden="Array.isArray(selectedProducts) && selectedProducts.length>0" :label="t('productCategory.toolBar.addButton')" icon="pi pi-plus" class="mr-2" @click="startCreation"></PrimeButton>
+                <PrimeButton :hidden="!selectedProducts || !selectedProducts.length" :label="t('productCategory.toolBar.deleteManyButton')" icon="pi pi-trash" severity="danger" @click="startDeletionMany"></PrimeButton>
             </div>
           </template>
       </PrimeToolbar>
@@ -36,8 +36,8 @@
             }
           }"
         >
-          <!-- <PrimeColumn selectionMode="multiple" style="width: 3rem" :exportable="false"></PrimeColumn> -->
-          <PrimeColumn v-for="(column, index) in Object.keys(mappedProductCategory[0] || {})" :key="index" :field="column" :header="t(`inventory.productCategory.table.headers.${column}`)" style="width: 35%">
+          <PrimeColumn selection-mode="multiple" style="width: 3rem" :exportable="false"></PrimeColumn>
+          <PrimeColumn v-for="(column, index) in Object.keys(mappedProductCategory[0] || {})" :key="index" :field="column" :header="t(`productCategory.table.headers.${column}`)" style="width: 35%">
             <template #body="rowData">
               <img v-if="column === 'imageUrl'" :src="rowData.data[column]" alt="" class="rounded" style="width: 128px" />
               <span v-else>
@@ -54,14 +54,14 @@
         </PrimeDataTable>
       </table>
 
-      <PrimeDialog v-model:visible="isUpdateDialogOpen" :header="t('inventory.productCategory.dialogs.editDialog.title')" :modal="true" class="w-[30rem]">
+      <PrimeDialog v-model:visible="isUpdateDialogOpen" :header="t('productCategory.dialogs.editDialog.title')" :modal="true" class="w-[30rem]">
         <div class="flex flex-col gap-4">
           <div>
-            <label class="block mb-1">{{t('inventory.productCategory.table.headers.label')}}</label>
+            <label class="block mb-1">{{t('productCategory.table.headers.label')}}</label>
             <PrimeInputText v-model="editableProduct.label" class="w-full" />
           </div>
           <div>
-            <label class="block mb-1">{{t('inventory.productCategory.table.headers.imageUrl')}}</label>
+            <label class="block mb-1">{{t('productCategory.table.headers.imageUrl')}}</label>
             <PrimeInputText v-model="editableProduct.imageUrl" class="w-full" />
           </div>
         </div>
@@ -72,15 +72,15 @@
         </template>
       </PrimeDialog>
 
-      <PrimeDialog v-model:visible="isDeleteDialogOpen" :header="t('inventory.productCategory.dialogs.deleteDialog.title')" :modal="true" class="w-[30rem]">
+      <PrimeDialog v-model:visible="isDeleteDialogOpen" :header="t('productCategory.dialogs.deleteDialog.title')" :modal="true" class="w-[30rem]">
         <div class="flex flex-col gap-4">
-          <h1 class="block mb-1">{{t('inventory.productCategory.dialogs.deleteDialog.message')}}</h1>
+          <h1 class="block mb-1">{{t('productCategory.dialogs.deleteDialog.message')}}</h1>
           <div>
-            <label class="block mb-1">{{t('inventory.productCategory.table.headers.label')}}</label>
+            <label class="block mb-1">{{t('productCategory.table.headers.label')}}</label>
             <label class="w-full">{{ deletableProduct.label }}</label>
           </div>
           <div>
-            <label class="block mb-1">{{t('inventory.productCategory.table.headers.imageUrl')}}</label>
+            <label class="block mb-1">{{t('productCategory.table.headers.imageUrl')}}</label>
             <img :src="deletableProduct.imageUrl" :alt="'No Image ?'" class="rounded" style="width: 64px" />
           </div>
         </div>
@@ -92,14 +92,14 @@
       </PrimeDialog>
 
       
-      <PrimeDialog v-model:visible="isCreationDialogOpen" :header="t('inventory.productCategory.dialogs.editDialog.title')" :modal="true" class="w-[30rem]">
+      <PrimeDialog v-model:visible="isCreationDialogOpen" :header="t('productCategory.dialogs.createDialog.title')" :modal="true" class="w-[30rem]">
         <div class="flex flex-col gap-4">
           <div>
-            <label class="block mb-1">{{t('inventory.productCategory.table.headers.label')}}</label>
+            <label class="block mb-1">{{t('productCategory.table.headers.label')}}</label>
             <PrimeInputText v-model="creatableProduct.label" class="w-full" />
           </div>
           <div>
-            <label class="block mb-1">{{t('inventory.productCategory.table.headers.imageUrl')}}</label>
+            <label class="block mb-1">{{t('productCategory.table.headers.imageUrl')}}</label>
             <PrimeInputText v-model="creatableProduct.imageUrl" class="w-full" />
           </div>
         </div>
@@ -110,24 +110,24 @@
         </template>
       </PrimeDialog>
 
-      <!-- <PrimeDialog v-model:visible="isdeleteProductsDialogOpen" :header="t('inventory.productCategory.dialogs.editDialog.title')" :modal="true" class="w-[30rem]">
-        <div class="flex flex-col gap-4">
-          <h1 class="block mb-1">{{t('inventory.productCategory.dialogs.deleteDialog.message')}}</h1>
-          <div>
-            <label class="block mb-1">{{t('inventory.productCategory.table.headers.label')}}</label>
-            <label class="w-full">{{ deletableProduct.label }}</label>
-          </div>
-          <div>
-            <label class="block mb-1">{{t('inventory.productCategory.table.headers.imageUrl')}}</label>
-            <img :src="deletableProduct.imageUrl" :alt="'No Image ?'" class="rounded" style="width: 64px" />
-          </div>
-        </div>
+      <PrimeDialog v-model:visible="isDeleteManyDialogOpen" :header="t('productCategory.dialogs.deleteManyDialog.title')" :modal="true" class="w-[30rem]">
+        
+        <PrimeDataTable>
+          <PrimeColumn v-for="(column, index) in Object.keys(selectedProducts[0] || {}).filter(key => key !== 'id')" :key="index" :field="column" :header="t(`productCategory.table.headers.${column}`)" style="width: 35%">
+            <template #body="rowData">
+              <img v-if="column === 'imageUrl'" :src="rowData[column]" alt="" class="rounded" style="width: 128px" />
+              <span v-else>
+                {{rowData[column]}}
+              </span>
+            </template>
+          </PrimeColumn>
+        </PrimeDataTable>
 
         <template #footer>
-          <PrimeButton label="Cancel" icon="pi pi-times" text @click="isDeleteDialogOpen = false" />
-          <PrimeButton label="Delete" icon="pi pi-check" @click="deleteProduct" />
+          <PrimeButton label="Cancel" icon="pi pi-times" text @click="isDeleteManyDialogOpen = false" />
+          <PrimeButton label="Delete" icon="pi pi-check" @click="deleteManyProducts" />
         </template>
-      </PrimeDialog> -->
+      </PrimeDialog>
 
   </div>
 </template>
@@ -137,7 +137,7 @@ import {useI18n} from 'vue-i18n'
 import { ref } from 'vue'
 import { computed } from 'vue'
 import { FilterMatchMode } from '@primevue/core/api';
-import { useFetchProductCategories, useUpdateProductCategories, useDeleteProductCategory, useCreateProductCategory} from '../composables/productCategory.composable'
+import { useFetchProductCategories, useUpdateProductCategory, useDeleteProductCategory, useCreateProductCategory, useDeleteManyProductCategories} from '../composables/productCategory.composable'
 
 interface ProductCategory {
   id: string,
@@ -148,15 +148,15 @@ interface ProductCategory {
 const { t } = useI18n()
 
 const { data:productCategories, refetch } = useFetchProductCategories()
-const { mutate:updateProductCategories } = useUpdateProductCategories()
+const { mutate:updateProductCategory } = useUpdateProductCategory()
 const { mutate:deleteProductCategory} = useDeleteProductCategory()
 const { mutate:createProductCategory} = useCreateProductCategory()
+const { mutate:deleteManyProductCategories } = useDeleteManyProductCategories()
 
 const filters = ref({
     'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
     'label': {value: null, matchMode: FilterMatchMode.CONTAINS},
 });
-
 
 const mappedProductCategory = computed(()=>{
   if (!productCategories.value) return []
@@ -173,17 +173,16 @@ const mappedProductCategory = computed(()=>{
 const isUpdateDialogOpen = ref(false)
 const isDeleteDialogOpen = ref(false)
 const isCreationDialogOpen = ref(false)
-//const areManySelected = ref(true)
-//const isdeleteProductsDialogOpen = ref(false)
+const isDeleteManyDialogOpen = ref(false)
 
 const currentCategoryProductId = ref('')
-//const selectedProducts = ref();
+const selectedProducts = ref();
 
 // Pour stocker le produit à éditer
 const editableProduct = ref({
   label : '',
   imageUrl : ''
-}) //productCategories.value[0]
+})
 
 // Pour stocker le produit à supprimer
 const deletableProduct = ref({
@@ -204,7 +203,7 @@ function startEdition(product:ProductCategory) {
 }
 
 async function editProduct() {
-  await updateProductCategories({id : currentCategoryProductId.value, ...editableProduct.value})
+  await updateProductCategory({id : currentCategoryProductId.value, ...editableProduct.value})
   isUpdateDialogOpen.value = false
   refetch.value()
 }
@@ -239,5 +238,15 @@ function createProduct(){
   createProductCategory(a)
   isCreationDialogOpen.value = false
 }
+
+const startDeletionMany = () => {
+  isDeleteManyDialogOpen.value = true
+}
+
+const deleteManyProducts = () => {
+  deleteManyProductCategories(selectedProducts.value.map((product: ProductCategory) => product.id))
+  isDeleteManyDialogOpen.value = false
+  selectedProducts.value = []
+};
 
 </script>

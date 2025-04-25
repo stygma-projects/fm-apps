@@ -54,4 +54,15 @@ export const productCategoryRouter = router({
         where: { id: input.id },
       })
     }),
+  deleteMany: publicProcedure
+    .input(z.array(z.string()))
+    .mutation(async ({ input }) => {
+      return await prisma.productCategory.deleteMany({
+        where: {
+          id: {
+            in: input,
+          },
+        },
+      })
+    }),
 })
