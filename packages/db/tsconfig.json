@@ -3,12 +3,7 @@
   "extends": "@fm-apps/toolkit/tsconfig.node",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "module": "CommonJS",
-    "moduleResolution": "node"
+    "rootDir": "./src"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

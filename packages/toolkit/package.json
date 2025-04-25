@@ -12,6 +12,7 @@
   "exports": {
     "./tsconfig.base": "./tsconfig.base.json",
     "./tsconfig.node": "./tsconfig.node.json",
+    "./tsconfig.web": "./tsconfig.web.json",
     "./eslint": "./eslint.config.js",
     "./prettier": "./prettier.config.js",
     "./commitlint": "./commitlint.config.js",
@@ -25,6 +26,7 @@
     "@eslint/js": "^9.24.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-vue": "^10.0.0",
-    "globals": "^16.0.0"
+    "globals": "^16.0.0",
+    "@vue/tsconfig": "^0.7.0"
   }
 }
