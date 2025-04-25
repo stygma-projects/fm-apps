@@ -1,18 +1,21 @@
 <template>
   <div>
-    {{ fr.inventory.productCategory.toolBar.newButton }}
       <PrimeToolbar class="mb-6">
           <template #start>
-              <PrimeButton :label="t.inventory.productCategory.toolBar.newButton" icon="pi pi-plus" class="mr-2" @click="startCreation">{{ fr.inventory.productCategory.table.headers.label }}</PrimeButton>
+              <h1 class="text-2xl font-bold">
+                  {{ t('inventory.productCategory.title') }}
+              </h1>
           </template>
           <template #end>
-            <div class="flex flex-wrap gap-2 items-center justify-between">
+            <div class="flex gap-2 items-center">
                 <PrimeIconField>
                     <PrimeInputIcon>
                         <i class="pi pi-search" />
                     </PrimeInputIcon>
-                    <PrimeInputText v-model="filters['label'].value" placeholder="Search..." /> <!-- v-model="filters['global'].value" -->
+                    <PrimeInputText v-model="filters['label'].value" :placeholder="t('inventory.productCategory.toolBar.searchPlaceholder')" />
                 </PrimeIconField>
+                <PrimeButton :label="t('inventory.productCategory.toolBar.addButton')" icon="pi pi-plus" class="mr-2" @click="startCreation"></PrimeButton>
+                <!-- <PrimeButton :hidden="areManySelected" :label="t('inventory.productCategory.toolBar.deleteManyButton')" icon="pi pi-trash" severity="danger" @click="startCreation"></PrimeButton> -->
             </div>
           </template>
       </PrimeToolbar>
@@ -33,7 +36,8 @@
             }
           }"
         >
-          <PrimeColumn v-for="(column, index) in Object.keys(mappedProductCategory[0] || {})" :key="index" :field="column" :header="column" style="width: 35%">
+          <!-- <PrimeColumn selectionMode="multiple" style="width: 3rem" :exportable="false"></PrimeColumn> -->
+          <PrimeColumn v-for="(column, index) in Object.keys(mappedProductCategory[0] || {})" :key="index" :field="column" :header="t(`inventory.productCategory.table.headers.${column}`)" style="width: 35%">
             <template #body="rowData">
               <img v-if="column === 'imageUrl'" :src="rowData.data[column]" alt="" class="rounded" style="width: 128px" />
               <span v-else>
@@ -41,7 +45,7 @@
               </span>
             </template>
           </PrimeColumn>
-          <PrimeColumn header="editeur">
+          <PrimeColumn>
             <template #body="rowData">
               <PrimeButton icon="pi pi-pencil" outlined rounded class="mr-2" @click="startEdition(rowData.data)" />
               <PrimeButton icon="pi pi-trash" outlined rounded severity="danger" @click="startDeletion(rowData.data)"/>
@@ -50,14 +54,14 @@
         </PrimeDataTable>
       </table>
 
-      <PrimeDialog v-model:visible="isUpdateDialogOpen" header="Edit Product" :modal="true" class="w-[30rem]">
+      <PrimeDialog v-model:visible="isUpdateDialogOpen" :header="t('inventory.productCategory.dialogs.editDialog.title')" :modal="true" class="w-[30rem]">
         <div class="flex flex-col gap-4">
           <div>
-            <label class="block mb-1">Label</label>
+            <label class="block mb-1">{{t('inventory.productCategory.table.headers.label')}}</label>
             <PrimeInputText v-model="editableProduct.label" class="w-full" />
           </div>
           <div>
-            <label class="block mb-1">Image URL</label>
+            <label class="block mb-1">{{t('inventory.productCategory.table.headers.imageUrl')}}</label>
             <PrimeInputText v-model="editableProduct.imageUrl" class="w-full" />
           </div>
         </div>
@@ -68,15 +72,15 @@
         </template>
       </PrimeDialog>
 
-      <PrimeDialog v-model:visible="isDeleteDialogOpen" header="Delete Product" :modal="true" class="w-[30rem]">
+      <PrimeDialog v-model:visible="isDeleteDialogOpen" :header="t('inventory.productCategory.dialogs.deleteDialog.title')" :modal="true" class="w-[30rem]">
         <div class="flex flex-col gap-4">
-          <h1 class="block mb-1">Are you sure you want to delete ?</h1>
+          <h1 class="block mb-1">{{t('inventory.productCategory.dialogs.deleteDialog.message')}}</h1>
           <div>
-            <label class="block mb-1">Label</label>
+            <label class="block mb-1">{{t('inventory.productCategory.table.headers.label')}}</label>
             <label class="w-full">{{ deletableProduct.label }}</label>
           </div>
           <div>
-            <label class="block mb-1">Image Url</label>
+            <label class="block mb-1">{{t('inventory.productCategory.table.headers.imageUrl')}}</label>
             <img :src="deletableProduct.imageUrl" :alt="'No Image ?'" class="rounded" style="width: 64px" />
           </div>
         </div>
@@ -88,14 +92,14 @@
       </PrimeDialog>
 
       
-      <PrimeDialog v-model:visible="isCreationDialogOpen" header="Create Product" :modal="true" class="w-[30rem]">
+      <PrimeDialog v-model:visible="isCreationDialogOpen" :header="t('inventory.productCategory.dialogs.editDialog.title')" :modal="true" class="w-[30rem]">
         <div class="flex flex-col gap-4">
           <div>
-            <label class="block mb-1">Label</label>
+            <label class="block mb-1">{{t('inventory.productCategory.table.headers.label')}}</label>
             <PrimeInputText v-model="creatableProduct.label" class="w-full" />
           </div>
           <div>
-            <label class="block mb-1">Image URL</label>
+            <label class="block mb-1">{{t('inventory.productCategory.table.headers.imageUrl')}}</label>
             <PrimeInputText v-model="creatableProduct.imageUrl" class="w-full" />
           </div>
         </div>
@@ -105,6 +109,25 @@
           <PrimeButton label="Create" icon="pi pi-check" @click="createProduct" />
         </template>
       </PrimeDialog>
+
+      <!-- <PrimeDialog v-model:visible="isdeleteProductsDialogOpen" :header="t('inventory.productCategory.dialogs.editDialog.title')" :modal="true" class="w-[30rem]">
+        <div class="flex flex-col gap-4">
+          <h1 class="block mb-1">{{t('inventory.productCategory.dialogs.deleteDialog.message')}}</h1>
+          <div>
+            <label class="block mb-1">{{t('inventory.productCategory.table.headers.label')}}</label>
+            <label class="w-full">{{ deletableProduct.label }}</label>
+          </div>
+          <div>
+            <label class="block mb-1">{{t('inventory.productCategory.table.headers.imageUrl')}}</label>
+            <img :src="deletableProduct.imageUrl" :alt="'No Image ?'" class="rounded" style="width: 64px" />
+          </div>
+        </div>
+
+        <template #footer>
+          <PrimeButton label="Cancel" icon="pi pi-times" text @click="isDeleteDialogOpen = false" />
+          <PrimeButton label="Delete" icon="pi pi-check" @click="deleteProduct" />
+        </template>
+      </PrimeDialog> -->
 
   </div>
 </template>
@@ -150,8 +173,11 @@ const mappedProductCategory = computed(()=>{
 const isUpdateDialogOpen = ref(false)
 const isDeleteDialogOpen = ref(false)
 const isCreationDialogOpen = ref(false)
+//const areManySelected = ref(true)
+//const isdeleteProductsDialogOpen = ref(false)
 
 const currentCategoryProductId = ref('')
+//const selectedProducts = ref();
 
 // Pour stocker le produit à éditer
 const editableProduct = ref({
