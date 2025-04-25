@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from 'vue-query'
 import { trpc } from '../api/trpc'
-import type { Ingredient } from '@fm-apps/db/src'
+import type { Ingredient } from '@fm-apps/db'
 
 export const useFetchIngredient = () => {
   return useQuery('ingredient', () => trpc.inventory.ingredient.list.query())

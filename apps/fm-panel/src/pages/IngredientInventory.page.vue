@@ -372,8 +372,9 @@ import {
   useDeleteManyIngredient,
 } from '../composables/ingredient.composable'
 import { useToast } from 'primevue'
-import type { IngredientInput } from '../types/ingredientCategory.type'
+import type { IngredientInput, IngredientWithCategory } from '../types/ingredientCategory.type'
 import { useFetchIngredientCategories } from '../composables/ingredientCategory.composable'
+import type { IngredientCategory } from '../../../../packages/db/generated/client'
 
 const toast = useToast()
 const { t } = useI18n()
@@ -394,7 +395,7 @@ const filters = ref({
 
 const categoriesOptions = computed(() => {
   const unique = new Map()
-  ;(data.value ?? []).forEach((ingredient) => {
+  ;(data.value ?? []).forEach((ingredient: IngredientWithCategory) => {
     if (ingredient.label && ingredient.category.label) {
       unique.set(ingredient.category.id, {
         name: ingredient.category.label,
@@ -406,7 +407,7 @@ const categoriesOptions = computed(() => {
 })
 
 const allCategoriesOptions = computed(() => {
-  return (ingredientCategories.value ?? []).map((category) => ({
+  return (ingredientCategories.value ?? []).map((category: IngredientCategory) => ({
     name: category.label,
     value: category.id,
   }))

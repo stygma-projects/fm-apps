@@ -4,6 +4,7 @@ import ProductCategoriesPage from './pages/ProductCategories.page.vue'
 import IngredientCategoriesPage from './pages/IngredientCategories.page.vue'
 import IngredientInventoryPage from './pages/IngredientInventory.page.vue'
 import ProductPage from './pages/ProductsInventory.page.vue'
+import IngredientInventoryPage from './pages/IngredientInventory.page.vue'
 
 const routes = [
   {
@@ -29,6 +30,9 @@ const routes = [
             path: 'products',
             component: ProductPage,
           },
+          { 
+            path: 'ingredient', 
+            component: IngredientInventoryPage },
         ],
       },
     ],
