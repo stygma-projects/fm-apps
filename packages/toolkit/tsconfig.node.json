@@ -1,4 +1,4 @@
-// packages/tsconfig/node.json
+// packages/ts/node.json
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Node.js",

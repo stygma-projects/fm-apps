@@ -1,4 +1,4 @@
-// apps/fm-api/tsconfig.json
+// apps/fm-api/ts.json
 {
   "extends": "@fm-apps/toolkit/tsconfig.node",
   "compilerOptions": {
