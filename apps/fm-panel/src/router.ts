@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MainTemplateLayout from './layouts/MainTemplate.layout.vue'
 import ProductCategoriesPage from './pages/ProductCategories.page.vue'
 import IngredientCategoriesPage from './pages/IngredientCategories.page.vue'
+import ProductPage from './pages/ProductsInventory.page.vue'
 
 const routes = [
   {
@@ -17,6 +18,10 @@ const routes = [
           {
             path: 'ingredient-categories',
             component: IngredientCategoriesPage,
+          },
+          {
+            path: 'products',
+            component: ProductPage,
           },
         ],
       },
