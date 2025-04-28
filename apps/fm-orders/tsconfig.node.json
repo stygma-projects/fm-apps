@@ -1,0 +1,7 @@
+{
+  "extends": "@fm-apps/toolkit/tsconfig.node",
+  "compilerOptions": {
+    "rootDir": "."
+  },
+  "include": ["vite.config.ts"]
+}
