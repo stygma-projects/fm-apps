@@ -54,7 +54,20 @@ export const fr = {
       action: 'Actions',
       category: 'Catégorie',
     },
-
+    actions: {
+      new: 'Nouveau',
+      delete: 'Supprimer',
+      edit: 'Modifier',
+      save: 'Enregistrer',
+      cancel: 'Annuler',
+    },
+    dialogs: {
+      detailsTitle: "Détails de l'ingrédient",
+      confirmDeleteTitle: 'Confirmation de la suppression',
+      confirmDeleteSingle: 'Êtes-vous sûr de vouloir supprimer : ',
+      confirmDeleteMultiple:
+        "Êtes-vous sûr de vouloir supprimer ces catégorie d'ingrédient ?",
+    },
     search: {
       searchPlaceholder: 'Rechercher...',
       searchByName: 'Rechercher par le nom',

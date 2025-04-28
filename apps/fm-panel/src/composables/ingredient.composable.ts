@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from 'vue-query'
 import { trpc } from '../api/trpc'
-import type { Ingredient } from '@fm-apps/db'
+import type { Ingredient } from '@fm-apps/db/src'
 
 export const useFetchIngredient = () => {
   return useQuery('ingredient', () => trpc.inventory.ingredient.list.query())
@@ -10,8 +10,12 @@ export const useUpdateIngredient = () => {
     trpc.inventory.ingredient.update.mutate({
       id: ingredientInput.id,
       label: ingredientInput.label,
-      priceExclTax: ingredientInput.priceExclTax,
-      priceIncludingTax: ingredientInput.priceIncludingTax,
+      priceExclTax: parseFloat(
+        ingredientInput.priceExclTax as unknown as string,
+      ),
+      priceIncludingTax: parseFloat(
+        ingredientInput.priceIncludingTax as unknown as string,
+      ),
       imageUrl: ingredientInput.imageUrl,
       categoryId: ingredientInput.categoryId,
     }),
@@ -22,16 +26,22 @@ export const useCreateIngredient = () => {
     if (!ingredientInput.label) throw new Error('Le label est requis')
     return trpc.inventory.ingredient.create.mutate({
       label: ingredientInput.label,
-      priceExclTax: ingredientInput.priceExclTax,
-      priceIncludingTax: ingredientInput.priceIncludingTax,
+      priceExclTax: parseFloat(
+        ingredientInput.priceExclTax as unknown as string,
+      ),
+      priceIncludingTax: parseFloat(
+        ingredientInput.priceIncludingTax as unknown as string,
+      ),
       imageUrl: ingredientInput.imageUrl,
       categoryId: ingredientInput.categoryId,
     })
   })
 }
 export const useDeleteIngredient = () => {
-  return useMutation((ingredientInput: Ingredient) =>
-    trpc.inventory.ingredient.delete.mutate(ingredientInput),
+  return useMutation((ingredientId: string) =>
+    trpc.inventory.ingredient.delete.mutate({
+      id: ingredientId,
+    }),
   )
 }
 export const useDeleteManyIngredient = () => {
