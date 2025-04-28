@@ -34,7 +34,7 @@ export const fr = {
     error: {
       nameRequired: 'Le nom est requis.',
       imageUrlLength:
-        "L'L'URL de l'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte.",
+        "L'URL de l'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte.",
     },
     buttons: {
       yes: 'Oui',
