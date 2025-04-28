@@ -20,7 +20,11 @@ export const productRouter = router({
     .input(
       z.object({
         label: z.string().min(2),
+        priceExclTax: z.number().min(0),
+        priceIncludingTax: z.number().min(0),
         imageUrl: z.string().optional(),
+        available: z.boolean().default(true),
+        categoryId: z.string(),
       }),
     )
     .mutation(async ({ input }) => {
@@ -33,7 +37,11 @@ export const productRouter = router({
       z.object({
         id: z.string(),
         label: z.string().min(2).optional(),
+        priceExclTax: z.number().min(0).optional(),
+        priceIncludingTax: z.number().min(0).optional(),
         imageUrl: z.string().optional(),
+        available: z.boolean().default(true).optional(),
+        categoryId: z.string().optional(),
       }),
     )
     .mutation(async ({ input }) => {
