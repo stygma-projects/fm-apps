@@ -1,7 +1,8 @@
 model Product {
   id          String                @id @default(uuid())
   label       String                @unique
-  price       Float
+  priceExclTax            Float
+  priceIncludingTax       Float
   imageUrl    String?
   available   Boolean               @default(true)
   categoryId  String
