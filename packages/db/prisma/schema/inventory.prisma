@@ -1,13 +1,14 @@
 model Product {
-  id          String                @id @default(uuid())
-  label       String                @unique
-  price       Float
-  imageUrl    String?
-  available   Boolean               @default(true)
-  categoryId  String
-  category    ProductCategory       @relation(fields: [categoryId], references: [id])
-  ingredients IngredientInProduct[]
-  Order       Order[]
+  id                      String                @id @default(uuid())
+  label                   String                @unique
+  priceExclTax            Float
+  priceIncludingTax       Float
+  imageUrl                String?
+  available               Boolean               @default(true)
+  categoryId              String
+  category                ProductCategory       @relation(fields: [categoryId], references: [id])
+  ingredients             IngredientInProduct[]
+  Order                   Order[]
 }
 
 model ProductCategory {

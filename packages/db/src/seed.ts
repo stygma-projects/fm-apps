@@ -90,6 +90,7 @@ async function main() {
     skipDuplicates: true,
   })
 }
+
 main()
   .catch(() => {
     process.exit(1)
