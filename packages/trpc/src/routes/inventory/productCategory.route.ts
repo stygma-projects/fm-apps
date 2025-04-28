@@ -20,7 +20,7 @@ export const productCategoryRouter = router({
     .input(
       z.object({
         label: z.string().min(2),
-        imageUrl: z.string().optional(),
+        imageUrl: z.string().optional().nullable(),
       }),
     )
     .mutation(async ({ input }) => {
@@ -33,7 +33,7 @@ export const productCategoryRouter = router({
       z.object({
         id: z.string(),
         label: z.string().min(2).optional(),
-        imageUrl: z.string().optional(),
+        imageUrl: z.string().optional().nullable(),
       }),
     )
     .mutation(async ({ input }) => {
@@ -52,6 +52,17 @@ export const productCategoryRouter = router({
     .mutation(async ({ input }) => {
       return await prisma.productCategory.delete({
         where: { id: input.id },
+      })
+    }),
+  deleteMany: publicProcedure
+    .input(z.array(z.string()))
+    .mutation(async ({ input }) => {
+      return await prisma.productCategory.deleteMany({
+        where: {
+          id: {
+            in: input,
+          },
+        },
       })
     }),
 })

@@ -42,4 +42,33 @@ export const fr = {
     },
     searchPlaceholder: 'Rechercher...',
   },
+  productCategory: {
+    table: {
+      headers: {
+        label: 'Nom',
+        imageUrl: 'Image',
+      },
+    },
+    toolBar: {
+      searchPlaceholder: 'Rechercher',
+      addButton: 'Nouvelle catégorie',
+      deleteManyButton: 'Supprimer',
+    },
+    title: 'Catégories de produits',
+    dialogs: {
+      editDialog: {
+        title: 'Modification de la catégorie de produit',
+      },
+      deleteDialog: {
+        title: 'Confirmation de la suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer ?',
+      },
+      createDialog: {
+        title: 'Nouvelle catégorie de produit',
+      },
+      deleteManyDialog: {
+        title: 'Confirmation de la suppression',
+      },
+    },
+  },
 }
