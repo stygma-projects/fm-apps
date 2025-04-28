@@ -1,16 +1,9 @@
-// apps/fm-api/tsconfig.json
+// apps/fm-api/ts.json
 {
   "extends": "@fm-apps/toolkit/tsconfig.node",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "composite": true
+    "rootDir": "src"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*"]
 }

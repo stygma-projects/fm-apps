@@ -5,6 +5,11 @@
     "build": {
       "dependsOn": ["^db:generate", "^build"]
     },
+    "preview": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^db:generate", "^build"]
+    },
     "dev": {
       "cache": false,
       "persistent": true,

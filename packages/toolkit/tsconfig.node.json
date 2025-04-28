@@ -1,11 +1,16 @@
-// packages/tsconfig/node.json
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Node.js",
+  "display": "Common Configuration",
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "module": "CommonJS",
-    "lib": ["es2020"],
-    "target": "ES2020"
-  }
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM"],
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
