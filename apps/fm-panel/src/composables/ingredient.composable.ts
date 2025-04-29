@@ -23,7 +23,6 @@ export const useUpdateIngredient = () => {
 }
 export const useCreateIngredient = () => {
   return useMutation((ingredientInput: Ingredient) => {
-    if (!ingredientInput.label) throw new Error('Le label est requis')
     return trpc.inventory.ingredient.create.mutate({
       label: ingredientInput.label,
       priceExclTax: parseFloat(

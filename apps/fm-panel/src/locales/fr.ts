@@ -61,6 +61,7 @@ export const fr = {
     },
     dialogs: {
       detailsTitle: "Détails de l'ingrédient",
+      editTitle: "Modification de l'ingrédient",
       confirmDeleteTitle: 'Confirmation de la suppression',
       confirmDeleteSingle: 'Êtes-vous sûr de vouloir supprimer : ',
       confirmDeleteMultiple: "Êtes-vous sûr de vouloir supprimer ces ingrédients ?",

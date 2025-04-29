@@ -124,17 +124,15 @@
         </template>
       </PrimeColumn>
 
-      <PrimeColumn
-        :header="t('ingredients.table.imageUrl')"
-        style="width: 110px"
-      >
+      <PrimeColumn :header="t('ingredients.table.imageUrl')">
         <template #body="ingredient">
-          <img
+          <PrimeImage
             v-if="ingredient.data.imageUrl"
             :src="ingredient.data.imageUrl"
             :alt="ingredient.data.label"
             class="rounded shadow-sm"
-            style="width: 92px; height: 92px; object-fit: cover"
+            style="width: 128px; height: 128px; object-fit: cover"
+            preview
           />
           <span v-else>{{ t('ingredients.table.noImage') }}</span>
         </template>
@@ -262,7 +260,7 @@
             t('ingredients.table.imageUrl')
           }}</label>
           <PrimeInputText
-            id="imageUrl"
+            id="priceIncludingTax"
             v-model="ingredient.imageUrl"
             class="w-full"
           />

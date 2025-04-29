@@ -8,17 +8,21 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    PrimeBadge: typeof import('primevue/badge')['default']
     PrimeButton: typeof import('primevue/button')['default']
     PrimeColumn: typeof import('primevue/column')['default']
     PrimeDataTable: typeof import('primevue/datatable')['default']
     PrimeDialog: typeof import('primevue/dialog')['default']
     PrimeDropdown: typeof import('primevue/dropdown')['default']
+    PrimeFileUpload: typeof import('primevue/fileupload')['default']
     PrimeIconField: typeof import('primevue/iconfield')['default']
     PrimeImage: typeof import('primevue/image')['default']
     PrimeInputIcon: typeof import('primevue/inputicon')['default']
     PrimeInputText: typeof import('primevue/inputtext')['default']
     PrimeMenu: typeof import('primevue/menu')['default']
+    PrimeMessage: typeof import('primevue/message')['default']
     PrimeMultiSelect: typeof import('primevue/multiselect')['default']
+    PrimeProgressBar: typeof import('primevue/progressbar')['default']
     PrimeRadioButton: typeof import('primevue/radiobutton')['default']
     PrimeSidebar: typeof import('primevue/sidebar')['default']
     PrimeTextarea: typeof import('primevue/textarea')['default']
