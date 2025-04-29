@@ -4,7 +4,6 @@ import ProductCategoriesPage from './pages/ProductCategories.page.vue'
 import IngredientCategoriesPage from './pages/IngredientCategories.page.vue'
 import IngredientInventoryPage from './pages/IngredientInventory.page.vue'
 import ProductPage from './pages/ProductsInventory.page.vue'
-import IngredientInventoryPage from './pages/IngredientInventory.page.vue'
 
 const routes = [
   {
@@ -16,16 +15,15 @@ const routes = [
         path: 'inventory',
         children: [
           { path: '', redirect: '/inventory/product-categories' },
-          { 
-            path: 'product-categories', 
-            component: ProductCategoriesPage 
+          {
+            path: 'product-categories',
+            component: ProductCategoriesPage,
           },
           {
             path: 'ingredient-categories',
             component: IngredientCategoriesPage,
           },
-          { path: 'ingredient', 
-            component: IngredientInventoryPage },
+          { path: 'ingredient', component: IngredientInventoryPage },
           {
             path: 'products',
             component: ProductPage,
