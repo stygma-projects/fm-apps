@@ -1,4 +1,9 @@
-import { PrismaClient } from '../generated/client'
+import {
+  OrderStatus,
+  OrderType,
+  PrismaClient,
+  WithdrawalMethod,
+} from '../generated/client'
 
 const prisma = new PrismaClient()
 
@@ -48,7 +53,7 @@ async function main() {
   const categories = await prisma.ingredientCategory.findMany()
 
   const getCategoryId = (label: string) => {
-    const cat = categories.find(c => c.label === label)
+    const cat = categories.find((c) => c.label === label)
     if (!cat) throw new Error(`Category "${label}" not found`)
     return cat.id
   }
@@ -58,36 +63,60 @@ async function main() {
     data: [
       {
         label: 'Bacon',
-        priceExclTax: 1.00,
-        priceIncludingTax: 1.20,
+        priceExclTax: 1.0,
+        priceIncludingTax: 1.2,
         categoryId: getCategoryId('Viande'),
       },
       {
         label: 'Cheddar',
-        priceExclTax: 0.80,
+        priceExclTax: 0.8,
         priceIncludingTax: 0.96,
         categoryId: getCategoryId('Fromage'),
       },
       {
         label: 'Salade',
-        priceExclTax: 0.30,
+        priceExclTax: 0.3,
         priceIncludingTax: 0.36,
         categoryId: getCategoryId('Légumes'),
       },
       {
         label: 'Pain doré',
-        priceExclTax: 0.50,
-        priceIncludingTax: 0.60,
+        priceExclTax: 0.5,
+        priceIncludingTax: 0.6,
         categoryId: getCategoryId('Pain'),
       },
       {
         label: 'Mayonnaise',
-        priceExclTax: 0.20,
+        priceExclTax: 0.2,
         priceIncludingTax: 0.24,
         categoryId: getCategoryId('Sauce'),
       },
     ],
     skipDuplicates: true,
+  })
+
+  // Insert Order
+  await prisma.order.createMany({
+    data: [
+      {
+        type: OrderType.PICKUP,
+        status: OrderStatus.DELIVERED,
+        withdrawalMethod: WithdrawalMethod.CASH,
+        price: 13.22,
+      },
+      {
+        type: OrderType.DELIVERY,
+        withdrawalMethod: WithdrawalMethod.CASH,
+        price: 7.27,
+      },
+      {
+        type: OrderType.TERMINALS,
+        status: OrderStatus.IN_PROGRESS,
+        withdrawalMethod: WithdrawalMethod.CARD,
+        terminalId: 1,
+        price: 10.0,
+      },
+    ],
   })
 }
 
