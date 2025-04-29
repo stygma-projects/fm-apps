@@ -6,6 +6,7 @@ export const fr = {
       subCategories: {
         productCategories: 'Catégories de produits',
         ingredientCategories: "Catégories d'ingrédients",
+        ingredient: 'Ingrédients',
       },
     },
   },
@@ -28,13 +29,11 @@ export const fr = {
       detailsTitle: "Détails de l'ingrédient",
       confirmDeleteTitle: 'Confirmation de la suppression',
       confirmDeleteSingle: 'Êtes-vous sûr de vouloir supprimer : ',
-      confirmDeleteMultiple:
-        "Êtes-vous sûr de vouloir supprimer ces catégorie d'ingrédient ?",
+      confirmDeleteMultiple: "Êtes-vous sûr de vouloir supprimer ces catégories d'ingrédients ?",
     },
     error: {
       nameRequired: 'Le nom est requis.',
-      imageUrlLength:
-        "L'URL de l'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte.",
+      imageUrlLength: "L'URL de l'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte.",
     },
     buttons: {
       yes: 'Oui',
@@ -42,7 +41,39 @@ export const fr = {
     },
     searchPlaceholder: 'Rechercher...',
   },
+  ingredients: {
+    title: 'Ingrédients',
+    table: {
+      label: "Nom d'ingrédient",
+      priceHt: 'Prix HT',
+      priceTtc: 'Prix TTC',
+      imageUrl: 'Image',
+      noImage: '',
+      action: 'Actions',
+      category: 'Catégorie',
+    },
+    actions: {
+      new: 'Nouveau',
+      delete: 'Supprimer',
+      edit: 'Modifier',
+      save: 'Enregistrer',
+      cancel: 'Annuler',
+    },
+    dialogs: {
+      detailsTitle: "Détails de l'ingrédient",
+      editTitle: "Modification de l'ingrédient",
+      confirmDeleteTitle: 'Confirmation de la suppression',
+      confirmDeleteSingle: 'Êtes-vous sûr de vouloir supprimer : ',
+      confirmDeleteMultiple: "Êtes-vous sûr de vouloir supprimer ces ingrédients ?",
+    },
+    search: {
+      searchPlaceholder: 'Rechercher...',
+      searchByName: 'Rechercher par le nom',
+      searchByPriceHt: 'Rechercher par le prix HT',
+    },
+  },
   productCategory: {
+    title: 'Catégories de produits',
     table: {
       headers: {
         label: 'Nom',
@@ -54,7 +85,6 @@ export const fr = {
       addButton: 'Nouvelle catégorie',
       deleteManyButton: 'Supprimer',
     },
-    title: 'Catégories de produits',
     dialogs: {
       editDialog: {
         title: 'Modification de la catégorie de produit',
@@ -71,4 +101,4 @@ export const fr = {
       },
     },
   },
-}
+};
