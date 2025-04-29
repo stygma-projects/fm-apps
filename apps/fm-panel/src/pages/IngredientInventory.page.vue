@@ -370,7 +370,10 @@ import {
   useDeleteManyIngredient,
 } from '../composables/ingredient.composable'
 import { useToast } from 'primevue'
-import type { IngredientInput, IngredientWithCategory } from '../types/ingredientCategory.type'
+import type {
+  IngredientInput,
+  IngredientWithCategory,
+} from '../types/ingredientCategory.type'
 import { useFetchIngredientCategories } from '../composables/ingredientCategory.composable'
 import type { IngredientCategory } from '../../../../packages/db/generated/client'
 
@@ -405,10 +408,12 @@ const categoriesOptions = computed(() => {
 })
 
 const allCategoriesOptions = computed(() => {
-  return (ingredientCategories.value ?? []).map((category: IngredientCategory) => ({
-    name: category.label,
-    value: category.id,
-  }))
+  return (ingredientCategories.value ?? []).map(
+    (category: IngredientCategory) => ({
+      name: category.label,
+      value: category.id,
+    }),
+  )
 })
 
 const selectedIngredients = ref<IngredientInput[]>([])

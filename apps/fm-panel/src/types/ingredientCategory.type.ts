@@ -1,4 +1,7 @@
-import type { Ingredient, IngredientCategory } from "../../../../packages/db/generated/client"
+import type {
+  Ingredient,
+  IngredientCategory,
+} from '../../../../packages/db/generated/client'
 
 export interface IngredientCategoryInput {
   id: string
@@ -13,5 +16,6 @@ export interface IngredientInput {
   imageUrl: string | null
   categoryId: string
 }
-export type IngredientWithCategory = Ingredient & { category: IngredientCategory }
-
+export type IngredientWithCategory = Ingredient & {
+  category: IngredientCategory
+}

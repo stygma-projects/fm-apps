@@ -30,9 +30,10 @@ const routes = [
             path: 'products',
             component: ProductPage,
           },
-          { 
-            path: 'ingredient', 
-            component: IngredientInventoryPage },
+          {
+            path: 'ingredient',
+            component: IngredientInventoryPage,
+          },
         ],
       },
     ],
