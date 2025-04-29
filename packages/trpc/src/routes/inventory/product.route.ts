@@ -26,7 +26,7 @@ export const productRouter = router({
         label: z.string().min(2),
         priceExclTax: z.number().min(0),
         priceIncludingTax: z.number().min(0),
-        imageUrl: z.string().optional(),
+        imageUrl: z.string().optional().nullable(),
         available: z.boolean().default(true),
         categoryId: z.string(),
       }),
