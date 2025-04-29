@@ -12,26 +12,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  firstName String
-  lastName  String
-  password  String
-  role      UserRole @default(CUSTOMER)
-  Order     Order[]
-}
-
-enum UserRole {
-  ADMIN
-  USER
-  CUSTOMER
-}
-
 model Order {
   id               String           @id @default(uuid())
-  userId           String
-  user             User             @relation(fields: [userId], references: [id])
   products         Product[]
   type             OrderType
   status           OrderStatus      @default(PENDING)
