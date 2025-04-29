@@ -20,7 +20,7 @@ const routes = [
             component: IngredientCategoriesPage,
           },
           {
-            path: 'products',
+            path: 'products-inventory',
             component: ProductPage,
           },
         ],

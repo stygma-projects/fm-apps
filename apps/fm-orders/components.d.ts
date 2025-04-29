@@ -8,14 +8,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    PrimeButton: typeof import('primevue/button')['default']
-    PrimeColumn: typeof import('primevue/column')['default']
-    PrimeDataTable: typeof import('primevue/datatable')['default']
-    PrimeDialog: typeof import('primevue/dialog')['default']
-    PrimeIconField: typeof import('primevue/iconfield')['default']
-    PrimeInputIcon: typeof import('primevue/inputicon')['default']
-    PrimeInputText: typeof import('primevue/inputtext')['default']
-    PrimeToolbar: typeof import('primevue/toolbar')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

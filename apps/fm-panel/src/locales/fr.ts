@@ -6,6 +6,7 @@ export const fr = {
       subCategories: {
         productCategories: 'Catégories de produits',
         ingredientCategories: "Catégories d'ingrédients",
+        productsInventory: 'Inventaire des produits',
       },
     },
   },
@@ -65,6 +66,41 @@ export const fr = {
       },
       createDialog: {
         title: 'Nouvelle catégorie de produit',
+      },
+      deleteManyDialog: {
+        title: 'Confirmation de la suppression',
+      },
+    },
+  },
+  productsInventory: {
+    table: {
+      headers: {
+        label: 'Nom',
+        imageUrl: 'Image',
+        priceExclTax: 'Prix HT',
+        priceIncludingTax: 'Prix TTC',
+        available: 'Disponible',
+        category: 'Catégorie',
+        categoryId: 'Catégorie',
+        ingredients: 'Ingrédients',
+      },
+    },
+    toolBar: {
+      searchPlaceholder: 'Rechercher',
+      addButton: 'Nouveau produit',
+      deleteManyButton: 'Supprimer',
+    },
+    title: 'Inventaire des produits',
+    dialogs: {
+      editDialog: {
+        title: 'Modification du produit',
+      },
+      deleteDialog: {
+        title: 'Confirmation de la suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer ?',
+      },
+      createDialog: {
+        title: 'Nouveau produit',
       },
       deleteManyDialog: {
         title: 'Confirmation de la suppression',

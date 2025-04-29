@@ -71,6 +71,10 @@ const menuItems = ref([
         label: t('sidebarMenu.inventory.subCategories.ingredientCategories'),
         to: 'ingredient-categories',
       },
+      {
+        label: t('sidebarMenu.inventory.subCategories.productsInventory'),
+        to: 'products-inventory',
+      },
     ],
   },
 ])
