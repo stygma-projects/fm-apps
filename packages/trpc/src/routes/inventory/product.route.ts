@@ -2,9 +2,9 @@ import { z } from 'zod'
 import prisma from '../../libs/prisma'
 import { publicProcedure, router } from '../../trpc'
 
-export const productCategoryRouter = router({
+export const productRouter = router({
   list: publicProcedure.query(async () => {
-    return await prisma.productCategory.findMany()
+    return await prisma.product.findMany()
   }),
   getById: publicProcedure
     .input(
@@ -14,17 +14,21 @@ export const productCategoryRouter = router({
     )
     .query(async ({ input }) => {
       const { id } = input
-      return await prisma.productCategory.findUnique({ where: { id } })
+      return await prisma.product.findUnique({ where: { id } })
     }),
   create: publicProcedure
     .input(
       z.object({
         label: z.string().min(2),
-        imageUrl: z.string().optional().nullable(),
+        priceExclTax: z.number().min(0),
+        priceIncludingTax: z.number().min(0),
+        imageUrl: z.string().optional(),
+        available: z.boolean().default(true),
+        categoryId: z.string(),
       }),
     )
     .mutation(async ({ input }) => {
-      return await prisma.productCategory.create({
+      return await prisma.product.create({
         data: input,
       })
     }),
@@ -33,12 +37,16 @@ export const productCategoryRouter = router({
       z.object({
         id: z.string(),
         label: z.string().min(2).optional(),
-        imageUrl: z.string().optional().nullable(),
+        priceExclTax: z.number().min(0).optional(),
+        priceIncludingTax: z.number().min(0).optional(),
+        imageUrl: z.string().optional(),
+        available: z.boolean().default(true).optional(),
+        categoryId: z.string().optional(),
       }),
     )
     .mutation(async ({ input }) => {
       const { id, ...data } = input
-      return await prisma.productCategory.update({
+      return await prisma.product.update({
         where: { id },
         data,
       })
@@ -50,14 +58,14 @@ export const productCategoryRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
-      return await prisma.productCategory.delete({
+      return await prisma.product.delete({
         where: { id: input.id },
       })
     }),
   deleteMany: publicProcedure
     .input(z.array(z.string()))
     .mutation(async ({ input }) => {
-      return await prisma.productCategory.deleteMany({
+      return await prisma.product.deleteMany({
         where: {
           id: {
             in: input,

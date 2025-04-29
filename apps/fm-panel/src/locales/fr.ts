@@ -29,13 +29,11 @@ export const fr = {
       detailsTitle: "Détails de l'ingrédient",
       confirmDeleteTitle: 'Confirmation de la suppression',
       confirmDeleteSingle: 'Êtes-vous sûr de vouloir supprimer : ',
-      confirmDeleteMultiple:
-        "Êtes-vous sûr de vouloir supprimer ces catégorie d'ingrédient ?",
+      confirmDeleteMultiple: "Êtes-vous sûr de vouloir supprimer ces catégories d'ingrédients ?",
     },
     error: {
       nameRequired: 'Le nom est requis.',
-      imageUrlLength:
-        "L'URL de l'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte.",
+      imageUrlLength: "L'URL de l'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte.",
     },
     buttons: {
       yes: 'Oui',
@@ -65,8 +63,7 @@ export const fr = {
       detailsTitle: "Détails de l'ingrédient",
       confirmDeleteTitle: 'Confirmation de la suppression',
       confirmDeleteSingle: 'Êtes-vous sûr de vouloir supprimer : ',
-      confirmDeleteMultiple:
-        "Êtes-vous sûr de vouloir supprimer ces catégorie d'ingrédient ?",
+      confirmDeleteMultiple: "Êtes-vous sûr de vouloir supprimer ces ingrédients ?",
     },
     search: {
       searchPlaceholder: 'Rechercher...',
@@ -74,4 +71,33 @@ export const fr = {
       searchByPriceHt: 'Rechercher par le prix HT',
     },
   },
-}
+  productCategory: {
+    title: 'Catégories de produits',
+    table: {
+      headers: {
+        label: 'Nom',
+        imageUrl: 'Image',
+      },
+    },
+    toolBar: {
+      searchPlaceholder: 'Rechercher',
+      addButton: 'Nouvelle catégorie',
+      deleteManyButton: 'Supprimer',
+    },
+    dialogs: {
+      editDialog: {
+        title: 'Modification de la catégorie de produit',
+      },
+      deleteDialog: {
+        title: 'Confirmation de la suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer ?',
+      },
+      createDialog: {
+        title: 'Nouvelle catégorie de produit',
+      },
+      deleteManyDialog: {
+        title: 'Confirmation de la suppression',
+      },
+    },
+  },
+};
