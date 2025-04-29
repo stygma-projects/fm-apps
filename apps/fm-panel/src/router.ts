@@ -25,7 +25,7 @@ const routes = [
           },
           { path: 'ingredient', component: IngredientInventoryPage },
           {
-            path: 'products',
+            path: 'products-inventory',
             component: ProductPage,
           },
           {
