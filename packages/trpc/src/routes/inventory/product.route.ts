@@ -4,11 +4,7 @@ import { publicProcedure, router } from '../../trpc'
 
 export const productRouter = router({
   list: publicProcedure.query(async () => {
-    return await prisma.product.findMany({
-      orderBy: {
-        label: 'asc',
-      },
-    })
+    return await prisma.product.findMany({ include: { ingredients: true } }) // include: { ingredients : true }
   }),
   getById: publicProcedure
     .input(
@@ -18,7 +14,10 @@ export const productRouter = router({
     )
     .query(async ({ input }) => {
       const { id } = input
-      return await prisma.product.findUnique({ where: { id } })
+      return await prisma.product.findUnique({
+        where: { id },
+        include: { ingredients: true },
+      })
     }),
   create: publicProcedure
     .input(
