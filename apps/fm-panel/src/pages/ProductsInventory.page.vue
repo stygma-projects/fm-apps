@@ -37,71 +37,74 @@
       </template>
     </PrimeToolbar>
 
-    <table>
-      <div class="flex flex-wrap gap-2 items-center justify-between">
-        <PrimeDataTable
-          ref="dt"
-          v-model:selection="selectedProducts"
-          :value="products"
-          data-key="id"
-          :filters="filters"
-          :pt="tableOptions"
+    <!-- v-if="products.length > 0"  -->
+    {{ products }}
+    <div class="flex flex-wrap gap-2 items-center justify-between">
+      <PrimeDataTable
+        ref="dt"
+        v-model:selection="selectedProducts"
+        :value="products"
+        data-key="id"
+        :filters="filters"
+        :pt="tableOptions"
+      >
+        <PrimeColumn
+          selection-mode="multiple"
+          style="width: 3rem"
+          :exportable="false"
+        ></PrimeColumn>
+        <PrimeColumn
+          v-for="(column, index) in Object.keys(products[0] || {}).filter(
+            (key) => key !== 'id',
+          )"
+          :key="index"
+          :field="column"
+          :header="t(`productsInventory.table.headers.${column}`)"
+          style="width: 15%"
         >
-          <PrimeColumn
-            selection-mode="multiple"
-            style="width: 3rem"
-            :exportable="false"
-          ></PrimeColumn>
-          <PrimeColumn
-            v-for="(column, index) in Object.keys(products[0] || {}).filter(
-              (key) => key !== 'id',
-            )"
-            :key="index"
-            :field="column"
-            :header="t(`productsInventory.table.headers.${column}`)"
-            style="width: 15%"
-          >
-            <template #body="rowData">
-              <img
-                v-if="column === 'imageUrl'"
-                :src="rowData.data[column]"
-                alt=""
-                class="rounded"
-                style="width: 128px"
-              />
-              <!-- <div v-else>
-                <div v-if="column === 'ingredients'">
-                  <div v-for="(ingredient, index) in rowData[column]" :key="index">
-                    {{ ingredient.label }}
-                  </div>
-                </div> -->
+          <template #body="rowData">
+            <img
+              v-if="column === 'imageUrl'"
+              :src="rowData.data[column]"
+              alt=""
+              class="rounded"
+              style="width: 128px"
+            />
+            <div v-else>
+              <div v-if="column === 'ingredients'">
+                <div
+                  v-for="(ingredient, index) in rowData[column]"
+                  :key="index"
+                >
+                  {{ ingredient.label }}
+                </div>
+              </div>
               <span v-else>
                 {{ rowData.data[column] }}
               </span>
-              <!-- </div> -->
-            </template>
-          </PrimeColumn>
-          <PrimeColumn>
-            <template #body="rowData">
-              <PrimeButton
-                icon="pi pi-pencil"
-                outlined
-                rounded
-                class="mr-2"
-                @click="startEdition(rowData.data)"
-              />
-              <PrimeButton
-                icon="pi pi-trash"
-                outlined
-                rounded
-                severity="danger"
-                @click="startDeletion(rowData.data)"
-              />
-            </template>
-          </PrimeColumn>
-        </PrimeDataTable>
-      </div>
-    </table>
+            </div>
+          </template>
+        </PrimeColumn>
+        <PrimeColumn>
+          <template #body="rowData">
+            <PrimeButton
+              icon="pi pi-pencil"
+              outlined
+              rounded
+              class="mr-2"
+              @click="startEdition(rowData.data)"
+            />
+            <PrimeButton
+              icon="pi pi-trash"
+              outlined
+              rounded
+              severity="danger"
+              @click="startDeletion(rowData.data)"
+            />
+          </template>
+        </PrimeColumn>
+      </PrimeDataTable>
+    </div>
 
     <PrimeDialog
       v-model:visible="isUpdateDialogOpen"
