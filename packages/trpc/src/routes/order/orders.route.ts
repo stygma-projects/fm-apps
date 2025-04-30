@@ -15,7 +15,18 @@ const withdrawalMethodEnum = z.enum([
 
 export const ordersRouter = router({
   list: publicProcedure.query(async () => {
-    return await prisma.order.findMany()
+    return await prisma.order.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        products: {
+          include: {
+            ingredients: true,
+          },
+        },
+      },
+    })
   }),
   getById: publicProcedure
     .input(
@@ -25,7 +36,16 @@ export const ordersRouter = router({
     )
     .query(async ({ input }) => {
       const { id } = input
-      return await prisma.order.findUnique({ where: { id } })
+      return await prisma.order.findUnique({
+        where: { id },
+        include: {
+          products: {
+            include: {
+              ingredients: true,
+            },
+          },
+        },
+      })
     }),
   create: publicProcedure
     .input(
