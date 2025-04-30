@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainTemplateLayout from './layouts/MainTemplate.layout.vue'
-import OrdersListPage from './pages/OrdersList.page.vue'
+import TerminalOrdersPage from './pages/TerminalOrders.page.vue'
+import DeliveryOrderPage from './pages/DeliveryOrder.page.vue'
+import PickUpOrderPage from './pages/PickupOrder.page.vue'
 
 const routes = [
   {
@@ -12,14 +14,17 @@ const routes = [
         path: 'orders',
         children: [
           { path: '', redirect: '/orders/terminal' },
-          { path: 'click-and-collect', component: OrdersListPage },
+          {
+            path: 'click-and-collect',
+            component: PickUpOrderPage,
+          },
           {
             path: 'delivery',
-            component: OrdersListPage,
+            component: DeliveryOrderPage,
           },
           {
             path: 'terminal',
-            component: OrdersListPage,
+            component: TerminalOrdersPage,
           },
         ],
       },
