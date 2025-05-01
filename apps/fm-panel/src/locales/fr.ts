@@ -29,11 +29,13 @@ export const fr = {
       detailsTitle: "Détails de l'ingrédient",
       confirmDeleteTitle: 'Confirmation de la suppression',
       confirmDeleteSingle: 'Êtes-vous sûr de vouloir supprimer : ',
-      confirmDeleteMultiple: "Êtes-vous sûr de vouloir supprimer ces catégories d'ingrédients ?",
+      confirmDeleteMultiple:
+        "Êtes-vous sûr de vouloir supprimer ces catégories d'ingrédients ?",
     },
     error: {
       nameRequired: 'Le nom est requis.',
-      imageUrlLength: "L'URL de l'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte.",
+      imageUrlLength:
+        "L'URL de l'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte.",
     },
     buttons: {
       yes: 'Oui',
@@ -64,7 +66,8 @@ export const fr = {
       editTitle: "Modification de l'ingrédient",
       confirmDeleteTitle: 'Confirmation de la suppression',
       confirmDeleteSingle: 'Êtes-vous sûr de vouloir supprimer : ',
-      confirmDeleteMultiple: "Êtes-vous sûr de vouloir supprimer ces ingrédients ?",
+      confirmDeleteMultiple:
+        'Êtes-vous sûr de vouloir supprimer ces ingrédients ?',
     },
     search: {
       searchPlaceholder: 'Rechercher...',
@@ -101,4 +104,4 @@ export const fr = {
       },
     },
   },
-};
+}
