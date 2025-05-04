@@ -1,3 +1,23 @@
+
+
+model Ingredient {
+  id                  String                @id @default(uuid())
+  label               String                @unique
+  priceExclTax        Float
+  priceIncludingTax   Float
+  imageUrl            String?
+  available           Boolean               @default(true)
+  category            IngredientCategory    @relation(fields: [categoryId], references: [id])
+  categoryId          String
+  IngredientInProduct IngredientInProduct[]
+}
+
+model IngredientCategory {
+  id          String       @id @default(uuid())
+  label       String       @unique
+  imageUrl    String?
+  ingredients Ingredient[]
+}
 model Product {
   id                      String                @id @default(uuid())
   label                   String                @unique
@@ -18,23 +38,6 @@ model ProductCategory {
   products Product[]
 }
 
-model Ingredient {
-  id                  String                @id @default(uuid())
-  label               String                @unique
-  priceExclTax        Float
-  priceIncludingTax   Float
-  imageUrl            String?
-  category            IngredientCategory    @relation(fields: [categoryId], references: [id])
-  categoryId          String
-  IngredientInProduct IngredientInProduct[]
-}
-
-model IngredientCategory {
-  id          String       @id @default(uuid())
-  label       String       @unique
-  imageUrl    String?
-  ingredients Ingredient[]
-}
 
 model IngredientInProduct {
   id           String                @id @default(uuid())

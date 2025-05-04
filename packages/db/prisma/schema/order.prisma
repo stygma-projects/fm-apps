@@ -2,7 +2,7 @@ model Order {
   id               String           @id @default(uuid())
   products         Product[]
   type             OrderType
-  status           OrderStatus      @default(PENDING)
+  status           OrderStatus      @default(IN_DRAFT)
   withdrawalMethod WithdrawalMethod
   terminalId       Int?
   price            Float
