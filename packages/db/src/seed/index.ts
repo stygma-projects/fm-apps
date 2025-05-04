@@ -3,7 +3,7 @@ import {
   OrderType,
   PrismaClient,
   WithdrawalMethod,
-} from '../generated/client'
+} from 'prisma-client-9b2cb67cfda9442322aa3989e7e8f9e816daad1436bb6f8145c8508b24fa7e95'
 
 const prisma = new PrismaClient()
 
@@ -46,7 +46,6 @@ async function main() {
       { label: 'Flammeskueches' },
       { label: 'Nos Salades' },
     ],
-    skipDuplicates: true,
   })
 
   // Fetch the inserted ingredient categories
