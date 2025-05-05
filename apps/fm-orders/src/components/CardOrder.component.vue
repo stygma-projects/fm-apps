@@ -55,7 +55,7 @@
                 v-for="ingredientItem in product.ingredients"
                 :key="ingredientItem.id"
               >
-                {{ ingredientItem.ingredient?.label || '' }}
+                {{ ingredientItem.ingredient?.label }}
                 <span
                   v-if="ingredientItem.composition === 'EXTRA'"
                   class="text-blue-600 font-medium"
