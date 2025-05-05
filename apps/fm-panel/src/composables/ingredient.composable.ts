@@ -1,50 +1,32 @@
 import { useMutation, useQuery } from 'vue-query'
 import { trpc } from '../api/trpc'
-import type { Ingredient } from '@fm-apps/db'
+import type {
+  CreateIngredientInput,
+  DeleteIngredientInput,
+  DeleteManyIngredientInput,
+  UpdateIngredientInput,
+} from '@fm-apps/trpc'
 
 export const useFetchIngredient = () => {
   return useQuery('ingredient', () => trpc.inventory.ingredient.list.query())
 }
 export const useUpdateIngredient = () => {
-  return useMutation((ingredientInput: Ingredient) =>
-    trpc.inventory.ingredient.update.mutate({
-      id: ingredientInput.id,
-      label: ingredientInput.label,
-      priceExclTax: parseFloat(
-        ingredientInput.priceExclTax as unknown as string,
-      ),
-      priceIncludingTax: parseFloat(
-        ingredientInput.priceIncludingTax as unknown as string,
-      ),
-      imageUrl: ingredientInput.imageUrl,
-      categoryId: ingredientInput.categoryId,
-    }),
+  return useMutation((updateIngredientInput: UpdateIngredientInput) =>
+    trpc.inventory.ingredient.update.mutate(updateIngredientInput),
   )
 }
 export const useCreateIngredient = () => {
-  return useMutation((ingredientInput: Ingredient) => {
-    return trpc.inventory.ingredient.create.mutate({
-      label: ingredientInput.label,
-      priceExclTax: parseFloat(
-        ingredientInput.priceExclTax as unknown as string,
-      ),
-      priceIncludingTax: parseFloat(
-        ingredientInput.priceIncludingTax as unknown as string,
-      ),
-      imageUrl: ingredientInput.imageUrl,
-      categoryId: ingredientInput.categoryId,
-    })
+  return useMutation((createIngredientInput: CreateIngredientInput) => {
+    return trpc.inventory.ingredient.create.mutate(createIngredientInput)
   })
 }
 export const useDeleteIngredient = () => {
-  return useMutation((ingredientId: string) =>
-    trpc.inventory.ingredient.delete.mutate({
-      id: ingredientId,
-    }),
+  return useMutation((deleteIngredientInput: DeleteIngredientInput) =>
+    trpc.inventory.ingredient.delete.mutate(deleteIngredientInput),
   )
 }
 export const useDeleteManyIngredient = () => {
-  return useMutation((ids: string[]) =>
-    trpc.inventory.ingredient.deleteMany.mutate({ ids }),
+  return useMutation((deleteManyIngredientInput: DeleteManyIngredientInput) =>
+    trpc.inventory.ingredient.deleteMany.mutate(deleteManyIngredientInput),
   )
 }

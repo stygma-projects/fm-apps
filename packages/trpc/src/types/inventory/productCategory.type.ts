@@ -1,23 +1,27 @@
 import { RouterInput, RouterOutput } from '../..'
 
-export type productCategoryListInput =
+export type ListProductCategoryInput =
   RouterInput['inventory']['productCategory']['list']
-export type productCategoryGetByIdInput =
+export type GetByIdProductCategoryInput =
   RouterInput['inventory']['productCategory']['getById']
-export type productCategoryCreateInput =
+export type CreateProductCategoryInput =
   RouterInput['inventory']['productCategory']['create']
-export type productCategoryUpdateInput =
+export type UpdateProductCategoryInput =
   RouterInput['inventory']['productCategory']['update']
-export type productCategoryDeleteInput =
+export type DeleteProductCategoryInput =
   RouterInput['inventory']['productCategory']['delete']
+export type DeleteManyProductCategoryInput =
+  RouterInput['inventory']['productCategory']['deleteMany']
 
-export type productCategoryListOutput =
+export type ListProductCategoryOutput =
   RouterOutput['inventory']['productCategory']['list']
-export type productCategoryGetByIdOutput =
+export type GetByIdProductCategoryOutput =
   RouterOutput['inventory']['productCategory']['getById']
-export type productCategoryCreateOutput =
+export type CreateProductCategoryOutput =
   RouterOutput['inventory']['productCategory']['create']
-export type productCategoryUpdateOutput =
+export type UpdateProductCategoryOutput =
   RouterOutput['inventory']['productCategory']['update']
-export type productCategoryDeleteOutput =
+export type DeleteProductCategoryOutput =
   RouterOutput['inventory']['productCategory']['delete']
+export type DeleteManyProductCategoryOutput =
+  RouterOutput['inventory']['productCategory']['deleteMany']
