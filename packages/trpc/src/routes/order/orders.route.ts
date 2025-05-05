@@ -22,7 +22,11 @@ export const ordersRouter = router({
       include: {
         products: {
           include: {
-            ingredients: true,
+            ingredients: {
+              include: {
+                ingredient: true,
+              },
+            },
           },
         },
       },
@@ -41,7 +45,11 @@ export const ordersRouter = router({
         include: {
           products: {
             include: {
-              ingredients: true,
+              ingredients: {
+                include: {
+                  ingredient: true,
+                },
+              },
             },
           },
         },
