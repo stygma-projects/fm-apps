@@ -10,31 +10,43 @@ export const useFetchOrders = () => {
   const deliveryOrders = ref<Order[]>([])
 
   const { refetch } = useQuery(
-    ['orders'],
-    () => trpc.order.orders.list.query(),
+    ['in-progress-orders'],
+    () => trpc.order.orders.listInProgress.query(),
     {
+      // Rafraîchit toutes les minutes
+      refetchInterval: 60000,
+
       onSuccess: (result: Order[]) => {
         const formattedOrders = result.map((order) => ({
           ...order,
           createdAt: new Date(order.createdAt),
         }))
-        orders.value = formattedOrders
 
-        // Update the filtered orders
-        terminalOrders.value = orders.value
-          .filter((o: Order) => o.type === 'TERMINALS')
-          .slice(0, 4)
+        // Mise à jour si les données ont changé
+        if (JSON.stringify(orders.value) !== JSON.stringify(formattedOrders)) {
+          orders.value = formattedOrders
 
-        pickupOrders.value = orders.value
-          .filter((o: Order) => o.type === 'PICKUP')
-          .slice(0, 4)
+          // Mise à jour des listes filtrées
+          terminalOrders.value = formattedOrders
+            .filter((o: Order) => o.type === 'TERMINALS')
+            .slice(0, 6)
 
-        deliveryOrders.value = orders.value
-          .filter((o: Order) => o.type === 'DELIVERY')
-          .slice(0, 4)
+          pickupOrders.value = formattedOrders
+            .filter((o: Order) => o.type === 'PICKUP')
+            .slice(0, 6)
+
+          deliveryOrders.value = formattedOrders
+            .filter((o: Order) => o.type === 'DELIVERY')
+            .slice(0, 6)
+        }
       },
     },
   )
 
-  return { terminalOrders, pickupOrders, deliveryOrders, refetch }
+  return {
+    terminalOrders,
+    pickupOrders,
+    deliveryOrders,
+    refetch,
+  }
 }

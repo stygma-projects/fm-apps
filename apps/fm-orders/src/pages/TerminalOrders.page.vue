@@ -1,13 +1,19 @@
 <template>
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-  >
-    <CardOrder
-      v-for="order in terminalOrders"
-      :key="order.id"
-      :order="order"
-      @refresh="handleRefresh"
-    />
+  <div class="grid grid-cols-6 w-full h-full">
+    <div
+      v-for="i in 6"
+      :key="i"
+      class="border-r border-gray-300 last:border-r-0 h-full"
+    >
+      <CardOrder
+        v-if="terminalOrders[i - 1]"
+        :order="terminalOrders[i - 1]"
+        @refresh="handleRefresh"
+      />
+      <div v-else class="h-full flex items-center justify-center bg-gray-50">
+        <span class="text-gray-500">En attente</span>
+      </div>
+    </div>
   </div>
 </template>
 

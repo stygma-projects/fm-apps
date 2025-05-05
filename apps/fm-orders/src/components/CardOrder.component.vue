@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-md overflow-hidden border border-gray-200 shadow-sm">
+  <div class="h-full flex flex-col">
     <!-- En-tête avec ID et heure -->
     <div class="p-3 flex justify-between items-center bg-blue-500 text-white">
       <div class="flex items-center">
@@ -10,15 +10,15 @@
     </div>
 
     <!-- Statut de la commande -->
-    <div class="p-2 border-b bg-gray-100 text-gray-800">
+    <div class="p-2 border-b border-gray-300 bg-gray-100">
       <div class="flex items-center">
         <i class="pi pi-check-circle mr-2"></i>
-        <span class="font-medium">{{ getStatusLabel(order.status) }}</span>
+        <span class="font-medium">En préparation</span>
       </div>
     </div>
 
     <!-- Informations de la commande -->
-    <div class="bg-white p-4">
+    <div class="bg-white p-4 flex-grow">
       <!-- Affichage uniquement du terminal -->
       <div v-if="order.terminalId" class="mb-3">
         <span>Terminal: </span>
@@ -30,7 +30,7 @@
         <div
           v-for="(product, index) in order.products"
           :key="product.id"
-          class="mb-3 pb-2 border-b last:border-0"
+          class="mb-3 pb-2 border-b border-gray-300 last:border-0"
         >
           <div class="flex justify-between font-medium">
             <div class="flex">
@@ -69,51 +69,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Boutons d'action -->
-    <!-- <div class="flex">
-      <template v-if="order.status === 'PENDING'">
-        <button 
-          class="w-1/2 p-2 text-center bg-gray-200 hover:bg-gray-300 text-gray-700"
-          @click="updateOrderStatus(order.id, 'CANCELED')"
-        >
-          Annuler
-        </button>
-        <button 
-          class="w-1/2 p-2 text-center bg-blue-500 hover:bg-blue-600 text-white"
-          @click="updateOrderStatus(order.id, 'IN_PROGRESS')"
-        >
-          En cours
-        </button>
-      </template>
-      
-      <template v-else-if="order.status === 'IN_PROGRESS'">
-        <button 
-          class="w-full p-2 text-center bg-blue-500 hover:bg-blue-600 text-white"
-          @click="updateOrderStatus(order.id, 'DELIVERED')"
-        >
-          Préparation terminée
-        </button>
-      </template>
-      
-      <template v-else-if="order.status === 'DELIVERED'">
-        <button 
-          class="w-full p-2 text-center bg-gray-200 text-gray-500 cursor-not-allowed"
-          disabled
-        >
-          Terminé
-        </button>
-      </template>
-      
-      <template v-else-if="order.status === 'CANCELED'">
-        <button 
-          class="w-full p-2 text-center bg-gray-200 text-gray-500 cursor-not-allowed"
-          disabled
-        >
-          Annulé
-        </button>
-      </template>
-    </div> -->
   </div>
 </template>
 
@@ -127,16 +82,6 @@ const props = defineProps<{
 
 const { order } = props
 
-function getStatusLabel(status: string): string {
-  const labels: Record<string, string> = {
-    PENDING: 'En attente',
-    IN_PROGRESS: 'En préparation',
-    DELIVERED: 'Préparation terminée',
-    CANCELED: 'Annulé',
-  }
-  return labels[status] || status
-}
-
 function formatTime(dateString: string | Date): string {
   if (!dateString) return ''
   const date = new Date(dateString)
@@ -146,9 +91,4 @@ function formatTime(dateString: string | Date): string {
     hour12: false,
   })
 }
-
-// Functions
-// const updateOrderStatus = (orderId: string, newStatus: string) => {
-//   // emit('update-status', { orderId, status: newStatus })
-// }
 </script>

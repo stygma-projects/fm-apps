@@ -35,7 +35,7 @@ export interface Product {
 // Interface pour la commande
 export interface Order {
   id: string
-  products?: Product[] // Rendu optionnel avec `?`
+  products?: Product[]
   type: OrderType
   status: OrderStatus
   withdrawalMethod: WithdrawalMethod
