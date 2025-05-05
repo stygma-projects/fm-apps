@@ -22,7 +22,32 @@ export const ordersRouter = router({
       include: {
         products: {
           include: {
-            ingredients: true,
+            ingredients: {
+              include: {
+                ingredient: true,
+              },
+            },
+          },
+        },
+      },
+    })
+  }),
+  listInProgress: publicProcedure.query(async () => {
+    return await prisma.order.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      where: {
+        status: OrderStatus.IN_PROGRESS,
+      },
+      include: {
+        products: {
+          include: {
+            ingredients: {
+              include: {
+                ingredient: true,
+              },
+            },
           },
         },
       },
@@ -41,7 +66,11 @@ export const ordersRouter = router({
         include: {
           products: {
             include: {
-              ingredients: true,
+              ingredients: {
+                include: {
+                  ingredient: true,
+                },
+              },
             },
           },
         },
