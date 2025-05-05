@@ -6,4 +6,5 @@ export const fr = {
   },
   ingredients: 'Ingrédients:',
   preparation: 'En préparation',
+  pending: 'En attente',
 }
