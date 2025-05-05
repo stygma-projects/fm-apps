@@ -13,13 +13,12 @@
     <div class="p-2 border-b border-gray-300 bg-gray-100">
       <div class="flex items-center">
         <i class="pi pi-check-circle mr-2"></i>
-        <span class="font-medium">En préparation</span>
+        <span class="font-medium">{{ t('preparation') }}</span>
       </div>
     </div>
 
     <!-- Informations de la commande -->
     <div class="bg-white p-4 flex-grow">
-      <!-- Affichage uniquement du terminal -->
       <div v-if="order.terminalId" class="mb-3">
         <span>Terminal: </span>
         <span class="font-medium">{{ order.terminalId }}</span>
@@ -49,7 +48,7 @@
             v-if="product.ingredients && product.ingredients.length > 0"
             class="ml-8 mt-1"
           >
-            <div class="text-sm text-gray-500 mb-1">Ingrédients:</div>
+            <div class="text-sm text-gray-500 mb-1">{{ t('ingredients') }}</div>
             <ul class="text-sm text-gray-600 list-disc pl-4">
               <li
                 v-for="ingredientItem in product.ingredients"
@@ -60,9 +59,11 @@
                   v-if="ingredientItem.composition === 'EXTRA'"
                   class="text-blue-600 font-medium"
                 >
-                  (Extra)</span
+                  {{ t('composition.extra') }}</span
                 >
-                <span v-else class="text-gray-400"> (Optionnel)</span>
+                <span v-else class="text-gray-400">{{
+                  t('composition.optional')
+                }}</span>
               </li>
             </ul>
           </div>
@@ -74,6 +75,9 @@
 
 <script setup lang="ts">
 import type { Order } from '../types/order.type'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // Props
 const props = defineProps<{
