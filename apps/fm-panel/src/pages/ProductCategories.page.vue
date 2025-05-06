@@ -245,16 +245,16 @@ import {
   useDeleteManyProductCategories,
 } from '../composables/productCategory.composable'
 
+const { data: productCategories, refetch } = useFetchProductCategories()
+const { mutate: updateProductCategory } = useUpdateProductCategory()
+const { mutate: deleteProductCategory } = useDeleteProductCategory()
+const { mutate: createProductCategory } = useCreateProductCategory()
+const { mutate: deleteManyProductCategories } = useDeleteManyProductCategories()
+
 // Define the type for the state parameter
 interface TableState {
   d_editing?: boolean
   [key: string]: unknown
-}
-
-interface ProductCategory {
-  id: string
-  label: string
-  imageUrl: string
 }
 
 const { t } = useI18n()
@@ -270,12 +270,6 @@ const tableOptions = {
   },
 }
 
-const { data: productCategories, refetch } = useFetchProductCategories()
-const { mutate: updateProductCategory } = useUpdateProductCategory()
-const { mutate: deleteProductCategory } = useDeleteProductCategory()
-const { mutate: createProductCategory } = useCreateProductCategory()
-const { mutate: deleteManyProductCategories } = useDeleteManyProductCategories()
-
 const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   label: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -283,7 +277,7 @@ const filters = ref({
 
 const mappedProductCategory = computed(() => {
   if (!productCategories.value) return []
-  return productCategories.value.map((productCategory: ProductCategory) => {
+  return productCategories.value.map((productCategory) => {
     const { label, imageUrl } = productCategory
     return {
       label,
@@ -319,7 +313,7 @@ const creatableProduct = ref({
   imageUrl: '',
 })
 
-function startEdition(product: ProductCategory) {
+function startEdition(product) {
   currentCategoryProductId.value = product.id
   editableProduct.value = { ...product }
   isUpdateDialogOpen.value = true
@@ -331,10 +325,10 @@ async function editProduct() {
     ...editableProduct.value,
   })
   isUpdateDialogOpen.value = false
-  refetch.value()
+  refetch()
 }
 
-function startDeletion(product: ProductCategory) {
+function startDeletion(product) {
   deletableProduct.value = { ...product }
   currentCategoryProductId.value = product.id
   isDeleteDialogOpen.value = true
@@ -371,7 +365,7 @@ const startDeletionMany = () => {
 
 const deleteManyProducts = () => {
   deleteManyProductCategories(
-    selectedProducts.value.map((product: ProductCategory) => product.id),
+    selectedProducts.value.map((product) => product.id),
   )
   isDeleteManyDialogOpen.value = false
   selectedProducts.value = []

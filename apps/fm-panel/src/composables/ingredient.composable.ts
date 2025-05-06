@@ -1,50 +1,63 @@
-import { useMutation, useQuery } from 'vue-query'
+import { useMutation, useQuery } from '@tanstack/vue-query'
 import { trpc } from '../api/trpc'
-import type { Ingredient } from '@fm-apps/db'
+import type {
+  CreateIngredientInput,
+  CreateIngredientOutput,
+  DeleteIngredientInput,
+  DeleteIngredientOutput,
+  DeleteManyIngredientInput,
+  DeleteManyIngredientOutput,
+  ListIngredientOutput,
+  UpdateIngredientInput,
+  UpdateIngredientOutput,
+} from '@fm-apps/trpc'
+
+enum IngredientQueryKey {
+  LIST = 'listIngredients',
+}
+
+enum IngredientMutationKey {
+  UPDATE = 'updateIngredient',
+  DELETE = 'deleteIngredient',
+  CREATE = 'createIngredient',
+  DELETE_MANY = 'deleteManyIngredients',
+}
 
 export const useFetchIngredient = () => {
-  return useQuery('ingredient', () => trpc.inventory.ingredient.list.query())
-}
-export const useUpdateIngredient = () => {
-  return useMutation((ingredientInput: Ingredient) =>
-    trpc.inventory.ingredient.update.mutate({
-      id: ingredientInput.id,
-      label: ingredientInput.label,
-      priceExclTax: parseFloat(
-        ingredientInput.priceExclTax as unknown as string,
-      ),
-      priceIncludingTax: parseFloat(
-        ingredientInput.priceIncludingTax as unknown as string,
-      ),
-      imageUrl: ingredientInput.imageUrl,
-      categoryId: ingredientInput.categoryId,
-    }),
-  )
-}
-export const useCreateIngredient = () => {
-  return useMutation((ingredientInput: Ingredient) => {
-    return trpc.inventory.ingredient.create.mutate({
-      label: ingredientInput.label,
-      priceExclTax: parseFloat(
-        ingredientInput.priceExclTax as unknown as string,
-      ),
-      priceIncludingTax: parseFloat(
-        ingredientInput.priceIncludingTax as unknown as string,
-      ),
-      imageUrl: ingredientInput.imageUrl,
-      categoryId: ingredientInput.categoryId,
-    })
+  return useQuery<ListIngredientOutput, Error>({
+    queryKey: [IngredientQueryKey.LIST],
+    queryFn: () => trpc.inventory.ingredient.list.query()
   })
 }
-export const useDeleteIngredient = () => {
-  return useMutation((ingredientId: string) =>
-    trpc.inventory.ingredient.delete.mutate({
-      id: ingredientId,
-    }),
-  )
+
+export const useUpdateIngredient = () => {
+  return useMutation<UpdateIngredientOutput, Error, UpdateIngredientInput>({
+    mutationKey: [IngredientMutationKey.UPDATE],
+    mutationFn: (updateIngredientInput) =>
+      trpc.inventory.ingredient.update.mutate(updateIngredientInput),
+  })
 }
+
+export const useCreateIngredient = () => {
+  return useMutation<CreateIngredientOutput, Error, CreateIngredientInput>({
+    mutationKey: [IngredientMutationKey.CREATE],
+    mutationFn: (createIngredientInput) =>
+      trpc.inventory.ingredient.create.mutate(createIngredientInput),
+  })
+}
+
+export const useDeleteIngredient = () => {
+  return useMutation<DeleteIngredientOutput, Error, DeleteIngredientInput>({
+    mutationKey: [IngredientMutationKey.DELETE],
+    mutationFn: (deleteIngredientInput) =>
+      trpc.inventory.ingredient.delete.mutate(deleteIngredientInput),
+  })
+}
+
 export const useDeleteManyIngredient = () => {
-  return useMutation((ids: string[]) =>
-    trpc.inventory.ingredient.deleteMany.mutate({ ids }),
-  )
+  return useMutation<DeleteManyIngredientOutput, Error, DeleteManyIngredientInput>({
+    mutationKey: [IngredientMutationKey.DELETE_MANY],
+    mutationFn: (deleteManyIngredientInput) =>
+      trpc.inventory.ingredient.deleteMany.mutate(deleteManyIngredientInput),
+  })
 }

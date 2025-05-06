@@ -370,10 +370,6 @@ import {
   useDeleteManyIngredient,
 } from '../composables/ingredient.composable'
 import { useToast } from 'primevue'
-import type {
-  IngredientInput,
-  IngredientWithCategory,
-} from '../types/ingredientCategory.type'
 import { useFetchIngredientCategories } from '../composables/ingredientCategory.composable'
 import type { IngredientCategory } from '../../../../packages/db/generated/client'
 
@@ -396,7 +392,7 @@ const filters = ref({
 
 const categoriesOptions = computed(() => {
   const unique = new Map()
-  ;(data.value ?? []).forEach((ingredient: IngredientWithCategory) => {
+  ;(data.value ?? []).forEach((ingredient) => {
     if (ingredient.label && ingredient.category.label) {
       unique.set(ingredient.category.id, {
         name: ingredient.category.label,
@@ -416,7 +412,7 @@ const allCategoriesOptions = computed(() => {
   )
 })
 
-const selectedIngredients = ref<IngredientInput[]>([])
+const selectedIngredients = ref([])
 const dt = ref(null)
 
 const ingredientDialog = ref(false)
@@ -431,7 +427,7 @@ const taxCalculator = computed(() => {
     : 0
 })
 
-const ingredient = ref<IngredientInput>({
+const ingredient = ref({
   id: '',
   label: '',
   priceExclTax: 0,
@@ -459,7 +455,7 @@ const hideDialog = () => {
   submitted.value = false
 }
 
-const editIngredient = (editIngredient: IngredientInput) => {
+const editIngredient = (editIngredient) => {
   let categoryId = editIngredient.categoryId
   if (!categoryId && editIngredient.categoryId) {
     categoryId = editIngredient.categoryId
@@ -501,7 +497,7 @@ const saveIngredient = async () => {
       await createIngredient.mutateAsync(payload)
     }
     ingredientDialog.value = false
-    refetchIngredients.value()
+    refetchIngredients()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     if (
@@ -529,7 +525,7 @@ const saveIngredient = async () => {
   }
 }
 
-const confirmDeleteIngredient = (ingredientToDelete: IngredientInput) => {
+const confirmDeleteIngredient = (ingredientToDelete) => {
   ingredient.value = ingredientToDelete
   deleteIngredientDialog.value = true
 }
@@ -537,7 +533,7 @@ const confirmDeleteIngredient = (ingredientToDelete: IngredientInput) => {
 const deleteCurrentIngredient = async () => {
   await deleteIngredient.mutateAsync(ingredient.value.id)
   deleteIngredientDialog.value = false
-  await refetchIngredients.value()
+  await refetchIngredients()
 }
 
 const confirmDeleteSelected = () => {
@@ -551,7 +547,7 @@ const deleteSelectedIngredients = async () => {
   await deleteManyIngredient.mutateAsync(ingredientIds)
   deleteIngredientsDialog.value = false
   selectedIngredients.value = []
-  await refetchIngredients.value()
+  await refetchIngredients()
 }
 </script>
 

@@ -1,37 +1,68 @@
-import { useMutation, useQuery } from 'vue-query'
+
+import { useMutation, useQuery } from '@tanstack/vue-query'
 import { trpc } from '../api/trpc'
-import type { ProductCategory } from '@fm-apps/db'
+import type {
+  CreateProductCategoryInput,
+  CreateProductCategoryOutput,
+  DeleteManyProductCategoryInput,
+  DeleteManyProductCategoryOutput,
+  DeleteProductCategoryInput,
+  DeleteProductCategoryOutput,
+  ListProductCategoryOutput,
+  UpdateProductCategoryInput,
+  UpdateProductCategoryOutput,
+} from '@fm-apps/trpc'
+
+enum ProductCategoryQueryKey {
+  LIST = 'listProductCategories',
+}
+
+enum ProductCategoryMutationKey {
+  UPDATE = 'updateProductCategory',
+  DELETE = 'deleteProductCategory',
+  CREATE = 'createProductCategory',
+  DELETE_MANY = 'deleteManyProductCategories',
+}
 
 export const useFetchProductCategories = () => {
-  return useQuery('productCategories', () =>
-    trpc.inventory.productCategory.list.query(),
-  )
+  return useQuery<ListProductCategoryOutput, Error>({
+    queryKey: [ProductCategoryQueryKey.LIST],
+    queryFn: () => trpc.inventory.productCategory.list.query(),
+  })
 }
 
 export const useUpdateProductCategory = () => {
-  return useMutation(
-    'updateProductCategories',
-    (productCategory: ProductCategory) =>
-      trpc.inventory.productCategory.update.mutate(productCategory),
-  )
+  return useMutation<UpdateProductCategoryOutput, Error, UpdateProductCategoryInput>({
+    mutationKey: [ProductCategoryMutationKey.UPDATE],
+    mutationFn: (updateProductCategoryInput) =>
+    trpc.inventory.productCategory.update.mutate(updateProductCategoryInput),
+})
 }
 
 export const useDeleteProductCategory = () => {
-  return useMutation('deleteProductCategory', (a: { id: string }) =>
-    trpc.inventory.productCategory.delete.mutate(a),
-  )
+  return useMutation<DeleteProductCategoryOutput, Error, DeleteProductCategoryInput>({
+    mutationKey:[ProductCategoryMutationKey.DELETE], mutationFn: (deleteProductCategoryInput) =>
+    trpc.inventory.productCategory.delete.mutate(deleteProductCategoryInput),
+  })
 }
 
 export const useCreateProductCategory = () => {
-  return useMutation(
-    'createProductCategory',
-    (a: { label: string; imageUrl: string | null }) =>
-      trpc.inventory.productCategory.create.mutate(a),
-  )
+  return useMutation<CreateProductCategoryOutput,
+    Error,
+    CreateProductCategoryInput
+  >({mutationKey:[ProductCategoryMutationKey.CREATE], mutationFn: (createProductCategoryInput) =>
+    trpc.inventory.productCategory.create.mutate(createProductCategoryInput),
+  })
 }
 
 export const useDeleteManyProductCategories = () => {
-  return useMutation('deleteManyProductCategories', (a: string[]) =>
-    trpc.inventory.productCategory.deleteMany.mutate(a),
-  )
+  return useMutation<
+    DeleteManyProductCategoryOutput,
+    Error,
+    DeleteManyProductCategoryInput
+  >({mutationKey:[ProductCategoryMutationKey.DELETE_MANY], mutationFn: (deleteManyProductCategoriesInput) =>
+    trpc.inventory.productCategory.deleteMany.mutate(
+      deleteManyProductCategoriesInput,
+    ),
+  })
 }
