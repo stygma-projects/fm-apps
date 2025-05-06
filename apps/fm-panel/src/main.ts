@@ -7,9 +7,9 @@ import { createPinia } from 'pinia'
 import { router } from './router.ts'
 import PrimeVue from 'primevue/config'
 import Aura from '@primeuix/themes/aura'
-import { VueQueryPlugin } from 'vue-query'
 import { createI18n } from 'vue-i18n'
 import { fr } from './locales/fr.ts'
+import { VueQueryPlugin } from '@tanstack/vue-query'
 
 const i18n = createI18n({
   locale: 'fr',

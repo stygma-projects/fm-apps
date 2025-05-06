@@ -243,7 +243,6 @@ import {
   useUpdateIngredientCategory,
 } from '../composables/ingredientCategory.composable'
 import { useToast } from 'primevue'
-import type { IngredientCategoryInput } from '../types/ingredientCategory.type.ts'
 
 const toast = useToast()
 const { t } = useI18n()
@@ -259,7 +258,7 @@ const filters = ref({
   global: { value: null, matchMode: 'contains' },
 })
 
-const selectedCategories = ref<IngredientCategoryInput[]>([])
+const selectedCategories = ref([])
 const dt = ref(null)
 
 const categoryDialog = ref(false)
@@ -268,14 +267,14 @@ const deleteCategoriesDialog = ref(false)
 
 const submitted = ref(false)
 
-const category = ref<IngredientCategoryInput>({
+const category = ref({
   id: '',
   label: '',
   imageUrl: '',
 })
 
 const openNew = () => {
-  category.value = {} as IngredientCategoryInput
+  category.value = {}
   isEditing.value = false
   submitted.value = false
   categoryDialog.value = true
@@ -286,7 +285,7 @@ const hideDialog = () => {
   submitted.value = false
 }
 
-const editCategory = (editCategory: IngredientCategoryInput) => {
+const editCategory = (editCategory) => {
   category.value = { ...editCategory }
   isEditing.value = true
   categoryDialog.value = true
@@ -321,7 +320,7 @@ const saveCategory = async () => {
     }
     categoryDialog.value = false
 
-    await refetchCategories.value()
+    await refetchCategories()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     if (
@@ -349,7 +348,7 @@ const saveCategory = async () => {
   }
 }
 
-const confirmDeleteCategory = (categoryToDelete: IngredientCategoryInput) => {
+const confirmDeleteCategory = (categoryToDelete) => {
   category.value = categoryToDelete
   deleteCategoryDialog.value = true
 }
@@ -357,7 +356,7 @@ const confirmDeleteCategory = (categoryToDelete: IngredientCategoryInput) => {
 const deleteCurrentCategory = async () => {
   await deleteCategory.mutate(category.value.id)
   deleteCategoryDialog.value = false
-  await refetchCategories.value()
+  await refetchCategories()
 }
 
 const confirmDeleteSelected = () => {
@@ -373,6 +372,6 @@ const deleteSelectedCategories = async () => {
   deleteCategoriesDialog.value = false
   selectedCategories.value = []
 
-  await refetchCategories.value()
+  await refetchCategories()
 }
 </script>
