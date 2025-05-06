@@ -25,6 +25,8 @@ declare module 'vue' {
     PrimeProgressBar: typeof import('primevue/progressbar')['default']
     PrimeRadioButton: typeof import('primevue/radiobutton')['default']
     PrimeSidebar: typeof import('primevue/sidebar')['default']
+    PrimeTabMenu: typeof import('primevue/tabmenu')['default']
+    PrimeTag: typeof import('primevue/tag')['default']
     PrimeTextarea: typeof import('primevue/textarea')['default']
     PrimeToolbar: typeof import('primevue/toolbar')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
