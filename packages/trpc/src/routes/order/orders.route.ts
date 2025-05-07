@@ -17,7 +17,7 @@ export const ordersRouter = router({
   list: publicProcedure.query(async () => {
     return await prisma.order.findMany({
       orderBy: {
-        createdAt: 'desc',
+        createdAt: 'asc',
       },
       include: {
         products: {
@@ -35,7 +35,7 @@ export const ordersRouter = router({
   listInProgress: publicProcedure.query(async () => {
     return await prisma.order.findMany({
       orderBy: {
-        createdAt: 'desc',
+        createdAt: 'asc',
       },
       where: {
         status: OrderStatus.IN_PROGRESS,
