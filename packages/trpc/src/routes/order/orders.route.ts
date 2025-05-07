@@ -15,7 +15,43 @@ const withdrawalMethodEnum = z.enum([
 
 export const ordersRouter = router({
   list: publicProcedure.query(async () => {
-    return await prisma.order.findMany()
+    return await prisma.order.findMany({
+      orderBy: {
+        createdAt: 'asc',
+      },
+      include: {
+        products: {
+          include: {
+            ingredients: {
+              include: {
+                ingredient: true,
+              },
+            },
+          },
+        },
+      },
+    })
+  }),
+  listInProgress: publicProcedure.query(async () => {
+    return await prisma.order.findMany({
+      orderBy: {
+        createdAt: 'asc',
+      },
+      where: {
+        status: OrderStatus.IN_PROGRESS,
+      },
+      include: {
+        products: {
+          include: {
+            ingredients: {
+              include: {
+                ingredient: true,
+              },
+            },
+          },
+        },
+      },
+    })
   }),
   getById: publicProcedure
     .input(
@@ -25,11 +61,25 @@ export const ordersRouter = router({
     )
     .query(async ({ input }) => {
       const { id } = input
-      return await prisma.order.findUnique({ where: { id } })
+      return await prisma.order.findUnique({
+        where: { id },
+        include: {
+          products: {
+            include: {
+              ingredients: {
+                include: {
+                  ingredient: true,
+                },
+              },
+            },
+          },
+        },
+      })
     }),
   create: publicProcedure
     .input(
       z.object({
+        orderId: z.number(),
         type: orderTypeEnum,
         status: statusEnum.default(statusEnum.enum.PENDING),
         withdrawalMethod: withdrawalMethodEnum,
@@ -51,6 +101,7 @@ export const ordersRouter = router({
     .input(
       z.object({
         id: z.string(),
+        orderId: z.number(),
         type: orderTypeEnum,
         status: statusEnum,
         withdrawalMethod: withdrawalMethodEnum,

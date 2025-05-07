@@ -12,6 +12,8 @@ export const productRouter = router({
             ingredient: true, // Inclut les détails des ingrédients associés
           },
         },
+      orderBy: {
+        label: 'asc',
       },
     })
   }),

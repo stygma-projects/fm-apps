@@ -8,6 +8,7 @@ export const fr = {
         ingredientCategories: "Catégories d'ingrédients",
         ingredient: 'Ingrédients',
         productsInventory: 'Produits',
+        commande: 'Commandes',
       },
     },
   },
@@ -152,3 +153,34 @@ export const fr = {
     noImage: "Pas d'image fournie",
   },
 };
+  order: {
+    title: {
+      id: '#',
+      type: 'Type',
+      price: 'Prix',
+      createdAt: 'Heure',
+    },
+    dialogs: {
+      title: 'Détail de la commande',
+      id: 'ID: ',
+      createdAt: 'Heure: ',
+      price: 'Prix: ',
+      withdrawalMethod: 'Méthode de paiement: ',
+      terminal: 'Terminal: ',
+      status: 'Status: ',
+      type: 'Type: ',
+      product: 'Produits: ',
+    },
+    status: {
+      PENDING: 'En attente',
+      IN_PROGRESS: 'En cours',
+      DELIVERED: 'Terminé',
+      CANCELED: 'Annulé',
+    },
+    types: {
+      TERMINALS: 'Terminal',
+      PICKUP: 'Click & Collect',
+      DELIVERY: 'Livraison',
+    },
+  },
+}
