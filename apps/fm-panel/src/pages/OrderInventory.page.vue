@@ -3,7 +3,7 @@
     <PrimeTabMenu :model="tabItems" />
     <div class="card">
       <PrimeDataTable :value="commandesFiltrees">
-        <PrimeColumn field="id" :header="t('order.title.id')" />
+        <PrimeColumn field="orderId" :header="t('order.title.id')" />
         <PrimeColumn field="type" :header="t('order.title.type')">
           <template #body="slotProps">
             <PrimeTag
@@ -65,7 +65,7 @@
         <div class="mb-4 pb-2 border-b border-gray-200">
           <div class="flex justify-between mb-2">
             <span class="font-medium">{{ t('order.dialogs.id') }}</span>
-            <span>{{ selectedCommande.id }}</span>
+            <span>{{ selectedCommande.orderId }}</span>
           </div>
           <div class="flex justify-between mb-2">
             <span class="font-medium">{{ t('order.dialogs.createdAt') }}</span>
