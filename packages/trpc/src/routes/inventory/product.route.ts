@@ -13,6 +13,9 @@ export const productRouter = router({
           },
         },
       },
+      orderBy: {
+        label: 'asc',
+      },
     })
   }),
   getById: publicProcedure
