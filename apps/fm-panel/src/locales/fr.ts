@@ -105,7 +105,7 @@ export const fr = {
       },
     },
   },
-  commande: {
+  order: {
     title: {
       id: '#',
       type: 'Type',
@@ -121,6 +121,7 @@ export const fr = {
       terminal: 'Terminal: ',
       status: 'Status: ',
       type: 'Type: ',
+      product: 'Produits: ',
     },
     status: {
       PENDING: 'En attente',

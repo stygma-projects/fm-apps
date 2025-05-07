@@ -3,8 +3,8 @@
     <PrimeTabMenu :model="tabItems" />
     <div class="card">
       <PrimeDataTable :value="commandesFiltrees">
-        <PrimeColumn field="id" :header="t('commande.title.id')" />
-        <PrimeColumn field="type" :header="t('commande.title.type')">
+        <PrimeColumn field="id" :header="t('order.title.id')" />
+        <PrimeColumn field="type" :header="t('order.title.type')">
           <template #body="slotProps">
             <PrimeTag
               :value="getTypeLabel(slotProps.data.type)"
@@ -12,10 +12,10 @@
             />
           </template>
         </PrimeColumn>
-        <PrimeColumn field="price" :header="t('commande.title.price')">
+        <PrimeColumn field="price" :header="t('order.title.price')">
           <template #body="slotProps"> {{ slotProps.data.price }} € </template>
         </PrimeColumn>
-        <PrimeColumn field="createdAt" :header="t('commande.title.createdAt')">
+        <PrimeColumn field="createdAt" :header="t('order.title.createdAt')">
           <template #body="slotProps">
             {{ formatHour(slotProps.data.createdAt) }}
           </template>
@@ -58,28 +58,26 @@
       v-model:visible="visible"
       maximizable
       modal
-      :header="t('commande.dialogs.title')"
+      :header="t('order.dialogs.title')"
       :style="{ width: '50rem' }"
     >
       <div v-if="selectedCommande" class="p-4">
         <div class="mb-4 pb-2 border-b border-gray-200">
           <div class="flex justify-between mb-2">
-            <span class="font-medium">{{ t('commande.dialogs.id') }}</span>
+            <span class="font-medium">{{ t('order.dialogs.id') }}</span>
             <span>{{ selectedCommande.id }}</span>
           </div>
           <div class="flex justify-between mb-2">
-            <span class="font-medium">{{
-              t('commande.dialogs.createdAt')
-            }}</span>
+            <span class="font-medium">{{ t('order.dialogs.createdAt') }}</span>
             <span>{{ formatHour(selectedCommande.createdAt) }}</span>
           </div>
           <div class="flex justify-between mb-2">
-            <span class="font-medium">{{ t('commande.dialogs.price') }}</span>
+            <span class="font-medium">{{ t('order.dialogs.price') }}</span>
             <span class="font-bold">{{ selectedCommande.price }} €</span>
           </div>
           <div class="flex justify-between mb-2">
             <span class="font-medium">{{
-              t('commande.dialogs.withdrawalMethod')
+              t('order.dialogs.withdrawalMethod')
             }}</span>
             <span>{{ selectedCommande.withdrawalMethod }}</span>
           </div>
@@ -87,17 +85,15 @@
             v-if="selectedCommande.terminalId"
             class="flex justify-between mb-2"
           >
-            <span class="font-medium">{{
-              t('commande.dialogs.terminal')
-            }}</span>
+            <span class="font-medium">{{ t('order.dialogs.terminal') }}</span>
             <span>{{ selectedCommande.terminalId }}</span>
           </div>
           <div class="flex justify-between mb-2">
-            <span class="font-medium">{{ t('commande.dialogs.status') }}</span>
+            <span class="font-medium">{{ t('order.dialogs.status') }}</span>
             <span>{{ getStatusLabel(selectedCommande.status) }}</span>
           </div>
           <div class="flex justify-between mb-2">
-            <span class="font-medium">{{ t('commande.dialogs.type') }}</span>
+            <span class="font-medium">{{ t('order.dialogs.type') }}</span>
             <PrimeTag
               :value="getTypeLabel(selectedCommande.type)"
               :severity="getTypeSeverity(selectedCommande.type)"
@@ -107,7 +103,9 @@
 
         <!-- Products section -->
         <div class="mt-4">
-          <h3 class="text-lg font-medium mb-3">Produits:</h3>
+          <h3 class="text-lg font-medium mb-3">
+            {{ t('order.dialogs.product') }}
+          </h3>
           <div
             v-for="product in selectedCommande.products"
             :key="product.id"
@@ -161,6 +159,7 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useFetchOrder, useUpdateOrder } from '../composables/order.composable'
 import type { OrderDialog } from '../types/order.type'
+import { formatHour } from '../utils/format'
 
 const { t } = useI18n()
 const { data, refetch: orderRefetch } = useFetchOrder()
@@ -170,9 +169,8 @@ const selectedStatus = ref('PENDING')
 const visible = ref(false)
 const selectedCommande = ref<OrderDialog>()
 
-const getStatusLabel = (status: string) =>
-  t(`commande.status.${status}`) || status
-const getTypeLabel = (type: string) => t(`commande.types.${type}`) || type
+const getStatusLabel = (status: string) => t(`order.status.${status}`) || status
+const getTypeLabel = (type: string) => t(`order.types.${type}`) || type
 
 // Rename database values to match the tabs
 const statusTabs = [
@@ -204,11 +202,6 @@ const commandesFiltrees = computed(
       (item: { status: string }) => item.status === selectedStatus.value,
     ) ?? [],
 )
-
-const formatHour = (date: string | Date) => {
-  const d = new Date(date)
-  return d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-}
 
 const getTypeSeverity = (type: string) => {
   switch (type) {

@@ -32,8 +32,14 @@ const routes = [
             path: 'ingredient',
             component: IngredientInventoryPage,
           },
+        ],
+      },
+      {
+        path: 'order',
+        children: [
+          { path: '', redirect: '/order/list' },
           {
-            path: 'commande',
+            path: 'list',
             component: CommandeInventoryPage,
           },
         ],
