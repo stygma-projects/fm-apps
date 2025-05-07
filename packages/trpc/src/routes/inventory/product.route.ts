@@ -5,6 +5,14 @@ import { publicProcedure, router } from '../../trpc'
 export const productRouter = router({
   list: publicProcedure.query(async () => {
     return await prisma.product.findMany({
+      include: {
+        category: true,
+        ingredients: {
+          include: {
+            ingredient: true, // Inclut les détails des ingrédients associés
+          },
+        },
+      },
       orderBy: {
         label: 'asc',
       },
@@ -18,7 +26,10 @@ export const productRouter = router({
     )
     .query(async ({ input }) => {
       const { id } = input
-      return await prisma.product.findUnique({ where: { id } })
+      return await prisma.product.findUnique({
+        where: { id },
+        include: { ingredients: true },
+      })
     }),
   create: publicProcedure
     .input(
@@ -26,7 +37,7 @@ export const productRouter = router({
         label: z.string().min(2),
         priceExclTax: z.number().min(0),
         priceIncludingTax: z.number().min(0),
-        imageUrl: z.string().optional(),
+        imageUrl: z.string().optional().nullable(),
         available: z.boolean().default(true),
         categoryId: z.string(),
       }),
@@ -43,7 +54,7 @@ export const productRouter = router({
         label: z.string().min(2).optional(),
         priceExclTax: z.number().min(0).optional(),
         priceIncludingTax: z.number().min(0).optional(),
-        imageUrl: z.string().optional(),
+        imageUrl: z.string().nullable().optional(),
         available: z.boolean().default(true).optional(),
         categoryId: z.string().optional(),
       }),
@@ -66,6 +77,7 @@ export const productRouter = router({
         where: { id: input.id },
       })
     }),
+
   deleteMany: publicProcedure
     .input(z.array(z.string()))
     .mutation(async ({ input }) => {
