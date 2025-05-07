@@ -6,6 +6,9 @@ export const ingredientRouter = router({
   list: publicProcedure.query(async () => {
     return await prisma.ingredient.findMany({
       include: { category: true, IngredientInProduct: true },
+      orderBy: {
+        label: 'asc',
+      },
     })
   }),
   getById: publicProcedure
