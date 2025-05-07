@@ -4,9 +4,9 @@
     <div class="p-3 flex justify-between items-center bg-blue-500 text-white">
       <div class="flex items-center">
         <i class="pi pi-file-o mr-2 text-lg"></i>
-        <span class="font-semibold text-lg">{{ order.id.slice(-5) }}</span>
+        <span class="font-semibold text-lg">{{ order.orderId }}</span>
       </div>
-      <div class="text-lg">{{ formatTime(order.createdAt) }}</div>
+      <div class="text-lg">{{ formatHour(order.createdAt) }}</div>
     </div>
 
     <!-- Informations de la commande -->
@@ -69,6 +69,7 @@
 
 <script setup lang="ts">
 import type { Order } from '../types/order.type'
+import formatHour from '@fm-apps/toolkit/utils'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -79,14 +80,4 @@ const props = defineProps<{
 }>()
 
 const { order } = props
-
-function formatTime(dateString: string | Date): string {
-  if (!dateString) return ''
-  const date = new Date(dateString)
-  return date.toLocaleTimeString('fr-FR', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  })
-}
 </script>
