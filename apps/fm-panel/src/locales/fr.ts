@@ -7,7 +7,7 @@ export const fr = {
         productCategories: 'Catégories de produits',
         ingredientCategories: "Catégories d'ingrédients",
         ingredient: 'Ingrédients',
-        productsInventory: 'Inventaire des produits',
+        productsInventory: 'Produits',
       },
     },
   },
@@ -123,7 +123,7 @@ export const fr = {
       addButton: 'Nouveau produit',
       deleteManyButton: 'Supprimer',
     },
-    title: 'Inventaire des produits',
+    title: 'Produits',
     dialogs: {
       editDialog: {
         title: 'Modification du produit',
@@ -134,10 +134,21 @@ export const fr = {
       },
       createDialog: {
         title: 'Nouveau produit',
+        categoryPlaceholder: 'Sélectionner une catégorie',
+        ingredientsPlaceholder: 'Sélectionner des ingrédients',
       },
       deleteManyDialog: {
         title: 'Confirmation de la suppression',
       },
     },
+    booleanValues: {
+      true: 'Oui',
+      false: 'Non',
+    },
+    availability: {
+      available: 'Disponible',
+      notAvailable: 'Rupture de stock',
+    },
+    noImage: "Pas d'image fournie",
   },
 }
