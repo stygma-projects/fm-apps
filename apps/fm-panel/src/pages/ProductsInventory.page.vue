@@ -13,7 +13,7 @@
               <i class="pi pi-search" />
             </PrimeInputIcon>
             <PrimeInputText
-              v-model="filters['label'].value"
+              v-model="filters['global'].value"
               :placeholder="t('productsInventory.toolBar.searchPlaceholder')"
             />
           </PrimeIconField>
@@ -37,17 +37,24 @@
       </template>
     </PrimeToolbar>
 
-    <!-- v-if="products.length > 0"  -->
-    {{ products }}
+    <br />
     <div class="flex flex-wrap gap-2 items-center justify-between">
       <PrimeDataTable
+        v-if="products"
         ref="dt"
         v-model:selection="selectedProducts"
+        :filters="filters"
         :value="products"
         data-key="id"
-        :filters="filters"
         :pt="tableOptions"
+        :global-filter-fields="[
+          'label',
+          'prixExclTax',
+          'priceIncludingTax',
+          'category.label',
+        ]"
       >
+        <!-- 'available' -->
         <PrimeColumn
           selection-mode="multiple"
           style="width: 3rem"
@@ -55,12 +62,13 @@
         ></PrimeColumn>
         <PrimeColumn
           v-for="(column, index) in Object.keys(products[0] || {}).filter(
-            (key) => key !== 'id',
+            (key) =>
+              key !== 'id' && key !== 'categoryId' && key !== 'ingredients',
           )"
           :key="index"
           :field="column"
           :header="t(`productsInventory.table.headers.${column}`)"
-          style="width: 15%"
+          style="width: 17%"
         >
           <template #body="rowData">
             <img
@@ -70,19 +78,28 @@
               class="rounded"
               style="width: 128px"
             />
-            <div v-else>
-              <div v-if="column === 'ingredients'">
-                <div
-                  v-for="(ingredient, index) in rowData[column]"
+            <!-- <div v-else-if="column === 'ingredients'">
+                <span
+                  v-for="(ingredient, index) in rowData.data[column]"
                   :key="index"
-                >
-                  {{ ingredient.label }}
-                </div>
-              </div>
-              <span v-else>
-                {{ rowData.data[column] }}
-              </span>
+                  >
+                  {{ ingredient.ingredient.label}} <span v-if="index < rowData.data[column].length - 1">,</span>
+                </span>
+              </div> -->
+            <div v-else-if="column === 'available'">
+              <span v-if="rowData.data[column] === true">{{
+                t('productsInventory.availability.available')
+              }}</span>
+              <span v-else>{{
+                t('productsInventory.availability.notAvailable')
+              }}</span>
             </div>
+            <div v-else-if="column === 'category'">
+              <span>{{ rowData.data[column].label }}</span>
+            </div>
+            <span v-else>
+              {{ rowData.data[column] }}
+            </span>
           </template>
         </PrimeColumn>
         <PrimeColumn>
@@ -130,7 +147,8 @@
             t('productsInventory.table.headers.priceExclTax')
           }}</label>
           <PrimeInputText
-            v-model="editableProduct.priceExclTax"
+            v-model.number="editableProduct.priceExclTax"
+            type="number"
             class="w-full"
           />
         </div>
@@ -139,7 +157,8 @@
             t('productsInventory.table.headers.priceIncludingTax')
           }}</label>
           <PrimeInputText
-            v-model="editableProduct.priceIncludingTax"
+            v-model.number="editableProduct.priceIncludingTax"
+            type="number"
             class="w-full"
           />
         </div>
@@ -147,23 +166,36 @@
           <label class="block mb-1">{{
             t('productsInventory.table.headers.available')
           }}</label>
-          <PrimeInputText v-model="editableProduct.available" class="w-full" />
+          <PrimeDropdown
+            v-model="editableProduct.available"
+            :options="booleanValues"
+            option-label="label"
+            option-value="value"
+            class="w-full"
+          />
         </div>
         <div>
           <label class="block mb-1">{{
             t('productsInventory.table.headers.category')
           }}</label>
-          <PrimeInputText v-model="editableProduct.category" class="w-full" />
-        </div>
-        <div>
-          <label class="block mb-1">{{
-            t('productsInventory.table.headers.ingredients')
-          }}</label>
-          <PrimeInputText
-            v-model="editableProduct.ingredients"
+          <PrimeDropdown
+            v-model="editableProduct.category"
+            :options="productCategories"
+            option-label="label"
             class="w-full"
           />
         </div>
+        <!-- <div>
+          <label class="block mb-1">{{
+            t('productsInventory.table.headers.ingredients')
+          }}</label>
+          <PrimeMultiSelect
+            v-model="usedIngredients"
+            :options="ingredients"
+            optionLabel="label"
+            class="w-full"
+          />
+        </div> -->
       </div>
 
       <template #footer>
@@ -171,7 +203,7 @@
           label="Cancel"
           icon="pi pi-times"
           text
-          @click="isUpdateDialogOpen = false"
+          @click="stopEdition"
         />
         <PrimeButton
           label="Save"
@@ -203,9 +235,8 @@
           }}</label>
           <img
             :src="deletableProduct.imageUrl"
-            :alt="'No Image ?'"
+            :alt="t('productsInventory.noImage')"
             class="rounded"
-            style="width: 64px"
           />
         </div>
         <div>
@@ -224,14 +255,29 @@
           <label class="block mb-1">{{
             t('productsInventory.table.headers.available')
           }}</label>
-          <label class="w-full">{{ deletableProduct.available }}</label>
+          <label class="w-full">{{
+            booleanValues.find(
+              (i: any) => i.value === deletableProduct.available,
+            )?.label
+          }}</label>
         </div>
         <div>
           <label class="block mb-1">{{
             t('productsInventory.table.headers.category')
           }}</label>
-          <label class="w-full">{{ deletableProduct.category }}</label>
+          <label class="w-full">{{ deletableProduct.category.label }}</label>
         </div>
+        <!-- <div>
+          <label class="block mb-1">{{
+            t('productsInventory.table.headers.ingredients')
+          }}</label>
+          <span
+            v-for="(ingredient, index) in deletableProduct.ingredients"
+            :key="index"
+            >
+            {{ ingredients.find((i: Ingredient) => i.id === ingredient.ingredientId).label }} <span v-if="index < deletableProduct.ingredients.length - 1">,</span>
+          </span>
+        </div> -->
       </div>
 
       <template #footer>
@@ -268,6 +314,59 @@
           }}</label>
           <PrimeInputText v-model="creatableProduct.imageUrl" class="w-full" />
         </div>
+        <div>
+          <label class="block mb-1">{{
+            t('productsInventory.table.headers.priceExclTax')
+          }}</label>
+          <PrimeInputText class="w-full">{{
+            creatableProduct.priceExclTax
+          }}</PrimeInputText>
+        </div>
+        <div>
+          <label class="block mb-1">{{
+            t('productsInventory.table.headers.priceIncludingTax')
+          }}</label>
+          <PrimeInputText class="w-full">{{
+            creatableProduct.priceIncludingTax
+          }}</PrimeInputText>
+        </div>
+        <div>
+          <label class="block mb-1">{{
+            t('productsInventory.table.headers.available')
+          }}</label>
+          <PrimeDropdown
+            v-model="creatableProduct.available"
+            :options="booleanValues"
+            option-label="label"
+            option-value="value"
+            class="w-full"
+          />
+        </div>
+        <div>
+          <label class="block mb-1">{{
+            t('productsInventory.table.headers.category')
+          }}</label>
+          <PrimeDropdown
+            v-model="creatableProduct.category"
+            :options="productCategories"
+            option-label="label"
+            class="w-full"
+            :placeholder="
+              t('productsInventory.dialogs.createDialog.categoryPlaceholder')
+            "
+          />
+        </div>
+        <!-- <div>
+          <label class="block mb-1">{{
+            t('productsInventory.table.headers.ingredients')
+          }}</label>
+          <PrimeMultiSelect
+            v-model="usedIngredients"
+            :options="ingredients"
+            optionLabel="label"
+            class="w-full"
+          />
+        </div> -->
       </div>
 
       <template #footer>
@@ -275,7 +374,7 @@
           label="Cancel"
           icon="pi pi-times"
           text
-          @click="isCreationDialogOpen = false"
+          @click="stopCreation"
         />
         <PrimeButton
           label="Create"
@@ -323,9 +422,13 @@
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { ref } from 'vue'
-// import { computed } from 'vue'
+import { ref } from 'vue' //computed
 import { FilterMatchMode } from '@primevue/core/api'
+import { useFetchProductCategories } from '../composables/productCategory.composable'
+// import { useFetchIngredient } from '../composables/ingredient.composable'
+// import type { Ingredient } from '@fm-apps/db'
+import type { ProductCategory } from '@fm-apps/db'
+// import type { IngredientInProduct } from '@fm-apps/db'
 import {
   useFetchProducts,
   useUpdateProduct,
@@ -333,8 +436,6 @@ import {
   useCreateProduct,
   useDeleteManyProducts,
 } from '../composables/productsInventory.composable'
-// import { useFetchProductCategories } from '../composables/productCategory.composable'
-// import type { ProductCategory } from '@fm-apps/db'
 
 // Define the type for the state parameter
 interface TableState {
@@ -349,8 +450,9 @@ interface Product {
   priceExclTax: number
   priceIncludingTax: number
   available: boolean
-  category: string
-  ingredients: string[]
+  category: ProductCategory
+  categoryId: string
+  // ingredients: IngredientInProduct[]
 }
 
 const { t } = useI18n()
@@ -366,28 +468,10 @@ const tableOptions = {
   },
 }
 
-// const products = ref([{
-//                 label: 'Debug Sandwich',
-//                 imageUrl : 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Salami_sandwich.jpg/500px-Salami_sandwich.jpg',
-//                 priceExclTax: 1.0,
-//                 priceIncludingTax: 1.2,
-//                 available : true,
-//                 category: 'aaaaaa',
-//                 ingredients: {
-//                   create: [
-//                     {
-//                       composition: 'BASE',
-//                       mandatory: true,
-//                       ingredient: {
-//                         id: 'aaaaaa',
-//                         label: 'Debug Bread',
-//                       },
-//                     },
-//                   ],
-//                 },
-//               },])
-// const { data:productCategories } = useFetchProductCategories()
-const { data: products, refetch } = useFetchProducts()
+const { data: products } = useFetchProducts() //refetch
+const { data: productCategories } = useFetchProductCategories()
+// const { data:ingredients } = useFetchIngredient()
+// const { data:ingredientsInProducts } = useFetchIngredientInProduct()
 const { mutate: updateProduct } = useUpdateProduct()
 const { mutate: deleteProduct } = useDeleteProduct()
 const { mutate: createProduct } = useCreateProduct()
@@ -395,25 +479,7 @@ const { mutate: deleteManyProducts } = useDeleteManyProducts()
 
 const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  label: { value: null, matchMode: FilterMatchMode.CONTAINS },
 })
-
-// const mappedProducts = computed(() => {
-//   if (!products.value) return []
-//   return products.value.map((product: Product) => {
-//     const { label, imageUrl, priceExclTax, priceIncludingTax, available, category, ingredients } = product
-//     return {
-//       label,
-//       imageUrl,
-//       priceExclTax,
-//       priceIncludingTax,
-//       available,
-//       category,
-//       // category: productCategories.value.find((cat) => cat.id === category)?.label,
-//       ingredients,
-//     }
-//   })
-// })
 
 // Pour afficher/masquer la modale
 const isUpdateDialogOpen = ref(false)
@@ -421,63 +487,82 @@ const isDeleteDialogOpen = ref(false)
 const isCreationDialogOpen = ref(false)
 const isDeleteManyDialogOpen = ref(false)
 
-const currentCategoryProductId = ref('')
 const selectedProducts = ref()
 
 // Pour stocker le produit à éditer
 const editableProduct = ref({
+  id: '',
   label: '',
   imageUrl: '',
-  priceExclTax: 0,
-  priceIncludingTax: 0,
+  priceExclTax: 0 as number,
+  priceIncludingTax: 0 as number,
   available: true,
-  category: '',
-  ingredients: [] as string[],
+  category: {} as ProductCategory,
+  categoryId: '',
+  // ingredients: [] as IngredientInProduct[],
 })
 
 // Pour stocker le produit à supprimer
 const deletableProduct = ref({
+  id: '',
   label: '',
   imageUrl: '',
   priceExclTax: 0,
   priceIncludingTax: 0,
   available: true,
-  category: '',
-  ingredients: [] as string[],
+  category: {} as ProductCategory,
+  // ingredients: [] as IngredientInProduct[],
 })
 
 // Pour stocker le produit à créer
 const creatableProduct = ref({
   label: '',
   imageUrl: '',
+  priceExclTax: 0,
+  priceIncludingTax: 0,
+  available: true,
+  category: {} as ProductCategory,
+  categoryId: '',
+  // ingredients: [] as IngredientInProduct[],
 })
 
+const booleanValues = [
+  { label: t('productsInventory.booleanValues.true'), value: true },
+  { label: t('productsInventory.booleanValues.false'), value: false },
+]
+
+// const usedIngredients = ref([] as Ingredient[])
+
 function startEdition(product: Product) {
-  currentCategoryProductId.value = product.id
   editableProduct.value = { ...product }
+  // usedIngredients.value = []
+  // for (const ingredient of product.ingredients) {
+  //   usedIngredients.value.push(ingredients.value.find((i: Ingredient) => i.id === ingredient.ingredientId))
+  // }
   isUpdateDialogOpen.value = true
 }
 
+function stopEdition() {
+  isUpdateDialogOpen.value = false
+  // usedIngredients.value = []
+}
+
 async function updateProductInInventory() {
+  editableProduct.value.categoryId = editableProduct.value.category.id // TODO: fix this when the backend/datatable are updated by modifying the productCategory Column's logic
   await updateProduct({
-    id: currentCategoryProductId.value,
-    ...editableProduct.value,
+    product: editableProduct.value,
+    // ingredients : editableProduct.value.ingredients
   })
   isUpdateDialogOpen.value = false
-  refetch.value()
 }
 
 function startDeletion(product: Product) {
   deletableProduct.value = { ...product }
-  currentCategoryProductId.value = product.id
   isDeleteDialogOpen.value = true
 }
 
 function deleteProductFromInventory() {
-  const a = {
-    id: currentCategoryProductId.value,
-  }
-  deleteProduct(a)
+  deleteProduct(deletableProduct.value)
   isDeleteDialogOpen.value = false
 }
 
@@ -486,15 +571,23 @@ function startCreation() {
   creatableProduct.value = {
     label: '',
     imageUrl: '',
+    priceExclTax: 0,
+    priceIncludingTax: 0,
+    available: true,
+    category: {} as ProductCategory,
+    categoryId: '',
+    // ingredients: [] as IngredientInProduct[],
   }
 }
 
+function stopCreation() {
+  isCreationDialogOpen.value = false
+  // usedIngredients.value = []
+}
+
 function createProductInInventory() {
-  const a = {
-    label: creatableProduct.value.label,
-    imageUrl: creatableProduct.value.imageUrl,
-  }
-  createProduct(a)
+  creatableProduct.value.categoryId = creatableProduct.value.category.id // TODO: fix this when the backend/datatable are updated by modifying the productCategory Column's logic
+  createProduct(creatableProduct.value)
   isCreationDialogOpen.value = false
 }
 
