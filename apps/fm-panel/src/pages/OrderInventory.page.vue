@@ -159,7 +159,7 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useFetchOrder, useUpdateOrder } from '../composables/order.composable'
 import type { OrderDialog } from '../types/order.type'
-import { formatHour } from '../utils/format'
+import formatHour from '@fm-apps/toolkit/utils'
 
 const { t } = useI18n()
 const { data, refetch: orderRefetch } = useFetchOrder()
