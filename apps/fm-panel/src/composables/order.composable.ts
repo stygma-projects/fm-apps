@@ -10,6 +10,7 @@ export const useUpdateOrder = () => {
   return useMutation((orderInput: Order) =>
     trpc.order.orders.update.mutate({
       id: orderInput.id,
+      orderId: orderInput.orderId,
       type: orderInput.type,
       status: orderInput.status,
       withdrawalMethod: orderInput.withdrawalMethod,

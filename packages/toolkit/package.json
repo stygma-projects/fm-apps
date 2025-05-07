@@ -5,6 +5,7 @@
   "description": "",
   "private": true,
   "scripts": {
+    "build": "tsc --project ./tsconfig.node.json",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "clean": "rm -rf node_modules"
@@ -16,7 +17,8 @@
     "./eslint": "./eslint.config.js",
     "./prettier": "./prettier.config.js",
     "./commitlint": "./commitlint.config.js",
-    "./lint-staged": "./lint-staged.config.js"
+    "./lint-staged": "./lint-staged.config.js",
+    "./utils": "./dist/utils/index.js"
   },
   "dependencies": {
     "@vfourny/node-toolkit": "1.0.13",

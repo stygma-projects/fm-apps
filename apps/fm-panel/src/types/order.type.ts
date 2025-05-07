@@ -1,6 +1,7 @@
 import type { OrderStatus, OrderType, WithdrawalMethod } from '@fm-apps/db'
 
 export interface OrderDialog {
+  orderId: number
   id: string
   products?: Product[]
   type: OrderType

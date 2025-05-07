@@ -34,6 +34,7 @@ export interface Product {
 
 // Interface pour la commande
 export interface Order {
+  orderId: number
   id: string
   products?: Product[]
   type: OrderType
