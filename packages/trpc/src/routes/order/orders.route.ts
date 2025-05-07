@@ -79,6 +79,7 @@ export const ordersRouter = router({
   create: publicProcedure
     .input(
       z.object({
+        orderId: z.number(),
         type: orderTypeEnum,
         status: statusEnum.default(statusEnum.enum.PENDING),
         withdrawalMethod: withdrawalMethodEnum,
@@ -100,6 +101,7 @@ export const ordersRouter = router({
     .input(
       z.object({
         id: z.string(),
+        orderId: z.number(),
         type: orderTypeEnum,
         status: statusEnum,
         withdrawalMethod: withdrawalMethodEnum,
