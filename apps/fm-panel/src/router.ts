@@ -4,6 +4,7 @@ import ProductCategoriesPage from './pages/ProductCategories.page.vue'
 import IngredientCategoriesPage from './pages/IngredientCategories.page.vue'
 import IngredientInventoryPage from './pages/IngredientInventory.page.vue'
 import ProductPage from './pages/ProductsInventory.page.vue'
+import CommandeInventoryPage from './pages/OrderInventory.page.vue'
 
 const routes = [
   {
@@ -23,7 +24,6 @@ const routes = [
             path: 'ingredient-categories',
             component: IngredientCategoriesPage,
           },
-          { path: 'ingredient', component: IngredientInventoryPage },
           {
             path: 'products',
             component: ProductPage,
@@ -31,6 +31,16 @@ const routes = [
           {
             path: 'ingredient',
             component: IngredientInventoryPage,
+          },
+        ],
+      },
+      {
+        path: 'order',
+        children: [
+          { path: '', redirect: '/order/list' },
+          {
+            path: 'list',
+            component: CommandeInventoryPage,
           },
         ],
       },
