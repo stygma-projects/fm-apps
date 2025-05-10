@@ -368,9 +368,9 @@ import {
   useUpdateIngredient,
   useDeleteIngredient,
   useDeleteManyIngredient,
-} from '../composables/ingredient.composable'
+} from '../composables/api/ingredient.composable'
 import { useToast } from 'primevue'
-import { useFetchIngredientCategories } from '../composables/ingredientCategory.composable'
+import { useFetchIngredientCategories } from '../composables/api/ingredientCategory.composable'
 import type { IngredientCategory } from '../../../../packages/db/generated/client'
 
 const toast = useToast()

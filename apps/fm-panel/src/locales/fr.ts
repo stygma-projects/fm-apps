@@ -1,5 +1,8 @@
 export const fr = {
   appName: 'FM Panel',
+  common: {
+    searchPlaceholder: 'Rechercher...',
+  },
   sidebarMenu: {
     inventory: {
       label: 'Inventaire',

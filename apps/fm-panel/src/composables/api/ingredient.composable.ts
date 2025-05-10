@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/vue-query'
-import { trpc } from '../api/trpc'
+import { trpc } from '../../api/trpc'
 import type {
   CreateIngredientInput,
   CreateIngredientOutput,
@@ -26,7 +26,7 @@ enum IngredientMutationKey {
 export const useFetchIngredient = () => {
   return useQuery<ListIngredientOutput, Error>({
     queryKey: [IngredientQueryKey.LIST],
-    queryFn: () => trpc.inventory.ingredient.list.query()
+    queryFn: () => trpc.inventory.ingredient.list.query(),
   })
 }
 
@@ -55,7 +55,11 @@ export const useDeleteIngredient = () => {
 }
 
 export const useDeleteManyIngredient = () => {
-  return useMutation<DeleteManyIngredientOutput, Error, DeleteManyIngredientInput>({
+  return useMutation<
+    DeleteManyIngredientOutput,
+    Error,
+    DeleteManyIngredientInput
+  >({
     mutationKey: [IngredientMutationKey.DELETE_MANY],
     mutationFn: (deleteManyIngredientInput) =>
       trpc.inventory.ingredient.deleteMany.mutate(deleteManyIngredientInput),

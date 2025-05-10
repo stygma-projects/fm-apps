@@ -238,14 +238,14 @@ import { ref } from 'vue'
 import { computed } from 'vue'
 import { FilterMatchMode } from '@primevue/core/api'
 import {
-  useFetchProductCategories,
+  useListProductCategories,
   useUpdateProductCategory,
   useDeleteProductCategory,
   useCreateProductCategory,
   useDeleteManyProductCategories,
 } from '../composables/productCategory.composable'
 
-const { data: productCategories, refetch } = useFetchProductCategories()
+const { data: productCategories, refetch } = useListProductCategories()
 const { mutate: updateProductCategory } = useUpdateProductCategory()
 const { mutate: deleteProductCategory } = useDeleteProductCategory()
 const { mutate: createProductCategory } = useCreateProductCategory()

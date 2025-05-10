@@ -241,7 +241,7 @@ import {
   useDeleteManyIngredientCategory,
   useFetchIngredientCategories,
   useUpdateIngredientCategory,
-} from '../composables/ingredientCategory.composable'
+} from '../composables/api/ingredientCategory.composable'
 import { useToast } from 'primevue'
 
 const toast = useToast()
