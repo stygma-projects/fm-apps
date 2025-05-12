@@ -4,7 +4,11 @@ import { publicProcedure, router } from '../../trpc'
 
 export const productRouter = router({
   list: publicProcedure.query(async () => {
-    return await prisma.product.findMany()
+    return await prisma.product.findMany({
+      orderBy: {
+        label: 'asc',
+      },
+    })
   }),
   getById: publicProcedure
     .input(

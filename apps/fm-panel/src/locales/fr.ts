@@ -26,6 +26,7 @@ export const fr = {
         productCategories: 'Catégories de produits',
         ingredientCategories: "Catégories d'ingrédients",
         ingredient: 'Ingrédients',
+        commande: 'Commandes',
       },
     },
   },
@@ -121,6 +122,36 @@ export const fr = {
       deleteManyDialog: {
         title: 'Confirmation de la suppression',
       },
+    },
+  },
+  order: {
+    title: {
+      id: '#',
+      type: 'Type',
+      price: 'Prix',
+      createdAt: 'Heure',
+    },
+    dialogs: {
+      title: 'Détail de la commande',
+      id: 'ID: ',
+      createdAt: 'Heure: ',
+      price: 'Prix: ',
+      withdrawalMethod: 'Méthode de paiement: ',
+      terminal: 'Terminal: ',
+      status: 'Status: ',
+      type: 'Type: ',
+      product: 'Produits: ',
+    },
+    status: {
+      PENDING: 'En attente',
+      IN_PROGRESS: 'En cours',
+      DELIVERED: 'Terminé',
+      CANCELED: 'Annulé',
+    },
+    types: {
+      TERMINALS: 'Terminal',
+      PICKUP: 'Click & Collect',
+      DELIVERY: 'Livraison',
     },
   },
 }

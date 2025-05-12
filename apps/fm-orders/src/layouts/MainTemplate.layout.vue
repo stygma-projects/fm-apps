@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="flex flex-grow overflow-hidden">
-      <div class="flex-grow p-8 overflow-y-auto">
+      <div class="flex-grow overflow-y-auto">
         <router-view />
         <Toast />
       </div>

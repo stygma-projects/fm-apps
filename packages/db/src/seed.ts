@@ -99,17 +99,20 @@ async function main() {
   await prisma.order.createMany({
     data: [
       {
+        orderId: 1,
         type: OrderType.PICKUP,
         status: OrderStatus.DELIVERED,
         withdrawalMethod: WithdrawalMethod.CASH,
         price: 13.22,
       },
       {
+        orderId: 2,
         type: OrderType.DELIVERY,
         withdrawalMethod: WithdrawalMethod.CASH,
         price: 7.27,
       },
       {
+        orderId: 3,
         type: OrderType.TERMINALS,
         status: OrderStatus.IN_PROGRESS,
         withdrawalMethod: WithdrawalMethod.CARD,

@@ -10,7 +10,11 @@ const isExistingCategoryLabel = async (label: string) => {
 
 export const productCategoryRouter = router({
   list: publicProcedure.query(async () => {
-    return await prisma.productCategory.findMany()
+    return await prisma.productCategory.findMany({
+      orderBy: {
+        label: 'asc',
+      },
+    })
   }),
   getById: publicProcedure
     .input(
