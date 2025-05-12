@@ -2,6 +2,22 @@ export const fr = {
   appName: 'FM Panel',
   common: {
     searchPlaceholder: 'Rechercher...',
+    actions: {
+      cancel: 'Annuler',
+      confirm: 'Confirmer',
+      delete: 'Supprimer',
+      edit: 'Modifier',
+      save: 'Enregistrer',
+    },
+    yes: 'Oui',
+    no: 'Non',
+    confirmModal: {
+      delete: {
+        header: 'Avant de continuer...',
+        message:
+          'Confirmer la suppression ? Cette action ne pourra pas être annulée.',
+      },
+    },
   },
   sidebarMenu: {
     inventory: {

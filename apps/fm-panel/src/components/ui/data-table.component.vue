@@ -16,17 +16,18 @@
           {{ t('productCategory.title') }}
         </h1>
         <div class="flex gap-2">
-        <PrimeIconField v-if="filterFields.length > 0">
-          <PrimeInputIcon>
-            <i class="pi pi-search" />
-          </PrimeInputIcon>
-          <PrimeInputText
-            v-model="searchFilter.global.value"
-            :placeholder="t('common.searchPlaceholder')"
-          />
-        </PrimeIconField>
-        <slot name="header" :selected-items="selectedItems"></slot>
-      </div></div>
+          <PrimeIconField v-if="filterFields.length > 0">
+            <PrimeInputIcon>
+              <i class="pi pi-search" />
+            </PrimeInputIcon>
+            <PrimeInputText
+              v-model="searchFilter.global.value"
+              :placeholder="t('common.searchPlaceholder')"
+            />
+          </PrimeIconField>
+          <slot name="header" :selected-items="selectedItems"></slot>
+        </div>
+      </div>
     </template>
     <PrimeColumn selection-mode="multiple"></PrimeColumn>
     <PrimeColumn

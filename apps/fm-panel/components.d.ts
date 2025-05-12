@@ -10,11 +10,9 @@ declare module 'vue' {
   export interface GlobalComponents {
     'ConfirmModalWrapper.component': typeof import('./src/components/ui/confirm-modal-wrapper.component.vue')['default']
     'CrudDataTable.component': typeof import('./src/components/ui/crud-data-table.component.vue')['default']
-    DataTable: typeof import('./src/components/ui/data-table.vue')['default']
     'DataTable.component': typeof import('./src/components/ui/data-table.component.vue')['default']
     InputText: typeof import('./src/components/ui/form/input-text.vue')['default']
     'InputText.component': typeof import('./src/components/ui/form/input-text.component.vue')['default']
-    ModalWrapper: typeof import('./src/components/ui/modal-wrapper.vue')['default']
     'ModalWrapper.component': typeof import('./src/components/ui/modal-wrapper.component.vue')['default']
     PrimeButton: typeof import('primevue/button')['default']
     PrimeColumn: typeof import('primevue/column')['default']

@@ -1,10 +1,10 @@
 <template>
   <PrimeDialog v-model:visible="isVisible" :header="title">
-    <div class="mt-2">  
+    <div class="mt-2">
       <slot name="content"></slot>
     </div>
 
-    <template #footer >
+    <template #footer>
       <PrimeButton
         v-if="onCancel"
         label="Cancel"
@@ -13,7 +13,12 @@
         outlined
         @click="handleCancel"
       />
-      <PrimeButton v-if="onConfirm" label="Save" icon="pi pi-check" @click="handleConfirm" />
+      <PrimeButton
+        v-if="onConfirm"
+        label="Save"
+        icon="pi pi-check"
+        @click="handleConfirm"
+      />
     </template>
   </PrimeDialog>
 </template>
@@ -33,13 +38,16 @@ const props = defineProps({
   onCancel: {
     type: Function,
     required: false,
-    default:null
+    default: null,
   },
 })
 
 const { title, onConfirm, onCancel } = toRefs(props)
 
-const isVisible = defineModel<boolean>('is-visible', { required: true, type: Boolean })
+const isVisible = defineModel<boolean>('is-visible', {
+  required: true,
+  type: Boolean,
+})
 
 const handleConfirm = () => {
   onConfirm?.value?.()

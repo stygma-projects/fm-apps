@@ -4,7 +4,12 @@ import { Severity } from '../types/primevue.type'
 export const useToast = () => {
   const toast = PrimeVueToast()
 
-  const showToast = (severity: Severity, summary: string, detail: string, life = 3000) => {
+  const showToast = (
+    severity: Severity,
+    summary: string,
+    detail: string,
+    life = 3000,
+  ) => {
     toast.add({
       severity,
       summary,
@@ -26,7 +31,7 @@ export const useToast = () => {
   }
 
   const errorToast = (summary: string, detail: string, life = 3000) => {
-    showToast(Severity.ERROR, summary, detail, life)
+    showToast(Severity.DANGER, summary, detail, life)
   }
 
   return {
@@ -38,4 +43,3 @@ export const useToast = () => {
     successToast,
   }
 }
-
