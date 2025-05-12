@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainTemplateLayout from './layouts/MainTemplate.layout.vue'
-import ProductCategoriesPage from './pages/ProductCategories.page.vue'
+import ProductCategoriesPage from './pages/product-categories.page.vue'
 import IngredientCategoriesPage from './pages/IngredientCategories.page.vue'
 import IngredientInventoryPage from './pages/IngredientInventory.page.vue'
 import ProductPage from './pages/ProductsInventory.page.vue'
