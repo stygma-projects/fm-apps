@@ -26,6 +26,7 @@ export const fr = {
         productCategories: 'Catégories de produits',
         ingredientCategories: "Catégories d'ingrédients",
         ingredient: 'Ingrédients',
+        productsInventory: 'Produits',
         commande: 'Commandes',
       },
     },
@@ -153,5 +154,51 @@ export const fr = {
       PICKUP: 'Click & Collect',
       DELIVERY: 'Livraison',
     },
+  },
+  productsInventory: {
+    table: {
+      headers: {
+        label: 'Nom',
+        imageUrl: 'Image',
+        priceExclTax: 'Prix HT',
+        priceIncludingTax: 'Prix TTC',
+        available: 'Disponible',
+        category: 'Catégorie',
+        categoryId: 'Catégorie',
+        ingredients: 'Ingrédients',
+      },
+    },
+    toolBar: {
+      searchPlaceholder: 'Rechercher',
+      addButton: 'Nouveau produit',
+      deleteManyButton: 'Supprimer',
+    },
+    title: 'Produits',
+    dialogs: {
+      editDialog: {
+        title: 'Modification du produit',
+      },
+      deleteDialog: {
+        title: 'Confirmation de la suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer ?',
+      },
+      createDialog: {
+        title: 'Nouveau produit',
+        categoryPlaceholder: 'Sélectionner une catégorie',
+        ingredientsPlaceholder: 'Sélectionner des ingrédients',
+      },
+      deleteManyDialog: {
+        title: 'Confirmation de la suppression',
+      },
+    },
+    booleanValues: {
+      true: 'Oui',
+      false: 'Non',
+    },
+    availability: {
+      available: 'Disponible',
+      notAvailable: 'Rupture de stock',
+    },
+    noImage: "Pas d'image fournie",
   },
 }

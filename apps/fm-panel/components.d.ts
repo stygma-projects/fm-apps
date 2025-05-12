@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+
     'ConfirmModalWrapper.component': typeof import('./src/components/ui/confirm-modal-wrapper.component.vue')['default']
     'CrudDataTable.component': typeof import('./src/components/ui/crud-data-table.component.vue')['default']
     'DataTable.component': typeof import('./src/components/ui/data-table.component.vue')['default']
