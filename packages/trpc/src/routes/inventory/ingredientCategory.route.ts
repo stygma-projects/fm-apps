@@ -2,6 +2,12 @@ import { z } from 'zod'
 import prisma from '../../libs/prisma'
 import { publicProcedure, router } from '../../trpc'
 
+const isExistingCategoryLabel = (label: string) => {
+  return !!prisma.ingredientCategory.findUnique({
+    where: { label },
+  })
+}
+
 export const ingredientCategoryRouter = router({
   list: publicProcedure.query(async () => {
     return await prisma.ingredientCategory.findMany({
@@ -28,6 +34,11 @@ export const ingredientCategoryRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
+      const existingCategoryLabel = isExistingCategoryLabel(input.label)
+      if (existingCategoryLabel) {
+        throw new Error('Une catégorie avec ce nom existe déjà')
+      }
+
       return await prisma.ingredientCategory.create({
         data: input,
       })
@@ -42,6 +53,14 @@ export const ingredientCategoryRouter = router({
     )
     .mutation(async ({ input }) => {
       const { id, ...data } = input
+
+      if (data.label) {
+        const existingCategoryLabel = isExistingCategoryLabel(data.label)
+        if (existingCategoryLabel) {
+          throw new Error('Une catégorie avec ce nom existe déjà')
+        }
+      }
+
       return await prisma.ingredientCategory.update({
         where: { id },
         data,

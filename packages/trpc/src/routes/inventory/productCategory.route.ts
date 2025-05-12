@@ -2,6 +2,12 @@ import { z } from 'zod'
 import prisma from '../../libs/prisma'
 import { publicProcedure, router } from '../../trpc'
 
+const isExistingCategoryLabel = async (label: string) => {
+  return await prisma.productCategory.findUnique({
+    where: { label },
+  })
+}
+
 export const productCategoryRouter = router({
   list: publicProcedure.query(async () => {
     return await prisma.productCategory.findMany({
@@ -28,6 +34,11 @@ export const productCategoryRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
+      const existingCategoryLabel = await isExistingCategoryLabel(input.label)
+      if (existingCategoryLabel) {
+        throw new Error('Une catégorie avec ce nom existe déjà')
+      }
+
       return await prisma.productCategory.create({
         data: input,
       })
@@ -42,6 +53,14 @@ export const productCategoryRouter = router({
     )
     .mutation(async ({ input }) => {
       const { id, ...data } = input
+
+      if (data.label) {
+        const existingCategoryLabel = await isExistingCategoryLabel(data.label)
+        if (existingCategoryLabel) {
+          throw new Error(`Une catégorie avec ce nom existe déjà`)
+        }
+      }
+
       return await prisma.productCategory.update({
         where: { id },
         data,
@@ -59,13 +78,16 @@ export const productCategoryRouter = router({
       })
     }),
   deleteMany: publicProcedure
-    .input(z.array(z.string()))
+    .input(
+      z.object({
+        ids: z.array(z.string()),
+      }),
+    )
     .mutation(async ({ input }) => {
+      const { ids } = input
       return await prisma.productCategory.deleteMany({
         where: {
-          id: {
-            in: input,
-          },
+          id: { in: ids },
         },
       })
     }),
