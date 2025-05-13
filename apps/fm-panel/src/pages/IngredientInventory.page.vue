@@ -73,12 +73,12 @@
         <InputText
           v-model="editableIngredient.priceExclTax"
           :label="t('ingredient.table.headers.priceExclTax')"
-          type="number"
+          :type="InputType.NUMBER"
         />
         <InputText
           v-model="editableIngredient.priceIncludingTax"
           :label="t('ingredient.table.headers.priceIncludingTax')"
-          type="number"
+          :type="InputType.NUMBER"
         />
         <PrimeDropdown
           v-model="editableIngredient.categoryId"
@@ -111,12 +111,12 @@
         <InputText
           v-model="editableIngredient.priceExclTax"
           :label="t('ingredient.table.headers.priceExclTax')"
-          type="number"
+          :type="InputType.NUMBER"
         />
         <InputText
           v-model="editableIngredient.priceIncludingTax"
           :label="t('ingredient.table.headers.priceIncludingTax')"
-          type="number"
+          :type="InputType.NUMBER"
         />
         <PrimeDropdown
           v-model="editableIngredient.categoryId"
@@ -134,6 +134,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import InputText from '../components/ui/form/input-text.component.vue'
+import { InputType } from '../types/primevue.type'
 import DataTable from '../components/ui/data-table.component.vue'
 import ModalWrapper from '../components/ui/modal-wrapper.component.vue'
 import {
