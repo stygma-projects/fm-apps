@@ -8,7 +8,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-
     'ConfirmModalWrapper.component': typeof import('./src/components/ui/confirm-modal-wrapper.component.vue')['default']
     'CrudDataTable.component': typeof import('./src/components/ui/crud-data-table.component.vue')['default']
     'DataTable.component': typeof import('./src/components/ui/data-table.component.vue')['default']
@@ -25,15 +24,16 @@ declare module 'vue' {
     PrimeIconField: typeof import('primevue/iconfield')['default']
     PrimeImage: typeof import('primevue/image')['default']
     PrimeInputIcon: typeof import('primevue/inputicon')['default']
+    PrimeInputNumber: typeof import('primevue/inputnumber')['default']
     PrimeInputText: typeof import('primevue/inputtext')['default']
     PrimeMultiSelect: typeof import('primevue/multiselect')['default']
-    PrimeToast: typeof import('primevue/toast')['default']
     PrimeProgressBar: typeof import('primevue/progressbar')['default']
     PrimeRadioButton: typeof import('primevue/radiobutton')['default']
     PrimeSidebar: typeof import('primevue/sidebar')['default']
     PrimeTabMenu: typeof import('primevue/tabmenu')['default']
     PrimeTag: typeof import('primevue/tag')['default']
     PrimeTextarea: typeof import('primevue/textarea')['default']
+    PrimeToast: typeof import('primevue/toast')['default']
     PrimeToolbar: typeof import('primevue/toolbar')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
