@@ -4,6 +4,7 @@ const scopes = [
   'fm-orders',
   'fm-panel',
   'fm-api',
+  'fm-customer',
   'db',
   'toolkit',
   'trpc',

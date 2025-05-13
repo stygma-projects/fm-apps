@@ -1,0 +1,28 @@
+{
+  "name": "@fm-apps/fm-customer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@nuxtjs/i18n": "^9.5.4",
+    "@primeuix/themes": "^1.1.1",
+    "@tailwindcss/vite": "^4.1.6",
+    "nuxt": "^3.17.3",
+    "primevue": "^4.3.4",
+    "tailwindcss": "^4.1.6",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@primevue/nuxt-module": "^4.3.4"
+  }
+}
