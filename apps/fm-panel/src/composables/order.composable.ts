@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from 'vue-query'
+import { useMutation, useQuery } from '@tanstack/vue-query'
 import { trpc } from '../api/trpc'
 import type { Order } from '@fm-apps/db'
 

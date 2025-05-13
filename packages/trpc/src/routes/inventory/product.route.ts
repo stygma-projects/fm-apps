@@ -2,6 +2,12 @@ import { z } from 'zod'
 import prisma from '../../libs/prisma'
 import { publicProcedure, router } from '../../trpc'
 
+const isExistingProductLabel = async (label: string) => {
+  return await prisma.productCategory.findUnique({
+    where: { label },
+  })
+}
+
 export const productRouter = router({
   list: publicProcedure.query(async () => {
     return await prisma.product.findMany({
@@ -43,6 +49,11 @@ export const productRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
+      const existingProductLabel = await isExistingProductLabel(input.label)
+      if (existingProductLabel) {
+        throw new Error('Un produit avec ce nom existe déjà')
+      }
+
       return await prisma.product.create({
         data: input,
       })
@@ -60,7 +71,15 @@ export const productRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
+      
       const { id, ...data } = input
+      if (data.label) {
+        const existingProductLabel = await isExistingProductLabel(data.label)
+        if (existingProductLabel) {
+          throw new Error(`Une catégorie avec ce nom existe déjà`)
+        }
+      }
+
       return await prisma.product.update({
         where: { id },
         data,
