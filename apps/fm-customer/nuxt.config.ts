@@ -6,6 +6,9 @@ export default defineNuxtConfig({
   srcDir: './src',
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  devServer: {
+    port: 3001
+  },
   modules: ['@primevue/nuxt-module', '@nuxtjs/i18n'], 
   css: ['~/assets/styles/main.css'],
   primevue: {
