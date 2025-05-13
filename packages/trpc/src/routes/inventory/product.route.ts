@@ -43,6 +43,11 @@ export const productRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
+
+      if (await prisma.product.findUnique({ where: { label: input.label } })) {
+        throw new Error(`Product ${input.label} already exists`)
+      }
+
       return await prisma.product.create({
         data: input,
       })
@@ -61,6 +66,11 @@ export const productRouter = router({
     )
     .mutation(async ({ input }) => {
       const { id, ...data } = input
+
+      if (await prisma.product.findUnique({ where: { label: data.label } })) {
+        throw new Error(`Product ${data.label} already exists`)
+      }
+
       return await prisma.product.update({
         where: { id },
         data,
