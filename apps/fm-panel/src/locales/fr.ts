@@ -34,67 +34,74 @@ export const fr = {
   ingredientCategories: {
     title: "Catégories d'ingrédients",
     table: {
-      name: 'Nom',
-      imageUrl: 'Image',
-      noImage: '',
-      action: 'Actions',
+      headers: {
+        label: 'Nom',
+        imageUrl: 'Image',
+        action: 'Actions',
+      }
     },
-    actions: {
-      new: 'Nouveau',
-      delete: 'Supprimer',
-      edit: 'Modifier',
-      save: 'Enregistrer',
-      cancel: 'Annuler',
+    toolBar: {
+      searchPlaceholder: 'Rechercher',
+      addButton: 'Nouvelle catégorie',
+      deleteManyButton: 'Supprimer',
     },
     dialogs: {
-      detailsTitle: "Détails de l'ingrédient",
-      confirmDeleteTitle: 'Confirmation de la suppression',
-      confirmDeleteSingle: 'Êtes-vous sûr de vouloir supprimer : ',
-      confirmDeleteMultiple:
-        "Êtes-vous sûr de vouloir supprimer ces catégories d'ingrédients ?",
+      editDialog: {
+        title: 'Modification de la catégorie',
+      },
+      deleteDialog: {
+        title: 'Confirmation de la suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer ?',
+      },
+      createDialog: {
+        title: 'Nouvelle catégorie',
+      },
+      deleteManyDialog: {
+        title: 'Confirmation de la suppression',
+      },
     },
-    error: {
-      nameRequired: 'Le nom est requis.',
-      imageUrlLength:
-        "L'URL de l'image est trop longue et ne peut pas être enregistrée. Veuillez fournir une URL plus courte.",
+    booleanValues: {
+      true: 'Oui',
+      false: 'Non',
     },
-    buttons: {
-      yes: 'Oui',
-      no: 'Non',
-    },
-    searchPlaceholder: 'Rechercher...',
+    noImage: "Pas d'image fournie",
   },
-  ingredients: {
+  ingredient: {
     title: 'Ingrédients',
     table: {
-      label: "Nom d'ingrédient",
-      priceHt: 'Prix HT',
-      priceTtc: 'Prix TTC',
-      imageUrl: 'Image',
-      noImage: '',
-      action: 'Actions',
-      category: 'Catégorie',
+      headers: {
+        label: 'Nom',
+        imageUrl: 'Image',
+        priceExclTax: 'Prix HT',
+        priceIncludingTax: 'Prix TTC',
+        category: 'Catégorie',
+      },
     },
-    actions: {
-      new: 'Nouveau',
-      delete: 'Supprimer',
-      edit: 'Modifier',
-      save: 'Enregistrer',
-      cancel: 'Annuler',
+    toolBar: {
+      searchPlaceholder: 'Rechercher',
+      addButton: 'Nouvel ingrédient',
+      deleteManyButton: 'Supprimer',
     },
     dialogs: {
-      detailsTitle: "Détails de l'ingrédient",
-      editTitle: "Modification de l'ingrédient",
-      confirmDeleteTitle: 'Confirmation de la suppression',
-      confirmDeleteSingle: 'Êtes-vous sûr de vouloir supprimer : ',
-      confirmDeleteMultiple:
-        'Êtes-vous sûr de vouloir supprimer ces ingrédients ?',
+      editDialog: {
+        title: 'Modification de l\'ingrédient',
+      },
+      deleteDialog: {
+        title: 'Confirmation de la suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer ?',
+      },
+      createDialog: {
+        title: 'Nouvel ingrédient',
+      },
+      deleteManyDialog: {
+        title: 'Confirmation de la suppression',
+      },
     },
-    search: {
-      searchPlaceholder: 'Rechercher...',
-      searchByName: 'Rechercher par le nom',
-      searchByPriceHt: 'Rechercher par le prix HT',
+    booleanValues: {
+      true: 'Oui',
+      false: 'Non',
     },
+    noImage: "Pas d'image fournie",
   },
   productCategory: {
     title: 'Catégories de produits',
@@ -108,6 +115,10 @@ export const fr = {
       searchPlaceholder: 'Rechercher',
       addButton: 'Nouvelle catégorie',
       deleteManyButton: 'Supprimer',
+    },
+    booleanValues: {
+      true: 'Oui',
+      false: 'Non',
     },
     dialogs: {
       editDialog: {
