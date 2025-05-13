@@ -81,10 +81,17 @@ export const ingredientRouter = router({
     )
     .mutation(async ({ input }) => {
       const { ids } = input
-      return await prisma.ingredient.deleteMany({
+
+      const ingredientInProducts = await prisma.ingredientInProduct.deleteMany({
+        where: {
+          ingredientId: { in: ids },
+        },
+      })
+      const ingredient = await prisma.ingredient.deleteMany({
         where: {
           id: { in: ids },
         },
       })
+      return { ingredientInProducts, ingredient }
     }),
 })
