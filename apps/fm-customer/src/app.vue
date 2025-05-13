@@ -1,6 +1,9 @@
 <template>
     <div>
         {{ $t('common.title') }}
-        <Button label="Check" icon="pi pi-check" />
+        <Button label="Danger" severity="danger" />
     </div>
 </template>
+
+<script setup>
+</script>
