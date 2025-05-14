@@ -2,6 +2,12 @@ import { z } from 'zod'
 import prisma from '../../libs/prisma'
 import { publicProcedure, router } from '../../trpc'
 
+const isExistingProductLabel = async (label: string) => {
+  return await prisma.productCategory.findUnique({
+    where: { label },
+  })
+}
+
 export const productRouter = router({
   list: publicProcedure.query(async () => {
     return await prisma.product.findMany({
@@ -65,6 +71,7 @@ export const productRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
+      
       const { id, ...data } = input
 
       if (await prisma.product.findUnique({ where: { label: data.label } })) {

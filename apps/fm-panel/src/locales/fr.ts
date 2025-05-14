@@ -135,6 +135,7 @@ export const fr = {
         title: 'Confirmation de la suppression',
       },
     },
+    noImage: "Pas d'image fournie",
   },
   order: {
     title: {
@@ -173,7 +174,7 @@ export const fr = {
         imageUrl: 'Image',
         priceExclTax: 'Prix HT',
         priceIncludingTax: 'Prix TTC',
-        available: 'Disponible',
+        available: 'Disponibilité',
         category: 'Catégorie',
         categoryId: 'Catégorie',
         ingredients: 'Ingrédients',

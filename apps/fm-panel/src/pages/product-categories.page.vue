@@ -28,7 +28,7 @@
         :alt="rowData.label"
         class="rounded shadow-sm"
       />
-      <span v-else>{{ t('productCategory.table.noImage') }}</span>
+      <span v-else>{{ t('productCategory.noImage') }}</span>
     </template>
     <template #actions="{ rowData }">
       <PrimeButton
@@ -105,7 +105,7 @@ import {
 import { ref } from 'vue'
 import { useToast } from '../composables/toast.composable'
 import { useConfirmModal } from '../composables/confirm-modal.composable'
-import type { GetByIdProductCategoryOutput } from '@fm-apps/trpc'
+import type { GetByIdProductCategoryOutput } from '@fm-apps/trpc/'
 
 const { t } = useI18n()
 const { deleteConfirmation } = useConfirmModal()
