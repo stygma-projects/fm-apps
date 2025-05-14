@@ -44,6 +44,7 @@ export const productRouter = router({
         categoryId: z.string(),
         mandatory: z.array(
           z.object({
+            id: z.string(),
             label: z.string().min(2),
             priceExclTax: z.number().min(0),
             priceIncludingTax: z.number().min(0),
@@ -53,6 +54,7 @@ export const productRouter = router({
         ).optional().nullable(),
         optionnalBase : z.array(
           z.object({
+            id: z.string(),
             label: z.string().min(2),
             priceExclTax: z.number().min(0),
             priceIncludingTax: z.number().min(0),
@@ -62,6 +64,7 @@ export const productRouter = router({
         ).optional().nullable(),
         extra : z.array(
           z.object({
+            id: z.string(),
             label: z.string().min(2),
             priceExclTax: z.number().min(0),
             priceIncludingTax: z.number().min(0),
@@ -93,6 +96,7 @@ export const productRouter = router({
         categoryId: z.string().optional(),
         mandatory: z.array(
           z.object({
+            id: z.string(),
             label: z.string().min(2),
             priceExclTax: z.number().min(0),
             priceIncludingTax: z.number().min(0),
@@ -102,6 +106,7 @@ export const productRouter = router({
         ).optional().nullable(),
         optionnalBase : z.array(
           z.object({
+            id: z.string(),
             label: z.string().min(2),
             priceExclTax: z.number().min(0),
             priceIncludingTax: z.number().min(0),
@@ -111,6 +116,7 @@ export const productRouter = router({
         ).optional().nullable(),
         extra : z.array(
           z.object({
+            id: z.string(),
             label: z.string().min(2),
             priceExclTax: z.number().min(0),
             priceIncludingTax: z.number().min(0),
