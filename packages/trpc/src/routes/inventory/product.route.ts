@@ -42,6 +42,9 @@ export const productRouter = router({
         imageUrl: z.string().optional().nullable(),
         available: z.boolean().default(true),
         categoryId: z.string(),
+        mandatory: z.array(z.string()).default([]), // Liste des IDs d'ingrédients
+        optionalBase: z.array(z.string()).default([]),
+        extra: z.array(z.string()).default([]),
       }),
     )
     .mutation(async ({ input }) => {
@@ -50,8 +53,21 @@ export const productRouter = router({
         throw new Error(`Product ${input.label} already exists`)
       }
 
+      const { mandatory, optionalBase, extra, ...data } = input
+
       return await prisma.product.create({
-        data: input,
+        data: {
+          ...data,
+          mandatory: {
+            connect: mandatory.map((id) => ({ id })),
+          },
+          optionalBase: {
+            connect: optionalBase.map((id) => ({ id })),
+          },
+          extra: {
+            connect: extra.map((id) => ({ id })),
+          },
+        },
       })
     }),
   update: publicProcedure
@@ -64,19 +80,39 @@ export const productRouter = router({
         imageUrl: z.string().nullable().optional(),
         available: z.boolean().default(true).optional(),
         categoryId: z.string().optional(),
+        mandatory: z.array(z.string()).optional(), // Liste des IDs d'ingrédients
+        optionalBase: z.array(z.string()).optional(),
+        extra: z.array(z.string()).optional(),
       }),
     )
     .mutation(async ({ input }) => {
-      
-      const { id, ...data } = input
 
-      if (await prisma.product.findUnique({ where: { label: data.label } })) {
-        throw new Error(`Product ${data.label} already exists`)
+      const { id, mandatory, optionalBase, extra, ...data } = input
+
+      if (!(await prisma.product.findUnique({ where: { label: data.label } }))) {
+        throw new Error(`Product ${data.label} doesn't exist !`)
       }
-
+      
       return await prisma.product.update({
         where: { id },
-        data,
+        data: {
+          ...data,
+          mandatory: mandatory
+            ? {
+                set: mandatory.map((id) => ({ id })), // Remplace les relations existantes
+              }
+            : undefined,
+          optionalBase: optionalBase
+            ? {
+                set: optionalBase.map((id) => ({ id })),
+              }
+            : undefined,
+          extra: extra
+            ? {
+                set: extra.map((id) => ({ id })),
+              }
+            : undefined,
+        },
       })
     }),
   delete: publicProcedure

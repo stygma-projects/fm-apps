@@ -177,7 +177,9 @@ export const fr = {
         available: 'Disponibilité',
         category: 'Catégorie',
         categoryId: 'Catégorie',
-        ingredients: 'Ingrédients',
+        mandatory: 'Ingrédients essentiels',
+        optionalBase: 'Ingrédients optionnels',
+        extra: 'Suppléments'
       },
     },
     toolBar: {
@@ -212,5 +214,6 @@ export const fr = {
       notAvailable: 'Rupture de stock',
     },
     noImage: "Pas d'image fournie",
+    noIngredients : "Aucun",
   },
 }

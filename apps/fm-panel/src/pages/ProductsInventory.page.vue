@@ -37,14 +37,43 @@
     <template #column-category="{ rowData }">
       <span>{{ rowData.category.label }}</span>
     </template>
-    <template #column-ingredients="{ rowData }">
+    <template #column-mandatory="{ rowData }">
+      <span v-if="rowData.mandatory.length === 0">
+        {{ t('productsInventory.noIngredients') }}
+      </span>
       <span
-        v-for="(ingredient, index) in rowData.ingredients"
+        v-else
+        v-for="(ingredient, index) in rowData.mandatory"
         :key="index"
       >
-        {{ ingredient.ingredient.label}} <span v-if="index < rowData.length - 1">,</span>
+        {{ ingredient.label}} <span v-if="index < rowData.length - 1">,</span>
       </span>
     </template>
+    <template #column-optional-base="{ rowData }">
+      <span v-if="rowData.optionalBase.length === 0">
+        {{ t('productsInventory.noIngredients') }}
+      </span>
+      <span
+        v-else
+        v-for="(ingredient, index) in rowData.optionalBase"
+        :key="index"
+      >
+        {{ ingredient.label}} <span v-if="index < rowData.length - 1">,</span>
+      </span>
+    </template>
+    <template #column-extra="{ rowData }">
+      <span v-if="rowData.extra.length === 0">
+        {{ t('productsInventory.noIngredients') }}
+      </span>
+      <span
+        v-else
+        v-for="(ingredient, index) in rowData.extra"
+        :key="index"
+      >
+        {{ ingredient.label}} <span v-if="index < rowData.length - 1">,</span>
+      </span>
+    </template>
+    
     <template #actions="{ rowData }">
       <PrimeButton
         icon="pi pi-pencil"
@@ -111,6 +140,33 @@
           />
           <label> {{ t('productsInventory.table.headers.category') }}</label>
         </PrimeFloatLabel>
+        <PrimeFloatLabel>
+          <PrimeMultiSelect
+            v-model="editableProduct.mandatory"
+            :options="ingredients"
+            option-label="label"
+            class="w-full"
+          />
+          <label>{{ t('productsInventory.table.headers.mandatory') }}</label>
+        </PrimeFloatLabel>
+        <PrimeFloatLabel>
+          <PrimeMultiSelect
+            v-model="editableProduct.optionalBase"
+            :options="ingredients"
+            option-label="label"
+            class="w-full"
+          />
+          <label>{{ t('productsInventory.table.headers.optionalBase') }}</label>
+        </PrimeFloatLabel>
+        <PrimeFloatLabel>
+          <PrimeMultiSelect
+            v-model="editableProduct.extra"
+            :options="ingredients"
+            option-label="label"
+            class="w-full"
+          />
+          <label>{{ t('productsInventory.table.headers.extra') }}</label>
+        </PrimeFloatLabel>
         
       </div>
     </template>
@@ -161,6 +217,34 @@
           />
           <label> {{ t('productsInventory.table.headers.category') }}</label>
         </PrimeFloatLabel>
+                <PrimeFloatLabel>
+          <PrimeMultiSelect
+            v-model="editableProduct.mandatory"
+            :options="ingredients"
+            option-label="label"
+            class="w-full"
+          />
+          <label>{{ t('productsInventory.table.headers.mandatory') }}</label>
+        </PrimeFloatLabel>
+        <PrimeFloatLabel>
+          <PrimeMultiSelect
+            v-model="editableProduct.optionalBase"
+            :options="ingredients"
+            option-label="label"
+            class="w-full"
+          />
+          <label>{{ t('productsInventory.table.headers.optionalBase') }}</label>
+        </PrimeFloatLabel>
+        <PrimeFloatLabel>
+          <PrimeMultiSelect
+            v-model="editableProduct.extra"
+            :options="ingredients"
+            option-label="label"
+            class="w-full"
+          />
+          <label>{{ t('productsInventory.table.headers.extra') }}</label>
+        </PrimeFloatLabel>
+
       </div>
     </template>
   </ModalWrapper>
@@ -183,13 +267,15 @@ import { ref } from 'vue'
 import { useToast } from '../composables/toast.composable'
 import { useConfirmModal } from '../composables/confirm-modal.composable'
 import { InputType } from '../types/primevue.type'
-import type { GetByIdProductCategoryOutput, GetByIdProductOutput } from '@fm-apps/trpc/'
+import type { GetByIdIngredientOutput, GetByIdProductCategoryOutput, GetByIdProductOutput } from '@fm-apps/trpc/'
+import { useFetchIngredient } from '../composables/api/ingredient.composable'
 
 const { t } = useI18n()
 const { deleteConfirmation } = useConfirmModal()
 const { successToast } = useToast()
 const { data: products, refetch: refetchProduct } = useListProducts()
 const { data: productCategories } = useListProductCategories()
+const { data: ingredients} = useFetchIngredient()
 const { mutateAsync: deleteProduct } = useDeleteProduct()
 const { mutateAsync: updateProduct } = useUpdateProduct()
 const { mutateAsync: createProduct } = useCreateProduct()
@@ -206,7 +292,9 @@ const editableProduct = ref({
   available: true,
   category: {} as GetByIdProductCategoryOutput,
   categoryId: '',
-  // ingredients: [] as IngredientInProduct[],
+  mandatory: [] as GetByIdIngredientOutput[],
+  optionalBase: [] as GetByIdIngredientOutput[],
+  extra: [] as GetByIdIngredientOutput[],
 })
 const columns = [
   { field: 'label', header: t(`productsInventory.table.headers.label`) },
@@ -215,7 +303,9 @@ const columns = [
   { field: 'priceIncludingTax', header: t(`productsInventory.table.headers.priceIncludingTax`) },
   { field: 'available', header: t(`productsInventory.table.headers.available`) },
   { field: 'category', header: t(`productsInventory.table.headers.category`) },
-  { field: 'ingredients', header: t(`productsInventory.table.headers.ingredients`) },
+  { field: 'mandatory', header: t(`productsInventory.table.headers.mandatory`) },
+  { field: 'optionalBase', header: t(`productsInventory.table.headers.optionalBase`) },
+  { field: 'extra', header: t(`productsInventory.table.headers.extra`) },
 ]
 const filterFields = [
     'label',
@@ -228,6 +318,21 @@ const booleanValues = [
   { label: t('productsInventory.booleanValues.false'), value: false },
 ]
 
+const resetEditableProduct = () => {
+  editableProduct.value = {
+  label: '',
+  imageUrl: '',
+  priceExclTax: 0,
+  priceIncludingTax: 0,
+  available: true,
+  category: {} as GetByIdProductCategoryOutput,
+  categoryId: '',
+  mandatory: [] as GetByIdIngredientOutput[],
+  optionalBase: [] as GetByIdIngredientOutput[],
+  extra: [] as GetByIdIngredientOutput[],
+  }
+}
+
 const showEditProductModal = (rowData: any) => {
   currentProduct.value = rowData
   editableProduct.value = {
@@ -238,7 +343,9 @@ const showEditProductModal = (rowData: any) => {
     available: rowData.available,
     category: rowData.category,
     categoryId: rowData.categoryId,
-    // ingredients: rowData.ingredients,
+    mandatory: rowData.mandatory,
+    optionalBase: rowData.optionalBase,
+    extra: rowData.extra,
   }
   isUpdateProductModalVisible.value = true
 }
@@ -255,31 +362,29 @@ const handleDeleteProduct = (rowData: any) => {
 
 const handleConfirmUpdateProduct = async () => {
   if (!currentProduct.value) return
-  await updateProduct({
-    id: currentProduct.value.id,
-    label: editableProduct.value.label,
-    imageUrl: editableProduct.value.imageUrl,
-    priceExclTax: editableProduct.value.priceExclTax,
-    priceIncludingTax: editableProduct.value.priceIncludingTax,
-    available: editableProduct.value.available,
-    categoryId: editableProduct.value.category.id,
-    // ingredients: editableProduct.value.ingredients,
-  })
-  successToast('Confirmed', 'Record updated')
-  refetchProduct()
+  // try{
+      await updateProduct({
+        id: currentProduct.value.id,
+        label: editableProduct.value.label,
+        imageUrl: editableProduct.value.imageUrl,
+        priceExclTax: editableProduct.value.priceExclTax,
+        priceIncludingTax: editableProduct.value.priceIncludingTax,
+        available: editableProduct.value.available,
+        categoryId: editableProduct.value.category.id,
+        mandatory: editableProduct.value.mandatory.map((ingredient) => ingredient.id),
+        optionalBase: editableProduct.value.optionalBase.map((ingredient) => ingredient.id),
+        extra: editableProduct.value.extra.map((ingredient) => ingredient.id),
+      })
+      successToast('Confirmed', 'Record updated')
+      refetchProduct()
+      resetEditableProduct()
+  // } catch (error) {
+  //   errorToast('Error', error as string)
+  // }
 }
 
 const handleCancelUpdateProduct = () => {
-  editableProduct.value = {
-  label: '',
-  imageUrl: '',
-  priceExclTax: 0,
-  priceIncludingTax: 0,
-  available: true,
-  category: {} as GetByIdProductCategoryOutput,
-  categoryId: '',
-  // ingredients: [] as IngredientInProduct[],
-  }
+  resetEditableProduct()
 }
 
 const handleDeleteManyProducts = (selectedItems: any) => {
@@ -305,22 +410,16 @@ const handleConfirmCreateProduct = async () => {
     priceIncludingTax: editableProduct.value.priceIncludingTax,
     available: editableProduct.value.available,
     categoryId: editableProduct.value.category.id,
-    // ingredients : editableProduct.value.ingredients,
+    mandatory: editableProduct.value.mandatory.map((ingredient) => ingredient.id),
+    optionalBase: editableProduct.value.optionalBase.map((ingredient) => ingredient.id),
+    extra: editableProduct.value.extra.map((ingredient) => ingredient.id),
   })
   successToast('Confirmed', 'Record created')
   refetchProduct()
+  resetEditableProduct()
 }
 
 const handleCancelCreateProduct = () => {
-  editableProduct.value = {
-    label: '',
-    imageUrl: '',
-    priceExclTax: 0,
-    priceIncludingTax: 0,
-    available: true,
-    category: {} as GetByIdProductCategoryOutput,
-    categoryId: '',
-    // ingredients: [] as IngredientInProduct[],
-  }
+  resetEditableProduct()
 }
 </script>
