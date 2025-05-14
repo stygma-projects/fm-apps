@@ -22,11 +22,9 @@ export const ordersRouter = router({
       include: {
         products: {
           include: {
-            ingredients: {
-              include: {
-                ingredient: true,
-              },
-            },
+            mandatory: true,
+            optionalBase: true,
+            extra: true,
           },
         },
       },
@@ -43,11 +41,9 @@ export const ordersRouter = router({
       include: {
         products: {
           include: {
-            ingredients: {
-              include: {
-                ingredient: true,
-              },
-            },
+            mandatory: true,
+            optionalBase: true,
+            extra: true,
           },
         },
       },
@@ -66,11 +62,9 @@ export const ordersRouter = router({
         include: {
           products: {
             include: {
-              ingredients: {
-                include: {
-                  ingredient: true,
-                },
-              },
+              mandatory: true,
+              optionalBase: true,
+              extra: true,
             },
           },
         },

@@ -7,11 +7,9 @@ export const productRouter = router({
     return await prisma.product.findMany({
       include: {
         category: true,
-        ingredients: {
-          include: {
-            ingredient: true, // Inclut les détails des ingrédients associés
-          },
-        },
+        mandatory: true,
+        optionalBase: true,
+        extra: true,
       },
       orderBy: {
         label: 'asc',
@@ -28,7 +26,11 @@ export const productRouter = router({
       const { id } = input
       return await prisma.product.findUnique({
         where: { id },
-        include: { ingredients: true },
+        include: {
+          mandatory: true,
+          optionalBase: true,
+          extra: true,
+        },
       })
     }),
   create: publicProcedure

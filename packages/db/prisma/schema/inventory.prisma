@@ -7,7 +7,9 @@ model Product {
   available               Boolean               @default(true)
   categoryId              String
   category                ProductCategory       @relation(fields: [categoryId], references: [id])
-  ingredients             IngredientInProduct[]
+  mandatory               Ingredient[]          @relation(name : "mandatory")
+  optionalBase            Ingredient[]          @relation(name : "optionalBase")
+  extra                   Ingredient[]          @relation(name : "extra")
   Order                   Order[]
 }
 
@@ -26,7 +28,9 @@ model Ingredient {
   imageUrl            String?
   category            IngredientCategory    @relation(fields: [categoryId], references: [id])
   categoryId          String
-  IngredientInProduct IngredientInProduct[]
+  mandatoryIn         Product[]          @relation(name : "mandatory")
+  optionalBaseIn      Product[]          @relation(name : "optionalBase")
+  extraIn             Product[]          @relation(name : "extra")
 }
 
 model IngredientCategory {
@@ -34,19 +38,4 @@ model IngredientCategory {
   label       String       @unique
   imageUrl    String?
   ingredients Ingredient[]
-}
-
-model IngredientInProduct {
-  id           String                @id @default(uuid())
-  ingredientId String
-  productId    String
-  ingredient   Ingredient            @relation(fields: [ingredientId], references: [id])
-  product      Product               @relation(fields: [productId], references: [id])
-  composition  IngredientComposition @default(BASE)
-  mandatory    Boolean               @default(false)
-}
-
-enum IngredientComposition {
-  BASE
-  EXTRA
 }
