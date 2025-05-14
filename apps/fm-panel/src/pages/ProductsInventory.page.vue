@@ -84,12 +84,12 @@
         <InputText
           v-model="editableProduct.priceExclTax"
           :label="t('productsInventory.table.headers.priceExclTax')"
-          type="number"
+          :type=InputType.NUMBER
         />
         <InputText
           v-model="editableProduct.priceIncludingTax"
           :label="t('productsInventory.table.headers.priceIncludingTax')"
-          type="number"
+          :type=InputType.NUMBER
         />
         <PrimeFloatLabel variant="on">
           <PrimeDropdown
@@ -134,12 +134,12 @@
         <InputText
           v-model="editableProduct.priceExclTax"
           :label="t('productsInventory.table.headers.priceExclTax')"
-          type="number"
+          :type=InputType.NUMBER
         />
         <InputText
           v-model="editableProduct.priceIncludingTax"
           :label="t('productsInventory.table.headers.priceIncludingTax')"
-          type="number"
+          :type=InputType.NUMBER
         />
         <PrimeFloatLabel variant="on">
           <PrimeDropdown
@@ -182,6 +182,7 @@ import { useListProductCategories } from '../composables/api/productCategory.com
 import { ref } from 'vue'
 import { useToast } from '../composables/toast.composable'
 import { useConfirmModal } from '../composables/confirm-modal.composable'
+import { InputType } from '../types/primevue.type'
 import type { GetByIdProductCategoryOutput, GetByIdProductOutput } from '@fm-apps/trpc/'
 
 const { t } = useI18n()
@@ -278,7 +279,7 @@ const handleCancelUpdateProduct = () => {
   category: {} as GetByIdProductCategoryOutput,
   categoryId: '',
   // ingredients: [] as IngredientInProduct[],
-}
+  }
 }
 
 const handleDeleteManyProducts = (selectedItems: any) => {

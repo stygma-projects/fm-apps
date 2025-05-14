@@ -5,7 +5,7 @@ import { publicProcedure, router } from '../../trpc'
 export const ingredientRouter = router({
   list: publicProcedure.query(async () => {
     return await prisma.ingredient.findMany({
-      include: { category: true, IngredientInProduct: true },
+      include: { category: true },
       orderBy: {
         label: 'asc',
       },
@@ -21,7 +21,7 @@ export const ingredientRouter = router({
       const { id } = input
       return await prisma.ingredient.findUnique({
         where: { id },
-        include: { category: true, IngredientInProduct: true },
+        include: { category: true },
       })
     }),
   create: publicProcedure
@@ -92,16 +92,11 @@ export const ingredientRouter = router({
     .mutation(async ({ input }) => {
       const { ids } = input
 
-      const ingredientInProducts = await prisma.ingredientInProduct.deleteMany({
-        where: {
-          ingredientId: { in: ids },
-        },
-      })
       const ingredient = await prisma.ingredient.deleteMany({
         where: {
           id: { in: ids },
         },
       })
-      return { ingredientInProducts, ingredient }
+      return { ingredient }
     }),
 })
