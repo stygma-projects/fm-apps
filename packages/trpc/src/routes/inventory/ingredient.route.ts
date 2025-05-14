@@ -36,6 +36,11 @@ export const ingredientRouter = router({
     )
     .mutation(async ({ input }) => {
       const { categoryId, ...ingredientData } = input
+
+      if (await prisma.ingredient.findUnique({ where: { label: ingredientData.label } })) {
+        throw new Error(`Ingredient ${ingredientData.label} already exists`)
+      }
+
       return await prisma.ingredient.create({
         data: {
           ...ingredientData,
@@ -56,6 +61,11 @@ export const ingredientRouter = router({
     )
     .mutation(async ({ input }) => {
       const { id, ...data } = input
+
+      if (await prisma.ingredient.findUnique({ where: { label: data.label } })) {
+        throw new Error(`Ingredient ${data.label} already exists`)
+      }
+
       return await prisma.ingredient.update({
         where: { id },
         data,
@@ -81,10 +91,17 @@ export const ingredientRouter = router({
     )
     .mutation(async ({ input }) => {
       const { ids } = input
-      return await prisma.ingredient.deleteMany({
+
+      const ingredientInProducts = await prisma.ingredientInProduct.deleteMany({
+        where: {
+          ingredientId: { in: ids },
+        },
+      })
+      const ingredient = await prisma.ingredient.deleteMany({
         where: {
           id: { in: ids },
         },
       })
+      return { ingredientInProducts, ingredient }
     }),
 })

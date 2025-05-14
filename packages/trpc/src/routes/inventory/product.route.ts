@@ -49,9 +49,9 @@ export const productRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
-      const existingProductLabel = await isExistingProductLabel(input.label)
-      if (existingProductLabel) {
-        throw new Error('Un produit avec ce nom existe déjà')
+
+      if (await prisma.product.findUnique({ where: { label: input.label } })) {
+        throw new Error(`Product ${input.label} already exists`)
       }
 
       return await prisma.product.create({
@@ -73,11 +73,9 @@ export const productRouter = router({
     .mutation(async ({ input }) => {
       
       const { id, ...data } = input
-      if (data.label) {
-        const existingProductLabel = await isExistingProductLabel(data.label)
-        if (existingProductLabel) {
-          throw new Error(`Une catégorie avec ce nom existe déjà`)
-        }
+
+      if (await prisma.product.findUnique({ where: { label: data.label } })) {
+        throw new Error(`Product ${data.label} already exists`)
       }
 
       return await prisma.product.update({

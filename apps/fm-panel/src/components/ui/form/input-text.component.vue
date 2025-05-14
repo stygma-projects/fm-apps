@@ -1,16 +1,13 @@
 <template>
   <PrimeFloatLabel variant="on">
     <PrimeInputText 
-      v-if="type === 'string'"
+      v-if="type === InputType.TEXT"
       v-model="model" 
       class="w-full" 
     />
     <PrimeInputNumber 
-      v-else-if="type === 'number' || type === 'float'"
+      v-else-if="type === InputType.NUMBER"
       v-model="model"
-      :min="0"
-      :mode="type === 'number' ? 'decimal' : 'decimal'"
-      :maxFractionDigits="type === 'float' ? 2 : 0"
       class="w-full" 
     />
     <label>{{ label }}</label>
@@ -18,7 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import { toRefs } from 'vue'
+import { toRefs, type PropType } from 'vue'
+import { InputType } from '../../../types/primevue.type'
 
 const model = defineModel<string | number>('modelValue', {
   required: true,
@@ -30,9 +28,8 @@ const props = defineProps({
     required: true,
   },
   type: {
-    type: String,
-    validator: (value: string) => ['string', 'number', 'float'].includes(value),
-    default: 'string'
+    type: String as PropType<InputType>,
+    default: InputType.TEXT
   }
 })
 
