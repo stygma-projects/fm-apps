@@ -21,6 +21,7 @@ export default defineNuxtConfig({
       },
     },
     components: {
+      prefix: 'Prime',
       exclude: ['Form', 'FormField']
     }
   }, 
