@@ -2,18 +2,18 @@ import { z } from 'zod'
 import prisma from '../../libs/prisma'
 import { publicProcedure, router } from '../../trpc'
 
-const isExistingCategoryLabel = (label: string) => {
-  return !!prisma.ingredientCategory.findUnique({
-    where: { label },
-  })
-}
-
 export const ingredientCategoryRouter = router({
   list: publicProcedure.query(async () => {
     return await prisma.ingredientCategory.findMany({
       orderBy: {
         label: 'asc',
       },
+      include: {
+        // Allow to know if there's an ingredient in the ingredientCategory
+        ingredients: {
+          select: { category: { select: { id: true }}}
+        }
+      }
     })
   }),
   getById: publicProcedure
@@ -34,9 +34,9 @@ export const ingredientCategoryRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
-      const existingCategoryLabel = isExistingCategoryLabel(input.label)
-      if (existingCategoryLabel) {
-        throw new Error('Une catégorie avec ce nom existe déjà')
+
+      if (await prisma.ingredientCategory.findUnique({ where: { label: input.label } })) {
+        throw new Error(`Ingredient category ${input.label} already exists`)
       }
 
       return await prisma.ingredientCategory.create({
@@ -54,11 +54,8 @@ export const ingredientCategoryRouter = router({
     .mutation(async ({ input }) => {
       const { id, ...data } = input
 
-      if (data.label) {
-        const existingCategoryLabel = isExistingCategoryLabel(data.label)
-        if (existingCategoryLabel) {
-          throw new Error('Une catégorie avec ce nom existe déjà')
-        }
+      if (await prisma.ingredientCategory.findUnique({ where: { label: data.label } })) {
+        throw new Error(`Ingredient category ${data.label} already exists`)
       }
 
       return await prisma.ingredientCategory.update({
