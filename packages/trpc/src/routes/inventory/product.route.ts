@@ -1,12 +1,6 @@
-import { z } from 'zod'
+import {z} from 'zod'
 import prisma from '../../libs/prisma'
-import { publicProcedure, router } from '../../trpc'
-
-const isExistingProductLabel = async (label: string) => {
-  return await prisma.productCategory.findUnique({
-    where: { label },
-  })
-}
+import {publicProcedure, router} from '../../trpc'
 
 export const productRouter = router({
   list: publicProcedure.query(async () => {
