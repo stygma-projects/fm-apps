@@ -177,7 +177,9 @@ export const fr = {
         available: 'Disponibilité',
         category: 'Catégorie',
         categoryId: 'Catégorie',
-        ingredients: 'Ingrédients',
+        mandatory: 'Ingrédients essentiels',
+        optionnalBase : 'Ingrédients optionnels',
+        extra : 'Suppléments'
       },
     },
     toolBar: {

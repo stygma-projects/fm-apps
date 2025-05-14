@@ -42,6 +42,33 @@ export const productRouter = router({
         imageUrl: z.string().optional().nullable(),
         available: z.boolean().default(true),
         categoryId: z.string(),
+        mandatory: z.array(
+          z.object({
+            label: z.string().min(2),
+            priceExclTax: z.number().min(0),
+            priceIncludingTax: z.number().min(0),
+            imageUrl: z.string().optional().nullable(),
+            categoryId: z.string(),
+          })
+        ).optional().nullable(),
+        optionnalBase : z.array(
+          z.object({
+            label: z.string().min(2),
+            priceExclTax: z.number().min(0),
+            priceIncludingTax: z.number().min(0),
+            imageUrl: z.string().optional().nullable(),
+            categoryId: z.string(),
+          })
+        ).optional().nullable(),
+        extra : z.array(
+          z.object({
+            label: z.string().min(2),
+            priceExclTax: z.number().min(0),
+            priceIncludingTax: z.number().min(0),
+            imageUrl: z.string().optional().nullable(),
+            categoryId: z.string(),
+          })
+        ).optional().nullable(),
       }),
     )
     .mutation(async ({ input }) => {
@@ -64,6 +91,33 @@ export const productRouter = router({
         imageUrl: z.string().nullable().optional(),
         available: z.boolean().default(true).optional(),
         categoryId: z.string().optional(),
+        mandatory: z.array(
+          z.object({
+            label: z.string().min(2),
+            priceExclTax: z.number().min(0),
+            priceIncludingTax: z.number().min(0),
+            imageUrl: z.string().optional().nullable(),
+            categoryId: z.string(),
+          })
+        ).optional().nullable(),
+        optionnalBase : z.array(
+          z.object({
+            label: z.string().min(2),
+            priceExclTax: z.number().min(0),
+            priceIncludingTax: z.number().min(0),
+            imageUrl: z.string().optional().nullable(),
+            categoryId: z.string(),
+          })
+        ).optional().nullable(),
+        extra : z.array(
+          z.object({
+            label: z.string().min(2),
+            priceExclTax: z.number().min(0),
+            priceIncludingTax: z.number().min(0),
+            imageUrl: z.string().optional().nullable(),
+            categoryId: z.string(),
+          })
+        ).optional().nullable(),
       }),
     )
     .mutation(async ({ input }) => {
