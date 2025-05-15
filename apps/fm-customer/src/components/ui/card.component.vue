@@ -4,35 +4,37 @@
       v-for="(item, index) in items" 
       :key="item.id || index"
       @click="handleItemClick(item)"
-      class="cursor-pointer bg-white rounded-lg shadow-sm hover:shadow-md"
+      class="flex flex-auto justify-center cursor-pointer rounded-lg shadow-sm hover:shadow-md h-52 lg:h-80"
     >
-    <template #header v-if="item.imageUrl">
-        <div class="w-full h-28 md:h-40 lg:h-60 overflow-hidden relative rounded-t-lg">
+      <template #header v-if="item.imageUrl">
+        <div class="w-full h-34 lg:h-52 overflow-hidden relative rounded-t-lg object-content lg:-top-5">
           <PrimeImage 
             :src="item.imageUrl" 
-            class="w-full h-full object-cover rounded-t-lg"
-            alt=""
+            imageClass="h-full w-full object-cover rounded-t-lg"
           />
         </div>
       </template> 
       
-      <template #title  >
-        <slot 
+      <template #title v-if="item.imageUrl">
+        <slot
           name="card-label" 
           :item="item"
         >
-          <div v-if="item.priceIncludingTax !== undefined" class="flex justify-between items-center">
-            <div class="text-start text-sm">
+          <div v-if="item.priceIncludingTax !== undefined" class="flex justify-between items-center p-5 lg:p-5 flex-grow">
+            <div class="text-base font-bold">
               {{ item.label }}
             </div>
-            <div class="text-end text-sm">
+            <div v-if="item.priceIncludingTax !== undefined" class="text-base font-bold">
               {{ item.priceIncludingTax }} €
             </div>
           </div>
-          
-          <!-- Pour les catégories (sans prix) -->
-          <div v-else class="p-4 flex items-center justify-center h-16">
-            <span class="font-medium text-center">
+        </slot>
+      </template>
+
+      <template #content v-else>
+        <slot>
+          <div class="h-full flex items-center justify-center">
+            <span class="text-xl font-bold text-center">
               {{ item.label }}
             </span>
           </div>
@@ -67,3 +69,8 @@ export default {
   }
 }
 </script>
+<style>
+div.p-card-body {
+  padding: 0 !important;
+}
+</style>
