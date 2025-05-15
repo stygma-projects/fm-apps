@@ -10,7 +10,7 @@
         :label="t('productsInventory.toolBar.deleteManyButton')"
         icon="pi pi-trash"
         severity="danger"
-        :badge="selectedItems.length"
+        :badge="selectedItems.length.toString()"
         @click="handleDeleteManyProducts(selectedItems)"
       ></PrimeButton>
       <PrimeButton
@@ -36,6 +36,18 @@
     </template>
     <template #column-category="{ rowData }">
       <span>{{ rowData.category.label }}</span>
+    </template>
+    <template #column-non-updatable="{ rowData }">
+      <span v-if="rowData.nonUpdatable.length === 0">
+        {{ t('productsInventory.noIngredients') }}
+      </span>
+      <span
+        v-else
+        v-for="(ingredient, index) in rowData.nonUpdatable"
+        :key="index"
+      >
+        {{ ingredient.label}} <span v-if="index < rowData.length - 1">,</span>
+      </span>
     </template>
     <template #column-mandatory="{ rowData }">
       <span v-if="rowData.mandatory.length === 0">
@@ -142,6 +154,15 @@
         </PrimeFloatLabel>
         <PrimeFloatLabel>
           <PrimeMultiSelect
+            v-model="editableProduct.nonUpdatable"
+            :options="ingredients"
+            option-label="label"
+            class="w-full"
+          />
+          <label>{{ t('productsInventory.table.headers.nonUpdatable') }}</label>
+        </PrimeFloatLabel>
+        <PrimeFloatLabel>
+          <PrimeMultiSelect
             v-model="editableProduct.mandatory"
             :options="ingredients"
             option-label="label"
@@ -217,7 +238,16 @@
           />
           <label> {{ t('productsInventory.table.headers.category') }}</label>
         </PrimeFloatLabel>
-                <PrimeFloatLabel>
+        <PrimeFloatLabel>
+          <PrimeMultiSelect
+            v-model="editableProduct.nonUpdatable"
+            :options="ingredients"
+            option-label="label"
+            class="w-full"
+          />
+          <label>{{ t('productsInventory.table.headers.nonUpdatable') }}</label>
+        </PrimeFloatLabel>
+        <PrimeFloatLabel>
           <PrimeMultiSelect
             v-model="editableProduct.mandatory"
             :options="ingredients"
@@ -292,6 +322,7 @@ const editableProduct = ref({
   available: true,
   category: {} as GetByIdProductCategoryOutput,
   categoryId: '',
+  nonUpdatable : [] as GetByIdIngredientOutput[],
   mandatory: [] as GetByIdIngredientOutput[],
   optionalBase: [] as GetByIdIngredientOutput[],
   extra: [] as GetByIdIngredientOutput[],
@@ -303,6 +334,7 @@ const columns = [
   { field: 'priceIncludingTax', header: t(`productsInventory.table.headers.priceIncludingTax`) },
   { field: 'available', header: t(`productsInventory.table.headers.available`) },
   { field: 'category', header: t(`productsInventory.table.headers.category`) },
+  { field: 'nonUpdatable', header: t(`productsInventory.table.headers.nonUpdatable`) },
   { field: 'mandatory', header: t(`productsInventory.table.headers.mandatory`) },
   { field: 'optionalBase', header: t(`productsInventory.table.headers.optionalBase`) },
   { field: 'extra', header: t(`productsInventory.table.headers.extra`) },
@@ -327,6 +359,7 @@ const resetEditableProduct = () => {
   available: true,
   category: {} as GetByIdProductCategoryOutput,
   categoryId: '',
+  nonUpdatable: [] as GetByIdIngredientOutput[],
   mandatory: [] as GetByIdIngredientOutput[],
   optionalBase: [] as GetByIdIngredientOutput[],
   extra: [] as GetByIdIngredientOutput[],
@@ -343,6 +376,7 @@ const showEditProductModal = (rowData: any) => {
     available: rowData.available,
     category: rowData.category,
     categoryId: rowData.categoryId,
+    nonUpdatable: rowData.nonUpdatable,
     mandatory: rowData.mandatory,
     optionalBase: rowData.optionalBase,
     extra: rowData.extra,
@@ -371,6 +405,7 @@ const handleConfirmUpdateProduct = async () => {
         priceIncludingTax: editableProduct.value.priceIncludingTax,
         available: editableProduct.value.available,
         categoryId: editableProduct.value.category.id,
+        nonUpdatable: editableProduct.value.nonUpdatable.map((ingredient) => ingredient.id),
         mandatory: editableProduct.value.mandatory.map((ingredient) => ingredient.id),
         optionalBase: editableProduct.value.optionalBase.map((ingredient) => ingredient.id),
         extra: editableProduct.value.extra.map((ingredient) => ingredient.id),
@@ -410,6 +445,7 @@ const handleConfirmCreateProduct = async () => {
     priceIncludingTax: editableProduct.value.priceIncludingTax,
     available: editableProduct.value.available,
     categoryId: editableProduct.value.category.id,
+    nonUpdatable: editableProduct.value.nonUpdatable.map((ingredient) => ingredient.id),
     mandatory: editableProduct.value.mandatory.map((ingredient) => ingredient.id),
     optionalBase: editableProduct.value.optionalBase.map((ingredient) => ingredient.id),
     extra: editableProduct.value.extra.map((ingredient) => ingredient.id),

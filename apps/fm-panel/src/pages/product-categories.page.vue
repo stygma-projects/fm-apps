@@ -10,7 +10,7 @@
         :label="t('productCategory.toolBar.deleteManyButton')"
         icon="pi pi-trash"
         severity="danger"
-        :badge="selectedItems.length"
+        :badge="selectedItems.length.toString()"
         @click="handleDeleteManyProductCategories(selectedItems)"
       ></PrimeButton>
       <PrimeButton

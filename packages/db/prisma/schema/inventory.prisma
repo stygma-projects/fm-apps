@@ -7,6 +7,7 @@ model Product {
   available               Boolean               @default(true)
   categoryId              String
   category                ProductCategory       @relation(fields: [categoryId], references: [id])
+  nonUpdatable            Ingredient[]          @relation(name : "nonUpdatable")
   mandatory               Ingredient[]          @relation(name : "mandatory")
   optionalBase            Ingredient[]          @relation(name : "optionalBase")
   extra                   Ingredient[]          @relation(name : "extra")
@@ -28,9 +29,10 @@ model Ingredient {
   imageUrl            String?
   category            IngredientCategory    @relation(fields: [categoryId], references: [id])
   categoryId          String
-  mandatoryIn         Product[]          @relation(name : "mandatory")
-  optionalBaseIn      Product[]          @relation(name : "optionalBase")
-  extraIn             Product[]          @relation(name : "extra")
+  nonUpdatableIn      Product[]             @relation(name : "nonUpdatable")
+  mandatoryIn         Product[]             @relation(name : "mandatory")
+  optionalBaseIn      Product[]             @relation(name : "optionalBase")
+  extraIn             Product[]             @relation(name : "extra")
 }
 
 model IngredientCategory {

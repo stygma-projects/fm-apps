@@ -10,7 +10,7 @@
         :label="t('ingredient.toolBar.deleteManyButton')"
         icon="pi pi-trash"
         severity="danger"
-        :badge="selectedItems.length"
+        :badge="selectedItems.length.toString()"
         @click="handleDeleteManyIngredients(selectedItems)"
       ></PrimeButton>
       <PrimeButton
