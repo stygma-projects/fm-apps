@@ -34,20 +34,5 @@ export const useFetchOrders = () => {
     pickupOrders,
     deliveryOrders,
     refetch,
-    // isError,
-    // error,
   }
 }
-
-    // onSuccess: (result: Order[]) => {
-    //   const formattedOrders = result.map((order) => ({
-    //     ...order,
-    //     createdAt: new Date(order.createdAt),
-    //   }))
-    //   if (JSON.stringify(orders.value) !== JSON.stringify(formattedOrders)) {
-    //     orders.value = formattedOrders
-    //     terminalOrders.value = formattedOrders.filter((o) => o.type === 'TERMINALS').slice(0, 6)
-    //     pickupOrders.value = formattedOrders.filter((o) => o.type === 'PICKUP').slice(0, 6)
-    //     deliveryOrders.value = formattedOrders.filter((o) => o.type === 'DELIVERY').slice(0, 6)
-    //   }
-    // },

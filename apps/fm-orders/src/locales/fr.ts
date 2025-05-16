@@ -1,6 +1,7 @@
 export const fr = {
   appName: 'FM Order',
   ingredientTypes: {
+    nonUpdatable: ' (Obligatoire)',
     mandatory: ' (Choix)',
     optionalBase: ' (Optionnel)',
     extra: ' (Suppléments)'

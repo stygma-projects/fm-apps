@@ -22,6 +22,7 @@ export const ordersRouter = router({
       include: {
         products: {
           include: {
+            nonUpdatable : true,
             mandatory: true,
             optionalBase: true,
             extra: true,
@@ -41,6 +42,7 @@ export const ordersRouter = router({
       include: {
         products: {
           include: {
+            nonUpdatable : true,
             mandatory: true,
             optionalBase: true,
             extra: true,
@@ -62,6 +64,7 @@ export const ordersRouter = router({
         include: {
           products: {
             include: {
+              nonUpdatable : true,
               mandatory: true,
               optionalBase: true,
               extra: true,

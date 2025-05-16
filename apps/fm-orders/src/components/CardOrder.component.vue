@@ -35,12 +35,30 @@
           </div>
 
           <div
-            v-if="product.mandatory && product.mandatory.length > 0"
+            v-if="product.nonUpdatable && product.nonUpdatable.length > 0"
             class="ml-9 mt-2"
           >
             <div class="text-base text-gray-500 mb-1 font-medium">
               {{ t('ingredients') }}
             </div>
+            <ul class="text-base text-gray-600 list-disc pl-4">
+              <li
+                v-for="ingredientItem in product.nonUpdatable"
+                :key="ingredientItem.id"
+                class="mb-1"
+              >
+                {{ ingredientItem.label }}
+                <span class="text-gray-400">{{
+                  t('ingredientTypes.nonUpdatable')
+                }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div
+            v-if="product.mandatory && product.mandatory.length > 0"
+            class="ml-9 mt-2"
+          >
             <ul class="text-base text-gray-600 list-disc pl-4">
               <li
                 v-for="ingredientItem in product.mandatory"

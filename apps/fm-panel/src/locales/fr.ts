@@ -168,6 +168,7 @@ export const fr = {
       DELIVERY: 'Livraison',
     },
     ingredientTypes : {
+      nonUpdatable : "Obligatoire",
       mandatory : "Choix",
       optionalBase : "Optionnel",
       extra : " Suppléments",

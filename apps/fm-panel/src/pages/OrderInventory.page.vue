@@ -114,6 +114,19 @@
             <div class="font-medium mb-2">{{ product.label }}</div>
             <div class="font-medium mb-2">{{ t("order.dialogs.ingredients") }}</div>
             <div
+              v-if="product.nonUpdatable && product.nonUpdatable.length"
+              class="pl-4"
+            >
+              <span> {{ t('order.ingredientTypes.nonUpdatable') }} : </span>
+              <div
+                v-for="ingredient in product.nonUpdatable"
+                :key="ingredient.id"
+                class="text-gray-600"
+              >
+                - {{ ingredient.label }}
+              </div>
+            </div>
+            <div
               v-if="product.mandatory && product.mandatory.length"
               class="pl-4"
             >
