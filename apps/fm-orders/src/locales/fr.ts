@@ -1,8 +1,10 @@
 export const fr = {
   appName: 'FM Order',
-  composition: {
-    extra: ' (Extra)',
-    optional: ' (Optionnel)',
+  ingredientTypes: {
+    nonUpdatable: ' (Obligatoire)',
+    mandatory: ' (Choix)',
+    optionalBase: ' (Optionnel)',
+    extra: ' (Suppléments)'
   },
   ingredients: 'Ingrédients:',
   preparation: 'En préparation',

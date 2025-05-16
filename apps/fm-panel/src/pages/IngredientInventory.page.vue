@@ -83,8 +83,8 @@
         <PrimeDropdown
           v-model="editableIngredient.categoryId"
           :options="ingredientCategoryOptions"
-          optionLabel="name"
-          optionValue="value"
+          option-label="name"
+          option-value="value"
           :label="t('ingredient.table.headers.category')"
           placeholder="t('ingredient.dialogs.createDialog.categoryPlaceholder')"
         />
@@ -121,8 +121,8 @@
         <PrimeDropdown
           v-model="editableIngredient.categoryId"
           :options="ingredientCategoryOptions"
-          optionLabel="name"
-          optionValue="value"
+          option-label="name"
+          option-value="value"
           :label="t('ingredient.table.headers.category')"
           placeholder="Sélectionner une catégorie"
         />

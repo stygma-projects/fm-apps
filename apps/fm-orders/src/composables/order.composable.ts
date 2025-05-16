@@ -1,7 +1,7 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { trpc } from '../api/trpc'
 import type { Order } from '@fm-apps/db'
-import { useQuery } from 'vue-query'
+import { useQuery, } from '@tanstack/vue-query'
 
 export const useFetchOrders = () => {
   const orders = ref<Order[]>([])
@@ -9,39 +9,25 @@ export const useFetchOrders = () => {
   const pickupOrders = ref<Order[]>([])
   const deliveryOrders = ref<Order[]>([])
 
-  const { refetch } = useQuery(
-    ['in-progress-orders'],
-    () => trpc.order.orders.listInProgress.query(),
-    {
-      // Rafraîchit toutes les minutes
-      refetchInterval: 60000,
+  const { data, refetch } = useQuery({
+    queryKey: ['in-progress-orders'],
+    queryFn: () => trpc.order.orders.listInProgress.query(),
+    refetchInterval: 60000,
+  })
 
-      onSuccess: (result: Order[]) => {
-        const formattedOrders = result.map((order) => ({
-          ...order,
-          createdAt: new Date(order.createdAt),
-        }))
-
-        // Mise à jour si les données ont changé
-        if (JSON.stringify(orders.value) !== JSON.stringify(formattedOrders)) {
-          orders.value = formattedOrders
-
-          // Mise à jour des listes filtrées
-          terminalOrders.value = formattedOrders
-            .filter((o: Order) => o.type === 'TERMINALS')
-            .slice(0, 6)
-
-          pickupOrders.value = formattedOrders
-            .filter((o: Order) => o.type === 'PICKUP')
-            .slice(0, 6)
-
-          deliveryOrders.value = formattedOrders
-            .filter((o: Order) => o.type === 'DELIVERY')
-            .slice(0, 6)
-        }
-      },
-    },
-  )
+  watch(data, (result) => {
+    if (!result) return
+    const formattedOrders = result.map((order) => ({
+      ...order,
+      createdAt: new Date(order.createdAt),
+    }))
+    if (JSON.stringify(orders.value) !== JSON.stringify(formattedOrders)) {
+      orders.value = formattedOrders
+      terminalOrders.value = formattedOrders.filter((o) => o.type === 'TERMINALS').slice(0, 6)
+      pickupOrders.value = formattedOrders.filter((o) => o.type === 'PICKUP').slice(0, 6)
+      deliveryOrders.value = formattedOrders.filter((o) => o.type === 'DELIVERY').slice(0, 6)
+    }
+  }, { immediate: true })
 
   return {
     terminalOrders,
