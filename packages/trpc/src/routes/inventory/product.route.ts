@@ -7,6 +7,7 @@ export const productRouter = router({
     return await prisma.product.findMany({
       include: {
         category: true,
+        nonUpdatable : true,
         mandatory: {
           include: {
             category: {
@@ -35,6 +36,7 @@ export const productRouter = router({
       return await prisma.product.findUnique({
         where: { id },
         include: {
+          nonUpdatable : true,
           mandatory: true,
           optionalBase: true,
           extra: true,
@@ -50,7 +52,8 @@ export const productRouter = router({
         imageUrl: z.string().optional().nullable(),
         available: z.boolean().default(true),
         categoryId: z.string(),
-        mandatory: z.array(z.string()).default([]), // Liste des IDs d'ingrédients
+        nonUpdatable : z.array(z.string()).default([]), // Liste des IDs d'ingrédients
+        mandatory: z.array(z.string()).default([]),
         optionalBase: z.array(z.string()).default([]),
         extra: z.array(z.string()).default([]),
       }),
@@ -61,11 +64,14 @@ export const productRouter = router({
         throw new Error(`Product ${input.label} already exists`)
       }
 
-      const { mandatory, optionalBase, extra, ...data } = input
+      const { nonUpdatable, mandatory, optionalBase, extra, ...data } = input
 
       return await prisma.product.create({
         data: {
           ...data,
+          nonUpdatable: {
+            connect: nonUpdatable.map((id) => ({ id })),
+          },
           mandatory: {
             connect: mandatory.map((id) => ({ id })),
           },
@@ -88,14 +94,15 @@ export const productRouter = router({
         imageUrl: z.string().nullable().optional(),
         available: z.boolean().default(true).optional(),
         categoryId: z.string().optional(),
-        mandatory: z.array(z.string()).optional(), // Liste des IDs d'ingrédients
+        nonUpdatable: z.array(z.string()).optional(), // Liste des IDs d'ingrédients
+        mandatory: z.array(z.string()).optional(), 
         optionalBase: z.array(z.string()).optional(),
         extra: z.array(z.string()).optional(),
       }),
     )
     .mutation(async ({ input }) => {
 
-      const { id, mandatory, optionalBase, extra, ...data } = input
+      const { id, nonUpdatable, mandatory, optionalBase, extra, ...data } = input
 
       if (!(await prisma.product.findUnique({ where: { label: data.label } }))) {
         throw new Error(`Product ${data.label} doesn't exist !`)
@@ -105,9 +112,14 @@ export const productRouter = router({
         where: { id },
         data: {
           ...data,
+          nonUpdatable: nonUpdatable
+            ? {
+                set: nonUpdatable.map((id) => ({ id })), // Remplace les relations existantes
+              }
+            : undefined,
           mandatory: mandatory
             ? {
-                set: mandatory.map((id) => ({ id })), // Remplace les relations existantes
+                set: mandatory.map((id) => ({ id })),
               }
             : undefined,
           optionalBase: optionalBase
