@@ -112,16 +112,44 @@
             class="mb-4 p-3 bg-gray-50 rounded"
           >
             <div class="font-medium mb-2">{{ product.label }}</div>
+            <div class="font-medium mb-2">{{ t("order.dialogs.ingredients") }}</div>
             <div
-              v-if="product.ingredients && product.ingredients.length"
+              v-if="product.mandatory && product.mandatory.length"
               class="pl-4"
             >
+              <span> {{ t('order.ingredientTypes.mandatory') }} : </span>
               <div
-                v-for="ingredient in product.ingredients"
+                v-for="ingredient in product.mandatory"
                 :key="ingredient.id"
                 class="text-gray-600"
               >
-                - {{ ingredient.ingredient?.label }}
+                - {{ ingredient.label }}
+              </div>
+            </div>
+            <div
+              v-if="product.optionalBase && product.optionalBase.length"
+              class="pl-4"
+            >
+              <span> {{ t('order.ingredientTypes.optionalBase') }} : </span>
+              <div
+                v-for="ingredient in product.optionalBase"
+                :key="ingredient.id"
+                class="text-gray-600"
+              >
+                - {{ ingredient.label }}
+              </div>
+            </div>
+            <div
+              v-if="product.extra && product.extra.length"
+              class="pl-4"
+            >
+              <span> {{ t('order.ingredientTypes.extra') }} : </span>
+              <div
+                v-for="ingredient in product.extra"
+                :key="ingredient.id"
+                class="text-gray-600"
+              >
+                - {{ ingredient.label }}
               </div>
             </div>
           </div>
@@ -158,7 +186,7 @@
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useFetchOrder, useUpdateOrder } from '../composables/order.composable'
-import type { OrderDialog } from '../types/order.type'
+import type { Order } from '../types/inventory.type'
 import formatHour from '@fm-apps/toolkit/utils'
 
 const { t } = useI18n()
@@ -167,7 +195,7 @@ const updateOrder = useUpdateOrder()
 const selectedStatus = ref('PENDING')
 
 const visible = ref(false)
-const selectedCommande = ref<OrderDialog>()
+const selectedCommande = ref<Order>()
 
 const getStatusLabel = (status: string) => t(`order.status.${status}`) || status
 const getTypeLabel = (type: string) => t(`order.types.${type}`) || type
@@ -216,20 +244,20 @@ const getTypeSeverity = (type: string) => {
   }
 }
 
-const showDetails = (commande: OrderDialog) => {
+const showDetails = (commande: Order) => {
   selectedCommande.value = commande
   visible.value = true
 }
 
-const submitOrder = async (commande: OrderDialog) => {
+const submitOrder = async (commande: Order) => {
   const index = statusTabs.findIndex((tab) => tab.value === commande.status)
   // We take the next status in the tab
   const nextStatus = statusTabs[index + 1]?.value
   if (nextStatus) {
-    const updatedCommande = { ...commande, status: nextStatus } as OrderDialog
+    const updatedCommande = { ...commande, status: nextStatus } as Order
     try {
       await updateOrder.mutateAsync(updatedCommande)
-      await orderRefetch.value()
+      await orderRefetch()
       visible.value = false
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
@@ -240,11 +268,11 @@ const submitOrder = async (commande: OrderDialog) => {
   }
 }
 
-const cancelOrder = async (commande: OrderDialog) => {
-  const canceledCommande = { ...commande, status: 'CANCELED' } as OrderDialog
+const cancelOrder = async (commande: Order) => {
+  const canceledCommande = { ...commande, status: 'CANCELED' } as Order
   try {
     await updateOrder.mutateAsync(canceledCommande)
-    await orderRefetch.value()
+    await orderRefetch()
     visible.value = false
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
