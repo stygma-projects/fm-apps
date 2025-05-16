@@ -42,8 +42,8 @@
         {{ t('productsInventory.noIngredients') }}
       </span>
       <span
-        v-else
         v-for="(ingredient, index) in rowData.mandatory"
+        v-else
         :key="index"
       >
         {{ ingredient.label}} <span v-if="index < rowData.length - 1">,</span>
@@ -54,11 +54,11 @@
         {{ t('productsInventory.noIngredients') }}
       </span>
       <span
-        v-else
         v-for="(ingredient, index) in rowData.optionalBase"
+        v-else
         :key="index"
       >
-        {{ ingredient.label}} <span v-if="index < rowData.length - 1">,</span>
+        {{ ingredient.label}} <span v-if="index < rowData.length - 1"> , </span>
       </span>
     </template>
     <template #column-extra="{ rowData }">
@@ -66,8 +66,8 @@
         {{ t('productsInventory.noIngredients') }}
       </span>
       <span
-        v-else
         v-for="(ingredient, index) in rowData.extra"
+        v-else
         :key="index"
       >
         {{ ingredient.label}} <span v-if="index < rowData.length - 1">,</span>
@@ -267,7 +267,7 @@ import { ref } from 'vue'
 import { useToast } from '../composables/toast.composable'
 import { useConfirmModal } from '../composables/confirm-modal.composable'
 import { InputType } from '../types/primevue.type'
-import type { GetByIdIngredientOutput, GetByIdProductCategoryOutput, GetByIdProductOutput } from '@fm-apps/trpc/'
+import type { ProductCategory, Product, Ingredient } from '../types/inventory.type'
 import { useFetchIngredient } from '../composables/api/ingredient.composable'
 
 const { t } = useI18n()
@@ -283,18 +283,18 @@ const { mutateAsync: deleteManyProducts } = useDeleteManyProducts()
 
 const isUpdateProductModalVisible = ref(false)
 const isCreateProductModalVisible = ref(false)
-const currentProduct = ref<GetByIdProductOutput>(null)
+const currentProduct = ref<Product>()
 const editableProduct = ref({
   label: '',
   imageUrl: '',
   priceExclTax: 0,
   priceIncludingTax: 0,
   available: true,
-  category: {} as GetByIdProductCategoryOutput,
+  category: {} as ProductCategory,
   categoryId: '',
-  mandatory: [] as GetByIdIngredientOutput[],
-  optionalBase: [] as GetByIdIngredientOutput[],
-  extra: [] as GetByIdIngredientOutput[],
+  mandatory: [] as Ingredient[],
+  optionalBase: [] as Ingredient[],
+  extra: [] as Ingredient[],
 })
 const columns = [
   { field: 'label', header: t(`productsInventory.table.headers.label`) },
@@ -325,11 +325,11 @@ const resetEditableProduct = () => {
   priceExclTax: 0,
   priceIncludingTax: 0,
   available: true,
-  category: {} as GetByIdProductCategoryOutput,
+  category: {} as ProductCategory,
   categoryId: '',
-  mandatory: [] as GetByIdIngredientOutput[],
-  optionalBase: [] as GetByIdIngredientOutput[],
-  extra: [] as GetByIdIngredientOutput[],
+  mandatory: [] as Ingredient[],
+  optionalBase: [] as Ingredient[],
+  extra: [] as Ingredient[],
   }
 }
 

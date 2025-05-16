@@ -154,6 +154,7 @@ export const fr = {
       status: 'Status: ',
       type: 'Type: ',
       product: 'Produits: ',
+      ingredients : 'Ingrédients: ',
     },
     status: {
       PENDING: 'En attente',
@@ -166,6 +167,11 @@ export const fr = {
       PICKUP: 'Click & Collect',
       DELIVERY: 'Livraison',
     },
+    ingredientTypes : {
+      mandatory : "Choix",
+      optionalBase : "Optionnel",
+      extra : " Suppléments",
+    }
   },
   productsInventory: {
     table: {

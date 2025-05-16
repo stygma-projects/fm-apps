@@ -99,7 +99,7 @@ export const ordersRouter = router({
         type: orderTypeEnum,
         status: statusEnum,
         withdrawalMethod: withdrawalMethodEnum,
-        terminalId: z.number().optional(),
+        terminalId: z.number().optional().nullable(),
         price: z.number().min(0),
       }),
     )
