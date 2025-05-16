@@ -2,7 +2,7 @@
 	<div class="min-h-screen bg-rose-50">
 		<header class="bg-yellow-300 shadow-sm py-3">
 			<div class="container mx-auto px-4">
-				<h1 class="text-xl font-bold">{{ t('common.header') }}</h1>
+				<h1 class="text-xl font-bold text-rose-700">{{ t('common.header') }}</h1>
 			</div>
 		</header>
 		
@@ -11,7 +11,7 @@
 		</main>
 		
 		<footer class="bg-yellow-300 py-4 mt-8">
-			<div class="container mx-auto px-4 text-center text-sm">
+			<div class="container mx-auto px-4 text-center text-sm text-rose-700">
 				{{ t('common.footer') }}
 			</div>
 		</footer>

@@ -7,7 +7,7 @@
       @item-click="navigateToCategory"
     >
       <template #card-label="{ item }">
-        <div class="text-center h-16 flex items-center justify-center">
+        <div class="text-center h-16 flex items-center justify-center font-bold">
           <span>{{ item.label }}</span>
         </div>
       </template>
