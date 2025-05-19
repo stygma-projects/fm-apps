@@ -7,7 +7,15 @@ export const productRouter = router({
     return await prisma.product.findMany({
       include: {
         category: true,
-        mandatory: true,
+        mandatory: {
+          include: {
+            category: {
+              select: {
+                label: true
+              }
+            }
+          }
+        },
         optionalBase: true,
         extra: true,
       },
