@@ -11,7 +11,7 @@ model Product {
   mandatory               Ingredient[]          @relation(name : "mandatory")
   optionalBase            Ingredient[]          @relation(name : "optionalBase")
   extra                   Ingredient[]          @relation(name : "extra")
-  Order                   Order[]
+  productUsedInOrder      ProductInOrder[]   
 }
 
 model ProductCategory {
@@ -22,17 +22,20 @@ model ProductCategory {
 }
 
 model Ingredient {
-  id                  String                @id @default(uuid())
-  label               String                @unique
-  priceExclTax        Float
-  priceIncludingTax   Float
-  imageUrl            String?
-  category            IngredientCategory    @relation(fields: [categoryId], references: [id])
-  categoryId          String
-  nonUpdatableIn      Product[]             @relation(name : "nonUpdatable")
-  mandatoryIn         Product[]             @relation(name : "mandatory")
-  optionalBaseIn      Product[]             @relation(name : "optionalBase")
-  extraIn             Product[]             @relation(name : "extra")
+  id                      String                @id @default(uuid())
+  label                   String                @unique
+  priceExclTax            Float
+  priceIncludingTax       Float
+  imageUrl                String?
+  category                IngredientCategory    @relation(fields: [categoryId], references: [id])
+  categoryId              String
+  nonUpdatableIn          Product[]             @relation(name : "nonUpdatable")
+  mandatoryIn             Product[]             @relation(name : "mandatory")
+  optionalBaseIn          Product[]             @relation(name : "optionalBase")
+  extraIn                 Product[]             @relation(name : "extra")
+  usedAsMandatoryIn       ProductInOrder[]      @relation(name : "usedAsMandatoryIn")
+  usedAsOptionalBaseIn    ProductInOrder[]      @relation(name : "usedAsOptionalBaseIn")
+  usedAsExtraIn           ProductInOrder[]      @relation(name : "usedAsExtraIn")
 }
 
 model IngredientCategory {
