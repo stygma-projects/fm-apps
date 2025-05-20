@@ -10,7 +10,9 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "e2e:open": "cypress open",
+    "e2e:dev": "cypress run"
   },
   "dependencies": {
     "@fm-apps/trpc": "*",
@@ -29,6 +31,7 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@primevue/nuxt-module": "^4.3.4"
+    "@primevue/nuxt-module": "^4.3.4",
+    "cypress": "^14.3.3"
   }
 }

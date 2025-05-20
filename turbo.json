@@ -43,6 +43,15 @@
       "cache": false,
       "persistent": true
     },
+    "e2e:open": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
+    },
+    "e2e:dev": {
+      "dependsOn": ["^build"],
+      "cache": false
+    },
     "lint": {},
     "lint:fix": {},
     "type-check": {
