@@ -4,7 +4,7 @@
       @click="$router.back()" 
       class="mb-8 flex items-center"
     >
-      Retour
+      {{ t('stepper.back') }}
     </PrimeButton>
     
     <Card 
@@ -27,6 +27,9 @@ import { computed, ref, onMounted } from 'vue';
 import Card from '~/components/ui/card.component.vue';
 import Stepper from '~/components/ui/stepper.component.vue';
 import { useProduct } from '~/composables/api/product.composable';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const route = useRoute();
 
