@@ -19,6 +19,8 @@
     "db:reset": "turbo db:reset",
     "db:push": "turbo db:push",
     "db:studio": "turbo db:studio",
+    "test:e2e:open": "turbo e2e:open",
+    "test:e2e:dev": "turbo e2e:dev",
     "clean": "turbo clean && rm -rf node_modules",
     "prepare": "husky"
   },
