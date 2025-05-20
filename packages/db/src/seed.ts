@@ -11,17 +11,17 @@ async function main() {
   // Insert ingredient types
   await prisma.ingredientCategory.createMany({
     data: [
-      { label: 'Légumes' },
-      { label: 'Produits laitier' },
-      { label: 'Viande' },
-      { label: 'Pain' },
-      { label: 'Sauce' },
-      { label: 'Cuisson' },
-      { label: 'Condiment' },
-      { label: 'Plat' },
-      { label: 'Fromage' },
-      { label: 'Gratiné' },
-      { label: 'Féculents' },
+      { label: 'Légumes', displayPriority: 7 },
+      { label: 'Produits laitier', displayPriority: 5 },
+      { label: 'Viande', displayPriority: 2 },
+      { label: 'Pain', displayPriority: 1 },
+      { label: 'Sauce', displayPriority: 9 },
+      { label: 'Cuisson', displayPriority: 3 },
+      { label: 'Condiment', displayPriority: 8 },
+      { label: 'Plat', displayPriority: 11 },
+      { label: 'Fromage', displayPriority: 4 },
+      { label: 'Gratiné', displayPriority: 10 },
+      { label: 'Féculents', displayPriority: 6 },
     ],
     skipDuplicates: true,
   })

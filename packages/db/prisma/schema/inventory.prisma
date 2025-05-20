@@ -15,10 +15,10 @@ model Product {
 }
 
 model ProductCategory {
-  id       String    @id @default(uuid())
-  label    String    @unique
-  imageUrl String?
-  products Product[]
+  id                String    @id @default(uuid())
+  label             String    @unique
+  imageUrl          String?
+  products          Product[]
 }
 
 model Ingredient {
@@ -39,8 +39,9 @@ model Ingredient {
 }
 
 model IngredientCategory {
-  id          String       @id @default(uuid())
-  label       String       @unique
-  imageUrl    String?
-  ingredients Ingredient[]
+  id                String        @id @default(uuid())
+  label             String        @unique
+  imageUrl          String? 
+  ingredients       Ingredient[]
+  displayPriority   Float         @unique
 }

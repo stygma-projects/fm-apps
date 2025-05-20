@@ -31,6 +31,7 @@ export const ingredientCategoryRouter = router({
       z.object({
         label: z.string().min(2),
         imageUrl: z.string().optional().nullable(),
+        displayPriority: z.number().min(1),
       }),
     )
     .mutation(async ({ input }) => {
@@ -49,6 +50,7 @@ export const ingredientCategoryRouter = router({
         id: z.string(),
         label: z.string().min(2).optional(),
         imageUrl: z.string().optional().nullable(),
+        displayPriority: z.number().min(1).optional(),
       }),
     )
     .mutation(async ({ input }) => {

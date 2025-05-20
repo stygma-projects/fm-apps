@@ -37,6 +37,7 @@ export const fr = {
       headers: {
         label: 'Nom',
         imageUrl: 'Image',
+        displayPriority: 'Importance',
         action: 'Actions',
       }
     },

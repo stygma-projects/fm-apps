@@ -3,6 +3,8 @@
     :items="ingredientCategories"
     :columns="columns"
     :filter-fields="filterFields"
+    sort-field="displayPriority" 
+    :sort-order="1"
   >
     <template #header="{ selectedItems }">
       <PrimeButton
@@ -69,6 +71,11 @@
           v-model="editableIngredientCategory.imageUrl"
           :label="t('ingredientCategories.table.headers.imageUrl')"
         />
+        <InputText
+          v-model="editableIngredientCategory.displayPriority"
+          :label="t('ingredientCategories.table.headers.displayPriority')"
+          :type = InputType.NUMBER
+        />
       </div>
     </template>
   </ModalWrapper>
@@ -89,6 +96,10 @@
           v-model="editableIngredientCategory.imageUrl"
           :label="t('ingredientCategories.table.headers.imageUrl')"
         />
+        <InputText
+          v-model="editableIngredientCategory.displayPriority"
+          :label="t('ingredientCategories.table.headers.displayPriority')"
+        />
       </div>
     </template>
   </ModalWrapper>
@@ -99,6 +110,7 @@ import { useI18n } from 'vue-i18n'
 import InputText from '../components/ui/form/input-text.component.vue'
 import DataTable from '../components/ui/data-table.component.vue'
 import ModalWrapper from '../components/ui/modal-wrapper.component.vue'
+import { InputType } from '../types/primevue.type'
 import {
   useFetchIngredientCategories,
   useDeleteIngredientCategory,
@@ -128,10 +140,12 @@ const currentIngredientCategory = ref<GetByIdIngredientCategoryOutput>(null)
 const editableIngredientCategory = ref({
   label: '',
   imageUrl: '',
+  displayPriority: 0
 })
 const columns = [
   { field: 'label', header: t(`ingredientCategories.table.headers.label`) },
   { field: 'imageUrl', header: t(`ingredientCategories.table.headers.imageUrl`) },
+  { field: 'displayPriority', header: t(`ingredientCategories.table.headers.displayPriority`) },
 ]
 const filterFields = ['label']
 
@@ -151,6 +165,7 @@ const showEditIngredientCategoryModal = (rowData: any) => {
   editableIngredientCategory.value = {
     label: rowData.label,
     imageUrl: rowData.imageUrl,
+    displayPriority: rowData.displayPriority
   }
   isUpdateIngredientCategoryModalVisible.value = true
 }
@@ -171,6 +186,7 @@ const handleConfirmUpdateIngredientCategory = async () => {
     id: currentIngredientCategory.value.id,
     label: editableIngredientCategory.value.label,
     imageUrl: editableIngredientCategory.value.imageUrl,
+    displayPriority: editableIngredientCategory.value.displayPriority,
   })
   successToast('Confirmed', 'Record updated')
   refetchIngredientCategories()
@@ -180,6 +196,7 @@ const resetEditableIngredientCategory = () => {
   editableIngredientCategory.value = {
     label: '',
     imageUrl: '',
+    displayPriority: 0,
   }
 }
 
@@ -209,6 +226,7 @@ const handleConfirmCreateIngredientCategory = async () => {
   await createIngredientCategory({
     label: editableIngredientCategory.value.label,
     imageUrl: editableIngredientCategory.value.imageUrl,
+    displayPriority : editableIngredientCategory.value.displayPriority
   })
   successToast('Confirmed', 'Record created')
   refetchIngredientCategories()
@@ -218,6 +236,7 @@ const handleCancelCreateIngredientCategory = () => {
   editableIngredientCategory.value = {
     label: '',
     imageUrl: '',
+    displayPriority: 0,
   }
 }
 </script>
