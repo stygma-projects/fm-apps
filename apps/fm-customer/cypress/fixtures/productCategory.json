@@ -1,0 +1,26 @@
+{
+  "result": {
+    "data": [
+      {
+        "id": "516c25a7-cf99-4580-a5fd-102c9de4eee0",
+        "label": "Boissons",
+        "imageUrl": null
+      },
+      {
+        "id": "d6ceeee8-2757-4c36-87e1-9dfee2c3de43",
+        "label": "2",
+        "imageUrl": null
+      },
+      {
+        "id": "46a9e6f6-89dd-4e60-8e28-7f940aaf4465",
+        "label": "3",
+        "imageUrl": null
+      },
+      {
+        "id": "13d36d01-c6de-43af-ab3a-429e454c0a7f",
+        "label": "4",
+        "imageUrl": null
+      }
+    ]
+  }
+}
