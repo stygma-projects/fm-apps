@@ -1,6 +1,8 @@
 <template>
 	<div class="min-h-screen bg-rose-50">
-		<header class="bg-yellow-300 shadow-sm py-3">
+		<header 
+		data-cy="fmc-header"
+		class="bg-yellow-300 shadow-sm py-3">
 			<div class="container mx-auto px-4">
 				<h1 class="text-xl font-bold text-rose-700">{{ t('common.header') }}</h1>
 			</div>
@@ -10,7 +12,9 @@
 			<slot />
 		</main>
 		
-		<footer class="fixed bottom-0 left-0 right-0 bg-yellow-300 py-4">
+		<footer 
+		data-cy="fmc-footer"
+		class="fixed bottom-0 left-0 right-0 bg-yellow-300 py-4">
 			<div class="container mx-auto px-4 text-center text-sm text-rose-700">
 				{{ t('common.footer') }}
 			</div>

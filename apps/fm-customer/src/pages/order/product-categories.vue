@@ -5,6 +5,7 @@
       :items="categories"
       :clickable="true"
       @item-click="navigateToCategory"
+      cy="product-categories-card"
     />
   </div>
 </template>

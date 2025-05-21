@@ -3,6 +3,7 @@
     <PrimeButton 
       @click="$router.back()" 
       class="mb-8 flex items-center"
+      data-cy="fmc-return-product-category-page"
     >
       {{ t('stepper.back') }}
     </PrimeButton>
@@ -10,6 +11,7 @@
     <Card 
       :items="products" 
       @item-click="openProductStepper"
+      cy="product-card"
     />
     
     <Stepper 

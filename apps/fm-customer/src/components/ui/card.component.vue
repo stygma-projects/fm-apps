@@ -5,12 +5,12 @@
       :key="item.id || index"
       @click="handleItemClick(item)"
       :pt="cardPt"
-      data-cy="fmc-category-card"
       :class="[
         'flex flex-col justify-center cursor-pointer transition-all duration-200 h-50 lg:h-70 border-1',
         isSelected(item) ? 'border-primary' : 'border-rose-200 hover:border-rose-400',
         isSelected(item) ? 'shadow-lg' : 'shadow-md hover:shadow-lg'
       ]"
+      :data-cy="`fmc-${cy}`"
     >
       <!-- Image Container -->
       <template #header>
@@ -72,6 +72,10 @@ const props = defineProps({
   selectedItems: {
     type: Array,
     default: () => []
+  },
+  cy: {
+    type: String,
+    default: ''
   }
 });
 

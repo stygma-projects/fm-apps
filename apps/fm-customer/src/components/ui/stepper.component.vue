@@ -26,11 +26,13 @@
                     severity="secondary" 
                     @click="emitComplete"
                     :label="t('stepper.cancel')"
+                    data-cy="fmc-cancel-step-button"
                   />
                   <PrimeButton 
                     severity="success" 
                     @click="emitComplete"
                     :label="t('stepper.validate')"
+                    data-cy="fmc-validate-step-button"
                   />
                 </div>
               </div>
@@ -62,12 +64,14 @@
                     severity="secondary" 
                     @click="emitComplete"
                     :label="t('stepper.cancel')"
+                    data-cy="fmc-cancel-step-button"
                   />
                   <PrimeButton 
                     v-if="index > 0"
                     severity="secondary" 
                     @click="stepperState.currentStep = String(index)"
                     :label="t('stepper.back')"
+                    data-cy="fmc-back-step-button"
                   />
                   <slot 
                     :name="`mandatory-${index + 1}-actions`" 
@@ -79,12 +83,14 @@
                       :disabled="!hasAllMandatorySelections"
                       @click="emitComplete"
                       :label="t('stepper.validate')"
+                      data-cy="fmc-validate-step-button"
                     />
                     <PrimeButton 
                       v-else
                       :disabled="!canProceed"
                       @click="stepperState.currentStep = String(index + 2)"
                       :label="t('stepper.next')"
+                      data-cy="fmc-next-step-button"
                     />
                   </slot>
                 </div>
@@ -149,6 +155,7 @@
               class="w-1/3"
               @click="emitComplete"
               :label="t('stepper.cancel')"
+              data-cy="fmc-cancel-step-button"
             />
           
           <div class="w-1/3 flex justify-center items-center">
@@ -159,6 +166,7 @@
               class="w-1/3"
               @click="emitComplete"
               :label="t('stepper.validate')"
+              data-cy="fmc-validate-step-button"
             />
           </slot>
         </div>
@@ -170,6 +178,7 @@
               class="w-1/3"
               @click="emitComplete"
               :label="t('stepper.cancel')"
+              data-cy="fmc-cancel-step-button"
             />
           <PrimeButton 
             v-if="stepperState.activeTabIndex > 0"
@@ -177,6 +186,7 @@
             @click="stepperState.activeTabIndex--"
             class="w-1/3"
             :label="t('stepper.back')"
+            data-cy="fmc-back-step-button"
           />
           
           <div class="w-1/3 flex justify-center items-center">
@@ -189,9 +199,9 @@
               severity="success" 
               :disabled="!hasAllMandatorySelections"
               @click="emitComplete"
-Hesitez pas a prendre
               class="w-1/3"
               :label="t('stepper.validate')"
+              data-cy="fmc-validate-step-button"
             />
             <PrimeButton 
               v-else
@@ -199,6 +209,7 @@ Hesitez pas a prendre
               @click="stepperState.activeTabIndex++"
               class="w-1/3"
               :label="t('stepper.next')"
+              data-cy="fmc-next-step-button"
             />
           </slot>
         </div>
