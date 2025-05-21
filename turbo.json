@@ -43,12 +43,12 @@
       "cache": false,
       "persistent": true
     },
-    "e2e:open": {
+    "test:e2e": {
       "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },
-    "e2e:dev": {
+    "test:e2e:ci": {
       "dependsOn": ["^build"],
       "cache": false
     },
