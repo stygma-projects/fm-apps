@@ -1,0 +1,41 @@
+model Order {
+  id                String            @id @default(uuid())
+  orderId           Int               @unique
+  orderHasProduct   ProductInOrder[]
+  type              OrderType
+  status            OrderStatus       @default(PENDING)
+  withdrawalMethod  WithdrawalMethod
+  terminalId        Int?
+  price             Float
+  createdAt         DateTime          @default(now())        
+}
+
+enum OrderType {
+  DELIVERY
+  PICKUP
+  TERMINALS
+}
+
+enum OrderStatus {
+  PENDING
+  IN_PROGRESS
+  DELIVERED
+  CANCELED
+}
+
+enum WithdrawalMethod {
+  CASH
+  CARD
+}
+
+
+model ProductInOrder {
+  id              String          @id @default(uuid())
+  productId       String          
+  product         Product         @relation(fields: [productId], references: [id])
+  orderId         String          
+  order           Order           @relation(fields: [orderId], references: [id])
+  mandatory       Ingredient[]    @relation(name : "usedAsMandatoryIn")
+  optionalBase    Ingredient[]    @relation(name : "usedAsOptionalBaseIn")
+  extra           Ingredient[]    @relation(name : "usedAsExtraIn")
+}
