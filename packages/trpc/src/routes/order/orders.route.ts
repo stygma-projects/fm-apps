@@ -20,12 +20,19 @@ export const ordersRouter = router({
         createdAt: 'asc',
       },
       include: {
-        products: {
+        orderHasProduct: {
           include: {
-            nonUpdatable : true,
-            mandatory: true,
-            optionalBase: true,
-            extra: true,
+            mandatory : true,
+            optionalBase : true,
+            extra : true,
+            product : {
+              include : {
+                nonUpdatable : true,
+                mandatory: true,
+                optionalBase: true,
+                extra: true,
+              },
+            },
           },
         },
       },
@@ -40,12 +47,19 @@ export const ordersRouter = router({
         status: OrderStatus.IN_PROGRESS,
       },
       include: {
-        products: {
-          include: {
-            nonUpdatable : true,
-            mandatory: true,
-            optionalBase: true,
-            extra: true,
+        orderHasProduct: {
+          include: { 
+            mandatory : true,
+            optionalBase : true,
+            extra : true,
+            product : {
+              include : {
+                nonUpdatable : true,
+                mandatory: true,
+                optionalBase: true,
+                extra: true,
+              },
+            },
           },
         },
       },
@@ -62,12 +76,19 @@ export const ordersRouter = router({
       return await prisma.order.findUnique({
         where: { id },
         include: {
-          products: {
+          orderHasProduct: {
             include: {
-              nonUpdatable : true,
-              mandatory: true,
-              optionalBase: true,
-              extra: true,
+            mandatory : true,
+            optionalBase : true,
+            extra : true,
+              product : {
+                include : {
+                  nonUpdatable : true,
+                  mandatory: true,
+                  optionalBase: true,
+                  extra: true,
+                },
+              },
             },
           },
         },

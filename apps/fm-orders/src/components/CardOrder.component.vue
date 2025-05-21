@@ -17,10 +17,10 @@
       </div>
 
       <!-- Liste des produits avec ingrédients -->
-      <div v-if="order.products && order.products.length > 0">
+      <div v-if="order.orderHasProduct && order.orderHasProduct.length > 0">
         <div
-          v-for="(product, index) in order.products"
-          :key="product.id"
+          v-for="(relationOrderProduct, index) in order.orderHasProduct"
+          :key="relationOrderProduct.productId"
           class="mb-4 pb-3 border-b border-gray-300 last:border-0"
         >
           <div class="flex justify-between font-medium">
@@ -30,12 +30,12 @@
               >
                 {{ index + 1 }}
               </span>
-              <span class="text-lg">{{ product.label }}</span>
+              <span class="text-lg">{{ relationOrderProduct.product.label }}</span>
             </div>
           </div>
 
           <div
-            v-if="product.nonUpdatable && product.nonUpdatable.length > 0"
+            v-if="relationOrderProduct.product.nonUpdatable && relationOrderProduct.product.nonUpdatable.length > 0"
             class="ml-9 mt-2"
           >
             <div class="text-base text-gray-500 mb-1 font-medium">
@@ -43,7 +43,7 @@
             </div>
             <ul class="text-base text-gray-600 list-disc pl-4">
               <li
-                v-for="ingredientItem in product.nonUpdatable"
+                v-for="ingredientItem in relationOrderProduct.product.nonUpdatable"
                 :key="ingredientItem.id"
                 class="mb-1"
               >
@@ -56,12 +56,12 @@
           </div>
 
           <div
-            v-if="product.mandatory && product.mandatory.length > 0"
+            v-if="relationOrderProduct.mandatory && relationOrderProduct.mandatory.length > 0"
             class="ml-9 mt-2"
           >
             <ul class="text-base text-gray-600 list-disc pl-4">
               <li
-                v-for="ingredientItem in product.mandatory"
+                v-for="ingredientItem in relationOrderProduct.mandatory"
                 :key="ingredientItem.id"
                 class="mb-1"
               >
@@ -74,12 +74,12 @@
           </div>
 
           <div
-            v-if="product.optionalBase && product.optionalBase.length > 0"
+            v-if="relationOrderProduct.optionalBase && relationOrderProduct.optionalBase.length > 0"
             class="ml-9 mt-2"
           >
             <ul class="text-base text-gray-600 list-disc pl-4">
               <li
-                v-for="ingredientItem in product.optionalBase"
+                v-for="ingredientItem in relationOrderProduct.optionalBase"
                 :key="ingredientItem.id"
                 class="mb-1"
               >
@@ -92,12 +92,12 @@
           </div>
 
           <div
-            v-if="product.extra && product.extra.length > 0"
+            v-if="relationOrderProduct.extra && relationOrderProduct.extra.length > 0"
             class="ml-9 mt-2"
           >
             <ul class="text-base text-gray-600 list-disc pl-4">
               <li
-                v-for="ingredientItem in product.extra"
+                v-for="ingredientItem in relationOrderProduct.extra"
                 :key="ingredientItem.id"
                 class="mb-1"
               >

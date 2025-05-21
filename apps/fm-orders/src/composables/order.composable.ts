@@ -1,6 +1,6 @@
 import { ref, watch } from 'vue'
 import { trpc } from '../api/trpc'
-import type { Order } from '@fm-apps/db'
+import type { Order } from '../types/order.type'
 import { useQuery, } from '@tanstack/vue-query'
 
 export const useFetchOrders = () => {
@@ -19,7 +19,7 @@ export const useFetchOrders = () => {
     if (!result) return
     const formattedOrders = result.map((order) => ({
       ...order,
-      createdAt: new Date(order.createdAt),
+      // createdAt: new Date(order.createdAt),
     }))
     if (JSON.stringify(orders.value) !== JSON.stringify(formattedOrders)) {
       orders.value = formattedOrders
