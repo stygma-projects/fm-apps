@@ -107,19 +107,19 @@
             {{ t('order.dialogs.product') }}
           </h3>
           <div
-            v-for="product in selectedCommande.products"
-            :key="product.id"
+            v-for="relationOrderProduct in selectedCommande.orderHasProduct"
+            :key="relationOrderProduct.productId"
             class="mb-4 p-3 bg-gray-50 rounded"
           >
-            <div class="font-medium mb-2">{{ product.label }}</div>
+            <div class="font-medium mb-2">{{ relationOrderProduct.product.label }}</div>
             <div class="font-medium mb-2">{{ t("order.dialogs.ingredients") }}</div>
             <div
-              v-if="product.nonUpdatable && product.nonUpdatable.length"
+              v-if="relationOrderProduct.product.nonUpdatable && relationOrderProduct.product.nonUpdatable.length"
               class="pl-4"
             >
               <span> {{ t('order.ingredientTypes.nonUpdatable') }} : </span>
               <div
-                v-for="ingredient in product.nonUpdatable"
+                v-for="ingredient in relationOrderProduct.product.nonUpdatable"
                 :key="ingredient.id"
                 class="text-gray-600"
               >
@@ -127,12 +127,12 @@
               </div>
             </div>
             <div
-              v-if="product.mandatory && product.mandatory.length"
+              v-if="relationOrderProduct.mandatory && relationOrderProduct.mandatory.length"
               class="pl-4"
             >
               <span> {{ t('order.ingredientTypes.mandatory') }} : </span>
               <div
-                v-for="ingredient in product.mandatory"
+                v-for="ingredient in relationOrderProduct.mandatory"
                 :key="ingredient.id"
                 class="text-gray-600"
               >
@@ -140,12 +140,12 @@
               </div>
             </div>
             <div
-              v-if="product.optionalBase && product.optionalBase.length"
+              v-if="relationOrderProduct.optionalBase && relationOrderProduct.optionalBase.length"
               class="pl-4"
             >
               <span> {{ t('order.ingredientTypes.optionalBase') }} : </span>
               <div
-                v-for="ingredient in product.optionalBase"
+                v-for="ingredient in relationOrderProduct.optionalBase"
                 :key="ingredient.id"
                 class="text-gray-600"
               >
@@ -153,12 +153,12 @@
               </div>
             </div>
             <div
-              v-if="product.extra && product.extra.length"
+              v-if="relationOrderProduct.extra && relationOrderProduct.extra.length"
               class="pl-4"
             >
               <span> {{ t('order.ingredientTypes.extra') }} : </span>
               <div
-                v-for="ingredient in product.extra"
+                v-for="ingredient in relationOrderProduct.extra"
                 :key="ingredient.id"
                 class="text-gray-600"
               >

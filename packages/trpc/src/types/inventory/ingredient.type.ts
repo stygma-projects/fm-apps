@@ -1,6 +1,7 @@
 import { RouterInput, RouterOutput } from '../..'
 
-export type ListIngredientInput = RouterInput['inventory']['ingredient']['list']
+export type ListIngredientInput = 
+  RouterInput['inventory']['ingredient']['list']
 export type GetByIdIngredientInput =
   RouterInput['inventory']['ingredient']['getById']
 export type CreateIngredientInput =
