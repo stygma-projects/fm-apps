@@ -1,0 +1,1 @@
+export { auth } from './lib/auth' // exports instance of db
