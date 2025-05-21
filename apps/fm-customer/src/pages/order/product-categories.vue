@@ -1,25 +1,20 @@
 <template>
-  <div>
+  <div class="pb-12">
     <h1 class="text-2xl font-bold mb-6 text-center">{{ t('productCategory.title') }}</h1>
     <Card 
       :items="categories"
       :clickable="true"
       @item-click="navigateToCategory"
-    >
-      <template #card-label="{ item }">
-        <div class="text-center h-16 flex items-center justify-center font-bold">
-          <span>{{ item.label }}</span>
-        </div>
-      </template>
-    </Card>
+    />
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
 import Card from '~/components/ui/card.component.vue'
 import { useProductCategory } from '~/composables/api/productCategoy.composable'
 import { useI18n } from 'vue-i18n'
+import type { ProductCategory } from '../../../../../packages/db/generated/client'
 
 const { t } = useI18n()
 
@@ -30,7 +25,7 @@ const categories = computed(() => {
   return productCategoryData.value || []
 })
 
-const navigateToCategory = (category) => {
+const navigateToCategory = (category: ProductCategory ) => {
   router.push({
     path: `/order/${category.id}/products`,
   })
