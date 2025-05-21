@@ -10,7 +10,7 @@
 			<slot />
 		</main>
 		
-		<footer class="bg-yellow-300 py-4 mt-8">
+		<footer class="fixed bottom-0 left-0 right-0 bg-yellow-300 py-4">
 			<div class="container mx-auto px-4 text-center text-sm text-rose-700">
 				{{ t('common.footer') }}
 			</div>

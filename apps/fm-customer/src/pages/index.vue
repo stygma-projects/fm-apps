@@ -3,7 +3,7 @@
     to="/order/product-categories" 
     class="inline-block px-6 py-3 bg-red-300 hover:bg-red-400 font-bold rounded-full shadow-md"
   >
-    {{ t('common.order') }}
+    {{ t('order.title') }}
   </NuxtLink>
 </template>
 

@@ -1,42 +1,46 @@
 <template>
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <div :class="containerClasses">
     <PrimeCard 
       v-for="(item, index) in items" 
       :key="item.id || index"
       @click="handleItemClick(item)"
-      class="flex flex-auto justify-center cursor-pointer rounded-lg shadow-sm hover:shadow-md h-52 lg:h-80"
+      :pt="cardPt"
+      :class="[
+        'flex flex-col justify-center cursor-pointer transition-all duration-200 h-40 sm:h-48 lg:h-72 border-2',
+        isSelected(item) ? 'border-primary' : 'border-rose-200 hover:border-rose-400',
+        isSelected(item) ? 'shadow-lg' : 'shadow-md hover:shadow-lg'
+      ]"
     >
-      <template #header v-if="item.imageUrl">
-        <div class="w-full h-34 lg:h-52 overflow-hidden relative rounded-t-lg object-content lg:-top-5">
+      <!-- Image Container -->
+      <template #header>
+        <div class="w-full h-24 sm:h-28 lg:h-44 overflow-hidden relative rounded-t-lg bg-gray-50">
           <PrimeImage 
+            v-if="hasImage(item)" 
             :src="item.imageUrl" 
-            imageClass="h-full w-full object-cover rounded-t-lg"
+            :pt="imagePt"
           />
+          <div v-else class="w-full h-full flex items-center justify-center">
+          </div>
         </div>
       </template> 
       
-      <template #title v-if="item.imageUrl">
+      <!-- Content Area -->
+      <template #title>
         <slot
           name="card-label" 
           :item="item"
+          :selected="isSelected(item)"
         >
-          <div v-if="item.priceIncludingTax !== undefined" class="flex justify-between items-center p-5 lg:p-5 flex-grow">
-            <div class="text-base font-bold">
-              {{ item.label }}
+          <div class="w-full p-2 sm:p-3 lg:p-5 flex items-center min-h-[50px]">
+            <!-- With price -->
+            <div v-if="hasPrice(item)" class="flex justify-between items-center w-full text-xs sm:text-sm lg:text-base font-bold">
+              <p class="truncate max-w-[64%]">{{ item.label }}</p>
+              <p class="text-right">{{ formatPrice(item.priceIncludingTax) }}</p>
             </div>
-            <div v-if="item.priceIncludingTax !== undefined" class="text-base font-bold">
-              {{ item.priceIncludingTax }} €
+            <!-- Without price -->
+            <div v-else class="text-center w-full">
+              <p class="text-xs sm:text-sm lg:text-base break-words font-bold line-clamp-2">{{ item.label }}</p>
             </div>
-          </div>
-        </slot>
-      </template>
-
-      <template #content v-else>
-        <slot>
-          <div class="h-full flex items-center justify-center">
-            <span class="text-xl font-bold text-center">
-              {{ item.label }}
-            </span>
           </div>
         </slot>
       </template>
@@ -44,33 +48,61 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Card',
-  props: {
-    items: {
-      type: Array,
-      default: () => []
-    },
-    clickable: {
-      type: Boolean,
-      default: false
-    }
+<script setup>
+import { computed } from 'vue';
+
+const props = defineProps({
+  items: {
+    type: Array,
+    default: () => []
   },
-  methods: {
-    handleItemClick(item) {
-      if (this.clickable) {
-        this.$emit('item-click', item)
-      }
-    }
+  grid: {
+    type: Boolean,
+    default: true
   },
-  render() {
-    return this.$slots.default ? this.$slots.default()[0] : this.$options.template
+  gridCols: {
+    type: Object,
+    default: () => ({
+      default: 2,
+      sm: 2, 
+      lg: 4
+    })
+  },
+  selectedItems: {
+    type: Array,
+    default: () => []
   }
-}
+});
+
+const emit = defineEmits(['item-click']);
+
+const containerClasses = computed(() => {
+  return [
+    'gap-x-4 gap-y-6 lg:gap-x-6 lg:gap-y-8',
+    props.grid ? `grid grid-cols-${props.gridCols.default} sm:grid-cols-${props.gridCols.sm} lg:grid-cols-${props.gridCols.lg}` : 'flex flex-col'
+  ]
+});
+
+const hasImage = (item) => Boolean(item?.imageUrl);
+const hasPrice = (item) => item?.priceIncludingTax !== undefined;
+const formatPrice = (price) => `${price} €`;
+
+const isSelected = (item) => {
+  return props.selectedItems.some(selected => selected.id === item.id);
+};
+
+const handleItemClick = (item) => {
+  emit('item-click', item);
+};
+
+const cardPt = {
+  root: { class: 'rounded-lg' },
+  body: { class: 'p-0 flex-grow' },
+  content: { class: 'p-0 h-full' },
+  title: { class: 'text-base font-medium h-full' }
+};
+
+const imagePt = {
+  image: { class: 'h-full w-full object-cover object-center rounded-t-lg' }
+};
 </script>
-<style>
-div.p-card-body {
-  padding: 0 !important;
-}
-</style>
