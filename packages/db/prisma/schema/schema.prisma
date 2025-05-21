@@ -12,36 +12,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Order {
-  id               String           @id @default(uuid())
-  orderId          Int              @unique
-  products         Product[]
-  type             OrderType
-  status           OrderStatus      @default(PENDING)
-  withdrawalMethod WithdrawalMethod
-  terminalId       Int?
-  price            Float
-  createdAt        DateTime         @default(now())
-}
-
-enum OrderType {
-  DELIVERY
-  PICKUP
-  TERMINALS
-}
-
-enum OrderStatus {
-  PENDING
-  IN_PROGRESS
-  DELIVERED
-  CANCELED
-}
-
-enum WithdrawalMethod {
-  CASH
-  CARD
-}
-
 model User {
   id            String    @id @default(uuid())
   name          String    @db.Text
