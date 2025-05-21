@@ -9,9 +9,18 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     'card.component': typeof import('./components/ui/card.component.vue')['default']
+    PrimeButton: typeof import('primevue/button')['default']
     PrimeCard: typeof import('primevue/card')['default']
+    PrimeDialog: typeof import('primevue/dialog')['default']
     PrimeImage: typeof import('primevue/image')['default']
+    PrimeRadioButton: typeof import('primevue/radiobutton')['default']
+    PrimeStep: typeof import('primevue/step')['default']
+    PrimeStepList: typeof import('primevue/steplist')['default']
+    PrimeStepPanel: typeof import('primevue/steppanel')['default']
+    PrimeStepPanels: typeof import('primevue/steppanels')['default']
+    PrimeStepper: typeof import('primevue/stepper')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    'stepper.component': typeof import('./components/ui/stepper.component.vue')['default']
   }
 }

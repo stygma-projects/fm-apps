@@ -9,7 +9,11 @@ export default defineNuxtConfig({
   devServer: {
     port: 3001
   },
-  modules: ['@primevue/nuxt-module', '@nuxtjs/i18n'], 
+  modules: [
+    '@primevue/nuxt-module', 
+    '@nuxtjs/i18n',
+    '@pinia/nuxt'
+  ], 
   css: ['~/assets/styles/main.css'],
   primevue: {
     options: {
