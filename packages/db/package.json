@@ -18,7 +18,8 @@
     "clean": "rm -rf node_modules && rm -rf generated"
   },
   "dependencies": {
-    "@prisma/client": "^6.5.0"
+    "@prisma/client": "^6.5.0",
+    "better-auth": "^1.2.8"
   },
   "devDependencies": {
     "@fm-apps/toolkit": "*",
