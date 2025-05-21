@@ -4,5 +4,6 @@ export default defineConfig({
   screenshotOnRunFailure: false,
   e2e: {
     baseUrl: 'http://localhost:3001',
+    excludeSpecPattern: '**/*.api.*'
   },
 })
