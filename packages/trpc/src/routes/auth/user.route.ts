@@ -5,7 +5,7 @@ import { auth } from "@fm-apps/auth"
 // UTILISER AUTH 
 
 export const userRouter = router({
-    create: publicProcedure
+    signUpByMailAndPassword: publicProcedure
         .input(
             z.object({
                 email : z.string(),
