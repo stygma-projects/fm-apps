@@ -1,0 +1,137 @@
+[
+    {
+        "result": {
+            "data": [
+                {
+                    "id": "product1",
+                    "label": "Bacon",
+                    "priceExclTax": 1,
+                    "priceIncludingTax": 2,
+                    "imageUrl": null,
+                    "categoryId": "cat2",
+                    "category": {
+                        "id": "cat2",
+                        "label": "Viande",
+                        "imageUrl": null
+                    }
+                },
+                {
+                    "id": "product2",
+                    "label": "Cheddar",
+                    "priceExclTax": 1,
+                    "priceIncludingTax": 2,
+                    "imageUrl": null,
+                    "categoryId": "cat3",
+                    "category": {
+                        "id": "cat3",
+                        "label": "Fromage",
+                        "imageUrl": null
+                    }
+                },
+                {
+                    "id": "product3",
+                    "label": "Mayonnaise",
+                    "priceExclTax": 1,
+                    "priceIncludingTax": 2,
+                    "imageUrl": null,
+                    "categoryId": "cat4",
+                    "category": {
+                        "id": "cat4",
+                        "label": "Sauce",
+                        "imageUrl": null
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "result": {
+            "data": [
+                {
+                    "id": "product1",
+                    "label": "Bacon",
+                    "priceExclTax": 1,
+                    "priceIncludingTax": 2,
+                    "imageUrl": null,
+                    "categoryId": "cat2",
+                    "category": {
+                        "id": "cat2",
+                        "label": "Viande",
+                        "imageUrl": null
+                    }
+                },
+                {
+                    "id": "product2",
+                    "label": "Cheddar",
+                    "priceExclTax": 1,
+                    "priceIncludingTax": 2,
+                    "imageUrl": null,
+                    "categoryId": "cat3",
+                    "category": {
+                        "id": "cat3",
+                        "label": "Fromage",
+                        "imageUrl": null
+                    }
+                },
+                {
+                    "id": "product3",
+                    "label": "Mayonnaise",
+                    "priceExclTax": 1,
+                    "priceIncludingTax": 2,
+                    "imageUrl": null,
+                    "categoryId": "cat4",
+                    "category": {
+                        "id": "cat4",
+                        "label": "Sauce",
+                        "imageUrl": null
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "result": {
+            "data": [
+                {
+                    "id": "product1",
+                    "label": "Bacon",
+                    "priceExclTax": 1,
+                    "priceIncludingTax": 2,
+                    "imageUrl": null,
+                    "categoryId": "cat2",
+                    "category": {
+                        "id": "cat2",
+                        "label": "Viande",
+                        "imageUrl": null
+                    }
+                },
+                {
+                    "id": "product2",
+                    "label": "Cheddar",
+                    "priceExclTax": 1,
+                    "priceIncludingTax": 2,
+                    "imageUrl": null,
+                    "categoryId": "cat3",
+                    "category": {
+                        "id": "cat3",
+                        "label": "Fromage",
+                        "imageUrl": null
+                    }
+                },
+                {
+                    "id": "product3",
+                    "label": "Mayonnaise",
+                    "priceExclTax": 1,
+                    "priceIncludingTax": 2,
+                    "imageUrl": null,
+                    "categoryId": "cat4",
+                    "category": {
+                        "id": "cat4",
+                        "label": "Sauce",
+                        "imageUrl": null
+                    }
+                }
+            ]
+        }
+    }
+]

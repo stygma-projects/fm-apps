@@ -1,0 +1,60 @@
+[
+    {
+        "result": {
+            "data": [
+                {
+                    "id": "catprod",
+                    "label": "Coca-cola",
+                    "priceExclTax": 100,
+                    "priceIncludingTax": 100,
+                    "imageUrl": "",
+                    "available": true,
+                    "categoryId": "cat1",
+                    "category": {
+                        "id": "cat1",
+                        "label": "Boissons",
+                        "imageUrl": null
+                    },
+                    "nonUpdatable": [],
+                    "mandatory": [
+                        {
+                            "id": "product1",
+                            "label": "Bacon",
+                            "priceExclTax": 1,
+                            "priceIncludingTax": 2,
+                            "imageUrl": null,
+                            "categoryId": "cat2",
+                            "category": {
+                                "label": "Viande"
+                            }
+                        },
+                        {
+                            "id": "product2",
+                            "label": "Cheddar",
+                            "priceExclTax": 1,
+                            "priceIncludingTax": 2,
+                            "imageUrl": null,
+                            "categoryId": "cat3",
+                            "category": {
+                                "label": "Fromage"
+                            }
+                        },
+                        {
+                            "id": "product3",
+                            "label": "Mayonnaise",
+                            "priceExclTax": 1,
+                            "priceIncludingTax": 2,
+                            "imageUrl": null,
+                            "categoryId": "cat4",
+                            "category": {
+                                "label": "Sauce"
+                            }
+                        }
+                    ],
+                    "optionalBase": [],
+                    "extra": []
+                }
+            ]
+        }
+    }
+]

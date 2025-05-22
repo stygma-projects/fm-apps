@@ -25,12 +25,14 @@
                   <PrimeButton 
                     severity="secondary" 
                     @click="emitComplete"
-                    :label="$t('stepper.cancel')"
+                    :label="t('stepper.cancel')"
+                    data-cy="fmc-cancel-step-button"
                   />
                   <PrimeButton 
                     severity="success" 
                     @click="emitComplete"
-                    :label="$t('stepper.validate')"
+                    :label="t('stepper.validate')"
+                    data-cy="fmc-validate-step-button"
                   />
                 </div>
               </div>
@@ -61,13 +63,15 @@
                     v-if="index === 0"
                     severity="secondary" 
                     @click="emitComplete"
-                    :label="$t('stepper.cancel')"
+                    :label="t('stepper.cancel')"
+                    data-cy="fmc-cancel-step-button"
                   />
                   <PrimeButton 
                     v-if="index > 0"
                     severity="secondary" 
                     @click="stepperState.currentStep = String(index)"
-                    :label="$t('stepper.back')"
+                    :label="t('stepper.back')"
+                    data-cy="fmc-back-step-button"
                   />
                   <slot 
                     :name="`mandatory-${index + 1}-actions`" 
@@ -78,13 +82,15 @@
                       severity="success" 
                       :disabled="!hasAllMandatorySelections"
                       @click="emitComplete"
-                      :label="$t('stepper.validate')"
+                      :label="t('stepper.validate')"
+                      data-cy="fmc-validate-step-button"
                     />
                     <PrimeButton 
                       v-else
                       :disabled="!canProceed"
                       @click="stepperState.currentStep = String(index + 2)"
-                      :label="$t('stepper.next')"
+                      :label="t('stepper.next')"
+                      data-cy="fmc-next-step-button"
                     />
                   </slot>
                 </div>
@@ -148,7 +154,8 @@
               severity="secondary" 
               class="w-1/3"
               @click="emitComplete"
-              :label="$t('stepper.cancel')"
+              :label="t('stepper.cancel')"
+              data-cy="fmc-cancel-step-button"
             />
           
           <div class="w-1/3 flex justify-center items-center">
@@ -158,7 +165,8 @@
               severity="success" 
               class="w-1/3"
               @click="emitComplete"
-              :label="$t('stepper.validate')"
+              :label="t('stepper.validate')"
+              data-cy="fmc-validate-step-button"
             />
           </slot>
         </div>
@@ -169,14 +177,16 @@
               severity="secondary" 
               class="w-1/3"
               @click="emitComplete"
-              :label="$t('stepper.cancel')"
+              :label="t('stepper.cancel')"
+              data-cy="fmc-cancel-step-button"
             />
           <PrimeButton 
             v-if="stepperState.activeTabIndex > 0"
             severity="secondary" 
             @click="stepperState.activeTabIndex--"
             class="w-1/3"
-            :label="$t('stepper.back')"
+            :label="t('stepper.back')"
+            data-cy="fmc-back-step-button"
           />
           
           <div class="w-1/3 flex justify-center items-center">
@@ -190,14 +200,16 @@
               :disabled="!hasAllMandatorySelections"
               @click="emitComplete"
               class="w-1/3"
-              :label="$t('stepper.validate')"
+              :label="t('stepper.validate')"
+              data-cy="fmc-validate-step-button"
             />
             <PrimeButton 
               v-else
               :disabled="!canProceed"
               @click="stepperState.activeTabIndex++"
               class="w-1/3"
-              :label="$t('stepper.next')"
+              :label="t('stepper.next')"
+              data-cy="fmc-next-step-button"
             />
           </slot>
         </div>
@@ -210,6 +222,9 @@
 import { ref, computed, watch, onMounted, reactive, toRefs } from 'vue';
 import type { StepperEmits, StepperProps, StepperState } from '~/types/stepper.type';
 import StepContent from './step-content.component.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 interface StepperHooks {
   isMobile: Ref<boolean>;

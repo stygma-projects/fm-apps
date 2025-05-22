@@ -5,6 +5,7 @@
       :items="categories"
       :clickable="true"
       @item-click="navigateToCategory"
+      cy="product-categories-card"
     />
   </div>
 </template>
@@ -19,10 +20,10 @@ import type { ProductCategory } from '../../../../../packages/db/generated/clien
 const { t } = useI18n()
 
 const router = useRouter()
-const { data: productCategoryData } = useProductCategory()
+const { fetchAllProductCategories } = useProductCategory()
 
 const categories = computed(() => {
-  return productCategoryData.value || []
+  return fetchAllProductCategories.data.value || []
 })
 
 const navigateToCategory = (category: ProductCategory ) => {

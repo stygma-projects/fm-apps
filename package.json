@@ -7,6 +7,8 @@
     "dev": "turbo dev",
     "test": "turbo test",
     "test:watch": "turbo test:watch",
+    "test:e2e": "turbo test:e2e",
+    "test:e2e:ci": "turbo test:e2e:ci",
     "type-check": "turbo type-check",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix --",

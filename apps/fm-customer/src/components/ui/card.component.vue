@@ -6,14 +6,15 @@
       @click="handleItemClick(item)"
       :pt="cardPt"
       :class="[
-        'flex flex-col justify-center cursor-pointer transition-all duration-200 h-40 sm:h-48 lg:h-72 border-2',
+        'flex flex-col justify-center cursor-pointer transition-all duration-200 h-50 lg:h-70 border-1',
         isSelected(item) ? 'border-primary' : 'border-rose-200 hover:border-rose-400',
         isSelected(item) ? 'shadow-lg' : 'shadow-md hover:shadow-lg'
       ]"
+      :data-cy="`fmc-${cy}`"
     >
       <!-- Image Container -->
       <template #header>
-        <div class="w-full h-24 sm:h-28 lg:h-44 overflow-hidden relative rounded-t-lg bg-gray-50">
+        <div class="w-full h-36 lg:h-54 overflow-hidden relative rounded-t-lg bg-gray-50">
           <PrimeImage 
             v-if="hasImage(item)" 
             :src="item.imageUrl" 
@@ -31,7 +32,7 @@
           :item="item"
           :selected="isSelected(item)"
         >
-          <div class="w-full p-2 sm:p-3 lg:p-5 flex items-center min-h-[50px]">
+          <div class="w-full p-5 flex items-center min-h-[20]">
             <!-- With price -->
             <div v-if="hasPrice(item)" class="flex justify-between items-center w-full text-xs sm:text-sm lg:text-base font-bold">
               <p class="truncate max-w-[64%]">{{ item.label }}</p>
@@ -71,6 +72,10 @@ const props = defineProps({
   selectedItems: {
     type: Array,
     default: () => []
+  },
+  cy: {
+    type: String,
+    default: ''
   }
 });
 
@@ -97,12 +102,17 @@ const handleItemClick = (item) => {
 
 const cardPt = {
   root: { class: 'rounded-lg' },
-  body: { class: 'p-0 flex-grow' },
-  content: { class: 'p-0 h-full' },
-  title: { class: 'text-base font-medium h-full' }
+  body: { class: 'p-0 flex-grow h-full' },
+  title: { class: 'text-base font-medium' }
 };
 
 const imagePt = {
   image: { class: 'h-full w-full object-cover object-center rounded-t-lg' }
 };
 </script>
+
+<style>
+[data-pc-section="body"] {
+  padding: 0 !important;
+}
+</style>

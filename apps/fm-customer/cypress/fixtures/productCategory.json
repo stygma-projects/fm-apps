@@ -1,0 +1,26 @@
+{
+  "result": {
+    "data": [
+      {
+        "id": "cat1",
+        "label": "Boissons",
+        "imageUrl": null
+      },
+      {
+        "id": "cat2",
+        "label": "Viande",
+        "imageUrl": null
+      },
+      {
+        "id": "cat3",
+        "label": "Fromage",
+        "imageUrl": null
+      },
+      {
+        "id": "cat4",
+        "label": "Sauce",
+        "imageUrl": null
+      }
+    ]
+  }
+}
