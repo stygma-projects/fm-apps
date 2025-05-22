@@ -35,5 +35,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "vee-validate": "^4.15.0",
+    "yup": "^1.6.1"
+  }
 }
