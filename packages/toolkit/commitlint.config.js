@@ -10,6 +10,7 @@ const scopes = [
   'trpc',
   'fm-apps',
   'ui',
+  'auth',
 ]
 
 export default createCommitlintMonorepoConfig({

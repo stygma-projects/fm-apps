@@ -4,7 +4,6 @@ import {
   PrismaClient,
   WithdrawalMethod,
 } from '../generated/client'
-import { auth } from "./lib/auth"
 
 const prisma = new PrismaClient()
 
@@ -123,14 +122,6 @@ async function main() {
     ],
   })
   
-  auth.api.signUpEmail({
-    returnHeaders: true,
-    body: {
-      email: "john@doe.com",
-      password: "password",
-      name: "John Doe",
-    },
-  })
 }
 
 
