@@ -49,8 +49,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-
 const props = defineProps({
   items: {
     type: Array,
@@ -94,4 +92,4 @@ const getCardPt = (item) => ({
 const imagePt = {
   image: { class: 'h-full w-full object-cover object-center' } // Retiré rounded-t-lg car overflow-hidden sur root le gère
 };
-</script>
+</script> 

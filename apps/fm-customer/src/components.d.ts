@@ -13,6 +13,7 @@ declare module 'vue' {
     PrimeButton: typeof import('primevue/button')['default']
     PrimeCard: typeof import('primevue/card')['default']
     PrimeDialog: typeof import('primevue/dialog')['default']
+    PrimeDrawer: typeof import('primevue/drawer')['default']
     PrimeIconField: typeof import('primevue/iconfield')['default']
     PrimeImage: typeof import('primevue/image')['default']
     PrimeOverlayBadge: typeof import('primevue/overlaybadge')['default']
