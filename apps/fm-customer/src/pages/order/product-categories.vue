@@ -10,6 +10,7 @@
         </template>
 
         <template #cart-panel>
+          <CartPanel />
         </template>
     </Splitter>
 </template>
@@ -18,6 +19,7 @@
 import Splitter from '~/components/ui/splitter.component.vue';
 import { useRouter } from 'vue-router'
 import Card from '~/components/ui/card.component.vue'
+import CartPanel from '~/components/ui/cart-panel.vue';
 import { useProductCategory } from '~/composables/api/productCategoy.composable'
 import type { ProductCategory } from '../../../../../packages/db/generated/client'
 

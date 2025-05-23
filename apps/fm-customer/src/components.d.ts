@@ -9,7 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     'card.component': typeof import('./components/ui/card.component.vue')['default']
-    'cart-button.component': typeof import('./components/cart-button.component.vue')['default']
+    'cart-panel': typeof import('./components/ui/cart-panel.vue')['default']
     PrimeButton: typeof import('primevue/button')['default']
     PrimeCard: typeof import('primevue/card')['default']
     PrimeDialog: typeof import('primevue/dialog')['default']
