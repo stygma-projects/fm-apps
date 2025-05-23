@@ -32,6 +32,7 @@ declare module 'vue' {
     PrimeInputNumber: typeof import('primevue/inputnumber')['default']
     PrimeInputText: typeof import('primevue/inputtext')['default']
     PrimeMultiSelect: typeof import('primevue/multiselect')['default']
+    PrimeOverlayBadge: typeof import('primevue/overlaybadge')['default']
     PrimeRadioButton: typeof import('primevue/radiobutton')['default']
     PrimeSkeleton: typeof import('primevue/skeleton')['default']
     PrimeSplitter: typeof import('primevue/splitter')['default']

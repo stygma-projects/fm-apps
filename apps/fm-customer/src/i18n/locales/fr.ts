@@ -41,7 +41,7 @@ export const fr = {
   },
   article: 'Article #',
   createAccount: {
-    form : {
+    form: {
       title: 'Création de compte',
       name: 'Nom :',
       email: 'Email :',
@@ -52,48 +52,48 @@ export const fr = {
       nameExample: 'Ex : Mark',
       emailExample: 'Ex : mark@gmail.com',
       passwordExample: 'Ex : D$1\\>0h1j4WO%_7oZ3e',
-      errors : {
+      errors: {
         nameRequired: 'Le nom est requis',
-        emailRequired: 'L\'email est requis',
+        emailRequired: "L'email est requis",
         passwordRequired: 'Le mot de passe est requis',
-        invalidEmail: 'L\'email doit être valide',
+        invalidEmail: "L'email doit être valide",
         passwordTooShort: 'Le mot de passe doit contenir au moins 8 caractères',
-      }
+      },
     },
     toast: {
-      success : 'Succès',
+      success: 'Succès',
       error: 'Erreur',
       accountCreated: 'Compte créé !',
-      registerError: 'Erreur lors de l\'enregistrement',
+      registerError: "Erreur lors de l'enregistrement",
       defaultError: 'Une erreur est survenue',
-      defaultParameterError : 'Un paramètre est incorrect',
-    }
+      defaultParameterError: 'Un paramètre est incorrect',
+    },
   },
   login: {
-    form : {
+    form: {
       title: 'Connexion',
       email: 'Email :',
       password: 'Mot de passe (8 caractères minimum) :',
       submit: 'Se connecter',
-      noAccount : 'Vous n\'avez pas de compte ?',
+      noAccount: "Vous n'avez pas de compte ?",
       createAccount: 'Créer un compte',
       nameExample: 'Ex : Mark',
       emailExample: 'Ex : mark@gmail.com',
       passwordExample: 'Ex : D$1\\>0h1j4WO%_7oZ3e',
-      errors : {
+      errors: {
         emailRequired: 'Veuillez entrer votre email',
         invalidEmail: 'Veuillez entrer un email valide',
         passwordRequired: 'Veuillez entrer votre mot de passe',
         invalidEntries: 'Email ou mot de passe invalide',
-      }
+      },
     },
     toast: {
-      success : 'Succès',
+      success: 'Succès',
       error: 'Erreur',
       accountCreated: 'Connexion réussie !',
-      registerError: 'Erreur lors de l\'enregistrement',
+      registerError: "Erreur lors de l'enregistrement",
       defaultError: 'Une erreur est survenue',
-      defaultParameterError : 'Un paramètre est incorrect',
-    }
+      defaultParameterError: 'Un paramètre est incorrect',
+    },
   },
 }
