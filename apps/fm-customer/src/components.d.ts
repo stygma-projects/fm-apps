@@ -9,10 +9,13 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     'card.component': typeof import('./components/ui/card.component.vue')['default']
+    'cart-button.component': typeof import('./components/cart-button.component.vue')['default']
     PrimeButton: typeof import('primevue/button')['default']
     PrimeCard: typeof import('primevue/card')['default']
     PrimeDialog: typeof import('primevue/dialog')['default']
+    PrimeIconField: typeof import('primevue/iconfield')['default']
     PrimeImage: typeof import('primevue/image')['default']
+    PrimeOverlayBadge: typeof import('primevue/overlaybadge')['default']
     PrimeRadioButton: typeof import('primevue/radiobutton')['default']
     PrimeStep: typeof import('primevue/step')['default']
     PrimeStepList: typeof import('primevue/steplist')['default']

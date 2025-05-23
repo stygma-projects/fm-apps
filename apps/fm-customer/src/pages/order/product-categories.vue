@@ -1,12 +1,13 @@
 <template>
-  <div class="pb-12">
-    <h1 class="text-2xl font-bold mb-6 text-center">{{ t('productCategory.title') }}</h1>
+  <div class="pb-12 lg:pb-[10%]">
+    <h1 class="mb-6 text-2xl font-bold text-center">{{ t('productCategory.title') }}</h1>
     <Card 
       :items="categories"
       :clickable="true"
       @item-click="navigateToCategory"
       cy="product-categories-card"
     />
+    <CartButtonComponent />
   </div>
 </template>
 

@@ -20,8 +20,8 @@
           <PrimeStepPanels>
             <PrimeStepPanel v-if="mandatoryCount === 0" value="1">
               <div class="p-4">
-                <h2 class="text-2xl font-bold mb-4">TOTO</h2>
-                <div class="flex justify-between items-center">
+                <h2 class="mb-4 text-2xl font-bold">TOTO</h2>
+                <div class="flex items-center justify-between">
                   <PrimeButton 
                     severity="secondary" 
                     @click="emitComplete"
@@ -105,18 +105,18 @@
   <!-- Mobile format -->
   <div 
     v-if="stepperState.mobileVisible" 
-    class="lg:hidden fixed inset-0 z-50 bg-white overflow-auto"
+    class="fixed inset-0 z-50 overflow-auto bg-white lg:hidden"
     style="min-height: 100vh; min-height: -webkit-fill-available;"
   >
     <div class="flex flex-col h-screen">
       <!-- Header -->
-      <div class="py-4 px-4 border-b border-gray-200 flex items-center">
+      <div class="flex items-center px-4 py-4 border-b border-gray-200">
         <button 
           class="text-gray-500 hover:text-gray-800" 
           @click="closeMobileView"
         >
         </button>
-        <h2 class="ml-4 text-xl font-bold flex-grow text-center pr-6">
+        <h2 class="flex-grow pr-6 ml-4 text-xl font-bold text-center">
           {{ currentCategoryName }}
         </h2>
       </div>
@@ -147,7 +147,7 @@
       </div>
       
       <!-- Footer -->
-      <div class="py-4 px-6 border-t">
+      <div class="px-6 py-4 border-t">
         <div v-if="mandatoryCount === 0" class="flex justify-center">
           <slot name="no-mandatory-actions">
             <PrimeButton 
@@ -158,7 +158,7 @@
               data-cy="fmc-cancel-step-button"
             />
           
-          <div class="w-1/3 flex justify-center items-center">
+          <div class="flex items-center justify-center w-1/3">
             {{ stepperState.activeTabIndex }} / {{ mandatoryCount }}
           </div>
             <PrimeButton 
@@ -189,7 +189,7 @@
             data-cy="fmc-back-step-button"
           />
           
-          <div class="w-1/3 flex justify-center items-center">
+          <div class="flex items-center justify-center w-1/3">
             {{ stepperState.activeTabIndex + 1 }} / {{ mandatoryCount }}
           </div>
           
@@ -225,6 +225,9 @@ import StepContent from './step-content.component.vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
+
+const ingredientStore = useIngredientStore();
+const cartStore = useCartStore(); 
 
 interface StepperHooks {
   isMobile: Ref<boolean>;
@@ -333,7 +336,17 @@ const mandatoryCount = computed(() => {
   return props.item?.mandatory?.length || 0;
 }) as ComputedRef<number>;
 
-watch(() => props.visible, (newValue) => {
+watch(() => props.visible, async (newValue) => {
+  if (newValue && props.item?.mandatory) {
+    await ingredientStore.fetchAllIngredients();
+    
+    const categoryIds = [...new Set(
+      props.item.mandatory.map(mandatory => mandatory.categoryId)
+    )];
+    
+    ingredientStore.filterByCategories(categoryIds);
+  }
+
   if (isMobile.value) {
     stepperState.mobileVisible = newValue;
   } else {
@@ -363,15 +376,14 @@ const closeMobileView = () => {
 };
 
 const emitComplete = () => {
-  if(mandatoryCount.value > 0 || !stepperState.selections) stepperState.selections = {}
+  const currentSelections = { ...stepperState.selections };
+  cartStore.addItem(props.item, currentSelections);
 
   emit('complete', {
     item: props.item,
     step: stepperState.currentStep,
-    selections: stepperState.selections
+    selections: currentSelections
   });
-
-  console.log(stepperState.selections);
   
   stepperState.selections = {};
   closeMobileView();
