@@ -1,24 +1,24 @@
 <template>
-	<div class="min-h-screen bg-rose-50">
+	<div class="h-screen flex flex-col bg-rose-50">
 		<header 
-		data-cy="fmc-header"
-		class="bg-yellow-300 shadow-sm py-3">
-			<div class="container mx-auto px-4">
+			data-cy="fmc-header"
+			class="flex-shrink-0 py-3 bg-yellow-300 shadow-sm">
+			<div class="container px-4 mx-auto">
 				<h1 class="text-xl font-bold text-rose-700">{{ t('common.header') }}</h1>
 			</div>
 		</header>
 		
-		<main class="container mx-auto py-6 px-4 min-h-[89.9vh]">
+		<main class="flex-1 overflow-hidden">
 			<slot />
 		</main>
 		
-		<footer 
-		data-cy="fmc-footer"
-		class="bottom-0 left-0 right-0 bg-yellow-300 py-4">
-			<div class="container mx-auto px-4 text-center text-sm text-rose-700">
+		<!-- <footer 
+			data-cy="fmc-footer"
+			class=" py-4 bg-yellow-300">
+			<div class="container px-4 mx-auto text-sm text-center text-rose-700">
 				{{ t('common.footer') }}
 			</div>
-		</footer>
+		</footer> -->
 	</div>
 </template>
 

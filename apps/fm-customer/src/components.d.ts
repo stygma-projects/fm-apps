@@ -17,6 +17,8 @@ declare module 'vue' {
     PrimeImage: typeof import('primevue/image')['default']
     PrimeOverlayBadge: typeof import('primevue/overlaybadge')['default']
     PrimeRadioButton: typeof import('primevue/radiobutton')['default']
+    PrimeSplitter: typeof import('primevue/splitter')['default']
+    PrimeSplitterPanel: typeof import('primevue/splitterpanel')['default']
     PrimeStep: typeof import('primevue/step')['default']
     PrimeStepList: typeof import('primevue/steplist')['default']
     PrimeStepPanel: typeof import('primevue/steppanel')['default']
@@ -24,6 +26,7 @@ declare module 'vue' {
     PrimeStepper: typeof import('primevue/stepper')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    splitter: typeof import('./components/ui/splitter.component.vue')['default']
     'stepper.component': typeof import('./components/ui/stepper.component.vue')['default']
   }
 }
