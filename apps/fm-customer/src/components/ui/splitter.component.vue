@@ -87,7 +87,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue'
 import { fr } from '../../i18n/locales/fr'
 import Button from './button.component.vue'
 import BackLink from './back-link.component.vue'

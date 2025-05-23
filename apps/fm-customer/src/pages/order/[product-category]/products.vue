@@ -1,3 +1,4 @@
+<!-- Dans products.vue -->
 <template>
   <Splitter :title="categoryName">
     <template #main-panel>
