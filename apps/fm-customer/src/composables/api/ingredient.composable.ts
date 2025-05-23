@@ -4,8 +4,12 @@ import { useTrpcQuery } from '../utils/useTrpcQuery'
 export const useIngredients = () => {
   const { $trpc } = useNuxtApp()
   
-  return useTrpcQuery<ListIngredientOutput>(
+  const fetchAllIngredient = useTrpcQuery<ListIngredientOutput>(
     'ingredients',
     () => $trpc.inventory.ingredient.list.query()
   )
+
+  return {
+    fetchAllIngredient
+  }
 }

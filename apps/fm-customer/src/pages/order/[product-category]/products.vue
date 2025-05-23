@@ -1,37 +1,33 @@
+<!-- Dans products.vue -->
 <template>
-  <div>
-    <PrimeButton 
-      @click="$router.back()" 
-      class="mb-8 flex items-center"
-      data-cy="fmc-return-product-category-page"
-    >
-      {{ t('stepper.back') }}
-    </PrimeButton>
-    
-    <Card 
-      :items="products" 
-      @item-click="openProductStepper"
-      cy="product-card"
-    />
-    
-    <Stepper 
-      v-model:visible="showStepper"
-      :item="selectedProduct" 
-    />
-    
-    <!-- TODO: cart system -->
-  </div>
+  <Splitter>
+    <template #main-panel>
+      <div>
+        <Card 
+          :items="products" 
+          @item-click="openProductStepper"
+          cy="product-card"
+        />
+        <Stepper 
+          v-model:visible="showStepper"
+          :item="selectedProduct" 
+        />
+      </div>
+    </template>
+    <template #cart-panel>
+      <CartPanel />
+    </template>
+  </Splitter>
 </template>
 
 <script setup>
 import { useRoute } from 'vue-router';
 import { computed, ref, onMounted } from 'vue';
 import Card from '~/components/ui/card.component.vue';
+import CartPanel from '~/components/ui/cart-panel.vue';
 import Stepper from '~/components/ui/stepper.component.vue';
 import { useProduct } from '~/composables/api/product.composable';
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
+import Splitter from '~/components/ui/splitter.component.vue';
 
 const route = useRoute();
 

@@ -4,7 +4,7 @@
         :items="ing" 
         :grid="false" 
         :selected-items="selections"
-        class="flex flex-row grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        class="grid flex-row grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         @item-click="selectIngredient"
         cy="ingredient-stepper-card"
         />
@@ -12,11 +12,13 @@
 </template>
 
 <script setup lang="ts">
-import { useIngredients } from '~/composables/api/ingredient.composable';
 import type { StepperItem } from '~/types/stepper.type';
 import { computed, ref, watch } from 'vue';
 import Card from '~/components/ui/card.component.vue';
-import type { Ingredient } from '../../../../../packages/db/generated/client';
+
+import type { Ingredient } from '@fm-apps/db';
+
+const ingredientStore = useIngredientStore();
 
 const props = defineProps<{
     item: StepperItem;
@@ -24,8 +26,6 @@ const props = defineProps<{
     isLast: boolean;
     selections: Ingredient[];
 }>();
-
-const { data: ingredients } = useIngredients();
 
 const selectedIngredients = ref<Ingredient[]>([]);
 
@@ -36,9 +36,9 @@ const ing = computed(() => {
     }
 
     const categoryId = mandatory[props.mandatoryIndex].categoryId;
-    return ingredients.value?.filter(
-        (ingredient) => ingredient.categoryId === categoryId
-    ) || [];
+    return ingredientStore.ingredients.filter(
+        (ingredient: { categoryId: string; }) => ingredient.categoryId === categoryId
+    );
 });
 
 watch(() => props.selections, (newSelections) => {

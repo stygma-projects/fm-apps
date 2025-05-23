@@ -1,4 +1,5 @@
 export interface StepperItem {
+  id: string;
   label: string;
   mandatory?: Array<{
     category: any;
