@@ -18,6 +18,9 @@ export const fr = {
   },
   cart: {
     title: 'Panier',
-    amount: 'Produits :'
+    amount: 'Produits :',
+    empty: 'Votre panier est vide',
+    mandatoryIngredients: 'Ingrédients obligatoires',
+    total: 'Total',
   }
 }
