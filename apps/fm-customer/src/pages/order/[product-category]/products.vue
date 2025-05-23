@@ -19,7 +19,7 @@
       :item="selectedProduct" 
     />
     
-    <!-- TODO: cart system -->
+    <CartButtonComponent />
   </div>
 </template>
 

@@ -15,5 +15,9 @@ export const fr = {
     cancel: 'Annuler',
     back: 'Retour',
     next: 'Suivant',
+  },
+  cart: {
+    title: 'Panier',
+    amount: 'Produits :'
   }
 }
