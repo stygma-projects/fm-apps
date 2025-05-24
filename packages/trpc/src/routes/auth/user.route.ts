@@ -1,8 +1,6 @@
 import { z } from 'zod'
-// import prisma from '../../libs/prisma'
-import { publicProcedure, router } from '../../trpc' //publicProcedure, 
+import { publicProcedure, router } from '../../trpc'
 import { auth } from "@fm-apps/auth"
-// UTILISER AUTH 
 
 export const userRouter = router({
     signUpByMailAndPassword: publicProcedure

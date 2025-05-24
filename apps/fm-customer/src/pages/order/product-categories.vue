@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import Card from '~/components/ui/card.component.vue'
-import { useProductCategory } from '~/composables/api/productCategoy.composable'
+import { useProductCategory } from '~/composables/api/productCategory.composable'
 import { useI18n } from 'vue-i18n'
 import type { ProductCategory } from '../../../../../packages/db/generated/client'
 
