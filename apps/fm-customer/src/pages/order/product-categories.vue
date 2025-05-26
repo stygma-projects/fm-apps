@@ -1,36 +1,36 @@
 <template>
-    <Splitter>
-        <template #main-panel>
-            <Card 
-                :items="categories"
-                :clickable="true"
-                @item-click="navigateToCategory"
-                cy="product-categories-card"
-            />
-        </template>
+  <Splitter>
+    <template #main-panel>
+      <Card
+        :items="categories"
+        :clickable="true"
+        @item-click="navigateToCategory"
+        cy="product-categories-card"
+      />
+    </template>
 
-        <template #cart-panel>
-          <CartPanel />
-        </template>
-    </Splitter>
+    <template #cart-panel>
+      <CartPanel />
+    </template>
+  </Splitter>
 </template>
 
 <script setup lang="ts">
-import Splitter from '~/components/ui/splitter.component.vue';
+import Splitter from '~/components/ui/splitter.component.vue'
 import { useRouter } from 'vue-router'
 import Card from '~/components/ui/card.component.vue'
-import CartPanel from '~/components/ui/cart-panel.vue';
-import { useProductCategory } from '~/composables/api/productCategoy.composable'
+import CartPanel from '~/components/ui/cart-panel.vue'
+import { useFetchAllProductCategories } from '~/composables/api/productCategoy.composable'
 import type { ProductCategory } from '../../../../../packages/db/generated/client'
 
 const router = useRouter()
-const { fetchAllProductCategories } = useProductCategory()
+const { data } = useFetchAllProductCategories()
 
 const categories = computed(() => {
-  return fetchAllProductCategories.data.value || []
+  return data.value || []
 })
 
-const navigateToCategory = (category: ProductCategory ) => {
+const navigateToCategory = (category: ProductCategory) => {
   router.push({
     path: `/order/${category.id}/products`,
   })

@@ -26,7 +26,7 @@ import { computed, ref, onMounted } from 'vue';
 import Card from '~/components/ui/card.component.vue';
 import CartPanel from '~/components/ui/cart-panel.vue';
 import Stepper from '~/components/ui/stepper.component.vue';
-import { useProduct } from '~/composables/api/product.composable';
+import { useFetchAllProduct } from '~/composables/api/product.composable';
 import Splitter from '~/components/ui/splitter.component.vue';
 
 const route = useRoute();
@@ -39,10 +39,10 @@ onMounted(() => {
   categoryId.value = route.params.productcategory;
 });
 
-const { fetchAllProducts } = useProduct();
+const { data } = useFetchAllProduct();
 
 const products = computed(() => {
-  return fetchAllProducts.data.value?.filter(
+  return data.value?.filter(
     product => product.categoryId === categoryId.value
   ) || [];
 });

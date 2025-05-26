@@ -2,7 +2,7 @@ export const fr = {
   common: {
     title: 'Accueil',
     header: 'Friterie Mollien',
-    footer: '© 2025 Friterie Mollien - Commandez en ligne'
+    footer: '© 2025 Friterie Mollien - Commandez en ligne',
   },
   order: {
     title: 'Commander',
@@ -22,5 +22,6 @@ export const fr = {
     empty: 'Votre panier est vide',
     mandatoryIngredients: 'Ingrédients obligatoires',
     total: 'Total',
-  }
+    update: 'Personnaliser',
+  },
 }

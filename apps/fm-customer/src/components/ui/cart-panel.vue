@@ -1,32 +1,74 @@
 <template>
-    <div class="space-y-4">
-        <!-- Empty -->
-        <div v-if="cartStore.items.length === 0">
-            {{ fr.cart.empty }}
-        </div>
-        
-        <div v-else>
-            <div v-for="item in data" :key="item.id">
-                <div>
-                    {{ item.product.label }}<br>
-                    <div v-if="item.mandatory.length > 0">
-                        Ingrédients obligatoires:
-                        <ul>
-                            <li v-for="ingredient in item.mandatory" :key="ingredient.id">
-                                {{ ingredient.label }} {{ ingredient.priceIncludingTax }} €
-                            </li>
+  <div class="space-y-4">
+    <PrimeDataView
+      :value="storeData"
+      :pt="{
+        footer: {
+          class: 'mt-10',
+        },
+      }"
+    >
+      <template #list="{ items }">
+        <div class="flex flex-col">
+          <div
+            v-for="(item, index) in items"
+            :key="item.id || index"
+            class="mb-4 border rounded-lg overflow-hidden"
+          >
+            <PrimeAccordion>
+              <PrimeAccordionTab>
+                <template #header>
+                  <p>{{ item.product?.label }}</p>
+                  <span class="text-xl font-semibold mr-4">
+                    ${{ item.product?.priceIncludingTax }}
+                  </span>
+                </template>
+
+                <div class="p-4">
+                  <div>
+                    <ul class="list-disc">
+                      <li>
+                        {{ fr.cart.mandatoryIngredients }} :
+                        <ul class="list-disc ml-6 mt-2">
+                          <li
+                            v-for="mandatoryItem in item.mandatory"
+                            :key="mandatoryItem.label"
+                            class="mb-1"
+                          >
+                            {{ mandatoryItem.label }}
+                            {{ mandatoryItem.priceIncludingTax }} €
+                          </li>
                         </ul>
-                    </div>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-            </div>
+              </PrimeAccordionTab>
+            </PrimeAccordion>
+          </div>
         </div>
-    </div>
+      </template>
+
+      <template #footer>
+        <div class="bg-white p-4">
+          <Button @click="handleCreateProductInOrder" />
+        </div>
+      </template>
+    </PrimeDataView>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { fr } from '../../i18n/locales/fr';
-import { useCartStore } from '~/stores/cart.store';
+import { useCartStore } from '~/stores/cart.store'
+import Button from './button.component.vue'
+import { useCreateProductInOrder } from '../../composables/api/productInOrder.composable'
+import { fr } from '../../i18n/locales/fr'
 
-const cartStore = useCartStore();
-const data = cartStore.getStoreContent();
+const createProductInOrder = useCreateProductInOrder
+const cartStore = useCartStore()
+const storeData = cartStore.getStoreContent()
+
+const handleCreateProductInOrder = async () => {
+  // await createProductInOrder(storeData)
+}
 </script>
