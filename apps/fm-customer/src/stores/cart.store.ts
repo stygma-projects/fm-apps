@@ -1,3 +1,4 @@
+import type { Ingredient, Product } from '@fm-apps/db';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import type { StepperItem } from '~/types/stepper.type';
@@ -6,9 +7,9 @@ type CartItem = {
   id: string;
   productId: string;
   product: StepperItem;
-  mandatory: any[];
-  optionalBase: any[];
-  extra: any[];
+  mandatory: Ingredient[];
+  optionalBase: Ingredient[];
+  extra: Ingredient[];
   addedAt: string;
 };
 
@@ -16,7 +17,7 @@ export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>([]);
   
   const addItem = (product: StepperItem, selections: Record<string, any[]> = {}) => {
-    const mandatoryIngredients: any[] = [];
+    const mandatoryIngredients: Ingredient[] = [];
     
     for (const key in selections) {
       if (selections[key] && Array.isArray(selections[key])) {
@@ -46,7 +47,7 @@ export const useCartStore = defineStore('cart', () => {
       let itemTotal = 0;
       
       if ('priceIncludingTax' in item.product) {
-        itemTotal += (item.product as any).priceIncludingTax || 0;
+        itemTotal += (item.product as Product).priceIncludingTax || 0;
       }
       
       item.mandatory.forEach(ingredient => {

@@ -8,10 +8,14 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    button: typeof import('./components/ui/')['default']
     'card.component': typeof import('./components/ui/card.component.vue')['default']
     'cart-panel': typeof import('./components/ui/cart-panel.vue')['default']
+    PrimeAccordion: typeof import('primevue/accordion')['default']
+    PrimeAccordionTab: typeof import('primevue/accordiontab')['default']
     PrimeButton: typeof import('primevue/button')['default']
     PrimeCard: typeof import('primevue/card')['default']
+    PrimeDataView: typeof import('primevue/dataview')['default']
     PrimeDialog: typeof import('primevue/dialog')['default']
     PrimeDrawer: typeof import('primevue/drawer')['default']
     PrimeIconField: typeof import('primevue/iconfield')['default']
