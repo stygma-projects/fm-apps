@@ -1,27 +1,27 @@
 import { RouterInput, RouterOutput } from '../..'
 
 export type ListProductInOrderInput =
-  RouterInput['order']['orders']['list']
+  RouterInput['order']['productInOrder']['list']
 export type GetByIdProductInOrderInput =
-  RouterInput['order']['orders']['getById']
+  RouterInput['order']['productInOrder']['getById']
 export type CreateProductInOrderInput =
-  RouterInput['order']['orders']['create']
+  RouterInput['order']['productInOrder']['create']
 export type UpdateProductInOrderInput =
-  RouterInput['order']['orders']['update']
+  RouterInput['order']['productInOrder']['update']
 export type DeleteProductInOrderInput =
-  RouterInput['order']['orders']['delete']
+  RouterInput['order']['productInOrder']['delete']
 export type DeleteManyProductInOrderInput =
-  RouterInput['order']['orders']['deleteMany']
+  RouterInput['order']['productInOrder']['deleteMany']
 
 export type ListProductInOrderOutput =
-  RouterOutput['order']['orders']['list']
+  RouterOutput['order']['productInOrder']['list']
 export type GetByIdProductInOrderOutput =
-  RouterOutput['order']['orders']['getById']
+  RouterOutput['order']['productInOrder']['getById']
 export type CreateProductInOrderOutput =
-  RouterOutput['order']['orders']['create']
+  RouterOutput['order']['productInOrder']['create']
 export type UpdateProductInOrderOutput =
-  RouterOutput['order']['orders']['update']
+  RouterOutput['order']['productInOrder']['update']
 export type DeleteProductInOrderOutput =
-  RouterOutput['order']['orders']['delete']
+  RouterOutput['order']['productInOrder']['delete']
 export type DeleteManyProductInOrderOutput =
-  RouterOutput['order']['orders']['deleteMany']
+  RouterOutput['order']['productInOrder']['deleteMany']
