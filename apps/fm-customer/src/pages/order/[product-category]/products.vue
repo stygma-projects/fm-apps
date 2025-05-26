@@ -1,16 +1,11 @@
-<!-- Dans products.vue -->
 <template>
   <Splitter>
     <template #main-panel>
       <div>
-        <Card 
-          :items="products" 
+        <Card
+          :items="products"
           @item-click="openProductStepper"
           cy="product-card"
-        />
-        <Stepper 
-          v-model:visible="showStepper"
-          :item="selectedProduct" 
         />
       </div>
     </template>
@@ -18,37 +13,39 @@
       <CartPanel />
     </template>
   </Splitter>
+  <Stepper v-model:visible="showStepper" :item="selectedProduct" />
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
-import { computed, ref, onMounted } from 'vue';
-import Card from '~/components/ui/card.component.vue';
-import CartPanel from '~/components/ui/cart-panel.vue';
-import Stepper from '~/components/ui/stepper.component.vue';
-import { useFetchAllProduct } from '~/composables/api/product.composable';
-import Splitter from '~/components/ui/splitter.component.vue';
+import { useRoute } from 'vue-router'
+import { computed, ref, onMounted } from 'vue'
+import Card from '~/components/ui/card.component.vue'
+import CartPanel from '~/components/ui/cart-panel.vue'
+import Stepper from '~/components/ui/stepper.component.vue'
+import { useFetchAllProduct } from '~/composables/api/product.composable'
+import Splitter from '~/components/ui/splitter.component.vue'
 
-const route = useRoute();
+const route = useRoute()
 
-const categoryId = ref('');
-const selectedProduct = ref(null);
-const showStepper = ref(false);
+const categoryId = ref('')
+const selectedProduct = ref(null)
+const showStepper = ref(false)
 
 onMounted(() => {
-  categoryId.value = route.params.productcategory;
-});
+  categoryId.value = route.params.productcategory
+})
 
-const { data } = useFetchAllProduct();
+const { data } = useFetchAllProduct()
 
 const products = computed(() => {
-  return data.value?.filter(
-    product => product.categoryId === categoryId.value
-  ) || [];
-});
+  return (
+    data.value?.filter((product) => product.categoryId === categoryId.value) ||
+    []
+  )
+})
 
 const openProductStepper = (product) => {
-  selectedProduct.value = product;
-  showStepper.value = true;
-};
+  selectedProduct.value = product
+  showStepper.value = true
+}
 </script>
