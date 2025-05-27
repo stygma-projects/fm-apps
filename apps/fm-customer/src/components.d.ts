@@ -8,7 +8,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    button: typeof import('./components/ui/')['default']
     'card.component': typeof import('./components/ui/card.component.vue')['default']
     PrimeAccordion: typeof import('primevue/accordion')['default']
     PrimeAccordionTab: typeof import('primevue/accordiontab')['default']
@@ -42,9 +41,7 @@ declare module 'vue' {
     PrimeStepPanel: typeof import('primevue/steppanel')['default']
     PrimeStepPanels: typeof import('primevue/steppanels')['default']
     PrimeStepper: typeof import('primevue/stepper')['default']
-    PrimeTabMenu: typeof import('primevue/tabmenu')['default']
     PrimeTag: typeof import('primevue/tag')['default']
-    PrimeToast: typeof import('primevue/toast')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     splitter: typeof import('./components/ui/splitter.component.vue')['default']
