@@ -4,7 +4,7 @@ export enum Severity {
   INFO = 'info',
   SUCCESS = 'success',
   WARNING = 'warn',
-  DANGER = 'danger',
+  DANGER = 'error',
   CONTRAST = 'contrast',
 }
 

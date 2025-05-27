@@ -13,7 +13,7 @@ export const userRouter = router({
         )
         .mutation(async ({ input }) => {
             return await auth.api.signUpEmail({
-                asResponse: true,
+                asResponse: false,
                 body: {
                     email: input.email,
                     password: input.password,
