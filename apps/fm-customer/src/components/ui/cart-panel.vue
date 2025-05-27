@@ -32,24 +32,30 @@
               :key="`item-${index}`"
             >
               <template #header>
-                <div class="flex items-center justify-between w-full">
+                <div
+                  :data-cy="`fmc-accordion-tab-${index}`"
+                  class="flex items-center justify-between w-full"
+                >
                   <div class="flex items-center space-x-3">
                     <div
                       class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center"
                     >
                       <span class="text-yellow-600">{{ index + 1 }}</span>
                     </div>
-                    <p class="font-medium text-gray-800">
+                    <p class="lg:text-xl font-semibold text-black">
                       {{ item.product?.label }}
                     </p>
                   </div>
-                  <span class="text-xl font-semibold text-red-600">
-                    ${{ item.product?.priceIncludingTax }}
+                  <span class="lg:text-xl font-semibold text-black">
+                    {{ item.product?.priceIncludingTax }} €
                   </span>
                 </div>
               </template>
 
-              <div class="p-6 bg-white">
+              <div
+                :data-cy="`fmc-accordion-content-${index}`"
+                class="p-6 bg-white"
+              >
                 <ul class="list-disc">
                   <IngredientSection
                     :title="fr.cart.info.mandatoryIngredients"
@@ -75,20 +81,22 @@
           <div class="px-6 py-4 bg-white border-b border-gray-200">
             <div class="flex justify-between w-full">
               <div class="flex space-x-3">
-                <p class="font-medium">{{ fr.cart.total }}</p>
+                <p class="lg:text-xl font-semibold text-black">
+                  {{ fr.cart.total }}
+                </p>
               </div>
-              <span class="text-xl font-semibold text-red-600">
+              <span class="lg:text-xl font-semibold text-black">
                 {{ cartStore.totalPrice.toFixed(2) }} €
               </span>
             </div>
           </div>
 
-          <div class="p-6 bg-gray-50">
+          <div data-cy="fmc-validate-cart" class="p-6 bg-gray-50">
             <NuxtLink
               to="/order/validate-basket"
-              class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 flex items-center justify-center space-x-2 text-center"
+              class="w-full bg-gradient-to-r from-yellow-300 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2 text-center"
             >
-              <span>{{ fr.order.title }}</span>
+              <span class="text-pink-700 lg:text-xl">{{ fr.order.title }}</span>
             </NuxtLink>
           </div>
         </div>

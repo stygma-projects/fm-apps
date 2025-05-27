@@ -2,7 +2,7 @@
   <div class="h-screen flex flex-col bg-rose-50">
     <header
       data-cy="fmc-header"
-      class="flex-shrink-0 py-3 bg-yellow-300 shadow-sm"
+      class="flex-shrink-0 py-3 bg-gradient-to-r from-yellow-300 to-yellow-400 shadow-sm"
     >
       <div class="container px-4 mx-auto">
         <h1 class="text-xl font-bold text-rose-700">

@@ -1,50 +1,107 @@
 <template>
   <div class="w-full h-full overflow-hidden">
-    <!-- Desktop view -->
-    <div class="hidden lg:flex h-full">
+    <!-- Desktop View -->
+    <div v-if="!isMobile" class="flex h-full" data-cy="fmc-desktop-view">
       <PrimeSplitter :pt="desktopPt">
         <!-- page panel - SCROLLABLE -->
-        <PrimeSplitterPanel :size="70" :minSize="70">
+        <PrimeSplitterPanel
+          :size="70"
+          :minSize="70"
+          data-cy="fmc-left-splitter-panel"
+        >
           <div class="h-full flex flex-col overflow-hidden">
-            <h1 class="flex-shrink-0 p-4 pb-8 text-2xl font-bold text-center">
-              {{ fr.productCategory.title }}
-            </h1>
+            <div class="flex-shrink-0 p-4 pb-8 relative">
+              <NuxtLink
+                data-cy="fmc-return-product-category-page"
+                to="/"
+                class="absolute left-5 top-5 flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+                <span class="text-sm font-medium">{{ fr.stepper.back }}</span>
+              </NuxtLink>
+
+              <h1 class="text-2xl font-bold text-center">
+                {{ fr.productCategory.title }}
+              </h1>
+            </div>
             <div class="flex-1 overflow-y-auto px-10 pb-8">
-              <slot name="main-panel"></slot>
+              <slot name="main-panel" :is-mobile="false"></slot>
             </div>
           </div>
         </PrimeSplitterPanel>
 
         <!-- cart panel - FIXED -->
-        <PrimeSplitterPanel class="flex flex-col pb-8" :size="30" :minSize="30">
+        <PrimeSplitterPanel
+          class="flex flex-col pb-8"
+          :size="30"
+          :minSize="30"
+          data-cy="fmc-right-splitter-panel"
+        >
           <h1 class="p-4 text-2xl font-bold text-center">
             {{ fr.cart.title }}
           </h1>
           <div class="px-4">
-            <slot name="cart-panel"></slot>
+            <slot name="cart-panel" :is-mobile="false"></slot>
           </div>
         </PrimeSplitterPanel>
       </PrimeSplitter>
     </div>
 
     <!-- Mobile view -->
-    <div class="block lg:hidden h-full overflow-y-auto">
+    <div v-else class="h-full overflow-y-auto" data-cy="fmc-mobile-view">
       <!-- Main content -->
       <div class="pb-20">
-        <div class="p-4">
-          <div class="bg-white rounded-lg shadow-md p-4">
+        <div class="bg-white rounded-lg shadow-md p-4">
+          <div class="relative mb-4">
+            <NuxtLink
+              data-cy="fmc-return-product-category-page"
+              to="/"
+              class="absolute left-0 top-0 flex items-center space-x-1 text-gray-600 hover:text-gray-800 transition-colors duration-200 z-10"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              <span class="text-xs font-medium">{{ fr.stepper.back }}</span>
+            </NuxtLink>
+
             <h1
-              class="text-xl font-bold text-center mb-4 border-b border-amber-300 pb-2"
+              class="text-xl font-bold text-center border-b border-amber-300 pb-2 pt-6"
             >
               {{ fr.productCategory.title }}
             </h1>
-            <slot name="main-panel"></slot>
           </div>
+          <slot name="main-panel" :is-mobile="true"></slot>
         </div>
       </div>
 
       <div class="fixed bottom-0 left-0 right-0 p-4 bg-white">
-        <Button :text="fr.cart.title" @click="openCart = true" />
+        <Button
+          data-cy="fmc-drawer-button"
+          :text="fr.cart.title"
+          @click="openCart = true"
+        />
       </div>
 
       <!-- Cart drawer -->
@@ -53,39 +110,43 @@
         position="bottom"
         :header="fr.cart.title"
         :pt="{
-          root: {
-            class: 'max-h-[80vh]',
-            style: 'height: auto',
-          },
-          content: {
-            class: 'h-full overflow-y-auto',
-          },
-          header: {
-            class: 'relative',
-          },
+          root: { class: 'max-h-[80vh]', style: 'height: auto' },
+          content: { class: 'h-full overflow-y-auto' },
+          header: { class: 'relative' },
           title: {
             class: 'text-xl font-bold absolute left-1/2 -translate-x-1/2',
           },
-          closeButton: {
-            class: 'relative z-10',
-          },
+          closeButton: { class: 'relative z-10' },
         }"
       >
-        <slot name="cart-panel"></slot>
+        <slot name="cart-panel" :is-mobile="true"></slot>
       </PrimeDrawer>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref, onMounted, onUnmounted } from 'vue'
 import { fr } from '../../i18n/locales/fr'
 import Button from './button.component.vue'
 
 const openCart = ref(false)
+const isMobile = ref(false)
+
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 1024
+}
+
+onMounted(() => {
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkMobile)
+})
 
 const desktopPt = {
-  root: {
-    class: 'h-full w-full',
-  },
+  root: { class: 'h-full w-full' },
 }
 </script>
