@@ -28,6 +28,13 @@ export const fr = {
       nameExample: 'Ex : Mark',
       emailExample: 'Ex : mark@gmail.com',
       passwordExample: 'Ex : D$1\\>0h1j4WO%_7oZ3e',
+      errors : {
+        nameRequired: 'Le nom est requis',
+        emailRequired: 'L\'email est requis',
+        passwordRequired: 'Le mot de passe est requis',
+        invalidEmail: 'L\'email doit être valide',
+        passwordTooShort: 'Le mot de passe doit contenir au moins 8 caractères',
+      }
     },
     toast: {
       success : 'Succès',

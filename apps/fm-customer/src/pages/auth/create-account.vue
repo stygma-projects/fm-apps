@@ -21,12 +21,11 @@
   </div>
 </template>
 
-
 <script setup>
 import { useForm, Form } from 'vee-validate';
 import { useUser } from '../../composables/api/user.composable';
-import * as yup from 'yup';
-import isEmailValidator from 'validator/lib/isEmail';
+import { toTypedSchema } from '@vee-validate/zod';
+import * as zod from 'zod';
 import { useToast } from '../../composables/utils/toast.composable'
 import { useI18n } from 'vue-i18n'
 
@@ -35,13 +34,19 @@ const { successToast, errorToast } = useToast()
 const { signUpByMailAndPassword } = useUser();
 
 const { handleSubmit, defineField } = useForm({
-  validationSchema: yup.object({
-    name: yup.string().required(),
-    email: yup.string().email().required().test("is-valid", (message) => `${message.path} is invalid`, (value) => value ? isEmailValidator(value) : new yup.ValidationError("Invalid value")),
-    password: yup.string().min(8).required(),
-  }),
+  validationSchema : toTypedSchema(
+    zod.object({
+      name: zod.string().nonempty({ message: t('createAccount.form.errors.nameRequired') }),
+      email: zod.string().nonempty({ message: t('createAccount.form.errors.emailRequired') }).email({ message: t('createAccount.form.errors.invalidEmail') }),
+      password: zod.string().nonempty({ message: t('createAccount.form.errors.passwordRequired')}).min(8, { message: t('createAccount.form.errors.passwordTooShort') }),
+    })
+  ),
+  initialValues: {
+    name: '',
+    email: '',
+    password: ''
+  }
 });
-
 
 async function onSuccess(values) {
   try {
