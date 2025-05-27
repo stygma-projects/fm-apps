@@ -20,8 +20,14 @@ export const fr = {
     title: 'Panier',
     amount: 'Produits :',
     empty: 'Votre panier est vide',
-    mandatoryIngredients: 'Ingrédients obligatoires',
-    total: 'Total',
     update: 'Personnaliser',
+    total: 'Total',
+    info: {
+      mandatoryIngredients: 'Ingrédients obligatoires',
+      optionalBaseIngredients: 'Ingrédients de base',
+      extraIngredients: 'Suppléments',
+    },
   },
+  validate: 'Valider la commande',
+  article: 'Article #',
 }

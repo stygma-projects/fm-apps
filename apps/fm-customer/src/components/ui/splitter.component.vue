@@ -44,7 +44,7 @@
       </div>
 
       <div class="fixed bottom-0 left-0 right-0 p-4 bg-white">
-        <Button @openCart="openCart = true" />
+        <Button :text="fr.cart.title" @click="openCart = true" />
       </div>
 
       <!-- Cart drawer -->

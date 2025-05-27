@@ -1,23 +1,48 @@
 <template>
-  <!-- Fixed cart button -->
-  <PrimeButton
-    severity="success"
-    @click="$emit('openCart')"
-    class="w-full flex items-center justify-between"
-  >
+  <PrimeButton :severity="severity" @click="handleClick" :class="buttonClasses">
     <div class="flex items-center gap-2">
-      <span>{{ fr.cart.title }}</span>
+      <span>{{ text }}</span>
     </div>
-    <span>{{ cartStore.totalPrice.toFixed(2) }} €</span>
+    <span v-if="secondaryText">{{ secondaryText }}</span>
   </PrimeButton>
 </template>
 
 <script lang="ts" setup>
-import { fr } from '../../i18n/locales/fr'
+import { computed } from 'vue'
 
-const cartStore = useCartStore()
+interface Props {
+  text: string
+  secondaryText?: string | number
+  severity?:
+    | 'success'
+    | 'info'
+    | 'warning'
+    | 'danger'
+    | 'help'
+    | 'secondary'
+    | undefined
+  fullWidth?: boolean
+  customClass?: string
+}
 
-defineEmits<{
+const props = withDefaults(defineProps<Props>(), {
+  severity: 'success',
+  fullWidth: true,
+  customClass: '',
+})
+
+const emit = defineEmits<{
+  click: []
   openCart: []
 }>()
+
+const buttonClasses = computed(() => {
+  const baseClasses = 'flex items-center justify-between'
+  const widthClass = props.fullWidth ? 'w-full' : ''
+  return `${baseClasses} ${widthClass} ${props.customClass}`.trim()
+})
+
+const handleClick = () => {
+  emit('click')
+}
 </script>
