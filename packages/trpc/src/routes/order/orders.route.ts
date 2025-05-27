@@ -22,12 +22,12 @@ export const ordersRouter = router({
       include: {
         orderHasProduct: {
           include: {
-            mandatory : true,
-            optionalBase : true,
-            extra : true,
-            product : {
-              include : {
-                nonUpdatable : true,
+            mandatory: true,
+            optionalBase: true,
+            extra: true,
+            product: {
+              include: {
+                nonUpdatable: true,
                 mandatory: true,
                 optionalBase: true,
                 extra: true,
@@ -48,13 +48,13 @@ export const ordersRouter = router({
       },
       include: {
         orderHasProduct: {
-          include: { 
-            mandatory : true,
-            optionalBase : true,
-            extra : true,
-            product : {
-              include : {
-                nonUpdatable : true,
+          include: {
+            mandatory: true,
+            optionalBase: true,
+            extra: true,
+            product: {
+              include: {
+                nonUpdatable: true,
                 mandatory: true,
                 optionalBase: true,
                 extra: true,
@@ -78,12 +78,12 @@ export const ordersRouter = router({
         include: {
           orderHasProduct: {
             include: {
-            mandatory : true,
-            optionalBase : true,
-            extra : true,
-              product : {
-                include : {
-                  nonUpdatable : true,
+              mandatory: true,
+              optionalBase: true,
+              extra: true,
+              product: {
+                include: {
+                  nonUpdatable: true,
                   mandatory: true,
                   optionalBase: true,
                   extra: true,
