@@ -45,4 +45,25 @@ export const fr = {
       defaultParameterError : 'Un paramètre est incorrect',
     }
   },
+  login: {
+    form : {
+      title: 'Connexion',
+      email: 'Email :',
+      password: 'Mot de passe (8 caractères minimum) :',
+      submit: 'Se connecter',
+      noAccount : 'Vous n\'avez pas de compte ?',
+      createAccount: 'Créer un compte',
+      nameExample: 'Ex : Mark',
+      emailExample: 'Ex : mark@gmail.com',
+      passwordExample: 'Ex : D$1\\>0h1j4WO%_7oZ3e',
+    },
+    toast: {
+      success : 'Succès',
+      error: 'Erreur',
+      accountCreated: 'Compte créé !',
+      registerError: 'Erreur lors de l\'enregistrement',
+      defaultError: 'Une erreur est survenue',
+      defaultParameterError : 'Un paramètre est incorrect',
+    }
+  },
 }
