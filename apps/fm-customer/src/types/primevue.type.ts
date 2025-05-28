@@ -7,8 +7,3 @@ export enum Severity {
   DANGER = 'error',
   CONTRAST = 'contrast',
 }
-
-export enum InputType {
-  TEXT = 'text',
-  NUMBER = 'number',
-}
