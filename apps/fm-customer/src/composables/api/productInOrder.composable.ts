@@ -4,6 +4,8 @@ import type {
   ListProductInOrderOutput,
   CreateProductInOrderInput,
   CreateProductInOrderOutput,
+  CreateManyProductInOrderInput,
+  CreateManyProductInOrderOutput,
   UpdateProductInOrderInput,
   UpdateProductInOrderOutput,
   DeleteProductInOrderInput,
@@ -24,6 +26,17 @@ export const useCreateProductInOrder = () => {
   return useTrpcMutation<CreateProductInOrderInput, CreateProductInOrderOutput>(
     (input: CreateProductInOrderInput) =>
       $trpc.order.productInOrder.create.mutate(input),
+  )
+}
+
+export const useCreateManyProductInOrder = () => {
+  const { $trpc } = useNuxtApp()
+
+  return useTrpcMutation<
+    CreateManyProductInOrderInput,
+    CreateManyProductInOrderOutput
+  >((input: CreateManyProductInOrderInput) =>
+    $trpc.order.productInOrder.createMany.mutate(input),
   )
 }
 

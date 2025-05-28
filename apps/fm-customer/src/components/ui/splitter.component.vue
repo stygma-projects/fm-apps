@@ -11,26 +11,7 @@
         >
           <div class="h-full flex flex-col overflow-hidden">
             <div class="flex-shrink-0 p-4 pb-8 relative">
-              <NuxtLink
-                data-cy="fmc-return-product-category-page"
-                to="/"
-                class="absolute left-5 top-5 flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
-              >
-                <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-                <span class="text-sm font-medium">{{ fr.stepper.back }}</span>
-              </NuxtLink>
+              <BackLink :text="fr.stepper.back" />
 
               <h1 class="text-2xl font-bold text-center">
                 {{ fr.productCategory.title }}
@@ -65,26 +46,7 @@
       <div class="pb-20">
         <div class="bg-white rounded-lg shadow-md p-4">
           <div class="relative mb-4">
-            <NuxtLink
-              data-cy="fmc-return-product-category-page"
-              to="/"
-              class="absolute left-0 top-0 flex items-center space-x-1 text-gray-600 hover:text-gray-800 transition-colors duration-200 z-10"
-            >
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              <span class="text-xs font-medium">{{ fr.stepper.back }}</span>
-            </NuxtLink>
+            <BackLink :text="fr.stepper.back" />
 
             <h1
               class="text-xl font-bold text-center border-b border-amber-300 pb-2 pt-6"
@@ -129,6 +91,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { fr } from '../../i18n/locales/fr'
 import Button from './button.component.vue'
+import BackLink from './back-link.component.vue'
 
 const openCart = ref(false)
 const isMobile = ref(false)

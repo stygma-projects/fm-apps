@@ -15,7 +15,6 @@
 import type { StepperItem } from '~/types/stepper.type'
 import { computed, ref, watch } from 'vue'
 import Card from '~/components/ui/card.component.vue'
-
 import type { Ingredient } from '@fm-apps/db'
 
 const ingredientStore = useIngredientStore()
@@ -31,14 +30,13 @@ const selectedIngredients = ref<Ingredient[]>([])
 
 const ing = computed(() => {
   const mandatory = props.item.mandatory
-  if (!mandatory) {
+  if (!mandatory || !mandatory[props.mandatoryIndex]) {
     return []
   }
 
-  const categoryId = mandatory[props.mandatoryIndex].categoryId
+  const categoryId = mandatory[props.mandatoryIndex].id
   return ingredientStore.ingredients.filter(
-    (ingredient: { categoryId: string }) =>
-      ingredient.categoryId === categoryId,
+    (ingredient: Ingredient) => ingredient.categoryId === categoryId,
   )
 })
 
