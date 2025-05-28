@@ -102,6 +102,47 @@ export const productInOrderRouter = router({
         },
       })
     }),
+  createMany: publicProcedure
+    .input(
+      z.array(
+        z.object({
+          id: z.string(),
+          productId: z.string(),
+          orderId: z.string(),
+          mandatory: z.array(z.string()).default([]),
+          optionalBase: z.array(z.string()).default([]),
+          extra: z.array(z.string()).default([]),
+        }),
+      ),
+    )
+    .mutation(async ({ input }) => {
+      return await prisma.$transaction(async (tx) => {
+        const results = []
+
+        for (const item of input) {
+          const { mandatory, optionalBase, extra, ...data } = item
+
+          const created = await tx.productInOrder.create({
+            data: {
+              ...data,
+              mandatory: {
+                connect: mandatory.map((id) => ({ id })),
+              },
+              optionalBase: {
+                connect: optionalBase.map((id) => ({ id })),
+              },
+              extra: {
+                connect: extra.map((id) => ({ id })),
+              },
+            },
+          })
+
+          results.push(created)
+        }
+
+        return results
+      })
+    }),
   update: publicProcedure
     .input(
       z.object({
