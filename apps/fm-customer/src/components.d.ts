@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    'back-link.component': typeof import('./components/ui/back-link.component.vue')
     'card.component': typeof import('./components/ui/card.component.vue')['default']
     PrimeAccordion: typeof import('primevue/accordion')['default']
     PrimeAccordionTab: typeof import('primevue/accordiontab')['default']
