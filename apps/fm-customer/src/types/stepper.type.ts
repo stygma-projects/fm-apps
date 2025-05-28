@@ -1,15 +1,9 @@
-import type { IngredientCategory, Product } from '@fm-apps/db'
+import type { Ingredient, IngredientCategory, Product } from '@fm-apps/db'
 
-export interface StepperItem extends Omit<Product, 'mandatory'> {
-  mandatory?: Array<{
-    category: IngredientCategory
-    id: string
-    label: string
-    priceExclTax: number
-    priceIncludingTax: number
-    imageUrl?: string
-    categoryId: string
-  }>
+export interface StepperItem extends Product {
+  mandatory: IngredientCategory[]
+  optionalBase: Ingredient[]
+  extra: Ingredient[]
 }
 
 export interface StepperProps {

@@ -11,14 +11,14 @@
         <PrimeStepper v-model:value="stepperState.currentStep" :linear="true">
           <PrimeStepList>
             <PrimeStep
-              v-for="(_, index) in steps"
+              v-for="(_, index) in availableSteps"
               :key="index"
               :value="String(index + 1)"
             />
           </PrimeStepList>
 
           <PrimeStepPanels>
-            <PrimeStepPanel v-if="mandatoryCount === 0" value="1">
+            <PrimeStepPanel v-if="availableSteps.length === 0" value="1">
               <div class="p-4">
                 <h2 class="mb-4 text-2xl font-bold">TOTO</h2>
                 <div class="flex items-center justify-between">
@@ -40,23 +40,17 @@
 
             <template v-else>
               <PrimeStepPanel
-                v-for="(mandatory, index) in steps"
+                v-for="(step, index) in availableSteps"
                 :key="index"
                 :value="String(index + 1)"
               >
-                <slot
-                  :name="`mandatory-${index + 1}`"
+                <StepContent
                   :item="item"
-                  :mandatory-index="index"
-                >
-                  <StepContent
-                    :item="item"
-                    :mandatory-index="index"
-                    :is-last="index === steps.length - 1"
-                    :selections="currentStepSelections"
-                    @update-selection="handleSelectionUpdate"
-                  />
-                </slot>
+                  :mandatory-index="step.originalIndex"
+                  :is-last="index === availableSteps.length - 1"
+                  :selections="currentStepSelections"
+                  @update-selection="handleSelectionUpdate"
+                />
 
                 <div class="flex justify-between mt-4">
                   <PrimeButton
@@ -73,26 +67,22 @@
                     :label="t('stepper.back')"
                     data-cy="fmc-back-step-button"
                   />
-                  <slot
-                    :name="`mandatory-${index + 1}-actions`"
-                    :is-last="index === steps.length - 1"
-                  >
-                    <PrimeButton
-                      v-if="index === steps.length - 1"
-                      severity="success"
-                      :disabled="!hasAllMandatorySelections"
-                      @click="emitComplete"
-                      :label="t('stepper.validate')"
-                      data-cy="fmc-validate-step-button"
-                    />
-                    <PrimeButton
-                      v-else
-                      :disabled="!canProceed"
-                      @click="stepperState.currentStep = String(index + 2)"
-                      :label="t('stepper.next')"
-                      data-cy="fmc-next-step-button"
-                    />
-                  </slot>
+
+                  <PrimeButton
+                    v-if="index === availableSteps.length - 1"
+                    severity="success"
+                    :disabled="!hasAllMandatorySelections"
+                    @click="emitComplete"
+                    :label="t('stepper.validate')"
+                    data-cy="fmc-validate-step-button"
+                  />
+                  <PrimeButton
+                    v-else
+                    :disabled="!canProceed"
+                    @click="stepperState.currentStep = String(index + 2)"
+                    :label="t('stepper.next')"
+                    data-cy="fmc-next-step-button"
+                  />
                 </div>
               </PrimeStepPanel>
             </template>
@@ -122,56 +112,46 @@
 
       <!-- Body -->
       <div class="flex-grow overflow-auto">
-        <div v-if="mandatoryCount === 0" class="p-6">
+        <div v-if="availableSteps.length === 0" class="p-6">
           <p>TOTO</p>
         </div>
 
         <div
           v-else
-          v-for="(_, index) in mandatoryCount"
+          v-for="(step, index) in availableSteps"
           :key="index"
           class="p-6"
           v-show="stepperState.activeTabIndex === index"
         >
-          <slot
-            :name="`mandatory-${index + 1}`"
+          <StepContent
             :item="item"
-            :mandatory-index="index"
-          >
-            <StepContent
-              :item="item"
-              :mandatory-index="index"
-              :is-last="index === mandatoryCount - 1"
-              :selections="currentStepSelections"
-              @update-selection="handleSelectionUpdate"
-            />
-          </slot>
+            :mandatory-index="step.originalIndex"
+            :is-last="index === availableSteps.length - 1"
+            :selections="currentStepSelections"
+            @update-selection="handleSelectionUpdate"
+          />
         </div>
       </div>
 
       <!-- Footer -->
       <div class="px-6 py-4 border-t">
-        <div v-if="mandatoryCount === 0" class="flex justify-center">
-          <slot name="no-mandatory-actions">
-            <PrimeButton
-              severity="secondary"
-              class="w-1/3"
-              @click="emitComplete"
-              :label="t('stepper.cancel')"
-              data-cy="fmc-cancel-step-button"
-            />
+        <div v-if="availableSteps.length === 0" class="flex justify-center">
+          <PrimeButton
+            severity="secondary"
+            class="w-1/3"
+            @click="emitComplete"
+            :label="t('stepper.cancel')"
+            data-cy="fmc-cancel-step-button"
+          />
 
-            <div class="flex items-center justify-center w-1/3">
-              {{ stepperState.activeTabIndex }} / {{ mandatoryCount }}
-            </div>
-            <PrimeButton
-              severity="success"
-              class="w-1/3"
-              @click="emitComplete"
-              :label="t('stepper.validate')"
-              data-cy="fmc-validate-step-button"
-            />
-          </slot>
+          <div class="flex items-center justify-center w-1/3">1 / 1</div>
+          <PrimeButton
+            severity="success"
+            class="w-1/3"
+            @click="emitComplete"
+            :label="t('stepper.validate')"
+            data-cy="fmc-validate-step-button"
+          />
         </div>
 
         <div v-else class="flex justify-between">
@@ -193,31 +173,26 @@
           />
 
           <div class="flex items-center justify-center w-1/3">
-            {{ stepperState.activeTabIndex + 1 }} / {{ mandatoryCount }}
+            {{ stepperState.activeTabIndex + 1 }} / {{ availableSteps.length }}
           </div>
 
-          <slot
-            :name="`mandatory-${stepperState.activeTabIndex + 1}-actions`"
-            :is-last="stepperState.activeTabIndex === mandatoryCount - 1"
-          >
-            <PrimeButton
-              v-if="stepperState.activeTabIndex === mandatoryCount - 1"
-              severity="success"
-              :disabled="!hasAllMandatorySelections"
-              @click="emitComplete"
-              class="w-1/3"
-              :label="t('stepper.validate')"
-              data-cy="fmc-validate-step-button"
-            />
-            <PrimeButton
-              v-else
-              :disabled="!canProceed"
-              @click="stepperState.activeTabIndex++"
-              class="w-1/3"
-              :label="t('stepper.next')"
-              data-cy="fmc-next-step-button"
-            />
-          </slot>
+          <PrimeButton
+            v-if="stepperState.activeTabIndex === availableSteps.length - 1"
+            severity="success"
+            :disabled="!hasAllMandatorySelections"
+            @click="emitComplete"
+            class="w-1/3"
+            :label="t('stepper.validate')"
+            data-cy="fmc-validate-step-button"
+          />
+          <PrimeButton
+            v-else
+            :disabled="!canProceed"
+            @click="stepperState.activeTabIndex++"
+            class="w-1/3"
+            :label="t('stepper.next')"
+            data-cy="fmc-next-step-button"
+          />
         </div>
       </div>
     </div>
@@ -258,31 +233,35 @@ const stepperState = reactive<
   selections: {},
 })
 
+const availableSteps = computed(() => {
+  if (!props.item?.mandatory) return []
+
+  const steps: any[] = []
+
+  props.item.mandatory.forEach((mandatoryCategory, index) => {
+    const hasIngredients = ingredientStore.ingredients.some(
+      (ingredient) => ingredient.categoryId === mandatoryCategory.id,
+    )
+
+    if (hasIngredients) {
+      steps.push({
+        category: mandatoryCategory,
+        originalIndex: index,
+        stepIndex: steps.length,
+      })
+    }
+  })
+
+  return steps
+})
+
 const currentCategoryName = computed(() => {
-  if (
-    !props.item?.mandatory ||
-    !props.item.mandatory[stepperState.activeTabIndex]
-  ) {
+  if (availableSteps.value.length === 0) {
     return props.item?.label
   }
 
-  return props.item.mandatory[stepperState.activeTabIndex].category.label
-})
-
-const steps = computed(() => {
-  if (!props.item.mandatory) return []
-
-  const uniqueCategories = new Set()
-  const filteredSteps = props.item.mandatory.filter((mandatory) => {
-    const categoryId = mandatory.categoryId
-    if (!uniqueCategories.has(categoryId)) {
-      uniqueCategories.add(categoryId)
-      return true
-    }
-    return false
-  })
-
-  return filteredSteps
+  const currentStep = availableSteps.value[stepperState.activeTabIndex]
+  return currentStep?.category?.label || props.item?.label
 })
 
 const currentStepSelections = computed(() => {
@@ -303,21 +282,22 @@ const hasSelections = computed(() => {
 })
 
 const canProceed = computed(() => {
-  if (mandatoryCount.value === 0) return true
-
+  if (availableSteps.value.length === 0) return true
   return hasSelections.value
 })
 
 const hasAllMandatorySelections = computed(() => {
-  if (mandatoryCount.value === 0) return true
+  if (availableSteps.value.length === 0) return true
 
-  // Get all step IDs as strings
-  const allSteps = Array.from({ length: mandatoryCount.value }, (_, i) =>
-    String(i + 1),
-  )
+  // Vérifier que toutes les étapes disponibles ont au moins une sélection
+  for (let i = 0; i < availableSteps.value.length; i++) {
+    const stepKey = String(i + 1)
+    if (!stepperState.selections[stepKey]?.length) {
+      return false
+    }
+  }
 
-  // Check if all steps have at least one selection
-  return allSteps.every((step) => stepperState.selections[step]?.length > 0)
+  return true
 })
 
 const useStepper = (props: StepperProps): StepperHooks => {
@@ -335,6 +315,7 @@ const useStepper = (props: StepperProps): StepperHooks => {
       stepperState.mobileVisible = false
     }
   }
+
   onMounted(() => {
     window.addEventListener('resize', handleResize)
     handleResize()
@@ -348,22 +329,14 @@ const useStepper = (props: StepperProps): StepperHooks => {
 
 const { isMobile } = useStepper(props)
 
-const mandatoryCount = computed(() => {
-  return props.item?.mandatory?.length || 0
-}) as ComputedRef<number>
-
 watch(
   () => props.visible,
   async (newValue) => {
     if (newValue && props.item?.mandatory) {
       await ingredientStore.fetchAllIngredients()
 
-      const categoryIds = [
-        ...new Set(
-          props.item.mandatory.map((mandatory) => mandatory.categoryId),
-        ),
-      ]
-
+      // Filtrer par tous les categoryIds des mandatory
+      const categoryIds = props.item.mandatory.map((mandatory) => mandatory.id)
       ingredientStore.filterByCategories(categoryIds)
     }
 

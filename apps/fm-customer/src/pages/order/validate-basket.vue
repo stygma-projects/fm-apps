@@ -6,13 +6,17 @@
 
 <script lang="ts" setup>
 import { useCreateOrder } from '~/composables/api/order.composable'
-import { useCreateProductInOrder } from '~/composables/api/productInOrder.composable'
+import {
+  useCreateManyProductInOrder,
+  useCreateProductInOrder,
+} from '~/composables/api/productInOrder.composable'
 import Button from '../../components/ui/button.component.vue'
 import { fr } from '../../i18n/locales/fr'
 
 const cartStore = useCartStore()
 const { mutate: createOrder } = useCreateOrder()
 const { mutate: createProductInOrder } = useCreateProductInOrder()
+const { mutate: createManyProductInOrder } = useCreateManyProductInOrder()
 
 const handleConfirmCreateOrder = async () => {
   try {
@@ -21,9 +25,10 @@ const handleConfirmCreateOrder = async () => {
 
     const productInOrderData = cartStore.getProductInOrderData(createdOrder.id)
 
-    for (const productData of productInOrderData) {
-      await createProductInOrder(productData)
-    }
+    const create =
+      productInOrderData.length > 1
+        ? await createManyProductInOrder(productInOrderData)
+        : await createProductInOrder(productInOrderData[0])
 
     cartStore.clearCart()
   } catch (error) {
