@@ -1,15 +1,10 @@
 import type { ListProductOutput } from '@fm-apps/trpc'
 import { useTrpcQuery } from '../utils/useTrpcQuery'
 
-export const useProduct = () => {
+export const useFetchAllProduct = () => {
   const { $trpc } = useNuxtApp()
-  
-  const fetchAllProducts = useTrpcQuery<ListProductOutput>(
-    'products',
-    () => $trpc.inventory.product.list.query()
-  )
 
-  return {
-    fetchAllProducts, 
-  }
+  return useTrpcQuery<ListProductOutput>('product', () =>
+    $trpc.inventory.product.list.query(),
+  )
 }
