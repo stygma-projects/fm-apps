@@ -21,7 +21,7 @@
     "./utils": "./dist/utils/index.js"
   },
   "dependencies": {
-    "@vfourny/node-toolkit": "1.0.13",
+    "@vfourny/node-toolkit": "1.0.15",
     "typescript-eslint": "^8.24.0"
   },
   "devDependencies": {
