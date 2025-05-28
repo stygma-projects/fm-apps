@@ -1,9 +1,5 @@
 <template>
-  <DataTable
-    :items="products"
-    :columns="columns"
-    :filter-fields="filterFields"
-  >
+  <DataTable :items="products" :columns="columns" :filter-fields="filterFields">
     <template #header="{ selectedItems }">
       <PrimeButton
         v-if="selectedItems.length > 0"
@@ -31,7 +27,9 @@
       <span v-else>{{ t('productsInventory.noImage') }}</span>
     </template>
     <template #column-available="{ rowData }">
-      <span v-if="rowData.available === true">{{ t('productsInventory.availability.available') }}</span>
+      <span v-if="rowData.available === true">{{
+        t('productsInventory.availability.available')
+      }}</span>
       <span v-else>{{ t('productsInventory.availability.notAvailable') }}</span>
     </template>
     <template #column-category="{ rowData }">
@@ -46,7 +44,7 @@
         v-else
         :key="index"
       >
-        {{ ingredient.label}} <span v-if="index < rowData.length - 1">,</span>
+        {{ ingredient.label }} <span v-if="index < rowData.length - 1">,</span>
       </span>
     </template>
     <template #column-mandatory="{ rowData }">
@@ -58,7 +56,7 @@
         v-else
         :key="index"
       >
-        {{ ingredient.label}} <span v-if="index < rowData.length - 1">,</span>
+        {{ ingredient.label }} <span v-if="index < rowData.length - 1">,</span>
       </span>
     </template>
     <template #column-optional-base="{ rowData }">
@@ -70,22 +68,19 @@
         v-else
         :key="index"
       >
-        {{ ingredient.label}} <span v-if="index < rowData.length - 1"> , </span>
+        {{ ingredient.label }}
+        <span v-if="index < rowData.length - 1"> , </span>
       </span>
     </template>
     <template #column-extra="{ rowData }">
       <span v-if="rowData.extra.length === 0">
         {{ t('productsInventory.noIngredients') }}
       </span>
-      <span
-        v-for="(ingredient, index) in rowData.extra"
-        v-else
-        :key="index"
-      >
-        {{ ingredient.label}} <span v-if="index < rowData.length - 1">,</span>
+      <span v-for="(ingredient, index) in rowData.extra" v-else :key="index">
+        {{ ingredient.label }} <span v-if="index < rowData.length - 1">,</span>
       </span>
     </template>
-    
+
     <template #actions="{ rowData }">
       <PrimeButton
         icon="pi pi-pencil"
@@ -125,12 +120,12 @@
         <InputText
           v-model="editableProduct.priceExclTax"
           :label="t('productsInventory.table.headers.priceExclTax')"
-          :type=InputType.NUMBER
+          :type="InputType.NUMBER"
         />
         <InputText
           v-model="editableProduct.priceIncludingTax"
           :label="t('productsInventory.table.headers.priceIncludingTax')"
-          :type=InputType.NUMBER
+          :type="InputType.NUMBER"
         />
         <PrimeFloatLabel variant="on">
           <PrimeDropdown
@@ -164,7 +159,7 @@
         <PrimeFloatLabel>
           <PrimeMultiSelect
             v-model="editableProduct.mandatory"
-            :options="ingredients"
+            :options="ingredientCategories"
             option-label="label"
             class="w-full"
           />
@@ -188,7 +183,6 @@
           />
           <label>{{ t('productsInventory.table.headers.extra') }}</label>
         </PrimeFloatLabel>
-        
       </div>
     </template>
   </ModalWrapper>
@@ -211,12 +205,12 @@
         <InputText
           v-model="editableProduct.priceExclTax"
           :label="t('productsInventory.table.headers.priceExclTax')"
-          :type=InputType.NUMBER
+          :type="InputType.NUMBER"
         />
         <InputText
           v-model="editableProduct.priceIncludingTax"
           :label="t('productsInventory.table.headers.priceIncludingTax')"
-          :type=InputType.NUMBER
+          :type="InputType.NUMBER"
         />
         <PrimeFloatLabel variant="on">
           <PrimeDropdown
@@ -250,7 +244,7 @@
         <PrimeFloatLabel>
           <PrimeMultiSelect
             v-model="editableProduct.mandatory"
-            :options="ingredients"
+            :options="ingredientCategories"
             option-label="label"
             class="w-full"
           />
@@ -274,7 +268,6 @@
           />
           <label>{{ t('productsInventory.table.headers.extra') }}</label>
         </PrimeFloatLabel>
-
       </div>
     </template>
   </ModalWrapper>
@@ -297,15 +290,22 @@ import { ref } from 'vue'
 import { useToast } from '../composables/toast.composable'
 import { useConfirmModal } from '../composables/confirm-modal.composable'
 import { InputType } from '../types/primevue.type'
-import type { ProductCategory, Product, Ingredient } from '../types/inventory.type'
+import type {
+  ProductCategory,
+  Product,
+  Ingredient,
+  IngredientCategory,
+} from '../types/inventory.type'
 import { useFetchIngredient } from '../composables/api/ingredient.composable'
+import { useFetchIngredientCategories } from '../composables/api/ingredientCategory.composable'
 
 const { t } = useI18n()
 const { deleteConfirmation } = useConfirmModal()
 const { successToast } = useToast()
 const { data: products, refetch: refetchProduct } = useListProducts()
 const { data: productCategories } = useListProductCategories()
-const { data: ingredients} = useFetchIngredient()
+const { data: ingredients } = useFetchIngredient()
+const { data: ingredientCategories } = useFetchIngredientCategories()
 const { mutateAsync: deleteProduct } = useDeleteProduct()
 const { mutateAsync: updateProduct } = useUpdateProduct()
 const { mutateAsync: createProduct } = useCreateProduct()
@@ -322,29 +322,47 @@ const editableProduct = ref({
   available: true,
   category: {} as ProductCategory,
   categoryId: '',
-  nonUpdatable : [] as Ingredient[],
-  mandatory: [] as Ingredient[],
+  nonUpdatable: [] as Ingredient[],
+  mandatory: [] as IngredientCategory[],
   optionalBase: [] as Ingredient[],
   extra: [] as Ingredient[],
 })
 const columns = [
   { field: 'label', header: t(`productsInventory.table.headers.label`) },
   { field: 'imageUrl', header: t(`productsInventory.table.headers.imageUrl`) },
-  { field: 'priceExclTax', header: t(`productsInventory.table.headers.priceExclTax`) },
-  { field: 'priceIncludingTax', header: t(`productsInventory.table.headers.priceIncludingTax`) },
-  { field: 'available', header: t(`productsInventory.table.headers.available`) },
+  {
+    field: 'priceExclTax',
+    header: t(`productsInventory.table.headers.priceExclTax`),
+  },
+  {
+    field: 'priceIncludingTax',
+    header: t(`productsInventory.table.headers.priceIncludingTax`),
+  },
+  {
+    field: 'available',
+    header: t(`productsInventory.table.headers.available`),
+  },
   { field: 'category', header: t(`productsInventory.table.headers.category`) },
-  { field: 'nonUpdatable', header: t(`productsInventory.table.headers.nonUpdatable`) },
-  { field: 'mandatory', header: t(`productsInventory.table.headers.mandatory`) },
-  { field: 'optionalBase', header: t(`productsInventory.table.headers.optionalBase`) },
+  {
+    field: 'nonUpdatable',
+    header: t(`productsInventory.table.headers.nonUpdatable`),
+  },
+  {
+    field: 'mandatory',
+    header: t(`productsInventory.table.headers.mandatory`),
+  },
+  {
+    field: 'optionalBase',
+    header: t(`productsInventory.table.headers.optionalBase`),
+  },
   { field: 'extra', header: t(`productsInventory.table.headers.extra`) },
 ]
 const filterFields = [
-    'label',
-    'prixExclTax',
-    'priceIncludingTax',
-    'category.label',
-  ]
+  'label',
+  'prixExclTax',
+  'priceIncludingTax',
+  'category.label',
+]
 const booleanValues = [
   { label: t('productsInventory.booleanValues.true'), value: true },
   { label: t('productsInventory.booleanValues.false'), value: false },
@@ -352,17 +370,17 @@ const booleanValues = [
 
 const resetEditableProduct = () => {
   editableProduct.value = {
-  label: '',
-  imageUrl: '',
-  priceExclTax: 0,
-  priceIncludingTax: 0,
-  available: true,
-  category: {} as ProductCategory,
-  categoryId: '',
-  nonUpdatable: [] as Ingredient[],
-  mandatory: [] as Ingredient[],
-  optionalBase: [] as Ingredient[],
-  extra: [] as Ingredient[],
+    label: '',
+    imageUrl: '',
+    priceExclTax: 0,
+    priceIncludingTax: 0,
+    available: true,
+    category: {} as ProductCategory,
+    categoryId: '',
+    nonUpdatable: [] as Ingredient[],
+    mandatory: [] as IngredientCategory[],
+    optionalBase: [] as Ingredient[],
+    extra: [] as Ingredient[],
   }
 }
 
@@ -397,22 +415,28 @@ const handleDeleteProduct = (rowData: any) => {
 const handleConfirmUpdateProduct = async () => {
   if (!currentProduct.value) return
   // try{
-      await updateProduct({
-        id: currentProduct.value.id,
-        label: editableProduct.value.label,
-        imageUrl: editableProduct.value.imageUrl,
-        priceExclTax: editableProduct.value.priceExclTax,
-        priceIncludingTax: editableProduct.value.priceIncludingTax,
-        available: editableProduct.value.available,
-        categoryId: editableProduct.value.category.id,
-        nonUpdatable: editableProduct.value.nonUpdatable.map((ingredient) => ingredient.id),
-        mandatory: editableProduct.value.mandatory.map((ingredient) => ingredient.id),
-        optionalBase: editableProduct.value.optionalBase.map((ingredient) => ingredient.id),
-        extra: editableProduct.value.extra.map((ingredient) => ingredient.id),
-      })
-      successToast('Confirmed', 'Record updated')
-      refetchProduct()
-      resetEditableProduct()
+  await updateProduct({
+    id: currentProduct.value.id,
+    label: editableProduct.value.label,
+    imageUrl: editableProduct.value.imageUrl,
+    priceExclTax: editableProduct.value.priceExclTax,
+    priceIncludingTax: editableProduct.value.priceIncludingTax,
+    available: editableProduct.value.available,
+    categoryId: editableProduct.value.category.id,
+    nonUpdatable: editableProduct.value.nonUpdatable.map(
+      (ingredient) => ingredient.id,
+    ),
+    mandatory: editableProduct.value.mandatory.map(
+      (ingredientCategory) => ingredientCategory.id,
+    ),
+    optionalBase: editableProduct.value.optionalBase.map(
+      (ingredient) => ingredient.id,
+    ),
+    extra: editableProduct.value.extra.map((ingredient) => ingredient.id),
+  })
+  successToast('Confirmed', 'Record updated')
+  refetchProduct()
+  resetEditableProduct()
   // } catch (error) {
   //   errorToast('Error', error as string)
   // }
@@ -445,9 +469,15 @@ const handleConfirmCreateProduct = async () => {
     priceIncludingTax: editableProduct.value.priceIncludingTax,
     available: editableProduct.value.available,
     categoryId: editableProduct.value.category.id,
-    nonUpdatable: editableProduct.value.nonUpdatable.map((ingredient) => ingredient.id),
-    mandatory: editableProduct.value.mandatory.map((ingredient) => ingredient.id),
-    optionalBase: editableProduct.value.optionalBase.map((ingredient) => ingredient.id),
+    nonUpdatable: editableProduct.value.nonUpdatable.map(
+      (ingredient) => ingredient.id,
+    ),
+    mandatory: editableProduct.value.mandatory.map(
+      (ingredientCategory) => ingredientCategory.id,
+    ),
+    optionalBase: editableProduct.value.optionalBase.map(
+      (ingredient) => ingredient.id,
+    ),
     extra: editableProduct.value.extra.map((ingredient) => ingredient.id),
   })
   successToast('Confirmed', 'Record created')

@@ -8,7 +8,7 @@ model Product {
   categoryId              String
   category                ProductCategory       @relation(fields: [categoryId], references: [id])
   nonUpdatable            Ingredient[]          @relation(name : "nonUpdatable")
-  mandatory               Ingredient[]          @relation(name : "mandatory")
+  mandatory               IngredientCategory[]  @relation(name : "mandatory")
   optionalBase            Ingredient[]          @relation(name : "optionalBase")
   extra                   Ingredient[]          @relation(name : "extra")
   productUsedInOrder      ProductInOrder[]   
@@ -30,7 +30,6 @@ model Ingredient {
   category                IngredientCategory    @relation(fields: [categoryId], references: [id])
   categoryId              String
   nonUpdatableIn          Product[]             @relation(name : "nonUpdatable")
-  mandatoryIn             Product[]             @relation(name : "mandatory")
   optionalBaseIn          Product[]             @relation(name : "optionalBase")
   extraIn                 Product[]             @relation(name : "extra")
   usedAsMandatoryIn       ProductInOrder[]      @relation(name : "usedAsMandatoryIn")
@@ -39,8 +38,9 @@ model Ingredient {
 }
 
 model IngredientCategory {
-  id          String       @id @default(uuid())
-  label       String       @unique
-  imageUrl    String?
-  ingredients Ingredient[]
+  id              String       @id @default(uuid())
+  label           String       @unique
+  imageUrl        String?
+  ingredients     Ingredient[]
+  mandatoryIn     Product[]    @relation(name : "mandatory")
 }
