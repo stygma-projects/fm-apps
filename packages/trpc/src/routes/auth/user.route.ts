@@ -20,5 +20,25 @@ export const userRouter = router({
                     name: input.name,
                 },
             })
-        })
+        }),
+    // signInByMailAndPassword: publicProcedure
+    //     .input(
+    //         z.object({
+    //             email : z.string(),
+    //             password : z.string(),
+    //             callbackURL : z.string().optional(),
+    //             rememberMe : z.boolean().default(true),
+    //         })
+    //     )
+    //     .mutation(async ({ input }) => {
+    //         return await auth.api.signInEmail({
+    //             asResponse: false,
+    //             body: {
+    //                 email: input.email,
+    //                 password: input.password,
+    //                 callbackURL : input.callbackURL,
+    //                 rememberMe: input.rememberMe,
+    //             },
+    //         })
+    //     }),
 })
