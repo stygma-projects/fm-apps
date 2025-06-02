@@ -33,6 +33,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     splitter: typeof import('./components/ui/splitter.component.vue')['default']
-    'stepper.component': typeof import('./components/ui/stepper.component.vue')['default']
+    'stepper.component': typeof import('./components/ui/stepper/stepper.component.vue')['default']
   }
 }
