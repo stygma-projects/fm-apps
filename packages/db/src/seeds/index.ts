@@ -8,7 +8,6 @@ async function main() {
 
 main()
     .catch((err) => {
-        console.error("Error during seeding:", err)
         process.exit(1)
     })
     .finally(async () => {
