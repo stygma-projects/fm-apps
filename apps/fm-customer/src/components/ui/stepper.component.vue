@@ -24,13 +24,13 @@
                 <div class="flex items-center justify-between">
                   <PrimeButton
                     severity="secondary"
-                    @click="emitComplete"
+                    @click="handleCancel"
                     :label="t('stepper.cancel')"
                     data-cy="fmc-cancel-step-button"
                   />
                   <PrimeButton
                     severity="success"
-                    @click="emitComplete"
+                    @click="handleValidate"
                     :label="t('stepper.validate')"
                     data-cy="fmc-validate-step-button"
                   />
@@ -56,7 +56,7 @@
                   <PrimeButton
                     v-if="index === 0"
                     severity="secondary"
-                    @click="emitComplete"
+                    @click="handleCancel"
                     :label="t('stepper.cancel')"
                     data-cy="fmc-cancel-step-button"
                   />
@@ -72,7 +72,7 @@
                     v-if="index === availableSteps.length - 1"
                     severity="success"
                     :disabled="!hasAllMandatorySelections"
-                    @click="emitComplete"
+                    @click="handleValidate"
                     :label="t('stepper.validate')"
                     data-cy="fmc-validate-step-button"
                   />
@@ -139,7 +139,7 @@
           <PrimeButton
             severity="secondary"
             class="w-1/3"
-            @click="emitComplete"
+            @click="handleCancel"
             :label="t('stepper.cancel')"
             data-cy="fmc-cancel-step-button"
           />
@@ -148,7 +148,7 @@
           <PrimeButton
             severity="success"
             class="w-1/3"
-            @click="emitComplete"
+            @click="handleValidate"
             :label="t('stepper.validate')"
             data-cy="fmc-validate-step-button"
           />
@@ -159,7 +159,7 @@
             v-if="stepperState.activeTabIndex === 0"
             severity="secondary"
             class="w-1/3"
-            @click="emitComplete"
+            @click="handleCancel"
             :label="t('stepper.cancel')"
             data-cy="fmc-cancel-step-button"
           />
@@ -180,7 +180,7 @@
             v-if="stepperState.activeTabIndex === availableSteps.length - 1"
             severity="success"
             :disabled="!hasAllMandatorySelections"
-            @click="emitComplete"
+            @click="handleValidate"
             class="w-1/3"
             :label="t('stepper.validate')"
             data-cy="fmc-validate-step-button"
@@ -376,18 +376,34 @@ const closeMobileView = () => {
   stepperState.activeTabIndex = 0
 }
 
-const emitComplete = () => {
+const emitComplete = (isCancelled = false) => {
   const currentSelections = { ...stepperState.selections }
-  cartStore.addItem(props.item, currentSelections)
+  if (!isCancelled) {
+    cartStore.addItem(props.item, currentSelections)
 
-  emit('complete', {
-    item: props.item,
-    step: stepperState.currentStep,
-    selections: currentSelections,
-  })
+    emit('complete', {
+      item: props.item,
+      step: stepperState.currentStep,
+      selections: currentSelections,
+    })
+  } else {
+    emit('cancel', {
+      item: props.item,
+      step: stepperState.currentStep,
+      selections: currentSelections,
+    })
+  }
 
   stepperState.selections = {}
   closeMobileView()
+}
+
+const handleCancel = () => {
+  emitComplete(true)
+}
+
+const handleValidate = () => {
+  emitComplete(false)
 }
 
 const handleSelectionUpdate = (selection: any[]) => {

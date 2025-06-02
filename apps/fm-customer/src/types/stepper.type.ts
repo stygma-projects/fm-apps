@@ -21,6 +21,14 @@ export interface StepperEmits {
       selections: Record<string, any[]>
     },
   ): void
+  (
+    e: 'cancel',
+    data: {
+      item: StepperItem
+      step: string
+      selections: Record<string, any[]>
+    },
+  ): void
   (e: 'step-change', step: string): void
   (e: 'update:visible', visible: boolean): void
 }
