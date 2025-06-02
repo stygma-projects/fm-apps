@@ -1,6 +1,7 @@
 model Product {
   id                      String                @id @default(uuid())
   label                   String                @unique
+  price              Float            @default(0.0)
   priceExclTax            Float
   priceIncludingTax       Float
   imageUrl                String?
@@ -12,6 +13,7 @@ model Product {
   optionalBase            Ingredient[]          @relation(name : "optionalBase")
   extra                   Ingredient[]          @relation(name : "extra")
   productUsedInOrder      ProductInOrder[]   
+
 }
 
 model ProductCategory {
@@ -22,8 +24,10 @@ model ProductCategory {
 }
 
 model Ingredient {
+
   id                      String                @id @default(uuid())
   label                   String                @unique
+  price                Float              @default(0.0)
   priceExclTax            Float
   priceIncludingTax       Float
   imageUrl                String?
