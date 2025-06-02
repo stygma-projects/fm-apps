@@ -7,28 +7,29 @@
     <template #footer>
       <PrimeButton
         v-if="onCancel"
-        label="Cancel"
         icon="pi pi-times"
-        severity="danger"
+        label="Cancel"
         outlined
+        severity="danger"
         @click="handleCancel"
       />
       <PrimeButton
         v-if="onConfirm"
-        label="Save"
         icon="pi pi-check"
+        label="Save"
         @click="handleConfirm"
       />
     </template>
   </PrimeDialog>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { toRefs } from 'vue'
 
 const props = defineProps({
   title: {
     type: String,
+    required:true
   },
   onConfirm: {
     type: Function,

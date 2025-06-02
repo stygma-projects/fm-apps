@@ -1,41 +1,41 @@
 <template>
   <DataTable
-    :items="productCategories"
     :columns="columns"
     :filter-fields="filterFields"
+    :items="productCategories"
   >
     <template #header="{ selectedItems }">
       <PrimeButton
         v-if="selectedItems.length > 0"
+        :badge="selectedItems.length.toString()"
         :label="t('productCategory.toolBar.deleteManyButton')"
         icon="pi pi-trash"
         severity="danger"
-        :badge="selectedItems.length.toString()"
         @click="handleDeleteManyProductCategories(selectedItems)"
       ></PrimeButton>
       <PrimeButton
         v-else
         :label="t('productCategory.toolBar.addButton')"
-        icon="pi pi-plus"
         class="mr-2"
+        icon="pi pi-plus"
         @click="showCreateProductCategoryModal"
       ></PrimeButton>
     </template>
     <template #column-image-url="{ rowData }">
       <img
         v-if="rowData.imageUrl"
-        :src="rowData.imageUrl"
         :alt="rowData.label"
+        :src="rowData.imageUrl"
         class="rounded shadow-sm"
       />
       <span v-else>{{ t('productCategory.noImage') }}</span>
     </template>
     <template #actions="{ rowData }">
       <PrimeButton
+        class="mr-2"
         icon="pi pi-pencil"
         outlined
         rounded
-        class="mr-2"
         severity="info"
         size="large"
         @click="showEditProductCategoryModal(rowData)"
@@ -52,9 +52,9 @@
   </DataTable>
   <ModalWrapper
     v-model:is-visible="isUpdateProductCategoryModalVisible"
-    :title="t('productCategory.dialogs.editDialog.title')"
-    :on-confirm="handleConfirmUpdateProductCategory"
     :on-cancel="handleCancelUpdateProductCategory"
+    :on-confirm="handleConfirmUpdateProductCategory"
+    :title="t('productCategory.dialogs.editDialog.title')"
   >
     <template #content>
       <div class="flex flex-col gap-4">
@@ -71,9 +71,9 @@
   </ModalWrapper>
   <ModalWrapper
     v-model:is-visible="isCreateProductCategoryModalVisible"
-    :title="t('productCategory.dialogs.createDialog.title')"
-    :on-confirm="handleConfirmCreateProductCategory"
     :on-cancel="handleCancelCreateProductCategory"
+    :on-confirm="handleConfirmCreateProductCategory"
+    :title="t('productCategory.dialogs.createDialog.title')"
   >
     <template #content>
       <div class="flex flex-col gap-4">
@@ -90,7 +90,7 @@
   </ModalWrapper>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
 import InputText from '../components/ui/form/input-text.component.vue'
 import DataTable from '../components/ui/data-table.component.vue'
@@ -106,6 +106,7 @@ import { ref } from 'vue'
 import { useToast } from '../composables/toast.composable'
 import { useConfirmModal } from '../composables/confirm-modal.composable'
 import type { GetByIdProductCategoryOutput } from '@fm-apps/trpc/'
+import type {ProductCategory} from "../types/inventory.type.ts";
 
 const { t } = useI18n()
 const { deleteConfirmation } = useConfirmModal()
@@ -140,7 +141,7 @@ const showEditProductCategoryModal = (rowData: any) => {
   isUpdateProductCategoryModalVisible.value = true
 }
 
-const handleDeleteProductCategory = (rowData: any) => {
+const handleDeleteProductCategory = (rowData:ProductCategory) => {
   deleteConfirmation({
     accept: async () => {
       await deleteProductCategory({ id: rowData.id })
@@ -168,8 +169,8 @@ const handleCancelUpdateProductCategory = () => {
   }
 }
 
-const handleDeleteManyProductCategories = (selectedItems: any) => {
-  const ids = selectedItems.map((item: any) => item.id)
+const handleDeleteManyProductCategories = (selectedItems: ProductCategory[]) => {
+  const ids = selectedItems.map((item) => item.id)
   deleteConfirmation({
     accept: async () => {
       await deleteManyProductCategories({ ids })
