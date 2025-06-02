@@ -8,12 +8,10 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    'back-link.component': typeof import('./components/ui/back-link.component.vue')
     'card.component': typeof import('./components/ui/card.component.vue')['default']
-    'cart-panel': typeof import('./components/ui/cart-panel.vue')['default']
-    'ingredient-section.component': typeof import ('./components/ui/ingredient-section.component.vue')['default']
     PrimeAccordion: typeof import('primevue/accordion')['default']
     PrimeAccordionTab: typeof import('primevue/accordiontab')['default']
+    PrimeBadge: typeof import('primevue/badge')['default']
     PrimeButton: typeof import('primevue/button')['default']
     PrimeCard: typeof import('primevue/card')['default']
     PrimeConfirmDialog: typeof import('primevue/confirmdialog')['default']

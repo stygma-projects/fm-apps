@@ -1,13 +1,23 @@
 <template>
-  <li v-if="items && items.length > 0">
-    {{ title }} :
-    <ul class="list-disc ml-6 mt-2">
-      <li v-for="ingredient in items" :key="ingredient.label" class="mb-1">
-        {{ ingredient.label }}
-        {{ ingredient.priceIncludingTax }} €
-      </li>
-    </ul>
-  </li>
+  <PrimeCard v-if="items && items.length > 0" :pt="cardPt">
+    <template #title>
+      {{ title }}
+    </template>
+    <template #content>
+      <ul class="space-y-2">
+        <li
+          v-for="ingredient in items"
+          :key="ingredient.label"
+          class="flex items-center justify-between"
+        >
+          <span class="text-gray-700">{{ ingredient.label }}</span>
+          <span class="font-medium text-gray-900"
+            >{{ ingredient.priceIncludingTax }} €</span
+          >
+        </li>
+      </ul>
+    </template>
+  </PrimeCard>
 </template>
 
 <script setup lang="ts">
@@ -19,6 +29,7 @@ interface Ingredient {
 interface Props {
   title: string
   items?: Ingredient[]
+  cardPt?: object
 }
 
 defineProps<Props>()

@@ -27,7 +27,14 @@ export const fr = {
       optionalBaseIngredients: 'Ingrédients de base',
       extraIngredients: 'Suppléments',
     },
+    function: {
+      update: 'Personnaliser',
+      delete: 'Supprimer',
+    },
   },
-  validate: 'Valider la commande',
+  validate: {
+    cart: 'Valider le panier',
+    order: 'Valider la commande',
+  },
   article: 'Article #',
 }

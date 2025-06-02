@@ -1,7 +1,7 @@
 <template>
   <PrimeButton :severity="severity" @click="handleClick" :class="buttonClasses">
     <div class="flex items-center gap-2">
-      <span>{{ text }}</span>
+      <span class="text-xl font-bold text-rose-700">{{ text }}</span>
     </div>
     <span v-if="secondaryText">{{ secondaryText }}</span>
   </PrimeButton>
@@ -11,7 +11,7 @@
 import { computed } from 'vue'
 
 interface Props {
-  text: string
+  text?: string
   secondaryText?: string | number
   severity?:
     | 'success'

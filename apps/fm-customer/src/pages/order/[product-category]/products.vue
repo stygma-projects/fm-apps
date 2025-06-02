@@ -20,7 +20,7 @@
 import { useRoute } from 'vue-router'
 import { computed, ref, onMounted } from 'vue'
 import Card from '~/components/ui/card.component.vue'
-import CartPanel from '~/components/ui/cart-panel.vue'
+import CartPanel from '~/components/ui/cart/cart-panel.vue'
 import Stepper from '~/components/ui/stepper.component.vue'
 import { useFetchAllProduct } from '~/composables/api/product.composable'
 import Splitter from '~/components/ui/splitter.component.vue'
