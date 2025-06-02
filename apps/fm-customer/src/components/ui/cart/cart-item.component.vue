@@ -103,7 +103,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import IngredientSection from '~/components/ui/ingredient-section.component.vue'
 import Stepper from '~/components/ui/stepper/stepper.component.vue'
 import { fr } from '../../../i18n/locales/fr'

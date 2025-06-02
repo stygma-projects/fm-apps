@@ -59,7 +59,7 @@ const { mutate: createManyProductInOrder } = useCreateManyProductInOrder()
 // redirect to categorie page if he deleted everything in the cart
 watch(
   () => cartStore.items.length,
-  (actualLength) => {
+  (actualLength: number) => {
     if (actualLength === 0) {
       router.push('/order/product-categories')
     }
