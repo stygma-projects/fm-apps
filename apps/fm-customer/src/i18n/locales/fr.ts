@@ -66,7 +66,7 @@ export const fr = {
     toast: {
       success : 'Succès',
       error: 'Erreur',
-      accountCreated: 'Compte créé !',
+      accountCreated: 'Connexion réussie !',
       registerError: 'Erreur lors de l\'enregistrement',
       defaultError: 'Une erreur est survenue',
       defaultParameterError : 'Un paramètre est incorrect',
