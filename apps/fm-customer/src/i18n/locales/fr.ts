@@ -56,11 +56,17 @@ export const fr = {
       nameExample: 'Ex : Mark',
       emailExample: 'Ex : mark@gmail.com',
       passwordExample: 'Ex : D$1\\>0h1j4WO%_7oZ3e',
+      errors : {
+        emailRequired: 'Veuillez entrer votre email',
+        invalidEmail: 'Veuillez entrer un email valide',
+        passwordRequired: 'Veuillez entrer votre mot de passe',
+        invalidEntries: 'Email ou mot de passe invalide',
+      }
     },
     toast: {
       success : 'Succès',
       error: 'Erreur',
-      accountCreated: 'Compte créé !',
+      accountCreated: 'Connexion réussie !',
       registerError: 'Erreur lors de l\'enregistrement',
       defaultError: 'Une erreur est survenue',
       defaultParameterError : 'Un paramètre est incorrect',
