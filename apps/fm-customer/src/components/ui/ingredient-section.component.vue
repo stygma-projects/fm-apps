@@ -1,3 +1,5 @@
+import { default } from './back-link.component.vue'; import { type } from
+'../../../.nuxt/types/imports';
 <template>
   <PrimeCard v-if="items && items.length > 0" :pt="cardPt">
     <template #title>
@@ -11,7 +13,7 @@
           class="flex items-center justify-between"
         >
           <span class="text-gray-700">{{ ingredient.label }}</span>
-          <span class="font-medium text-gray-900"
+          <span v-if="isNotMandatory" class="font-medium text-gray-900"
             >{{ ingredient.priceIncludingTax }} €</span
           >
         </li>
@@ -30,6 +32,7 @@ interface Props {
   title: string
   items?: Ingredient[]
   cardPt?: object
+  isNotMandatory?: boolean
 }
 
 defineProps<Props>()

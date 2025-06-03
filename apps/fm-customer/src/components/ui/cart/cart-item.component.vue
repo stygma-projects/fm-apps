@@ -41,6 +41,7 @@
                 root: { class: 'border-l-4 border-red-500 bg-red-50' },
                 content: { class: 'pt-2' },
               }"
+              :is-not-mandatory="false"
             />
 
             <IngredientSection
@@ -78,7 +79,7 @@
                   'hover:bg-amber-50 border-amber-400 text-amber-700 hover:border-amber-500 w-1/2 lg:w-full',
               },
             }"
-            @click="$emit('remove', item.id)"
+            @click="openStepper"
           />
           <PrimeButton
             :label="fr.cart.function.delete"
@@ -96,11 +97,23 @@
         </div>
       </div>
     </div>
+
+    <Stepper
+      :visible="stepperVisible"
+      :item="item.product"
+      :initial-selections="item.selections"
+      :selections-key="item.selectionsKey"
+      @update:visible="stepperVisible = $event"
+      @complete="handleStepperComplete"
+      @cancel="handleStepperCancel"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
 import IngredientSection from '~/components/ui/ingredient-section.component.vue'
+import Stepper from '~/components/ui/stepper/stepper.component.vue'
 import { fr } from '../../../i18n/locales/fr'
 
 interface Props {
@@ -108,8 +121,23 @@ interface Props {
   index: number
 }
 
-defineProps<Props>()
-defineEmits<{
+const props = defineProps<Props>()
+const emit = defineEmits<{
   remove: [id: string]
+  update: [item: any]
 }>()
+
+const stepperVisible = ref(false)
+
+const openStepper = () => {
+  stepperVisible.value = true
+}
+
+const handleStepperComplete = (data: any) => {
+  stepperVisible.value = false
+}
+
+const handleStepperCancel = () => {
+  stepperVisible.value = false
+}
 </script>

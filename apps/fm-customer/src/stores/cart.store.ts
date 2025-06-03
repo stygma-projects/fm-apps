@@ -11,10 +11,12 @@ type CartItem = {
   optionalBase: Ingredient[]
   extra: Ingredient[]
   addedAt: string
+  selectionsKey: string
 }
 
 export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>([])
+  const stepperSelections = ref<Record<string, Record<string, any[]>>>({})
 
   const addItem = (
     product: StepperItem,
@@ -28,6 +30,7 @@ export const useCartStore = defineStore('cart', () => {
       }
     }
 
+    const selectionsKey = generateCartItemId()
     const cartItem: CartItem = {
       id: generateCartItemId(),
       productId: product.id,
@@ -36,9 +39,35 @@ export const useCartStore = defineStore('cart', () => {
       optionalBase: [],
       extra: [],
       addedAt: new Date().toISOString(),
+      selectionsKey: selectionsKey,
     }
+    stepperSelections.value[selectionsKey] = selections
 
     items.value.push(cartItem)
+  }
+
+  const updateItem = (
+    selectionKey: string,
+    newSelections: Record<string, any[]>,
+  ) => {
+    const item = items.value.find((item) => item.selectionsKey === selectionKey)
+
+    if (!item) return
+
+    stepperSelections.value[item.selectionsKey] = newSelections
+
+    const mandatoryIngredients: Ingredient[] = []
+    for (const key in newSelections) {
+      if (newSelections[key] && Array.isArray(newSelections[key])) {
+        mandatoryIngredients.push(...newSelections[key])
+      }
+    }
+
+    item.mandatory = mandatoryIngredients
+  }
+
+  const getItemSelections = (selectionsKey: string) => {
+    return stepperSelections.value[selectionsKey]
   }
 
   const getStoreContent = () => {
@@ -52,10 +81,6 @@ export const useCartStore = defineStore('cart', () => {
       if ('priceIncludingTax' in item.product) {
         itemTotal += (item.product as Product).priceIncludingTax || 0
       }
-
-      item.mandatory.forEach((ingredient) => {
-        itemTotal += ingredient.priceIncludingTax || 0
-      })
 
       item.optionalBase.forEach((ingredient) => {
         itemTotal += ingredient.priceIncludingTax || 0
@@ -112,6 +137,8 @@ export const useCartStore = defineStore('cart', () => {
   return {
     items,
     addItem,
+    updateItem,
+    getItemSelections,
     getStoreContent,
     removeItem,
     clearCart,

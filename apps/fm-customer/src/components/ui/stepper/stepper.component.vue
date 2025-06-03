@@ -219,8 +219,13 @@ interface StepperHooks {
   handleResize: () => void
 }
 
-const props = defineProps<StepperProps>()
+const props = defineProps<
+  StepperProps & {
+    selectionsKey?: string
+  }
+>()
 const emit = defineEmits<StepperEmits>()
+
 const { item } = toRefs(props)
 
 const stepperState = reactive<
@@ -335,9 +340,15 @@ watch(
     if (newValue && props.item?.mandatory) {
       await ingredientStore.fetchAllIngredients()
 
-      // Filtrer par tous les categoryIds des mandatory
       const categoryIds = props.item.mandatory.map((mandatory) => mandatory.id)
       ingredientStore.filterByCategories(categoryIds)
+
+      if (props.selectionsKey) {
+        const existingKey = cartStore.getItemSelections(props.selectionsKey)
+        stepperState.selections = { ...existingKey }
+      } else {
+        stepperState.selections = {}
+      }
     }
 
     if (isMobile.value) {
@@ -378,8 +389,13 @@ const closeMobileView = () => {
 
 const emitComplete = (isCancelled = false) => {
   const currentSelections = { ...stepperState.selections }
+
   if (!isCancelled) {
-    cartStore.addItem(props.item, currentSelections)
+    if (props.selectionsKey) {
+      cartStore.updateItem(props.selectionsKey, currentSelections)
+    } else {
+      cartStore.addItem(props.item, currentSelections)
+    }
 
     emit('complete', {
       item: props.item,
