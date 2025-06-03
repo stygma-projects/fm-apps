@@ -46,6 +46,25 @@ export const useCartStore = defineStore('cart', () => {
     items.value.push(cartItem)
   }
 
+  const addItemDirectly = (product: StepperItem) => {
+    if (!product || !product.id) return
+
+    const selectionsKey = generateCartItemId()
+    const cartItem: CartItem = {
+      id: generateCartItemId(),
+      productId: product.id,
+      product: product,
+      mandatory: [],
+      optionalBase: [],
+      extra: [],
+      addedAt: new Date().toISOString(),
+      selectionsKey: selectionsKey,
+    }
+
+    stepperSelections.value[selectionsKey] = {}
+    items.value.push(cartItem)
+  }
+
   const updateItem = (
     selectionKey: string,
     newSelections: Record<string, any[]>,
@@ -67,7 +86,7 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   const getItemSelections = (selectionsKey: string) => {
-    return stepperSelections.value[selectionsKey]
+    return stepperSelections.value[selectionsKey] || {}
   }
 
   const getStoreContent = () => {
@@ -97,9 +116,12 @@ export const useCartStore = defineStore('cart', () => {
   const totalItems = computed(() => items.value.length)
 
   const removeItem = (itemId: string) => {
-    const index = items.value.findIndex((item) => {
-      return item.id === itemId
-    })
+    const item = items.value.find((item) => item.id === itemId)
+    if (item) {
+      delete stepperSelections.value[item.selectionsKey]
+    }
+
+    const index = items.value.findIndex((item) => item.id === itemId)
     if (index !== -1) {
       items.value.splice(index, 1)
     }
@@ -107,6 +129,7 @@ export const useCartStore = defineStore('cart', () => {
 
   const clearCart = () => {
     items.value = []
+    stepperSelections.value = {}
   }
 
   const generateCartItemId = () => {
@@ -137,6 +160,7 @@ export const useCartStore = defineStore('cart', () => {
   return {
     items,
     addItem,
+    addItemDirectly,
     updateItem,
     getItemSelections,
     getStoreContent,

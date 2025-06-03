@@ -18,74 +18,52 @@
           </PrimeStepList>
 
           <PrimeStepPanels>
-            <PrimeStepPanel v-if="availableSteps.length === 0" value="1">
-              <div class="p-4">
-                <h2 class="mb-4 text-2xl font-bold">TOTO</h2>
-                <div class="flex items-center justify-between">
-                  <PrimeButton
-                    severity="secondary"
-                    @click="handleCancel"
-                    :label="t('stepper.cancel')"
-                    data-cy="fmc-cancel-step-button"
-                  />
-                  <PrimeButton
-                    severity="success"
-                    @click="handleValidate"
-                    :label="t('stepper.validate')"
-                    data-cy="fmc-validate-step-button"
-                  />
-                </div>
-              </div>
-            </PrimeStepPanel>
+            <PrimeStepPanel
+              v-for="(step, index) in availableSteps"
+              :key="index"
+              :value="String(index + 1)"
+            >
+              <StepContent
+                :item="item"
+                :mandatory-index="step.originalIndex"
+                :is-last="index === availableSteps.length - 1"
+                :selections="currentStepSelections"
+                @update-selection="handleSelectionUpdate"
+              />
 
-            <template v-else>
-              <PrimeStepPanel
-                v-for="(step, index) in availableSteps"
-                :key="index"
-                :value="String(index + 1)"
-              >
-                <StepContent
-                  :item="item"
-                  :mandatory-index="step.originalIndex"
-                  :is-last="index === availableSteps.length - 1"
-                  :selections="currentStepSelections"
-                  @update-selection="handleSelectionUpdate"
+              <div class="flex justify-between mt-4">
+                <PrimeButton
+                  v-if="index === 0"
+                  severity="secondary"
+                  @click="handleCancel"
+                  :label="t('stepper.cancel')"
+                  data-cy="fmc-cancel-step-button"
+                />
+                <PrimeButton
+                  v-if="index > 0"
+                  severity="secondary"
+                  @click="stepperState.currentStep = String(index)"
+                  :label="t('stepper.back')"
+                  data-cy="fmc-back-step-button"
                 />
 
-                <div class="flex justify-between mt-4">
-                  <PrimeButton
-                    v-if="index === 0"
-                    severity="secondary"
-                    @click="handleCancel"
-                    :label="t('stepper.cancel')"
-                    data-cy="fmc-cancel-step-button"
-                  />
-                  <PrimeButton
-                    v-if="index > 0"
-                    severity="secondary"
-                    @click="stepperState.currentStep = String(index)"
-                    :label="t('stepper.back')"
-                    data-cy="fmc-back-step-button"
-                  />
-
-                  <PrimeButton
-                    v-if="index === availableSteps.length - 1"
-                    severity="success"
-                    :disabled="!hasAllMandatorySelections"
-                    @click="handleValidate"
-                    :label="t('stepper.validate')"
-                    data-cy="fmc-validate-step-button"
-                  />
-                  <PrimeButton
-                    v-else
-                    :disabled="!canProceed"
-                    @click="stepperState.currentStep = String(index + 2)"
-                    :label="t('stepper.next')"
-                    data-cy="fmc-next-step-button"
-                  />
-                </div>
-              </PrimeStepPanel>
-            </template>
+                <PrimeButton
+                  v-if="index === availableSteps.length - 1"
+                  severity="success"
+                  :disabled="!hasAllMandatorySelections"
+                  @click="handleValidate"
+                  :label="t('stepper.validate')"
+                  data-cy="fmc-validate-step-button"
+                />
+                <PrimeButton
+                  v-else
+                  :disabled="!canProceed"
+                  @click="stepperState.currentStep = String(index + 2)"
+                  :label="t('stepper.next')"
+                  data-cy="fmc-next-step-button"
+                />
+              </div>
+            </PrimeStepPanel>
           </PrimeStepPanels>
         </PrimeStepper>
       </div>
@@ -112,12 +90,7 @@
 
       <!-- Body -->
       <div class="flex-grow overflow-auto">
-        <div v-if="availableSteps.length === 0" class="p-6">
-          <p>TOTO</p>
-        </div>
-
         <div
-          v-else
           v-for="(step, index) in availableSteps"
           :key="index"
           class="p-6"
@@ -135,26 +108,7 @@
 
       <!-- Footer -->
       <div class="px-6 py-4 border-t">
-        <div v-if="availableSteps.length === 0" class="flex justify-center">
-          <PrimeButton
-            severity="secondary"
-            class="w-1/3"
-            @click="handleCancel"
-            :label="t('stepper.cancel')"
-            data-cy="fmc-cancel-step-button"
-          />
-
-          <div class="flex items-center justify-center w-1/3">1 / 1</div>
-          <PrimeButton
-            severity="success"
-            class="w-1/3"
-            @click="handleValidate"
-            :label="t('stepper.validate')"
-            data-cy="fmc-validate-step-button"
-          />
-        </div>
-
-        <div v-else class="flex justify-between">
+        <div class="flex justify-between">
           <PrimeButton
             v-if="stepperState.activeTabIndex === 0"
             severity="secondary"
@@ -238,6 +192,8 @@ const stepperState = reactive<
   selections: {},
 })
 
+const hasAddedDirectly = ref(false)
+
 const availableSteps = computed(() => {
   if (!props.item?.mandatory) return []
 
@@ -287,14 +243,10 @@ const hasSelections = computed(() => {
 })
 
 const canProceed = computed(() => {
-  if (availableSteps.value.length === 0) return true
   return hasSelections.value
 })
 
 const hasAllMandatorySelections = computed(() => {
-  if (availableSteps.value.length === 0) return true
-
-  // Vérifier que toutes les étapes disponibles ont au moins une sélection
   for (let i = 0; i < availableSteps.value.length; i++) {
     const stepKey = String(i + 1)
     if (!stepperState.selections[stepKey]?.length) {
@@ -337,7 +289,27 @@ const { isMobile } = useStepper(props)
 watch(
   () => props.visible,
   async (newValue) => {
-    if (newValue && props.item?.mandatory) {
+    if (!newValue) {
+      hasAddedDirectly.value = false
+      return
+    }
+
+    // Si pas de mandatory, ajouter directement
+    if (!props.item?.mandatory || props.item.mandatory.length === 0) {
+      if (!props.selectionsKey && !hasAddedDirectly.value) {
+        hasAddedDirectly.value = true
+        cartStore.addItemDirectly(props.item)
+        emit('complete', { item: props.item, step: '1', selections: {} })
+
+        emit('update:visible', false)
+        stepperState.mobileVisible = false
+        stepperState.dialogVisible = false
+        return
+      }
+    }
+
+    // Si il y a des mandatory, procéder normalement
+    if (props.item?.mandatory && props.item.mandatory.length > 0) {
       await ingredientStore.fetchAllIngredients()
 
       const categoryIds = props.item.mandatory.map((mandatory) => mandatory.id)
@@ -360,7 +332,6 @@ watch(
   { immediate: true },
 )
 
-// Watch the desktop
 watch(
   () => stepperState.currentStep,
   (newStep) => {
@@ -381,8 +352,8 @@ const closeMobileView = () => {
   emit('update:visible', false)
   stepperState.mobileVisible = false
   stepperState.dialogVisible = false
+  hasAddedDirectly.value = false
 
-  // Reset steps but keep selections
   stepperState.currentStep = '1'
   stepperState.activeTabIndex = 0
 }

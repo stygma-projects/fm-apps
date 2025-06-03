@@ -101,7 +101,6 @@
     <Stepper
       :visible="stepperVisible"
       :item="item.product"
-      :initial-selections="item.selections"
       :selections-key="item.selectionsKey"
       @update:visible="stepperVisible = $event"
       @complete="handleStepperComplete"

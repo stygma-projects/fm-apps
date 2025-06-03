@@ -3,7 +3,7 @@
     <Card
       :items="ing"
       :grid="false"
-      :selected-items="selections"
+      :selected-items="selectedIngredients"
       class="grid flex-row grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       @item-click="selectIngredient"
       cy="ingredient-stepper-card"
@@ -43,7 +43,7 @@ const ing = computed(() => {
 watch(
   () => props.selections,
   (newSelections) => {
-    selectedIngredients.value = newSelections
+    selectedIngredients.value = [...newSelections]
   },
   { immediate: true },
 )
