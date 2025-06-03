@@ -28,7 +28,7 @@
     "typescript": "^5.3.3"
   },
   "prisma": {
-    "seed": "tsx ./src/seed.ts",
+    "seed": "tsx ./src/seeds/index.ts",
     "schema": "./prisma/schema"
   }
 }
