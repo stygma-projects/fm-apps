@@ -46,8 +46,8 @@
                       {{ item.product?.label }}
                     </p>
                   </div>
-                  <span class="lg:text-xl font-semibold text-black">
-                    {{ item.product?.priceIncludingTax }} €
+                  <span class="lg:text-xl font-semibold text-red-700">
+                    {{ item.product?.price }} €
                   </span>
                 </div>
               </template>

@@ -22,8 +22,8 @@
               <span class="lg:text-xl font-medium mt-2">
                 {{ item.product?.label }}
               </span>
-              <span class="font-semibold text-red-600 mt-2 ml-10">
-                {{ item.product?.priceIncludingTax }} €
+              <span class="lg:text-xl font-semibold text-red-700 mt-2 ml-10">
+                {{ item.product?.price }} €
               </span>
             </div>
             <div>

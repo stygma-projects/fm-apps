@@ -40,8 +40,8 @@
               class="flex items-center justify-between w-full text-xs font-bold sm:text-sm lg:text-base"
             >
               <p class="truncate max-w-[64%]">{{ item.label }}</p>
-              <p class="text-right">
-                {{ formatPrice(item.priceIncludingTax) }}
+              <p class="text-right text-red-700">
+                {{ formatPrice(item.price) }}
               </p>
             </div>
             <!-- Without price -->
@@ -78,7 +78,7 @@ const props = defineProps({
 const emit = defineEmits(['item-click'])
 
 const hasImage = (item) => Boolean(item?.imageUrl)
-const hasPrice = (item) => item?.priceIncludingTax !== undefined
+const hasPrice = (item) => item?.price !== undefined
 const formatPrice = (price) => `${price} €`
 
 const isSelected = (item) => {

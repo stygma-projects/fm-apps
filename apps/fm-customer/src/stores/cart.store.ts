@@ -97,16 +97,14 @@ export const useCartStore = defineStore('cart', () => {
     return items.value.reduce((total, item) => {
       let itemTotal = 0
 
-      if ('priceIncludingTax' in item.product) {
-        itemTotal += (item.product as Product).priceIncludingTax || 0
-      }
+      itemTotal += item.product.price ?? 0
 
       item.optionalBase.forEach((ingredient) => {
-        itemTotal += ingredient.priceIncludingTax || 0
+        itemTotal += ingredient.price ?? 0
       })
 
       item.extra.forEach((ingredient) => {
-        itemTotal += ingredient.priceIncludingTax || 0
+        itemTotal += ingredient.price ?? 0
       })
 
       return total + itemTotal
