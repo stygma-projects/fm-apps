@@ -26,6 +26,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+
 interface Ingredient {
   label: string
   price: number

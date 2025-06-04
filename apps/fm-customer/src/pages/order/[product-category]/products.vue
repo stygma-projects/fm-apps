@@ -25,6 +25,7 @@ import CartPanel from '~/components/ui/cart/cart-panel.vue'
 import Stepper from '~/components/ui/stepper.component.vue'
 import { useFetchAllProduct } from '~/composables/api/product.composable'
 import Splitter from '~/components/ui/splitter.component.vue'
+import { fr } from '~/i18n/locales/fr'
 
 const route = useRoute()
 
