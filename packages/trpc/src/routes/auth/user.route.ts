@@ -1,8 +1,6 @@
 import { z } from 'zod'
-// import prisma from '../../libs/prisma'
-import { publicProcedure, router } from '../../trpc' //publicProcedure, 
+import { publicProcedure, router } from '../../trpc'
 import { auth } from "@fm-apps/auth"
-// UTILISER AUTH 
 
 export const userRouter = router({
     signUpByMailAndPassword: publicProcedure
@@ -15,7 +13,7 @@ export const userRouter = router({
         )
         .mutation(async ({ input }) => {
             return await auth.api.signUpEmail({
-                asResponse: true,
+                asResponse: false,
                 body: {
                     email: input.email,
                     password: input.password,
