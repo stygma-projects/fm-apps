@@ -16,7 +16,7 @@
       <button type="submit" class="mt-5 border-1 border-gray-300 rounded-lg shadow-md mx-auto w-auto pl-2 pr-2 pt-1 pb-1">{{ t('createAccount.form.submit') }}</button>
 
       <h2 class="mt-10 text-center">{{ t('createAccount.form.alreadyHaveAccount') }}</h2>
-      <button type="button" class="mt-5 border-1 border-gray-300 rounded-lg shadow-md mx-auto w-auto pl-2 pr-2 pt-1 pb-1">{{ t('createAccount.form.login') }}</button>
+      <NuxtLink to="./../auth/login" data-cy="fmc-order-button" class="mt-5 border-1 border-gray-300 rounded-lg shadow-md mx-auto w-auto pl-2 pr-2 pt-1 pb-1"> {{ t('createAccount.form.login') }} </NuxtLink>
     </Form>
   </div>
 </template>
@@ -50,7 +50,11 @@ const { handleSubmit, defineField } = useForm({
 
 async function onSuccess(values) {
   try {
-    await signUpByMailAndPassword.mutate(values)
+    await signUpByMailAndPassword.mutate({
+      email : values.email,
+      password : values.password,
+      name : values.name,
+  })
     successToast(t('createAccount.toast.success'), t('createAccount.toast.accountCreated'));
   } catch (error) {
     errorToast(t('createAccount.toast.registerError'), error.message || t('createAccount.toast.defaultError'));
