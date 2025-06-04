@@ -4,6 +4,18 @@ import { publicProcedure, router } from '../../trpc'
 import { auth } from "@fm-apps/auth"
 
 export const userRouter = router({
+    list : publicProcedure
+        .query(async () => {
+            return await prisma.user.findMany({
+                orderBy: {
+                    name: 'asc',
+                },
+                include: {
+                    sessions : true,
+                    accounts : true,
+                }
+            })
+        }),
     getById: publicProcedure
         .input(z.string())
         .query(async ({ input }) => {

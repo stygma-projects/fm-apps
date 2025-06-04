@@ -27,7 +27,18 @@ export const fr = {
         ingredientCategories: "Catégories d'ingrédients",
         ingredient: 'Ingrédients',
         productsInventory: 'Produits',
+      },
+    },
+    orders : {
+      label: 'Gestion des commandes',
+      subCategories: {
         commande: 'Commandes',
+      },
+    },
+    accounts : {
+      label: 'Gestion des comptes utilisateurs',
+      subCategories: {
+        usersPanel: 'Utilisateurs',
       },
     },
   },
@@ -224,4 +235,19 @@ export const fr = {
     noImage: "Pas d'image fournie",
     noIngredients : "Aucun",
   },
+  user : {
+    title : 'Utilisateurs',
+    table: {
+      headers: {
+        name : 'Nom',
+        email : 'Email',
+        emailVerified : 'Email vérifié',
+        image : 'Image',
+        createdAt : 'Date de création',
+        updatedAt : 'Date de mise à jour',
+        sessions : 'Sessions',
+        accounts : 'Comptes',
+      },
+    },
+  }
 }
