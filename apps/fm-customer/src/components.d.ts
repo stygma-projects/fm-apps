@@ -22,6 +22,7 @@ declare module 'vue' {
     PrimeImage: typeof import('primevue/image')['default']
     PrimeOverlayBadge: typeof import('primevue/overlaybadge')['default']
     PrimeRadioButton: typeof import('primevue/radiobutton')['default']
+    PrimeSkeleton: typeof import('primevue/skeleton')['default']
     PrimeSplitter: typeof import('primevue/splitter')['default']
     PrimeSplitterPanel: typeof import('primevue/splitterpanel')['default']
     PrimeStep: typeof import('primevue/step')['default']

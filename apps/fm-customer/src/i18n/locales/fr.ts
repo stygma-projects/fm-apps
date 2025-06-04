@@ -10,6 +10,9 @@ export const fr = {
   productCategory: {
     title: 'Catégories de produits',
   },
+  product: {
+    title: 'Produits',
+  },
   stepper: {
     validate: 'Valider',
     cancel: 'Annuler',

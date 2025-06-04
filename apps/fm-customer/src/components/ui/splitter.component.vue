@@ -14,7 +14,7 @@
               <BackLink :text="fr.stepper.back" />
 
               <h1 class="text-2xl font-bold text-center">
-                {{ fr.productCategory.title }}
+                {{ title }}
               </h1>
             </div>
             <div class="flex-1 overflow-y-auto px-10 pb-8">
@@ -48,20 +48,19 @@
           <div class="relative mb-4">
             <BackLink :text="fr.stepper.back" />
 
-            <h1
-              class="text-xl font-bold text-center border-b border-amber-300 pb-2 pt-6"
-            >
-              {{ fr.productCategory.title }}
+            <h1 class="text-xl font-bold text-center pt-6">
+              {{ title }}
             </h1>
           </div>
           <slot name="main-panel" :is-mobile="true"></slot>
         </div>
       </div>
 
-      <div class="fixed bottom-0 left-0 right-0 p-4 bg-white">
+      <div class="fixed bottom-0 left-0 right-0 p-4">
         <Button
           data-cy="fmc-drawer-button"
           :text="fr.cart.title"
+          :secondary-text="cartStore.totalItems"
           @click="openCart = true"
         />
       </div>
@@ -93,8 +92,14 @@ import { fr } from '../../i18n/locales/fr'
 import Button from './button.component.vue'
 import BackLink from './back-link.component.vue'
 
+const cartStore = useCartStore()
+
 const openCart = ref(false)
 const isMobile = ref(false)
+
+const props = defineProps({
+  title: String,
+})
 
 const checkMobile = () => {
   isMobile.value = window.innerWidth < 1024

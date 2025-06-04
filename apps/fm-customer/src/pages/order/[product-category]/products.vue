@@ -1,5 +1,5 @@
 <template>
-  <Splitter>
+  <Splitter :title="categoryName">
     <template #main-panel>
       <div>
         <Card
@@ -24,6 +24,7 @@ import CartPanel from '~/components/ui/cart/cart-panel.vue'
 import Stepper from '~/components/ui/stepper/stepper.component.vue'
 import { useFetchAllProduct } from '~/composables/api/product.composable'
 import Splitter from '~/components/ui/splitter.component.vue'
+import { fr } from '~/i18n/locales/fr'
 
 const route = useRoute()
 
@@ -48,4 +49,11 @@ const openProductStepper = (product) => {
   selectedProduct.value = product
   showStepper.value = true
 }
+
+const categoryName = computed(() => {
+  if (!products.value || products.value.length === 0) return fr.product.title
+  const firstProduct = products.value[0]
+
+  return firstProduct?.category?.label
+})
 </script>

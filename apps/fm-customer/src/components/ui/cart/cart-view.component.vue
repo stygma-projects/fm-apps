@@ -2,6 +2,7 @@
   <div class="h-[100dvh] flex flex-col">
     <PrimeDataView
       :value="cartStore.items"
+      layout="grid"
       :pt="{
         root: {
           class: 'flex-1 flex flex-col min-h-0',
@@ -14,15 +15,21 @@
         },
       }"
     >
-      <template #list="{ items }">
+      <template #grid="slotProps">
         <div class="lg:pt-[6vh] lg:px-[26vh] lg:p-12">
-          <CartItem
-            v-for="(item, index) in items"
-            :key="`item-${index}`"
-            :item="item"
-            :index="index"
-            @remove="cartStore.removeItem"
-          />
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:pb-0 pb-12">
+            <div
+              v-for="(item, index) in slotProps.items"
+              :key="`item-${index}`"
+              class="col-span-1"
+            >
+              <CartItem
+                :item="item"
+                :index="index"
+                @remove="cartStore.removeItem"
+              />
+            </div>
+          </div>
         </div>
       </template>
 
@@ -41,11 +48,23 @@ import {
 } from '~/composables/api/productInOrder.composable'
 import CartItem from './cart-item.component.vue'
 import CartFooter from './cart-footer.component.vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const cartStore = useCartStore()
 const { mutate: createOrder } = useCreateOrder()
 const { mutate: createProductInOrder } = useCreateProductInOrder()
 const { mutate: createManyProductInOrder } = useCreateManyProductInOrder()
+
+// redirect to categorie page if he deleted everything in the cart
+watch(
+  () => cartStore.items.length,
+  (actualLength) => {
+    if (actualLength === 0) {
+      router.push('/order/product-categories')
+    }
+  },
+)
 
 const handleConfirmCreateOrder = async () => {
   try {

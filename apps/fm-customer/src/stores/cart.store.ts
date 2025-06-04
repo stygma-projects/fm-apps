@@ -1,4 +1,4 @@
-import type { Ingredient, Product } from '@fm-apps/db'
+import type { Ingredient } from '@fm-apps/db'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { StepperItem } from '~/types/stepper.type'

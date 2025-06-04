@@ -1,5 +1,5 @@
 <template>
-  <div class="lg:px-[26vh] p-6">
+  <div class="lg:px-[26vh] pb-1">
     <!-- Total Summary -->
     <div class="flex justify-between items-center mb-4">
       <span class="text-lg font-semibold text-gray-800">

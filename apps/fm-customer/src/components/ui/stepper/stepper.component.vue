@@ -294,7 +294,7 @@ watch(
       return
     }
 
-    // Si pas de mandatory, ajouter directement
+    // if no mandatory, add by closing the stepper instantly
     if (!props.item?.mandatory || props.item.mandatory.length === 0) {
       if (!props.selectionsKey && !hasAddedDirectly.value) {
         hasAddedDirectly.value = true
@@ -308,7 +308,7 @@ watch(
       }
     }
 
-    // Si il y a des mandatory, procéder normalement
+    // if mandatory, let the stepper work
     if (props.item?.mandatory && props.item.mandatory.length > 0) {
       await ingredientStore.fetchAllIngredients()
 

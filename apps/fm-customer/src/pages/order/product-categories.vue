@@ -1,5 +1,5 @@
 <template>
-  <Splitter>
+  <Splitter :title="fr.productCategory.title">
     <template #main-panel>
       <Card
         :items="categories"
@@ -22,6 +22,7 @@ import Card from '~/components/ui/card.component.vue'
 import CartPanel from '~/components/ui/cart/cart-panel.vue'
 import { useFetchAllProductCategories } from '~/composables/api/productCategoy.composable'
 import type { ProductCategory } from '../../../../../packages/db/generated/client'
+import { fr } from '~/i18n/locales/fr'
 
 const router = useRouter()
 const { data } = useFetchAllProductCategories()

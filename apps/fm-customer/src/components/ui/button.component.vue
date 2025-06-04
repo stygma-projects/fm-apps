@@ -1,15 +1,26 @@
 <template>
-  <PrimeButton :severity="severity" @click="handleClick" :class="buttonClasses">
+  <PrimeButton
+    :severity="severity"
+    @click="handleClick"
+    :pt="{
+      root: {
+        class: `w-full bg-gradient-to-r from-yellow-300 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2 text-center border-none ${customClass}`,
+      },
+      label: {
+        class: 'text-pink-700 lg:text-xl',
+      },
+    }"
+  >
     <div class="flex items-center gap-2">
-      <span class="text-xl font-bold text-rose-700">{{ text }}</span>
+      <PrimeBadge v-if="secondaryText" severity="danger">{{
+        secondaryText
+      }}</PrimeBadge>
+      <span>{{ text }}</span>
     </div>
-    <span v-if="secondaryText">{{ secondaryText }}</span>
   </PrimeButton>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-
 interface Props {
   text?: string
   secondaryText?: string | number
@@ -35,12 +46,6 @@ const emit = defineEmits<{
   click: []
   openCart: []
 }>()
-
-const buttonClasses = computed(() => {
-  const baseClasses = 'flex items-center justify-between'
-  const widthClass = props.fullWidth ? 'w-full' : ''
-  return `${baseClasses} ${widthClass} ${props.customClass}`.trim()
-})
 
 const handleClick = () => {
   emit('click')
