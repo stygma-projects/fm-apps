@@ -75,7 +75,7 @@ export const fr = {
       email: 'Email :',
       password: 'Mot de passe (8 caractères minimum) :',
       submit: 'Se connecter',
-      noAccount: "Vous n'avez pas de compte ?",
+      noAccount : 'Vous n\'avez pas de compte ?',
       createAccount: 'Créer un compte',
       nameExample: 'Ex : Mark',
       emailExample: 'Ex : mark@gmail.com',

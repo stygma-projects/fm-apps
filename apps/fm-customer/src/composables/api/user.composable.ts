@@ -1,4 +1,3 @@
-import { readonly } from 'vue'
 import type { signUpByMailAndPasswordInput, signInByMailAndPasswordInput } from '@fm-apps/trpc'
 import { useTrpcQuery } from '../utils/useTrpcQuery'
 import { useTrpcMutation } from '../utils/useTrpcMutation'
