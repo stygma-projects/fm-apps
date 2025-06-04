@@ -80,11 +80,11 @@
                           <span class="text-yellow-600">{{ index + 1 }}</span>
                         </div>
                         <p class="lg:text-xl font-semibold text-black">
-                          {{ item.label }}
+                          {{ item.product.label }}
                         </p>
                       </div>
                       <span class="lg:text-xl font-semibold text-red-700">
-                        {{ item.price }} €
+                        {{ item.product.price }} €
                       </span>
                     </div>
                   </div>

@@ -154,7 +154,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, reactive, toRefs } from 'vue'
 import type {
   StepperEmits,
   StepperProps,
@@ -199,9 +198,9 @@ const availableSteps = computed(() => {
 
   const steps: any[] = []
 
-  props.item.mandatory.forEach((mandatoryCategory, index) => {
+  props.item.mandatory.forEach((mandatoryCategory: { id: any }, index: any) => {
     const hasIngredients = ingredientStore.ingredients.some(
-      (ingredient) => ingredient.categoryId === mandatoryCategory.id,
+      (ingredient: { categoryId: any }) => ingredient.categoryId === mandatoryCategory.id,
     )
 
     if (hasIngredients) {
@@ -288,7 +287,7 @@ const { isMobile } = useStepper(props)
 
 watch(
   () => props.visible,
-  async (newValue) => {
+  async (newValue: any) => {
     if (!newValue) {
       hasAddedDirectly.value = false
       return
@@ -312,7 +311,7 @@ watch(
     if (props.item?.mandatory && props.item.mandatory.length > 0) {
       await ingredientStore.fetchAllIngredients()
 
-      const categoryIds = props.item.mandatory.map((mandatory) => mandatory.id)
+      const categoryIds = props.item.mandatory.map((mandatory: { id: any }) => mandatory.id)
       ingredientStore.filterByCategories(categoryIds)
 
       if (props.selectionsKey) {
@@ -334,7 +333,7 @@ watch(
 
 watch(
   () => stepperState.currentStep,
-  (newStep) => {
+  (newStep: string) => {
     stepperState.activeTabIndex = parseInt(newStep) - 1
     emit('step-change', newStep)
   },
@@ -342,7 +341,7 @@ watch(
 
 watch(
   () => stepperState.activeTabIndex,
-  (newIndex) => {
+  (newIndex: number) => {
     stepperState.currentStep = String(newIndex + 1)
     emit('step-change', stepperState.currentStep)
   },

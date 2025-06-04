@@ -26,17 +26,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-
 interface Ingredient {
   label: string
   price: number
 }
 
+type ColorVariant = 'red' | 'amber' | 'blue'
+
 interface Props {
   title: string
   items?: Ingredient[]
-  color?: 'red' | 'amber' | 'blue'
+  color?: ColorVariant
   cardPt?: object
   isMandatory?: boolean
 }
@@ -45,7 +45,11 @@ const props = withDefaults(defineProps<Props>(), {
   color: 'red',
 })
 
-const colorVariants = {
+const colorVariants: Record<ColorVariant, {
+  title: string
+  root: string
+  content: string
+}> = {
   red: {
     title: 'text-red-700 font-bold lg:text-sm',
     root: 'border-l-4 border-red-500 bg-red-50',
@@ -68,7 +72,7 @@ const computedCardPt = computed(() => {
     return props.cardPt
   }
 
-  const variant = colorVariants[props.color]
+  const variant = colorVariants[props.color as ColorVariant]
   return {
     title: { class: variant.title },
     root: { class: variant.root },

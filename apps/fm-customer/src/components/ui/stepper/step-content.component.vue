@@ -13,7 +13,6 @@
 
 <script setup lang="ts">
 import type { StepperItem } from '~/types/stepper.type'
-import { computed, ref, watch, nextTick } from 'vue'
 import Card from '~/components/ui/card.component.vue'
 import type { Ingredient } from '@fm-apps/db'
 
@@ -43,7 +42,7 @@ const ing = computed(() => {
 
 watch(
   () => props.selections,
-  async (newSelections) => {
+  async (newSelections: any) => {
     isUpdatingFromProps.value = true
     selectedIngredients.value = [...newSelections]
     await nextTick()
@@ -54,7 +53,7 @@ watch(
 
 watch(
   selectedIngredients,
-  (newSelection) => {
+  (newSelection: any) => {
     if (!isUpdatingFromProps.value) {
       emit('update-selection', newSelection)
     }
