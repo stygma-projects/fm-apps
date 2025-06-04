@@ -19,6 +19,7 @@ declare module 'vue' {
     PrimeStepPanel: typeof import('primevue/steppanel')['default']
     PrimeStepPanels: typeof import('primevue/steppanels')['default']
     PrimeStepper: typeof import('primevue/stepper')['default']
+    PrimeToast: typeof import('primevue/toast')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     'stepper.component': typeof import('./components/ui/stepper.component.vue')['default']
