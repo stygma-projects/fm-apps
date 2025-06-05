@@ -17,6 +17,7 @@
     >
       <template #grid="slotProps">
         <div class="lg:pt-[6vh] lg:px-[26vh] lg:p-12">
+          <BackLink :text="fr.stepper.back" :applySpecialStyles="true" />
           <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:pb-0 pb-12">
             <div
               v-for="(item, index) in slotProps.items"
@@ -48,7 +49,9 @@ import {
 } from '~/composables/api/productInOrder.composable'
 import CartItem from './cart-item.component.vue'
 import CartFooter from './cart-footer.component.vue'
+import BackLink from '../back-link.component.vue'
 import { useRouter } from 'vue-router'
+import { fr } from '~/i18n/locales/fr'
 
 const router = useRouter()
 const cartStore = useCartStore()

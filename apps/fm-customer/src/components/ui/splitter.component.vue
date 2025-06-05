@@ -45,9 +45,9 @@
       <!-- Main content -->
       <div class="pb-20">
         <div class="bg-white rounded-lg shadow-md p-4">
-          <div class="relative mb-4">
-            <BackLink :text="fr.stepper.back" />
+          <BackLink :text="fr.stepper.back" :applySpecialStyles="true" />
 
+          <div class="relative mb-4">
             <h1 class="text-xl font-bold text-center pt-6">
               {{ title }}
             </h1>
