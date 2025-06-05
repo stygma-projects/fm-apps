@@ -28,10 +28,13 @@ import { toTypedSchema } from '@vee-validate/zod';
 import * as zod from 'zod';
 import { useToast } from '../../composables/utils/toast.composable'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const { t } = useI18n()
 const { successToast, errorToast } = useToast()
 const { signUpByMailAndPassword } = useUser();
+const { setUserValues } = useUserStore();
 
 const { handleSubmit, defineField } = useForm({
   validationSchema : toTypedSchema(
@@ -50,12 +53,14 @@ const { handleSubmit, defineField } = useForm({
 
 async function onSuccess(values) {
   try {
-    await signUpByMailAndPassword.mutate({
+    const response = await signUpByMailAndPassword.mutate({
       email : values.email,
       password : values.password,
       name : values.name,
-  })
+    })
     successToast(t('createAccount.toast.success'), t('createAccount.toast.accountCreated'));
+    setUserValues(response.token, response.user);
+    router.push('../..')
   } catch (error) {
     errorToast(t('createAccount.toast.registerError'), error.message || t('createAccount.toast.defaultError'));
   }

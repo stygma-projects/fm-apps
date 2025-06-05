@@ -36,9 +36,9 @@ export const fr = {
       },
     },
     accounts : {
-      label: 'Gestion des comptes utilisateurs',
+      label: 'Administration',
       subCategories: {
-        usersPanel: 'Utilisateurs',
+        usersPanel: 'Gestion des utilisateurs',
       },
     },
   },
@@ -241,12 +241,8 @@ export const fr = {
       headers: {
         name : 'Nom',
         email : 'Email',
-        emailVerified : 'Email vérifié',
-        image : 'Image',
         createdAt : 'Date de création',
-        updatedAt : 'Date de dernière mise à jour',
-        sessions : 'Sessions',
-        accounts : 'Comptes',
+        sessions : 'Connexions',
       },
     },
     dialogs: {
@@ -254,33 +250,13 @@ export const fr = {
         title: 'Confirmation de la suppression',
         message: 'Êtes-vous sûr de vouloir supprimer ?',
       },
-      createDialog: {
-        title: 'Nouvel utilisateur',
-      },
       deleteManyDialog: {
         title: 'Confirmation de la suppression',
       },
     },
     toolBar: {
       searchPlaceholder: 'Rechercher',
-      addButton: 'Nouvel utilisateur',
       deleteManyButton: 'Supprimer',
     },
-    emailVerified: {
-      true : 'Oui',
-      false : 'Non',
-    },
-    sessions : {
-      empty : 'Aucune session active',
-    },
-    accounts : {
-      empty : 'Aucun compte associé',
-    },
-    dataExposition : {
-      id : "- Id :",
-      createdAt : "- Date de création :",
-      updatedAt : "- Date de dernière mise à jour :",
-      expiresAt : "- Date d'expiration :",
-    }
   }
 }

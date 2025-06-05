@@ -8,7 +8,9 @@ export const userRouter = router({
         .query(async () => {
             return await prisma.user.findMany({
                 orderBy: {
-                    name: 'asc',
+                    sessions: {
+                        _count: 'desc', // Nécessite Prisma >= 2.23
+                    },
                 },
                 include: {
                     sessions : true,
