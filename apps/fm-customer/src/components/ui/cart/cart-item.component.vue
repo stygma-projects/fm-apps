@@ -91,7 +91,7 @@
       </div>
     </div>
 
-    <Stepper
+    <StepperDialog
       :visible="stepperVisible"
       :item="item.product"
       :selections-key="item.selectionsKey"
@@ -104,7 +104,7 @@
 
 <script lang="ts" setup>
 import IngredientSection from '~/components/ui/ingredient-section.component.vue'
-import Stepper from '~/components/ui/stepper/stepper.component.vue'
+import StepperDialog from '~/components/ui/stepper/stepper-dialog.component.vue'
 import { fr } from '../../../i18n/locales/fr'
 
 interface Props {

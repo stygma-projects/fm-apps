@@ -14,7 +14,7 @@
       <CartPanel />
     </template>
   </Splitter>
-  <Stepper v-model:visible="showStepper" :item="selectedProduct" />
+  <StepperDialog v-model:visible="showStepper" :item="selectedProduct" />
 </template>
 
 <script setup>
@@ -22,7 +22,7 @@ import { useRoute } from 'vue-router'
 import { computed, ref, onMounted } from 'vue'
 import Card from '~/components/ui/card.component.vue'
 import CartPanel from '~/components/ui/cart/cart-panel.vue'
-import Stepper from '~/components/ui/stepper/stepper.component.vue'
+import StepperDialog from '~/components/ui/stepper/stepper-dialog.component.vue'
 import { useFetchAllProduct } from '~/composables/api/product.composable'
 import Splitter from '~/components/ui/splitter.component.vue'
 import { fr } from '~/i18n/locales/fr'
