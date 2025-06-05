@@ -65,4 +65,20 @@ export const userRouter = router({
                 },
             })
         }),
+    delete: publicProcedure
+        .input(z.string())
+        .mutation(async ({ input }) => { 
+            return await prisma.user.delete({
+                where: { id: input },
+            });
+        }),
+    deleteMany: publicProcedure
+        .input(z.array(z.string()))
+        .mutation(async ({ input }) => { 
+            return await prisma.user.deleteMany({
+                where: { 
+                    id: { in: input },
+                },
+            });
+        }),
 })

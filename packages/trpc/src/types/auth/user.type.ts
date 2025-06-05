@@ -8,6 +8,10 @@ export type SignUpByMailAndPasswordInput =
   RouterInput['auth']['user']['signUpByMailAndPassword']
 export type SignInByMailAndPasswordInput =
   RouterInput['auth']['user']['signInByMailAndPassword']
+export type DeleteUserInput =
+  RouterInput['auth']['user']['delete']
+export type DeleteManyUsersInput =
+  RouterInput['auth']['user']['deleteMany']
 
 export type ListUsersOutput = 
   RouterOutput['auth']['user']['list']
@@ -15,5 +19,9 @@ export type GetByIdUserOutput =
   RouterOutput['auth']['user']['getById']
 export type SignUpByMailAndPasswordOutput =
   RouterOutput['auth']['user']['signUpByMailAndPassword']
-export type signInByMailAndPasswordOutput =
+export type SignInByMailAndPasswordOutput =
   RouterOutput['auth']['user']['signInByMailAndPassword']
+export type DeleteUserOutput =
+  RouterOutput['auth']['user']['delete']
+export type DeleteManyUsersOutput =
+  RouterOutput['auth']['user']['deleteMany']

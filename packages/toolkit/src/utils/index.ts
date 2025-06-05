@@ -1,3 +1,3 @@
-import { formatHour } from './format'
+import { formatHour, formatDateTime} from './format'
 
-export default formatHour
+export default {formatHour, formatDateTime}
