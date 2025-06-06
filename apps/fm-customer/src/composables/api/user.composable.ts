@@ -1,4 +1,4 @@
-import type { signUpByMailAndPasswordInput, signInByMailAndPasswordInput } from '@fm-apps/trpc'
+import type { SignUpByMailAndPasswordInput, SignInByMailAndPasswordInput } from '@fm-apps/trpc'
 import { useTrpcQuery } from '../utils/useTrpcQuery'
 import { useTrpcMutation } from '../utils/useTrpcMutation'
 

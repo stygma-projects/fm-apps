@@ -4,6 +4,20 @@ import { publicProcedure, router } from '../../trpc'
 import { auth } from "@fm-apps/auth"
 
 export const userRouter = router({
+    list : publicProcedure
+        .query(async () => {
+            return await prisma.user.findMany({
+                orderBy: {
+                    sessions: {
+                        _count: 'desc', // Nécessite Prisma >= 2.23
+                    },
+                },
+                include: {
+                    sessions : true,
+                    accounts : true,
+                }
+            })
+        }),
     getById: publicProcedure
         .input(z.string())
         .query(async ({ input }) => {
@@ -52,5 +66,21 @@ export const userRouter = router({
                     rememberMe: input.rememberMe,
                 },
             })
+        }),
+    delete: publicProcedure
+        .input(z.string())
+        .mutation(async ({ input }) => { 
+            return await prisma.user.delete({
+                where: { id: input },
+            });
+        }),
+    deleteMany: publicProcedure
+        .input(z.array(z.string()))
+        .mutation(async ({ input }) => { 
+            return await prisma.user.deleteMany({
+                where: { 
+                    id: { in: input },
+                },
+            });
         }),
 })
