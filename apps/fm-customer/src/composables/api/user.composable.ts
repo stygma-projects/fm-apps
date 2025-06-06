@@ -1,4 +1,7 @@
-import type { SignUpByMailAndPasswordInput, SignInByMailAndPasswordInput } from '@fm-apps/trpc'
+import type { 
+  SignUpByMailAndPasswordInput, 
+  SignInByMailAndPasswordInput,
+  SignInWithGoogleInput } from '@fm-apps/trpc'
 import { useTrpcQuery } from '../utils/useTrpcQuery'
 import { useTrpcMutation } from '../utils/useTrpcMutation'
 
@@ -20,10 +23,17 @@ export const useUser = () => {
     (input : SignInByMailAndPasswordInput) => $trpc.auth.user.signInByMailAndPassword.mutate(input)
   )
 
+  const signInWithGoogle = useTrpcMutation(
+    'user',
+    (input : SignInWithGoogleInput) => $trpc.auth.user.signInWithGoogle.mutate(input)
+  )
+
+
   return {    
     getById,
     signUpByMailAndPassword,
-    signInByMailAndPassword
+    signInByMailAndPassword,
+    signInWithGoogle
   }
 
 }

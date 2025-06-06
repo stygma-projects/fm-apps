@@ -12,7 +12,7 @@
 
       <button type="submit" class="mt-5 border-1 border-gray-300 rounded-lg shadow-md mx-auto w-auto pl-2 pr-2 pt-1 pb-1">{{ t('login.form.submit') }}</button>
 
-      <button class="mt-5 border-1 border-gray-300 rounded-lg shadow-md mx-auto w-auto pl-2 pr-2 pt-1 pb-1" :onclick="googleLogin">{{ t('login.form.googleButton') }}</button>
+      <button type="button" class="mt-5 border-1 border-gray-300 rounded-lg shadow-md mx-auto w-auto pl-2 pr-2 pt-1 pb-1" :onclick="googleLogin">{{ t('login.form.googleButton') }}</button>
 
       <h2 class="mt-10 text-center">{{ t('login.form.noAccount') }}</h2>
       <NuxtLink to="./../auth/create-account" data-cy="fmc-order-button" class="mt-5 border-1 border-gray-300 rounded-lg shadow-md mx-auto w-auto pl-2 pr-2 pt-1 pb-1"> {{ t('login.form.createAccount') }} </NuxtLink>
@@ -31,11 +31,10 @@ import { useToast } from '../../composables/utils/toast.composable';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router'
 
-
 const router = useRouter()
 const { t } = useI18n();
 const { successToast, errorToast } = useToast();
-const { signInByMailAndPassword } = useUser();
+const { signInByMailAndPassword, signInWithGoogle } = useUser();
 const { setUserValues } = useUserStore();
 
 const { handleSubmit, defineField } = useForm({
@@ -52,7 +51,19 @@ const { handleSubmit, defineField } = useForm({
 });
 
 async function googleLogin() {
-
+  try {
+    const response = await signInWithGoogle.mutate();
+    // Ici, response doit contenir l'URL de redirection Google ou le token
+    // Si c'est une URL, redirige l'utilisateur :
+    if (response?.redirectUrl) {
+      router.push(response.redirectUrl);
+    }
+    // Sinon, gère le token comme pour un login classique
+    // setUserValues(response.token, response.user);
+    // router.push('../../')
+  } catch (error) {
+      errorToast(t('login.toast.registerError'), error.message || t('login.toast.defaultError'));
+  }
 };
 
 async function onSuccess(values) {

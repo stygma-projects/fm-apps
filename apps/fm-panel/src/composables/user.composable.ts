@@ -6,8 +6,6 @@ import type {
   SignUpByMailAndPasswordOutput,
   SignInByMailAndPasswordInput,
   SignInByMailAndPasswordOutput,
-  SignInWithGoogleInput,
-  SignInWithGoogleOutput,
   DeleteUserInput,
   DeleteUserOutput,
   DeleteManyUsersInput,
@@ -57,17 +55,6 @@ export const useSignInWithMailAndPasswordUser = () => {
   })
 }
 
-export const useSignInWithGoogleUser = () => {
-    return useMutation<
-        SignInWithGoogleOutput,
-        Error,
-        SignInWithGoogleInput
-      >({
-    mutationKey: [UserMutationKey.SIGN_IN_WITH_GOOGLE],
-    mutationFn: (SignInWithGoogleInput) => trpc.auth.user.signInWithGoogle.mutate(SignInWithGoogleInput),
-  })
-}
-
 export const useDeleteUser = () => {
     return useMutation<
         DeleteUserOutput,
@@ -89,15 +76,3 @@ export const useDeleteManyUsers = () => {
     mutationFn: (DeleteManyUsersInput) => trpc.auth.user.deleteMany.mutate(DeleteManyUsersInput),
   })
 }
-
-// export const useUpdateUser = () => {
-//   return useMutation<
-//     UpdateOrderOutput,
-//     Error,
-//     UpdateOrderInput
-//   >({
-//     mutationKey: [OrderMutationKey.UPDATE],
-//     mutationFn: (updateOrderInput) =>
-//       trpc.order.orders.update.mutate(updateOrderInput),
-//   })
-// }
