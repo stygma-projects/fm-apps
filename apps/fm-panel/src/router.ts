@@ -5,6 +5,7 @@ import IngredientCategoriesPage from './pages/IngredientCategories.page.vue'
 import IngredientInventoryPage from './pages/IngredientInventory.page.vue'
 import ProductPage from './pages/ProductsInventory.page.vue'
 import CommandeInventoryPage from './pages/OrderInventory.page.vue'
+import UsersPanelPage from './pages/UsersPanel.page.vue'
 
 const routes = [
   {
@@ -41,6 +42,16 @@ const routes = [
           {
             path: 'list',
             component: CommandeInventoryPage,
+          },
+        ],
+      },
+      {
+        path: 'user',
+        children: [
+          { path: '', redirect: '/user/list' },
+          {
+            path: 'list',
+            component: UsersPanelPage,
           },
         ],
       },

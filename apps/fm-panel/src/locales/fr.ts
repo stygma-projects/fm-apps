@@ -27,7 +27,18 @@ export const fr = {
         ingredientCategories: "Catégories d'ingrédients",
         ingredient: 'Ingrédients',
         productsInventory: 'Produits',
+      },
+    },
+    orders : {
+      label: 'Gestion des commandes',
+      subCategories: {
         commande: 'Commandes',
+      },
+    },
+    accounts : {
+      label: 'Administration',
+      subCategories: {
+        usersPanel: 'Gestion des utilisateurs',
       },
     },
   },
@@ -224,4 +235,28 @@ export const fr = {
     noImage: "Pas d'image fournie",
     noIngredients : "Aucun",
   },
+  user : {
+    title : 'Utilisateurs',
+    table: {
+      headers: {
+        name : 'Nom',
+        email : 'Email',
+        createdAt : 'Date de création',
+        sessions : 'Connexions',
+      },
+    },
+    dialogs: {
+      deleteDialog: {
+        title: 'Confirmation de la suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer ?',
+      },
+      deleteManyDialog: {
+        title: 'Confirmation de la suppression',
+      },
+    },
+    toolBar: {
+      searchPlaceholder: 'Rechercher',
+      deleteManyButton: 'Supprimer',
+    },
+  }
 }

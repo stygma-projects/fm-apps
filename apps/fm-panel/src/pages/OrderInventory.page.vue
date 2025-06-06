@@ -17,7 +17,7 @@
         </PrimeColumn>
         <PrimeColumn field="createdAt" :header="t('order.title.createdAt')">
           <template #body="slotProps">
-            {{ formatHour(slotProps.data.createdAt) }}
+            {{ utils.formatHour(slotProps.data.createdAt) }}
           </template>
         </PrimeColumn>
         <PrimeColumn header="Actions">
@@ -69,7 +69,7 @@
           </div>
           <div class="flex justify-between mb-2">
             <span class="font-medium">{{ t('order.dialogs.createdAt') }}</span>
-            <span>{{ formatHour(selectedCommande.createdAt) }}</span>
+            <span>{{ utils.formatHour(selectedCommande.createdAt) }}</span>
           </div>
           <div class="flex justify-between mb-2">
             <span class="font-medium">{{ t('order.dialogs.price') }}</span>
@@ -200,7 +200,7 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useFetchOrder, useUpdateOrder } from '../composables/order.composable'
 import type { Order } from '../types/inventory.type'
-import formatHour from '@fm-apps/toolkit/utils'
+import utils from '@fm-apps/toolkit/utils'
 
 const { t } = useI18n()
 const { data, refetch: orderRefetch } = useFetchOrder()
