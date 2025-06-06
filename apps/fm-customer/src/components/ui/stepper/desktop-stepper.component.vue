@@ -28,6 +28,7 @@
                 :mandatory-index="step.originalIndex"
                 :is-last="index === availableSteps.length - 1"
                 :selections="currentStepSelections"
+                :stepper-type="stepperType"
                 @update-selection="$emit('selection-update', $event)"
               />
 
@@ -50,6 +51,7 @@
 </template>
 
 <script setup lang="ts">
+import type { StepperType } from '~/types/stepper.type'
 import StepContent from './step-content.component.vue'
 import StepperNavigation from './stepper-navigation.component.vue'
 
@@ -62,6 +64,7 @@ interface Props {
   canProceed: boolean
   hasAllMandatorySelections: boolean
   item: any
+  stepperType: StepperType
 }
 
 interface Emits {

@@ -44,19 +44,27 @@
                           class="lg:p-6 bg-white"
                         >
                           <IngredientSection
+                            v-if="item.mandatory && item.mandatory.length > 0"
                             :title="fr.cart.info.mandatoryIngredients"
                             :items="item.mandatory"
                             :is-mandatory="true"
+                            :in-cart="false"
                             color="red"
                           />
                           <IngredientSection
+                            v-if="item.extra && item.extra.length > 0"
                             :title="fr.cart.info.extraIngredients"
                             :items="item.extra"
+                            :in-cart="false"
                             color="amber"
                           />
                           <IngredientSection
+                            v-if="
+                              item.optionalBase && item.optionalBase.length > 0
+                            "
                             :title="fr.cart.info.optionalBaseIngredients"
                             :items="item.optionalBase"
+                            :in-cart="false"
                             color="blue"
                           />
                         </div>

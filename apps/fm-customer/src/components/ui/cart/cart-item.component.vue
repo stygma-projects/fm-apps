@@ -30,7 +30,19 @@
               </span>
             </div>
             <div>
-              <PrimeBadge :value="index + 1" severity="danger" />
+              <PrimeButton
+                icon="pi pi-trash"
+                severity="danger"
+                size="small"
+                variant="outlined"
+                raised
+                :pt="{
+                  root: {
+                    class: 'hover:bg-red-500 w-full lg:w-full',
+                  },
+                }"
+                @click="$emit('remove', item.id)"
+              />
             </div>
           </div>
 
@@ -39,59 +51,34 @@
             <IngredientSection
               :title="fr.cart.info.mandatoryIngredients"
               :items="item.mandatory"
-              color="red"
               :is-mandatory="true"
+              :in-cart="true"
+              @click="handleIngredientClick('mandatory')"
+              color="red"
             />
 
             <IngredientSection
               :title="fr.cart.info.extraIngredients"
               :items="item.extra"
+              :in-cart="true"
+              @click="handleIngredientClick('extra')"
               color="amber"
             />
 
             <IngredientSection
               :title="fr.cart.info.optionalBaseIngredients"
               :items="item.optionalBase"
+              :in-cart="true"
+              @click="handleIngredientClick('optionalBase')"
               color="blue"
             />
           </div>
-        </div>
-
-        <!-- Actions -->
-        <div
-          class="flex flex-row lg:flex-col justify-center lg:justify-end lg:mt-auto gap-3 w-full lg:w-auto"
-        >
-          <PrimeButton
-            :label="fr.cart.function.update"
-            size="small"
-            variant="outlined"
-            raised
-            :pt="{
-              root: {
-                class:
-                  'hover:bg-amber-50 border-amber-400 text-amber-700 hover:border-amber-500 w-full lg:w-full',
-              },
-            }"
-            @click="openStepper"
-          />
-          <PrimeButton
-            :label="fr.cart.function.delete"
-            severity="danger"
-            size="small"
-            variant="outlined"
-            raised
-            :pt="{
-              root: {
-                class: 'hover:bg-red-50 w-full lg:w-full',
-              },
-            }"
-            @click="$emit('remove', item.id)"
-          />
         </div>
       </div>
     </div>
 
     <StepperDialog
+      :stepper-type="currentStepperType"
       :visible="stepperVisible"
       :item="item.product"
       :selections-key="item.selectionsKey"
@@ -105,6 +92,7 @@
 <script lang="ts" setup>
 import IngredientSection from '~/components/ui/ingredient-section.component.vue'
 import StepperDialog from '~/components/ui/stepper/stepper-dialog.component.vue'
+import type { StepperType } from '~/types/stepper.type'
 import { fr } from '../../../i18n/locales/fr'
 
 interface Props {
@@ -119,22 +107,59 @@ const emit = defineEmits<{
 }>()
 
 const stepperVisible = ref(false)
+const currentStepperType = ref<StepperType>('mandatory')
 
-const canUpdate = computed(() => {
+const canUpdateMandatory = computed(() => {
   return (
     props.item.product?.mandatory && props.item.product.mandatory.length > 0
   )
 })
 
-const openStepper = () => {
-  if (canUpdate.value) stepperVisible.value = true
-}
+const canUpdateExtra = computed(() => {
+  return props.item.product?.extra && props.item.product.extra.length > 0
+})
+
+const canUpdateOptionalBase = computed(() => {
+  return (
+    props.item.product?.optionalBase &&
+    props.item.product.optionalBase.length > 0
+  )
+})
 
 const handleStepperComplete = (data: any) => {
   stepperVisible.value = false
+
+  const updatedItem = { ...props.item }
+
+  switch (data.stepperType) {
+    case 'mandatory':
+      updatedItem.mandatory = data.selections
+      break
+    case 'extra':
+      updatedItem.extra = data.selections
+      break
+    case 'optionalBase':
+      updatedItem.optionalBase = data.selections
+      break
+  }
+
+  emit('update', updatedItem)
 }
 
 const handleStepperCancel = () => {
   stepperVisible.value = false
+}
+
+const handleIngredientClick = (type: StepperType) => {
+  const canUpdate = {
+    mandatory: canUpdateMandatory.value,
+    extra: canUpdateExtra.value,
+    optionalBase: canUpdateOptionalBase.value,
+  }[type]
+
+  if (canUpdate) {
+    currentStepperType.value = type
+    stepperVisible.value = true
+  }
 }
 </script>

@@ -1,5 +1,7 @@
 import type { Ingredient, IngredientCategory, Product } from '@fm-apps/db'
 
+export type StepperType = 'mandatory' | 'extra' | 'optionalBase'
+
 export interface StepperItem extends Product {
   mandatory: IngredientCategory[]
   optionalBase: Ingredient[]
@@ -10,6 +12,7 @@ export interface StepperProps {
   item: StepperItem
   stepLabels?: string[]
   visible: boolean
+  stepperType?: StepperType
 }
 
 export interface StepperEmits {
@@ -19,6 +22,7 @@ export interface StepperEmits {
       item: StepperItem
       step: string
       selections: Record<string, any[]>
+      stepperType?: StepperType
     },
   ): void
   (
@@ -27,6 +31,7 @@ export interface StepperEmits {
       item: StepperItem
       step: string
       selections: Record<string, any[]>
+      stepperType?: StepperType
     },
   ): void
   (e: 'step-change', step: string): void

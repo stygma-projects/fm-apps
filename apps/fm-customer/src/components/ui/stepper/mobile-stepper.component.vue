@@ -24,6 +24,7 @@
             :mandatory-index="step.originalIndex"
             :is-last="index === availableSteps.length - 1"
             :selections="currentStepSelections"
+            :stepper-type="stepperType"
             @update-selection="$emit('selection-update', $event)"
           />
         </div>
@@ -48,6 +49,7 @@
 import StepContent from './step-content.component.vue'
 import MobileStepperHeader from './mobile-stepper-header.component.vue'
 import MobileStepperFooter from './mobile-stepper-footer.component.vue'
+import type { StepperType } from '~/types/stepper.type'
 
 interface Props {
   visible: boolean
@@ -58,6 +60,7 @@ interface Props {
   canProceed: boolean
   hasAllMandatorySelections: boolean
   item: any
+  stepperType?: StepperType
 }
 
 interface Emits {

@@ -9,6 +9,7 @@
     :can-proceed="canProceed"
     :has-all-mandatory-selections="hasAllMandatorySelections"
     :item="item"
+    :stepper-type="stepperType"
     @update:visible="handleVisibilityUpdate"
     @step-change="handleStepChange"
     @selection-update="handleSelectionUpdate"
@@ -26,6 +27,7 @@
     :can-proceed="canProceed"
     :has-all-mandatory-selections="hasAllMandatorySelections"
     :item="item"
+    :stepper-type="stepperType"
     @close="closeMobileView"
     @tab-change="handleTabChange"
     @selection-update="handleSelectionUpdate"
@@ -39,9 +41,11 @@ import type {
   StepperEmits,
   StepperProps,
   StepperState,
+  StepperType,
 } from '~/types/stepper.type'
 import DesktopStepper from './desktop-stepper.component.vue'
 import MobileStepper from './mobile-stepper.component.vue'
+import { fr } from '~/i18n/locales/fr'
 
 const ingredientStore = useIngredientStore()
 const cartStore = useCartStore()
@@ -54,9 +58,13 @@ interface StepperHooks {
 const props = defineProps<
   StepperProps & {
     selectionsKey?: string
+    stepperType?: StepperType
   }
 >()
+
 const emit = defineEmits<StepperEmits>()
+
+const stepperType = computed(() => props.stepperType || 'mandatory')
 
 const { item } = toRefs(props)
 
@@ -73,27 +81,67 @@ const stepperState = reactive<
 const hasAddedDirectly = ref(false)
 
 const availableSteps = computed(() => {
+  return getStepsForType(stepperType.value)
+})
+
+const getStepsForType = (type: StepperType) => {
+  switch (type) {
+    case 'mandatory':
+      return getMandatorySteps()
+    case 'extra':
+    case 'optionalBase':
+      return getSingleStep(type)
+    default:
+      return []
+  }
+}
+
+const getSingleStep = (type: 'extra' | 'optionalBase') => {
+  const targetData = props.item?.[type]
+
+  if (!targetData || targetData.length === 0) return []
+
+  const labelKey =
+    type === 'extra' ? 'extraIngredients' : 'optionalBaseIngredients'
+  const label = fr.cart.info[labelKey]
+
+  return [
+    {
+      category: {
+        id: type,
+        label: label,
+      },
+      originalIndex: 0,
+      stepIndex: 0,
+      [`is${type.charAt(0).toUpperCase() + type.slice(1)}`]: true,
+    },
+  ]
+}
+
+const getMandatorySteps = () => {
   if (!props.item?.mandatory) return []
 
   const steps: any[] = []
 
-  props.item.mandatory.forEach((mandatoryCategory: { id: any }, index: any) => {
-    const hasIngredients = ingredientStore.ingredients.some(
-      (ingredient: { categoryId: any }) =>
-        ingredient.categoryId === mandatoryCategory.id,
-    )
+  props.item.mandatory.forEach(
+    (mandatoryCategory: { id: string }, index: number) => {
+      const hasIngredients = ingredientStore.ingredients.some(
+        (ingredient: { categoryId: string }) =>
+          ingredient.categoryId === mandatoryCategory.id,
+      )
 
-    if (hasIngredients) {
-      steps.push({
-        category: mandatoryCategory,
-        originalIndex: index,
-        stepIndex: steps.length,
-      })
-    }
-  })
+      if (hasIngredients) {
+        steps.push({
+          category: mandatoryCategory,
+          originalIndex: index,
+          stepIndex: steps.length,
+        })
+      }
+    },
+  )
 
   return steps
-})
+}
 
 const currentCategoryName = computed(() => {
   if (availableSteps.value.length === 0) {
@@ -105,12 +153,20 @@ const currentCategoryName = computed(() => {
 })
 
 const currentStepSelections = computed(() => {
-  const key = stepperState.currentStep
+  const key =
+    stepperType.value === 'mandatory'
+      ? stepperState.currentStep
+      : stepperType.value
+
   return stepperState.selections[key] || []
 })
 
 const updateStepSelections = (selections: any[]) => {
-  const key = stepperState.currentStep
+  const key =
+    stepperType.value === 'mandatory'
+      ? stepperState.currentStep
+      : stepperType.value
+
   stepperState.selections = {
     ...stepperState.selections,
     [key]: selections,
@@ -122,10 +178,18 @@ const hasSelections = computed(() => {
 })
 
 const canProceed = computed(() => {
+  if (stepperType.value === 'extra' || stepperType.value === 'optionalBase') {
+    return true
+  }
+
   return hasSelections.value
 })
 
 const hasAllMandatorySelections = computed(() => {
+  if (stepperType.value === 'extra' || stepperType.value === 'optionalBase') {
+    return true
+  }
+
   for (let i = 0; i < availableSteps.value.length; i++) {
     const stepKey = String(i + 1)
     if (!stepperState.selections[stepKey]?.length) {
@@ -173,12 +237,18 @@ watch(
       return
     }
 
-    // if no mandatory, add by closing the stepper instantly
-    if (!props.item?.mandatory || props.item.mandatory.length === 0) {
+    const targetData = getTargetData()
+
+    if (!targetData || targetData.length === 0) {
       if (!props.selectionsKey && !hasAddedDirectly.value) {
         hasAddedDirectly.value = true
         cartStore.addItemDirectly(props.item)
-        emit('complete', { item: props.item, step: '1', selections: {} })
+        emit('complete', {
+          item: props.item,
+          step: '1',
+          selections: {},
+          stepperType: stepperType.value,
+        })
 
         emit('update:visible', false)
         stepperState.mobileVisible = false
@@ -187,21 +257,39 @@ watch(
       }
     }
 
-    // if mandatory, let the stepper work
-    if (props.item?.mandatory && props.item.mandatory.length > 0) {
-      await ingredientStore.fetchAllIngredients()
+    if (stepperType.value === 'mandatory') {
+      // if no mandatory, add by closing the stepper instantly
+      if (!props.item?.mandatory || props.item.mandatory.length === 0) {
+        if (!props.selectionsKey && !hasAddedDirectly.value) {
+          hasAddedDirectly.value = true
+          cartStore.addItemDirectly(props.item)
+          emit('complete', { item: props.item, step: '1', selections: {} })
 
-      const categoryIds = props.item.mandatory.map(
-        (mandatory: { id: any }) => mandatory.id,
-      )
-      ingredientStore.filterByCategories(categoryIds)
-
-      if (props.selectionsKey) {
-        const existingKey = cartStore.getItemSelections(props.selectionsKey)
-        stepperState.selections = { ...existingKey }
-      } else {
-        stepperState.selections = {}
+          emit('update:visible', false)
+          stepperState.mobileVisible = false
+          stepperState.dialogVisible = false
+          return
+        }
       }
+
+      // if mandatory, let the stepper work
+      if (props.item?.mandatory && props.item.mandatory.length > 0) {
+        await ingredientStore.fetchAllIngredients()
+
+        const categoryIds = props.item.mandatory.map(
+          (mandatory: { id: any }) => mandatory.id,
+        )
+        ingredientStore.filterByCategories(categoryIds)
+      }
+    } else {
+      await ingredientStore.fetchAllIngredients()
+    }
+
+    if (props.selectionsKey) {
+      const existingKey = cartStore.getItemSelections(props.selectionsKey)
+      stepperState.selections = { ...existingKey }
+    } else {
+      stepperState.selections = {}
     }
 
     if (isMobile.value) {
@@ -212,6 +300,33 @@ watch(
   },
   { immediate: true },
 )
+
+const getTargetData = () => {
+  switch (stepperType.value) {
+    case 'mandatory':
+      return props.item?.mandatory
+    case 'extra':
+      return props.item?.extra
+    case 'optionalBase':
+      return props.item?.optionalBase
+    default:
+      return []
+  }
+}
+
+const handleDirectAdd = () => {
+  cartStore.addItemDirectly(props.item)
+  emit('complete', {
+    item: props.item,
+    step: '1',
+    selections: {},
+    stepperType: stepperType.value,
+  })
+
+  emit('update:visible', false)
+  stepperState.mobileVisible = false
+  stepperState.dialogVisible = false
+}
 
 const handleVisibilityUpdate = (visible: boolean) => {
   emit('update:visible', visible)
@@ -254,12 +369,14 @@ const emitComplete = (isCancelled = false) => {
       item: props.item,
       step: stepperState.currentStep,
       selections: currentSelections,
+      stepperType: stepperType.value,
     })
   } else {
     emit('cancel', {
       item: props.item,
       step: stepperState.currentStep,
       selections: currentSelections,
+      stepperType: stepperType.value,
     })
   }
 
