@@ -23,7 +23,7 @@
       >
         <div :class="{ hidden: !sidebarVisible }" class="p-4">
           <div v-for="(item, itemIndex) in menuItems" :key="itemIndex">
-            <h2 class="text-lg font-semibold">{{ item.category }}</h2>
+            <h2 class="text-lg font-semibold pt-5">{{ item.category }}</h2>
             <ul class="mt-4">
               <li
                 v-for="(subcategory, subcategoryIndex) in item.subcategory"
@@ -76,12 +76,26 @@ const menuItems = ref([
         to: '/inventory/ingredient',
       },
       {
-        label: t('sidebarMenu.inventory.subCategories.commande'),
+        label: t('sidebarMenu.inventory.subCategories.productsInventory'),
+        to: '/inventory/products-inventory',
+      },
+    ],
+  },
+  {
+    category: t('sidebarMenu.orders.label'),
+    subcategory: [
+      {
+        label: t('sidebarMenu.orders.subCategories.commande'),
         to: '/order/list',
       },
+    ],
+  },
+  {
+    category: t('sidebarMenu.accounts.label'),
+    subcategory: [
       {
-        label: t('sidebarMenu.inventory.subCategories.productsInventory'),
-        to: 'products-inventory',
+        label: t('sidebarMenu.accounts.subCategories.usersPanel'),
+        to: '/user/list',
       },
     ],
   },

@@ -1,4 +1,4 @@
-import type { signUpByMailAndPasswordInput, signInByMailAndPasswordInput } from '@fm-apps/trpc'
+import type { SignUpByMailAndPasswordInput, SignInByMailAndPasswordInput } from '@fm-apps/trpc'
 import { useTrpcQuery } from '../utils/useTrpcQuery'
 import { useTrpcMutation } from '../utils/useTrpcMutation'
 
@@ -12,12 +12,12 @@ export const useUser = () => {
 
   const signUpByMailAndPassword = useTrpcMutation(
     'user',
-    (input : signUpByMailAndPasswordInput) => $trpc.auth.user.signUpByMailAndPassword.mutate(input)
+    (input : SignUpByMailAndPasswordInput) => $trpc.auth.user.signUpByMailAndPassword.mutate(input)
   )
 
   const signInByMailAndPassword = useTrpcMutation(
     'user',
-    (input : signInByMailAndPasswordInput) => $trpc.auth.user.signInByMailAndPassword.mutate(input)
+    (input : SignInByMailAndPasswordInput) => $trpc.auth.user.signInByMailAndPassword.mutate(input)
   )
 
   return {    
