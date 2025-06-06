@@ -1,58 +1,60 @@
+<!-- Dans products.vue -->
 <template>
-  <div>
-    <PrimeButton 
-      @click="$router.back()" 
-      class="mb-8 flex items-center"
-      data-cy="fmc-return-product-category-page"
-    >
-      {{ t('stepper.back') }}
-    </PrimeButton>
-    
-    <Card 
-      :items="products" 
-      @item-click="openProductStepper"
-      cy="product-card"
-    />
-    
-    <Stepper 
-      v-model:visible="showStepper"
-      :item="selectedProduct" 
-    />
-    
-    <!-- TODO: cart system -->
-  </div>
+  <Splitter :title="categoryName">
+    <template #main-panel>
+      <div>
+        <Card
+          :items="products"
+          @item-click="openProductStepper"
+          cy="product-card"
+        />
+      </div>
+    </template>
+    <template #cart-panel>
+      <CartPanel />
+    </template>
+  </Splitter>
+  <Stepper v-model:visible="showStepper" :item="selectedProduct" />
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
-import { computed, ref, onMounted } from 'vue';
-import Card from '~/components/ui/card.component.vue';
-import Stepper from '~/components/ui/stepper.component.vue';
-import { useProduct } from '~/composables/api/product.composable';
-import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
+import { computed, ref, onMounted } from 'vue'
+import Card from '~/components/ui/card.component.vue'
+import CartPanel from '~/components/ui/cart/cart-panel.vue'
+import Stepper from '~/components/ui/stepper/stepper.component.vue'
+import { useFetchAllProduct } from '~/composables/api/product.composable'
+import Splitter from '~/components/ui/splitter.component.vue'
+import { fr } from '~/i18n/locales/fr'
 
-const { t } = useI18n()
+const route = useRoute()
 
-const route = useRoute();
-
-const categoryId = ref('');
-const selectedProduct = ref(null);
-const showStepper = ref(false);
+const categoryId = ref('')
+const selectedProduct = ref(null)
+const showStepper = ref(false)
 
 onMounted(() => {
-  categoryId.value = route.params.productcategory;
-});
+  categoryId.value = route.params.productcategory
+})
 
-const { fetchAllProducts } = useProduct();
+const { data } = useFetchAllProduct()
 
 const products = computed(() => {
-  return fetchAllProducts.data.value?.filter(
-    product => product.categoryId === categoryId.value
-  ) || [];
-});
+  return (
+    data.value?.filter((product) => product.categoryId === categoryId.value) ||
+    []
+  )
+})
 
 const openProductStepper = (product) => {
-  selectedProduct.value = product;
-  showStepper.value = true;
-};
+  selectedProduct.value = product
+  showStepper.value = true
+}
+
+const categoryName = computed(() => {
+  if (!products.value || products.value.length === 0) return fr.product.title
+  const firstProduct = products.value[0]
+
+  return firstProduct?.category?.label
+})
 </script>

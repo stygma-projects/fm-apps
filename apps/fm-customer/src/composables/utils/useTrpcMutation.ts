@@ -1,27 +1,39 @@
-export const useTrpcMutation = <T, V = void>(
-  key: string,
-  mutationFn: (variables: V) => Promise<T>
+import { ref } from 'vue'
+import type { MutationOptions } from '~/types/mutation.type'
+
+export const useTrpcMutation = <TInput, TOutput>(
+  mutationFn: (input: TInput) => Promise<TOutput>,
+  options?: MutationOptions<TOutput>,
 ) => {
-  const isTesting = process.client && (window as any).Cypress
-  const cacheKey = isTesting ? `${key}-test` : key
+  const isLoading = ref(false)
+  const error = ref<Error | null>(null)
+  const data = ref<TOutput | null>(null)
 
-  const data = ref<T | null>(null)
-  const pending = ref(false)
-  const error = ref<unknown>(null)
-
-  const mutate = async (variables: V) => {
-    pending.value = true
-    error.value = null
+  const mutate = async (input: TInput) => {
     try {
-      data.value = await mutationFn(variables)
-      return data.value
+      isLoading.value = true
+      error.value = null
+
+      const result = await mutationFn(input)
+      data.value = result
+
+      options?.onSuccess?.(result)
+      return result
     } catch (err) {
-      error.value = err
-      throw err
+      const errorObj = err instanceof Error ? err : new Error('Unknown error')
+      error.value = errorObj
+      options?.onError?.(errorObj)
+      throw errorObj
     } finally {
-      pending.value = false
+      isLoading.value = false
+      options?.onSettled?.()
     }
   }
 
-  return { data, pending, error, mutate }
+  return {
+    mutate,
+    isLoading: readonly(isLoading),
+    error: readonly(error),
+    data: readonly(data),
+  }
 }
