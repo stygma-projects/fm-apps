@@ -67,6 +67,26 @@ export const userRouter = router({
                 },
             })
         }),
+    signInWithGoogle: publicProcedure
+        .input(
+            z.object({
+                callbackURL : z.string().optional(),
+                token: z.string(),   // Google ID Token
+                accessToken: z.string(),   // Google Access Token
+            })
+        )
+        .mutation(async ({ input }) => {
+            return await auth.api.signInSocial({
+                asResponse: false,
+                body : {
+                    provider: "google",
+                    idToken: {
+                        token: input.token,   // Google ID Token,
+                        accessToken: input.accessToken,   // Google Access Token
+                    }
+                }
+            })
+        }),
     delete: publicProcedure
         .input(z.string())
         .mutation(async ({ input }) => { 

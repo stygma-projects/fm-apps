@@ -56,6 +56,7 @@ export const fr = {
       nameExample: 'Ex : Mark',
       emailExample: 'Ex : mark@gmail.com',
       passwordExample: 'Ex : D$1\\>0h1j4WO%_7oZ3e',
+      googleButton: 'Se connecter avec Google',
       errors : {
         emailRequired: 'Veuillez entrer votre email',
         invalidEmail: 'Veuillez entrer un email valide',

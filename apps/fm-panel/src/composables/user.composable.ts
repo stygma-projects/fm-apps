@@ -6,6 +6,8 @@ import type {
   SignUpByMailAndPasswordOutput,
   SignInByMailAndPasswordInput,
   SignInByMailAndPasswordOutput,
+  SignInWithGoogleInput,
+  SignInWithGoogleOutput,
   DeleteUserInput,
   DeleteUserOutput,
   DeleteManyUsersInput,
@@ -20,6 +22,7 @@ enum UserMutationKey {
   // UPDATE = 'updateUser',
   SIGN_UP_BY_MAIL_AND_PASSWORD = 'signUpByMailAndPassword',
   SIGN_IN_BY_MAIL_AND_PASSWORD = 'signInByMailAndPassword',
+  SIGN_IN_WITH_GOOGLE = 'signInWithGoogle',
   DELETE = 'deleteUser',
   DELETE_MANY = 'deleteManyUsers',
 }
@@ -51,6 +54,17 @@ export const useSignInWithMailAndPasswordUser = () => {
       >({
     mutationKey: [UserMutationKey.SIGN_IN_BY_MAIL_AND_PASSWORD],
     mutationFn: (SignInByMailAndPasswordInput) => trpc.auth.user.signInByMailAndPassword.mutate(SignInByMailAndPasswordInput),
+  })
+}
+
+export const useSignInWithGoogleUser = () => {
+    return useMutation<
+        SignInWithGoogleOutput,
+        Error,
+        SignInWithGoogleInput
+      >({
+    mutationKey: [UserMutationKey.SIGN_IN_WITH_GOOGLE],
+    mutationFn: (SignInWithGoogleInput) => trpc.auth.user.signInWithGoogle.mutate(SignInWithGoogleInput),
   })
 }
 
