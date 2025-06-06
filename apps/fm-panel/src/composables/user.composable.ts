@@ -75,15 +75,3 @@ export const useDeleteManyUsers = () => {
     mutationFn: (DeleteManyUsersInput) => trpc.auth.user.deleteMany.mutate(DeleteManyUsersInput),
   })
 }
-
-// export const useUpdateUser = () => {
-//   return useMutation<
-//     UpdateOrderOutput,
-//     Error,
-//     UpdateOrderInput
-//   >({
-//     mutationKey: [OrderMutationKey.UPDATE],
-//     mutationFn: (updateOrderInput) =>
-//       trpc.order.orders.update.mutate(updateOrderInput),
-//   })
-// }
