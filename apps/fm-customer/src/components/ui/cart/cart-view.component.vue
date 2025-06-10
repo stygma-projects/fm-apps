@@ -76,10 +76,17 @@ const handleConfirmCreateOrder = async () => {
 
     const productInOrderData = cartStore.getProductInOrderData(createdOrder.id)
 
+    console.log(
+      'Data sent to API:',
+      JSON.stringify(productInOrderData, null, 2),
+    )
+
     const create =
       productInOrderData.length > 1
         ? await createManyProductInOrder(productInOrderData)
         : await createProductInOrder(productInOrderData[0])
+
+    console.log('API Response:', create)
 
     cartStore.clearCart()
     await navigateTo('/')

@@ -31,11 +31,14 @@
       </div>
 
       <!-- Footer -->
-      <MobileStepperFooter
-        :active-tab-index="activeTabIndex"
-        :total-steps="availableSteps.length"
+      <StepperNavigation
+        :is-first-step="activeTabIndex === 0"
+        :is-last-step="activeTabIndex === availableSteps.length - 1"
         :can-proceed="canProceed"
         :has-all-mandatory-selections="hasAllMandatorySelections"
+        :current-step="activeTabIndex + 1"
+        :total-steps="availableSteps.length"
+        variant="mobile"
         @cancel="$emit('cancel')"
         @back="$emit('tab-change', activeTabIndex - 1)"
         @next="$emit('tab-change', activeTabIndex + 1)"
@@ -48,20 +51,8 @@
 <script setup lang="ts">
 import StepContent from './step-content.component.vue'
 import MobileStepperHeader from './mobile-stepper-header.component.vue'
-import MobileStepperFooter from './mobile-stepper-footer.component.vue'
-import type { StepperType } from '~/types/stepper.type'
-
-interface Props {
-  visible: boolean
-  activeTabIndex: number
-  availableSteps: any[]
-  currentCategoryName: string
-  currentStepSelections: any[]
-  canProceed: boolean
-  hasAllMandatorySelections: boolean
-  item: any
-  stepperType?: StepperType
-}
+import StepperNavigation from './stepper-navigation.component.vue'
+import type { MobileStepperProps } from '~/types/stepper.type'
 
 interface Emits {
   (e: 'close'): void
@@ -71,6 +62,6 @@ interface Emits {
   (e: 'validate'): void
 }
 
-defineProps<Props>()
+defineProps<MobileStepperProps>()
 defineEmits<Emits>()
 </script>

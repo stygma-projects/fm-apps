@@ -1,6 +1,7 @@
 import type { Ingredient, IngredientCategory, Product } from '@fm-apps/db'
 
 export type StepperType = 'mandatory' | 'extra' | 'optionalBase'
+export type NavigationVariant = 'desktop' | 'mobile'
 
 export interface StepperItem extends Product {
   mandatory: IngredientCategory[]
@@ -13,29 +14,21 @@ export interface StepperProps {
   stepLabels?: string[]
   visible: boolean
   stepperType?: StepperType
+  selectionsKey?: string
 }
 
 export interface StepperEmits {
-  (
-    e: 'complete',
-    data: {
-      item: StepperItem
-      step: string
-      selections: Record<string, any[]>
-      stepperType?: StepperType
-    },
-  ): void
-  (
-    e: 'cancel',
-    data: {
-      item: StepperItem
-      step: string
-      selections: Record<string, any[]>
-      stepperType?: StepperType
-    },
-  ): void
+  (e: 'complete', data: StepperCompletionData): void
+  (e: 'cancel', data: StepperCompletionData): void
   (e: 'step-change', step: string): void
   (e: 'update:visible', visible: boolean): void
+}
+
+export interface StepperCompletionData {
+  item: StepperItem
+  step: string
+  selections: Record<string, any[]>
+  stepperType?: StepperType
 }
 
 export interface StepperState {
@@ -43,4 +36,70 @@ export interface StepperState {
   activeTabIndex: number
   dialogVisible: boolean
   mobileVisible: boolean
+  selections: Record<string, any[]>
+}
+
+export interface NavigationProps {
+  isFirstStep: boolean
+  isLastStep: boolean
+  canProceed: boolean
+  hasAllMandatorySelections: boolean
+  variant?: NavigationVariant
+  currentStep?: number
+  totalSteps?: number
+}
+
+export interface StepInfo {
+  category: IngredientCategory | { id: string; label: string }
+  originalIndex: number
+  stepIndex: number
+  isExtra?: boolean
+  isOptionalBase?: boolean
+}
+
+export interface StepperCompletionData {
+  item: StepperItem
+  step: string
+  selections: Record<string, any[]>
+  stepperType?: StepperType
+}
+
+// Interface pour les props des composants desktop/mobile
+export interface BaseStepperProps {
+  visible: boolean
+  availableSteps: StepInfo[]
+  currentCategoryName: string
+  currentStepSelections: any[]
+  canProceed: boolean
+  hasAllMandatorySelections: boolean
+  item: StepperItem
+  stepperType: StepperType
+}
+
+export interface DesktopStepperProps extends BaseStepperProps {
+  currentStep: string
+}
+
+export interface MobileStepperProps extends BaseStepperProps {
+  activeTabIndex: number
+}
+
+// Interface pour StepInfo
+export interface StepInfo {
+  category: IngredientCategory | { id: string; label: string }
+  originalIndex: number
+  stepIndex: number
+  isExtra?: boolean
+  isOptionalBase?: boolean
+}
+
+// Types pour la navigation
+export interface NavigationProps {
+  isFirstStep: boolean
+  isLastStep: boolean
+  canProceed: boolean
+  hasAllMandatorySelections: boolean
+  variant?: NavigationVariant
+  currentStep?: number
+  totalSteps?: number
 }

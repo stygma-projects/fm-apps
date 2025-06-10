@@ -2,7 +2,7 @@
   <PrimeCard :pt="computedCardPt">
     <template #title>
       <div
-        v-if="!items || items.length === 0"
+        v-if="!displayItems || displayItems.length === 0"
         class="flex items-center justify-between"
       >
         <span>{{ title }}</span>
@@ -15,37 +15,40 @@
           @click="handleClick"
         />
       </div>
-      <!-- Sinon, titre normal -->
       <span v-else>{{ title }}</span>
     </template>
     <template #content>
-      <!-- Contenu seulement si il y a des ingrédients -->
       <div
-        v-if="items && items.length > 0"
+        v-if="displayItems && displayItems.length > 0"
         class="grid grid-cols-[1fr_auto] gap-4 min-h-[60px]"
       >
-        <!-- Liste des ingrédients -->
         <div class="self-start">
           <ul class="space-y-0.5">
             <li
-              v-for="ingredient in items"
-              :key="ingredient.label"
+              v-for="item in displayItems"
+              :key="item.id || item.label"
               class="flex flex-row lg:items-center justify-between gap-1 lg:gap-0"
             >
-              <span class="text-gray-700 text-sm lg:text-base">{{
-                ingredient.label
-              }}</span>
+              <span class="text-gray-700 text-sm lg:text-base">
+                {{ item.label }}
+                <span
+                  v-if="item.quantity > 1"
+                  class="font-semibold text-gray-900 ml-1"
+                >
+                  x{{ item.quantity }}
+                </span>
+              </span>
               <span
-                v-if="!isMandatory"
+                v-if="!isMandatory && item.price > 0"
                 class="font-medium text-red-700 text-sm lg:text-base"
               >
-                {{ ingredient.price }} €
+                {{ item.totalPrice.toFixed(2) }} €
               </span>
             </li>
           </ul>
         </div>
 
-        <div class="self-end justify-self-end">
+        <div class="self-end">
           <PrimeButton
             v-if="inCart"
             icon="pi pi-pencil"
@@ -61,16 +64,34 @@
 </template>
 
 <script setup lang="ts">
-interface Ingredient {
+interface IngredientWithQuantity {
+  ingredient: {
+    id: string
+    label: string
+    price: number
+  }
+  quantity: number
+}
+
+interface SimpleIngredient {
+  id?: string
   label: string
   price: number
+}
+
+interface DisplayIngredient {
+  id: string
+  label: string
+  price: number
+  quantity: number
+  totalPrice: number
 }
 
 type ColorVariant = 'red' | 'amber' | 'blue'
 
 interface Props {
   title: string
-  items?: Ingredient[]
+  items?: (IngredientWithQuantity | SimpleIngredient)[]
   color?: ColorVariant
   cardPt?: object
   isMandatory?: boolean
@@ -79,6 +100,52 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   color: 'red',
+})
+
+const isNewFormat = (item: any): item is IngredientWithQuantity => {
+  return (
+    item &&
+    typeof item === 'object' &&
+    'ingredient' in item &&
+    'quantity' in item
+  )
+}
+
+const displayItems = computed((): DisplayIngredient[] => {
+  if (!props.items || props.items.length === 0) return []
+
+  const grouped = new Map<string, DisplayIngredient>()
+
+  props.items.forEach((item) => {
+    let ingredient: SimpleIngredient
+    let quantity: number
+
+    if (isNewFormat(item)) {
+      ingredient = item.ingredient
+      quantity = item.quantity
+    } else {
+      ingredient = item as SimpleIngredient
+      quantity = 1
+    }
+
+    const key = ingredient.id || ingredient.label
+
+    if (grouped.has(key)) {
+      const existing = grouped.get(key)!
+      existing.quantity += quantity
+      existing.totalPrice = existing.price * existing.quantity
+    } else {
+      grouped.set(key, {
+        id: ingredient.id || key,
+        label: ingredient.label,
+        price: ingredient.price || 0,
+        quantity: quantity,
+        totalPrice: (ingredient.price || 0) * quantity,
+      })
+    }
+  })
+
+  return Array.from(grouped.values())
 })
 
 const colorVariants: Record<

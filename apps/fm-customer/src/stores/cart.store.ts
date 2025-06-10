@@ -1,15 +1,21 @@
 import type { Ingredient } from '@fm-apps/db'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { StepperItem } from '~/types/stepper.type'
+import type { StepperItem, StepperType } from '~/types/stepper.type'
+
+// Interface pour les ingrédients avec quantité
+interface IngredientWithQuantity {
+  ingredient: Ingredient
+  quantity: number
+}
 
 type CartItem = {
   id: string
   productId: string
   product: StepperItem
-  mandatory: Ingredient[]
-  optionalBase: Ingredient[]
-  extra: Ingredient[]
+  mandatory: IngredientWithQuantity[]
+  optionalBase: IngredientWithQuantity[]
+  extra: IngredientWithQuantity[]
   addedAt: string
   selectionsKey: string
 }
@@ -18,31 +24,48 @@ export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>([])
   const stepperSelections = ref<Record<string, Record<string, any[]>>>({})
 
+  // Fonction helper pour convertir un tableau d'ingrédients en ingrédients avec quantités
+  const groupIngredientsByQuantity = (
+    ingredients: Ingredient[],
+  ): IngredientWithQuantity[] => {
+    const grouped = new Map<string, IngredientWithQuantity>()
+
+    ingredients.forEach((ingredient) => {
+      const key = ingredient.id
+
+      if (grouped.has(key)) {
+        grouped.get(key)!.quantity += 1
+      } else {
+        grouped.set(key, {
+          ingredient,
+          quantity: 1,
+        })
+      }
+    })
+
+    return Array.from(grouped.values())
+  }
+
   const addItem = (
     product: StepperItem,
     selections: Record<string, any[]> = {},
+    stepperType?: StepperType,
   ) => {
-    const mandatoryIngredients: Ingredient[] = []
-
-    for (const key in selections) {
-      if (selections[key] && Array.isArray(selections[key])) {
-        mandatoryIngredients.push(...selections[key])
-      }
-    }
-
     const selectionsKey = generateCartItemId()
     const cartItem: CartItem = {
       id: generateCartItemId(),
       productId: product.id,
       product: product,
-      mandatory: mandatoryIngredients,
+      mandatory: [],
       optionalBase: [],
       extra: [],
       addedAt: new Date().toISOString(),
       selectionsKey: selectionsKey,
     }
-    stepperSelections.value[selectionsKey] = selections
 
+    organizeIngredientsByType(cartItem, selections, stepperType)
+
+    stepperSelections.value[selectionsKey] = selections
     items.value.push(cartItem)
   }
 
@@ -68,21 +91,66 @@ export const useCartStore = defineStore('cart', () => {
   const updateItem = (
     selectionKey: string,
     newSelections: Record<string, any[]>,
+    stepperType?: StepperType,
   ) => {
     const item = items.value.find((item) => item.selectionsKey === selectionKey)
-
     if (!item) return
 
-    stepperSelections.value[item.selectionsKey] = newSelections
-
-    const mandatoryIngredients: Ingredient[] = []
-    for (const key in newSelections) {
-      if (newSelections[key] && Array.isArray(newSelections[key])) {
-        mandatoryIngredients.push(...newSelections[key])
+    if (stepperType === 'extra') {
+      item.extra = []
+      stepperSelections.value[item.selectionsKey] = {
+        ...stepperSelections.value[item.selectionsKey],
+        extra: newSelections.extra || [],
       }
+    } else if (stepperType === 'optionalBase') {
+      item.optionalBase = []
+      stepperSelections.value[item.selectionsKey] = {
+        ...stepperSelections.value[item.selectionsKey],
+        optionalBase: newSelections.optionalBase || [],
+      }
+    } else {
+      item.mandatory = []
+      item.optionalBase = []
+      item.extra = []
+      stepperSelections.value[item.selectionsKey] = newSelections
     }
 
-    item.mandatory = mandatoryIngredients
+    organizeIngredientsByType(item, newSelections, stepperType)
+  }
+
+  const organizeIngredientsByType = (
+    cartItem: CartItem,
+    selections: Record<string, any[]>,
+    stepperType?: StepperType,
+  ) => {
+    for (const key in selections) {
+      if (!selections[key] || !Array.isArray(selections[key])) continue
+
+      const ingredients = selections[key] as Ingredient[]
+      const groupedIngredients = groupIngredientsByQuantity(ingredients)
+
+      if (stepperType === 'extra') {
+        if (key === 'extra') {
+          cartItem.extra.push(...groupedIngredients)
+        }
+      } else if (stepperType === 'optionalBase') {
+        if (key === 'optionalBase') {
+          cartItem.optionalBase.push(...groupedIngredients)
+        }
+      } else if (stepperType === 'mandatory') {
+        if (!isNaN(Number(key))) {
+          cartItem.mandatory.push(...groupedIngredients)
+        }
+      } else {
+        if (key === 'extra') {
+          cartItem.extra.push(...groupedIngredients)
+        } else if (key === 'optionalBase') {
+          cartItem.optionalBase.push(...groupedIngredients)
+        } else if (!isNaN(Number(key))) {
+          cartItem.mandatory.push(...groupedIngredients)
+        }
+      }
+    }
   }
 
   const getItemSelections = (selectionsKey: string) => {
@@ -99,12 +167,11 @@ export const useCartStore = defineStore('cart', () => {
 
       itemTotal += item.product.price ?? 0
 
-      item.optionalBase.forEach((ingredient) => {
-        itemTotal += ingredient.price ?? 0
+      item.optionalBase.forEach(({ ingredient, quantity }) => {
+        itemTotal += (ingredient.price ?? 0) * quantity
       })
-
-      item.extra.forEach((ingredient) => {
-        itemTotal += ingredient.price ?? 0
+      item.extra.forEach(({ ingredient, quantity }) => {
+        itemTotal += (ingredient.price ?? 0) * quantity
       })
 
       return total + itemTotal
@@ -145,13 +212,27 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   const getProductInOrderData = (orderId: string) => {
+    const expandIngredients = (
+      ingredientsWithQty: IngredientWithQuantity[],
+    ): string[] => {
+      const expanded: string[] = []
+      ingredientsWithQty.forEach(({ ingredient, quantity }) => {
+        // Gestion des objets réactifs Vue
+        const ingredientId = toRaw(ingredient)?.id || ingredient.id
+        for (let i = 0; i < quantity; i++) {
+          expanded.push(ingredientId)
+        }
+      })
+      return expanded
+    }
+
     return items.value.map((item) => ({
       id: item.id,
       productId: item.productId,
       orderId: orderId,
-      mandatory: item.mandatory.map((ing) => ing.id),
-      optionalBase: item.optionalBase.map((ing) => ing.id),
-      extra: item.extra.map((ing) => ing.id),
+      mandatory: expandIngredients(item.mandatory),
+      optionalBase: expandIngredients(item.optionalBase),
+      extra: expandIngredients(item.extra),
     }))
   }
 

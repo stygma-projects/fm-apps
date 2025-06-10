@@ -37,6 +37,7 @@
                 :is-last-step="index === availableSteps.length - 1"
                 :can-proceed="canProceed"
                 :has-all-mandatory-selections="hasAllMandatorySelections"
+                variant="desktop"
                 @cancel="$emit('cancel')"
                 @back="$emit('step-change', String(index))"
                 @next="$emit('step-change', String(index + 2))"
@@ -51,21 +52,9 @@
 </template>
 
 <script setup lang="ts">
-import type { StepperType } from '~/types/stepper.type'
+import type { DesktopStepperProps } from '~/types/stepper.type'
 import StepContent from './step-content.component.vue'
 import StepperNavigation from './stepper-navigation.component.vue'
-
-interface Props {
-  visible: boolean
-  currentStep: string
-  availableSteps: any[]
-  currentCategoryName: string
-  currentStepSelections: any[]
-  canProceed: boolean
-  hasAllMandatorySelections: boolean
-  item: any
-  stepperType: StepperType
-}
 
 interface Emits {
   (e: 'update:visible', value: boolean): void
@@ -75,6 +64,6 @@ interface Emits {
   (e: 'validate'): void
 }
 
-defineProps<Props>()
+defineProps<DesktopStepperProps>()
 defineEmits<Emits>()
 </script>
