@@ -28,14 +28,25 @@ enum WithdrawalMethod {
   CARD
 }
 
-
 model ProductInOrder {
   id              String          @id @default(uuid())
   productId       String          
   product         Product         @relation(fields: [productId], references: [id])
   orderId         String          
   order           Order           @relation(fields: [orderId], references: [id])
-  mandatory       Ingredient[]    @relation(name : "usedAsMandatoryIn")
-  optionalBase    Ingredient[]    @relation(name : "usedAsOptionalBaseIn")
-  extra           Ingredient[]    @relation(name : "usedAsExtraIn")
+  mandatory       Ingredient[]    @relation(name: "usedAsMandatoryIn")
+  optionalBase    Ingredient[]    @relation(name: "usedAsOptionalBaseIn")
+  
+  extraIngredients ExtraIngredientInProductOrder[]
+}
+
+model ExtraIngredientInProductOrder {
+  id               String         @id @default(uuid())
+  productInOrderId String
+  productInOrder   ProductInOrder @relation(fields: [productInOrderId], references: [id], onDelete: Cascade)
+  ingredientId     String
+  ingredient       Ingredient     @relation(fields: [ingredientId], references: [id])
+  quantity         Int            @default(1)
+  
+  @@unique([productInOrderId, ingredientId])
 }
