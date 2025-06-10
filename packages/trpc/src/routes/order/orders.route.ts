@@ -24,7 +24,9 @@ export const ordersRouter = router({
           include: {
             mandatory: true,
             optionalBase: true,
-            extra: true,
+            extraIngredients: {
+              include: { ingredient: true },
+            },
             product: {
               include: {
                 nonUpdatable: true,
@@ -51,7 +53,9 @@ export const ordersRouter = router({
           include: {
             mandatory: true,
             optionalBase: true,
-            extra: true,
+            extraIngredients: {
+              include: { ingredient: true },
+            },
             product: {
               include: {
                 nonUpdatable: true,
@@ -80,7 +84,9 @@ export const ordersRouter = router({
             include: {
               mandatory: true,
               optionalBase: true,
-              extra: true,
+              extraIngredients: {
+                include: { ingredient: true },
+              },
               product: {
                 include: {
                   nonUpdatable: true,
