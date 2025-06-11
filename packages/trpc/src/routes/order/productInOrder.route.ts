@@ -147,7 +147,7 @@ export const productInOrderRouter = router({
               optionalBase: {
                 connect: optionalBase.map((id) => ({ id })),
               },
-              extra: {
+              extraIngredients: {
                 connect: extra.map((id) => ({ id })),
               },
             },
