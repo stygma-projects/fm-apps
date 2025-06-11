@@ -94,25 +94,91 @@ export const seedInventory = async ()=>{
         if (!category) throw new Error(`Product category "${label}" not found`);
         return category.id;
     }
-    await prisma.product.createMany({
-        data: [
-            {
-                label: 'Bacon Sandwich',
-                price: 3.5,
-                categoryId: getProductCategoryByLabel(ProductCategoryLabel.SANDWICHES),
-            },
-            {
-                label: 'Cheddar Panini',
-                price: 4.0,
-                categoryId: getProductCategoryByLabel(ProductCategoryLabel.PANINIS),
-            },
-            {
-                label: 'Salad Bowl',
-                price: 5.0,
-                categoryId: getProductCategoryByLabel(ProductCategoryLabel.SALADS),
-            },
-        ],
-        skipDuplicates: true,
-    })
 
+    // Insert products with relations
+    await prisma.product.create({
+        data: {
+            label: 'Bacon Sandwich',
+            price: 3.5,
+            categoryId: getProductCategoryByLabel(ProductCategoryLabel.SANDWICHES),
+            mandatory: {
+                connect: [
+                    { label: IngredientCategoryLabel.MEAT },
+                    { label: IngredientCategoryLabel.BREAD },
+                    { label: IngredientCategoryLabel.SAUCE },
+                ]
+            },
+            optionalBase: {
+                connect: [
+                    { label: 'Salade' },
+                    { label: 'Mayonnaise' },
+                ]
+            },
+            extra: {
+                connect: [
+                    { label: 'Bacon' },
+                    { label: 'Cheddar' },
+                    { label: 'Pain doré' },
+                ]
+            }
+        }
+    });
+
+    await prisma.product.create({
+        data: {
+            label: 'Cheddar Panini',
+            price: 4.0,
+            categoryId: getProductCategoryByLabel(ProductCategoryLabel.PANINIS),
+            mandatory: {
+                connect: [
+                    { label: IngredientCategoryLabel.CHEESE },
+                    { label: IngredientCategoryLabel.BREAD },
+                ]
+            },
+            optionalBase: {
+                connect: [
+                    { label: 'Mayonnaise' },
+                    { label: 'Salade' },
+                ]
+            },
+            extra: {
+                connect: [
+                    { label: 'Bacon' },
+                    { label: 'Cheddar' },
+                    { label: 'Pain doré' },
+                    { label: 'Salade' },
+                ]
+            }
+        }
+    });
+
+    await prisma.product.create({
+        data: {
+            label: 'Salad Bowl',
+            price: 5.0,
+            categoryId: getProductCategoryByLabel(ProductCategoryLabel.SALADS),
+            mandatory: {
+                connect: [
+                    { label: IngredientCategoryLabel.VEGETABLES },
+                    { label: IngredientCategoryLabel.CHEESE },
+                    { label: IngredientCategoryLabel.SAUCE },
+                ]
+            },
+            optionalBase: {
+                connect: [
+                    { label: 'Pain blanc' },
+                    { label: 'Pain doré' },
+                ]
+            },
+            extra: {
+                connect: [
+                    { label: 'Bacon' },
+                    { label: 'Cheddar' },
+                    { label: 'Salade' },
+                    { label: 'Pain doré' },
+                    { label: 'Mayonnaise' },
+                ]
+            }
+        }
+    });
 }

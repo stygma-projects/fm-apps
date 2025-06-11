@@ -1,8 +1,10 @@
 import {seedInventory} from "./inventory.seed";
 import {prisma} from "../client";
+import { seedOrders } from "./order.seed";
 
 async function main() {
     await seedInventory()
+    await seedOrders()
 }
 
 

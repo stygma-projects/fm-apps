@@ -11,7 +11,9 @@ export const productInOrderRouter = router({
       include: {
         mandatory: true,
         optionalBase: true,
-        extra: true,
+        extraIngredients: {
+          include: { ingredient: true },
+        },
         product: {
           include: {
             nonUpdatable: true,
@@ -36,7 +38,9 @@ export const productInOrderRouter = router({
         include: {
           mandatory: true,
           optionalBase: true,
-          extra: true,
+          extraIngredients: {
+            include: { ingredient: true },
+          },
           product: {
             include: {
               nonUpdatable: true,
@@ -61,7 +65,9 @@ export const productInOrderRouter = router({
         include: {
           mandatory: true,
           optionalBase: true,
-          extra: true,
+          extraIngredients: {
+            include: { ingredient: true },
+          },
           product: {
             include: {
               nonUpdatable: true,
@@ -81,7 +87,14 @@ export const productInOrderRouter = router({
         orderId: z.string(),
         mandatory: z.array(z.string()).default([]),
         optionalBase: z.array(z.string()).default([]),
-        extra: z.array(z.string()).default([]),
+        extra: z
+          .array(
+            z.object({
+              ingredientId: z.string(),
+              quantity: z.number().int().positive().default(1),
+            }),
+          )
+          .default([]),
       }),
     )
     .mutation(async ({ input }) => {
@@ -96,8 +109,11 @@ export const productInOrderRouter = router({
           optionalBase: {
             connect: optionalBase.map((id) => ({ id })),
           },
-          extra: {
-            connect: extra.map((id) => ({ id })),
+          extraIngredients: {
+            create: extra.map((item) => ({
+              ingredientId: item.ingredientId,
+              quantity: item.quantity,
+            })),
           },
         },
       })
@@ -171,7 +187,7 @@ export const productInOrderRouter = router({
                 set: optionalBase.map((id) => ({ id })),
               }
             : undefined,
-          extra: extra
+          extraIngredients: extra
             ? {
                 set: extra.map((id) => ({ id })),
               }
