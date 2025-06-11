@@ -11,13 +11,11 @@ export const useUser = () => {
   )
 
   const signUpByMailAndPassword = useTrpcMutation(
-    'user',
-    (input : SignUpByMailAndPasswordInput) => $trpc.auth.user.signUpByMailAndPassword.mutate(input)
+    (input: signUpByMailAndPasswordInput) => $trpc.auth.user.signUpByMailAndPassword.mutate(input)
   )
 
   const signInByMailAndPassword = useTrpcMutation(
-    'user',
-    (input : SignInByMailAndPasswordInput) => $trpc.auth.user.signInByMailAndPassword.mutate(input)
+    (input: signInByMailAndPasswordInput) => $trpc.auth.user.signInByMailAndPassword.mutate(input)
   )
 
   return {    
@@ -25,5 +23,4 @@ export const useUser = () => {
     signUpByMailAndPassword,
     signInByMailAndPassword
   }
-
 }
