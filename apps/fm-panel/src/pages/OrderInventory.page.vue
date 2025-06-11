@@ -107,62 +107,61 @@
             {{ t('order.dialogs.product') }}
           </h3>
           <div
-            v-for="relationOrderProduct in selectedCommande.orderHasProduct"
-            :key="relationOrderProduct.productId"
+            v-for="productInOrder in selectedCommande.orderHasProduct"
+            :key="productInOrder.id"
             class="mb-4 p-3 bg-gray-50 rounded"
           >
-            <div class="font-medium mb-2">{{ relationOrderProduct.product.label }}</div>
-            <div class="font-medium mb-2">{{ t("order.dialogs.ingredients") }}</div>
+            <div class="font-medium mb-2">{{ productInOrder.product.label }}</div>
+            
+            <!-- Ingrédients obligatoires -->
             <div
-              v-if="relationOrderProduct.product.nonUpdatable && relationOrderProduct.product.nonUpdatable.length"
-              class="pl-4"
+              v-if="productInOrder.mandatory && productInOrder.mandatory.length"
+              class="pl-4 mt-2"
             >
-              <span> {{ t('order.ingredientTypes.nonUpdatable') }} : </span>
+              <div class="text-sm font-medium text-gray-700">
+                {{ t('order.ingredientTypes.mandatory') }}:
+              </div>
               <div
-                v-for="ingredient in relationOrderProduct.product.nonUpdatable"
+                v-for="ingredient in productInOrder.mandatory"
                 :key="ingredient.id"
-                class="text-gray-600"
+                class="text-gray-600 pl-2"
               >
                 - {{ ingredient.label }}
               </div>
             </div>
+
+            <!-- Base optionnelle -->
             <div
-              v-if="relationOrderProduct.mandatory && relationOrderProduct.mandatory.length"
-              class="pl-4"
+              v-if="productInOrder.optionalBase && productInOrder.optionalBase.length"
+              class="pl-4 mt-2"
             >
-              <span> {{ t('order.ingredientTypes.mandatory') }} : </span>
+              <div class="text-sm font-medium text-gray-700">
+                {{ t('order.ingredientTypes.optionalBase') }}:
+              </div>
               <div
-                v-for="ingredient in relationOrderProduct.mandatory"
+                v-for="ingredient in productInOrder.optionalBase"
                 :key="ingredient.id"
-                class="text-gray-600"
+                class="text-gray-600 pl-2"
               >
                 - {{ ingredient.label }}
               </div>
             </div>
+
+            <!-- Ingrédients supplémentaires -->
             <div
-              v-if="relationOrderProduct.optionalBase && relationOrderProduct.optionalBase.length"
-              class="pl-4"
+              v-if="productInOrder.extraIngredients && productInOrder.extraIngredients.length"
+              class="pl-4 mt-2"
             >
-              <span> {{ t('order.ingredientTypes.optionalBase') }} : </span>
-              <div
-                v-for="ingredient in relationOrderProduct.optionalBase"
-                :key="ingredient.id"
-                class="text-gray-600"
-              >
-                - {{ ingredient.label }}
+              <div class="text-sm font-medium text-gray-700">
+                {{ t('order.ingredientTypes.extra') }}:
               </div>
-            </div>
-            <div
-              v-if="relationOrderProduct.extra && relationOrderProduct.extra.length"
-              class="pl-4"
-            >
-              <span> {{ t('order.ingredientTypes.extra') }} : </span>
               <div
-                v-for="ingredient in relationOrderProduct.extra"
-                :key="ingredient.id"
-                class="text-gray-600"
+                v-for="extra in productInOrder.extraIngredients"
+                :key="extra.id"
+                class="text-gray-600 pl-2"
               >
-                - {{ ingredient.label }}
+                - {{ extra.ingredient.label }} 
+                <span v-if="extra.quantity > 1">(x{{ extra.quantity }})</span>
               </div>
             </div>
           </div>
