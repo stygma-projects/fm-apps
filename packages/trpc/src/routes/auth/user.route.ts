@@ -9,7 +9,7 @@ export const userRouter = router({
             return await prisma.user.findMany({
                 orderBy: {
                     sessions: {
-                        _count: 'desc', // Nécessite Prisma >= 2.23
+                        _count: 'desc', 
                     },
                 },
                 include: {
@@ -68,12 +68,17 @@ export const userRouter = router({
             })
         }),
     signInWithGoogle: publicProcedure
-        .input(z.string())
-        .mutation(async () => {
+        .input(
+            z.object({
+                callbackURL : z.string().optional(),
+            })
+        )
+        .mutation(async ({input}) => {
             return await auth.api.signInSocial({
                 asResponse: false,
                 body : {
                     provider: "google",
+                    callbackURL: input.callbackURL || undefined,
                 },
             })
         }),

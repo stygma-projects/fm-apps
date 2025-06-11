@@ -4,6 +4,8 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "@fm-apps/db";
  
 export const auth = betterAuth({
+    baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+    // basePath: "/ba/auth",
     database: prismaAdapter(prisma, {
         provider: "mysql", // or "mysql", "postgresql", ...etc
     }),
@@ -22,4 +24,5 @@ export const auth = betterAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string, 
         }, 
     },
+    
 });

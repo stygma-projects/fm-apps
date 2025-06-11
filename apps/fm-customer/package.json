@@ -25,6 +25,7 @@
     "@tanstack/vue-query": "^5.76.0",
     "@trpc/client": "^10.45.2",
     "@trpc/server": "^10.45.2",
+    "better-auth": "^1.2.9",
     "nuxt": "^3.17.3",
     "pinia": "^3.0.2",
     "primevue": "^4.3.4",

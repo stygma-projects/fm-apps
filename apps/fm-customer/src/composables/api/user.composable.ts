@@ -28,8 +28,7 @@ export const useUser = () => {
     (input : SignInWithGoogleInput) => $trpc.auth.user.signInWithGoogle.mutate(input)
   )
 
-
-  return {    
+  return {
     getById,
     signUpByMailAndPassword,
     signInByMailAndPassword,

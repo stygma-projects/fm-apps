@@ -51,16 +51,13 @@ const { handleSubmit, defineField } = useForm({
 });
 
 async function googleLogin() {
+  console.log('Attempting Google login...');
   try {
-    const response = await signInWithGoogle.mutate();
-    // Ici, response doit contenir l'URL de redirection Google ou le token
-    // Si c'est une URL, redirige l'utilisateur :
-    if (response?.redirectUrl) {
-      router.push(response.redirectUrl);
+    const response = await signInWithGoogle.mutate({ callbackURL : `${window.location.origin}/auth/login` });
+    console.log('Response from Google login:', response);
+    if (response.url) {
+      window.location.href = (response.url);
     }
-    // Sinon, gère le token comme pour un login classique
-    // setUserValues(response.token, response.user);
-    // router.push('../../')
   } catch (error) {
       errorToast(t('login.toast.registerError'), error.message || t('login.toast.defaultError'));
   }
