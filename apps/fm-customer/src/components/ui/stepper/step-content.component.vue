@@ -49,13 +49,12 @@
         </div>
 
         <div class="flex items-center space-x-3">
-          <PrimeButton
-            :disabled="getIngredientQuantity(ingredient.id) === 0"
-            severity="secondary"
+          <Button
             size="small"
             icon="pi pi-minus"
+            :disabled="getIngredientQuantity(ingredient.id) === 0"
+            :severity="Severity.SECONDARY"
             @click="decreaseQuantity(ingredient)"
-            class="w-8 h-8 p-0"
             data-cy="decrease-ingredient-button"
           />
 
@@ -66,12 +65,12 @@
             {{ getIngredientQuantity(ingredient.id) }}
           </span>
 
-          <PrimeButton
-            :disabled="hasMaxQuantity(ingredient.id)"
+          <Button
             size="small"
             icon="pi pi-plus"
+            :severity="Severity.WARNING"
+            :disabled="hasMaxQuantity(ingredient.id)"
             @click="increaseQuantity(ingredient)"
-            class="w-8 h-8 p-0"
             data-cy="increase-ingredient-button"
           />
         </div>
@@ -96,6 +95,8 @@
 
 <script setup lang="ts">
 import type { StepperItem, StepperType } from '~/types/stepper.type'
+import { Severity } from '~/types/primevue.type'
+import Button from '~/components/ui/button.component.vue'
 import Card from '~/components/ui/card.component.vue'
 import type { Ingredient } from '@fm-apps/db'
 

@@ -59,6 +59,7 @@
       <div class="fixed bottom-0 left-0 right-0 p-4">
         <Button
           data-cy="fmc-drawer-button"
+          :severity="Severity.SUCCESS"
           :text="fr.cart.title"
           :secondary-text="cartStore.totalItems"
           @click="openCart = true"
@@ -90,6 +91,7 @@
 import { fr } from '../../i18n/locales/fr'
 import Button from './button.component.vue'
 import BackLink from './back-link.component.vue'
+import { Severity } from '~/types/primevue.type'
 
 const cartStore = useCartStore()
 

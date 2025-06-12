@@ -40,7 +40,7 @@ export default {
     linkClasses() {
       return {
         'lg:top-18 top-[16px] left-[80%]': this.applySpecialStyles,
-        'absolute left-0 lg:left-5 top-0 lg:top-5 flex items-center space-x-1 lg:space-x-2 text-gray-600 hover:text-gray-800 transition-all duration-200 hover:bg-amber-200 hover:rounded-3xl hover:p-3': true,
+        'absolute left-0 lg:left-5 top-0 lg:top-5 flex items-center space-x-1 lg:space-x-2 text-gray-600 lg:hover:text-gray-800 transition-all duration-200 lg:hover:bg-amber-200 lg:hover:rounded-3xl lg:hover:p-3': true,
       }
     },
   },

@@ -120,12 +120,12 @@
         </div>
 
         <div data-cy="fmc-validate-cart">
-          <NuxtLink
-            to="/order/validate-basket"
-            class="w-full bg-gradient-to-r from-yellow-300 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2 text-center"
-          >
-            <span class="text-pink-700 lg:text-xl">{{ fr.validate.cart }}</span>
-          </NuxtLink>
+          <Button
+            :text="fr.validate.cart"
+            :severity="Severity.WARNING"
+            :full-width="Width.FULL"
+            :to="'/order/validate-basket'"
+          />
         </div>
       </div>
     </div>
@@ -135,6 +135,8 @@
 <script setup lang="ts">
 import { fr } from '../../../i18n/locales/fr'
 import IngredientSection from '../ingredient-section.component.vue'
+import Button from '~/components/ui/button.component.vue'
+import { Severity, Width } from '~/types/primevue.type'
 
 const cartStore = useCartStore()
 

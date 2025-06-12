@@ -1,20 +1,20 @@
 <template>
   <div class="px-6 py-4 border-t">
     <div class="flex justify-between">
-      <PrimeButton
+      <Button
         v-if="activeTabIndex === 0"
-        severity="secondary"
-        class="w-1/3"
+        :severity="Severity.SECONDARY"
+        :full-width="Width.ATHIRD"
+        :label="fr.stepper.cancel"
         @click="$emit('cancel')"
-        :label="t('stepper.cancel')"
         data-cy="fmc-cancel-step-button"
       />
       <PrimeButton
         v-if="activeTabIndex > 0"
-        severity="secondary"
+        :severity="Severity.SECONDARY"
+        :full-width="Width.ATHIRD"
+        :label="fr.stepper.back"
         @click="$emit('back')"
-        class="w-1/3"
-        :label="t('stepper.back')"
         data-cy="fmc-back-step-button"
       />
 
@@ -24,19 +24,19 @@
 
       <PrimeButton
         v-if="activeTabIndex === totalSteps - 1"
-        severity="success"
+        :severity="Severity.SUCCESS"
         :disabled="!hasAllMandatorySelections"
+        :full-width="Width.ATHIRD"
+        :label="fr.stepper.validate"
         @click="$emit('validate')"
-        class="w-1/3"
-        :label="t('stepper.validate')"
         data-cy="fmc-validate-step-button"
       />
       <PrimeButton
         v-else
         :disabled="!canProceed"
+        :full-width="Width.ATHIRD"
+        :label="fr.stepper.next"
         @click="$emit('next')"
-        class="w-1/3"
-        :label="t('stepper.next')"
         data-cy="fmc-next-step-button"
       />
     </div>
@@ -44,9 +44,9 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
+import Button from '~/components/ui/button.component.vue'
+import { Severity, Width } from '~/types/primevue.type'
+import { fr } from '~/i18n/locales/fr'
 
 interface Props {
   activeTabIndex: number

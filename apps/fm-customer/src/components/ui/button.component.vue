@@ -1,53 +1,114 @@
 <template>
   <PrimeButton
-    :severity="severity"
+    :disabled="disabled || loading"
+    :loading="loading"
+    :severity="mapSeverityToPrime(severity)"
     @click="handleClick"
-    :pt="{
-      root: {
-        class: `w-full bg-gradient-to-r from-yellow-300 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2 text-center border-none ${customClass}`,
-      },
-      label: {
-        class: 'text-pink-700 lg:text-xl',
-      },
-    }"
+    :pt="myPt"
   >
-    <div class="flex items-center gap-2">
-      <PrimeBadge v-if="secondaryText" severity="danger">{{
-        secondaryText
-      }}</PrimeBadge>
-      <span>{{ text }}</span>
+    <div v-if="text || secondaryText" class="flex items-center gap-2">
+      <PrimeBadge v-if="secondaryText">{{ secondaryText }}</PrimeBadge>
+      <span v-if="text" :class="textClass">{{ text }}</span>
     </div>
   </PrimeButton>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
+import { Severity, Width } from '~/types/primevue.type'
+import { useRouter } from 'vue-router'
+
 interface Props {
   text?: string
   secondaryText?: string | number
-  severity?:
-    | 'success'
-    | 'info'
-    | 'warning'
-    | 'danger'
-    | 'help'
-    | 'secondary'
-    | undefined
-  fullWidth?: boolean
+  severity?: Severity
+  fullWidth?: Width
   customClass?: string
+  textClass?: string
+  to?: string | object
+  disabled?: boolean
+  loading?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  severity: 'success',
-  fullWidth: true,
+  severity: Severity.PRIMARY,
+  fullWidth: Width.FULL,
   customClass: '',
+  disabled: false,
+  loading: false,
 })
 
 const emit = defineEmits<{
   click: []
   openCart: []
+  navigate: [destination: string | object]
 }>()
 
-const handleClick = () => {
-  emit('click')
+const mapSeverityToPrime = (severity: Severity) => {
+  const severityMap: Record<Severity, string> = {
+    [Severity.PRIMARY]: 'primary',
+    [Severity.SECONDARY]: 'secondary',
+    [Severity.SUCCESS]: 'success',
+    [Severity.INFO]: 'info',
+    [Severity.WARNING]: 'warn',
+    [Severity.DANGER]: 'danger',
+    [Severity.CONTRAST]: 'contrast',
+  }
+
+  return severityMap[severity] || 'primary'
+}
+
+const mapWidthToPrime = (width: Width) => {
+  const widthMap: Record<Width, string> = {
+    [Width.FULL]: 'w-full',
+    [Width.AUTO]: 'w-auto',
+    [Width.ATHIRD]: 'w-1/3',
+  }
+
+  return widthMap[width] || 'w-full'
+}
+
+const myPt = computed(() => {
+  return {
+    root: {
+      class: [
+        mapWidthToPrime(props.fullWidth),
+        props.customClass,
+
+        'font-bold',
+        'transition-all duration-200 ease-in-out',
+
+        {
+          'shadow-lg hover:shadow-xl': !props.disabled,
+          'transform hover:scale-[1.02] active:scale-[0.98]':
+            !props.disabled && !props.loading,
+          'hover:brightness-110': !props.disabled && !props.loading,
+        },
+
+        'focus:ring-2 focus:ring-offset-2 focus:outline-none',
+
+        {
+          'opacity-60 cursor-not-allowed': props.disabled,
+        },
+      ],
+    },
+  }
+})
+
+const router = useRouter()
+
+const handleClick = async () => {
+  if (props.to) {
+    await handleNavigation()
+  } else {
+    emit('click')
+  }
+}
+
+const handleNavigation = async () => {
+  if (props.to) {
+    await router.push(props.to)
+    emit('navigate', props.to)
+  }
 }
 </script>

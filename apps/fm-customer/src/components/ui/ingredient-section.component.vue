@@ -6,12 +6,11 @@
         class="flex items-center justify-between"
       >
         <span>{{ title }}</span>
-        <PrimeButton
+        <Button
           v-if="inCart"
           icon="pi pi-pencil"
-          size="large"
-          variant="outlined"
-          raised
+          :full-width="Width.AUTO"
+          :severity="Severity.SECONDARY"
           @click="handleClick"
         />
       </div>
@@ -49,12 +48,11 @@
         </div>
 
         <div class="self-end">
-          <PrimeButton
+          <Button
             v-if="inCart"
             icon="pi pi-pencil"
-            size="large"
-            variant="outlined"
-            raised
+            :full-width="Width.AUTO"
+            :severity="Severity.SECONDARY"
             @click="handleClick"
           />
         </div>
@@ -64,6 +62,9 @@
 </template>
 
 <script setup lang="ts">
+import Button from './button.component.vue' // Ajuste le chemin selon ton architecture
+import { Severity, Width } from '~/types/primevue.type'
+
 interface IngredientWithQuantity {
   ingredient: {
     id: string

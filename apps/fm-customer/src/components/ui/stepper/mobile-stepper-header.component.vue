@@ -3,13 +3,19 @@
     <h2 class="flex-grow pr-6 ml-4 text-xl font-bold text-center">
       {{ currentCategoryName }}
     </h2>
-    <button class="text-gray-500 hover:text-gray-800" @click="$emit('close')">
-      ✕
-    </button>
+    <Button
+      text="✕"
+      :severity="Severity.SECONDARY"
+      :full-width="Width.AUTO"
+      @click="$emit('close')"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+import Button from '~/components/ui/button.component.vue'
+import { Severity, Width } from '~/types/primevue.type'
+
 interface Props {
   currentCategoryName: string
 }

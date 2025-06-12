@@ -1,17 +1,16 @@
 <template>
   <div class="pt-8 flex justify-center">
-    <NuxtLink
+    <Button
+      :text="fr.order.title"
+      :full-width="Width.AUTO"
+      :severity="Severity.DANGER"
       to="/order/product-categories"
-      data-cy="fmc-order-button"
-      class="px-6 py-3 text-center bg-red-300 hover:bg-red-400 font-bold rounded-full shadow-md"
-    >
-      {{ t('order.title') }}
-    </NuxtLink>
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
+import Button from '~/components/ui/button.component.vue'
+import { fr } from '~/i18n/locales/fr'
+import { Severity, Width } from '~/types/primevue.type'
 </script>

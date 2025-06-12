@@ -1,20 +1,20 @@
 <template>
   <div :class="containerClasses">
-    <PrimeButton
+    <Button
       v-if="showCancelButton"
-      severity="secondary"
-      @click="$emit('cancel')"
-      :label="t('stepper.cancel')"
+      :severity="Severity.SECONDARY"
+      :label="fr.stepper.cancel"
       :class="buttonClasses"
+      @click="$emit('cancel')"
       data-cy="fmc-cancel-step-button"
     />
 
-    <PrimeButton
+    <Button
       v-if="showBackButton"
-      severity="secondary"
-      @click="$emit('back')"
-      :label="t('stepper.back')"
+      :severity="Severity.SECONDARY"
+      :label="fr.stepper.back"
       :class="buttonClasses"
+      @click="$emit('back')"
       data-cy="fmc-back-step-button"
     />
 
@@ -26,28 +26,30 @@
       {{ currentStep }} / {{ totalSteps }}
     </div>
 
-    <PrimeButton
+    <Button
       v-if="isLastStep"
-      severity="success"
+      :severity="Severity.SUCCESS"
       :disabled="!hasAllMandatorySelections"
-      @click="$emit('validate')"
-      :label="t('stepper.validate')"
+      :label="fr.stepper.validate"
       :class="buttonClasses"
+      @click="$emit('validate')"
       data-cy="fmc-validate-step-button"
     />
-    <PrimeButton
+    <Button
       v-else
       :disabled="!canProceed"
-      @click="$emit('next')"
-      :label="t('stepper.next')"
+      :label="fr.stepper.next"
       :class="buttonClasses"
+      @click="$emit('next')"
       data-cy="fmc-next-step-button"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
+import Button from '~/components/ui/button.component.vue'
+import { Severity, Width } from '~/types/primevue.type'
+import { fr } from '~/i18n/locales/fr'
 import type { NavigationProps } from '~/types/stepper.type'
 
 interface Props extends NavigationProps {}
@@ -65,8 +67,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 defineEmits<Emits>()
 
-const { t } = useI18n()
-
 const isMobile = computed(() => props.variant === 'mobile')
 const showCancelButton = computed(() => props.isFirstStep)
 const showBackButton = computed(() => !props.isFirstStep)
@@ -75,9 +75,9 @@ const showStepCounter = computed(
 )
 
 const containerClasses = computed(() => {
-  const base = 'flex justify-between'
+  const base = 'flex justify-between gap-4'
   return isMobile.value ? `${base} px-6 py-4 border-t` : `${base} mt-4`
 })
 
-const buttonClasses = computed(() => (isMobile.value ? 'w-1/3' : ''))
+const buttonClasses = computed(() => (isMobile.value ? Width.ATHIRD : ''))
 </script>

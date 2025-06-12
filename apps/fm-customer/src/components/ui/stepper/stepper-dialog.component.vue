@@ -38,11 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import type {
-  StepperProps,
-  StepperEmits,
-  StepperType,
-} from '~/types/stepper.type'
+import type { StepperProps, StepperEmits } from '~/types/stepper.type'
 import DesktopStepper from './desktop-stepper.component.vue'
 import MobileStepper from './mobile-stepper.component.vue'
 import { useResponsive } from '~/composables/stepper/useResponsive.composable'

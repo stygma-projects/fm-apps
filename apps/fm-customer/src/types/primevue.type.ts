@@ -7,3 +7,9 @@ export enum Severity {
   DANGER = 'error',
   CONTRAST = 'contrast',
 }
+
+export enum Width {
+  FULL = 'w-full',
+  AUTO = 'w-auto',
+  ATHIRD = 'w-1/3',
+}

@@ -30,17 +30,10 @@
               </span>
             </div>
             <div>
-              <PrimeButton
+              <Button
                 icon="pi pi-trash"
-                severity="danger"
-                size="small"
-                variant="outlined"
-                raised
-                :pt="{
-                  root: {
-                    class: 'hover:bg-red-500 w-full lg:w-full',
-                  },
-                }"
+                :severity="Severity.DANGER"
+                :full-width="Width.AUTO"
                 @click="$emit('remove', item.id)"
               />
             </div>
@@ -92,6 +85,8 @@
 <script lang="ts" setup>
 import IngredientSection from '~/components/ui/ingredient-section.component.vue'
 import StepperDialog from '~/components/ui/stepper/stepper-dialog.component.vue'
+import Button from '~/components/ui/button.component.vue'
+import { Severity, Width } from '~/types/primevue.type'
 import type { StepperType } from '~/types/stepper.type'
 import { fr } from '../../../i18n/locales/fr'
 
