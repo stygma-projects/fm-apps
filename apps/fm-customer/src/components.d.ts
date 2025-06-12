@@ -39,6 +39,7 @@ declare module 'vue' {
     PrimeStepPanels: typeof import('primevue/steppanels')['default']
     PrimeStepper: typeof import('primevue/stepper')['default']
     PrimeTag: typeof import('primevue/tag')['default']
+    PrimeToast: typeof import('primevue/toast')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     splitter: typeof import('./components/ui/splitter.component.vue')['default']
