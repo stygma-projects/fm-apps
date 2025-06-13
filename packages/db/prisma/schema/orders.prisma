@@ -35,9 +35,9 @@ model ProductInOrder {
   orderId         String          
   order           Order           @relation(fields: [orderId], references: [id])
   mandatory       Ingredient[]    @relation(name: "usedAsMandatoryIn")
-  optionalBase    Ingredient[]    @relation(name: "usedAsOptionalBaseIn")
   
-  extraIngredients ExtraIngredientInProductOrder[]
+  extraIngredients        ExtraIngredientInProductOrder[]
+  optionalBaseIngredient  OptionalBaseIngredientInProductOrder[]
 }
 
 model ExtraIngredientInProductOrder {
@@ -47,6 +47,17 @@ model ExtraIngredientInProductOrder {
   ingredientId     String
   ingredient       Ingredient     @relation(fields: [ingredientId], references: [id])
   quantity         Int            @default(1)
+  
+  @@unique([productInOrderId, ingredientId])
+}
+
+model OptionalBaseIngredientInProductOrder {
+  id               String         @id @default(uuid())
+  productInOrderId String
+  productInOrder   ProductInOrder @relation(fields: [productInOrderId], references: [id], onDelete: Cascade)
+  ingredientId     String
+  ingredient       Ingredient     @relation(fields: [ingredientId], references: [id])
+  isSelected         Boolean            @default(false)
   
   @@unique([productInOrderId, ingredientId])
 }

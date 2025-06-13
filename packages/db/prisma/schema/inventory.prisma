@@ -35,9 +35,9 @@ model Ingredient {
   optionalBaseIn       Product[]          @relation(name: "optionalBase")
   extraIn              Product[]          @relation(name: "extra")
   usedAsMandatoryIn    ProductInOrder[]   @relation(name: "usedAsMandatoryIn")
-  usedAsOptionalBaseIn ProductInOrder[]   @relation(name: "usedAsOptionalBaseIn")
   
-  extraInProductOrder  ExtraIngredientInProductOrder[]
+  extraInProductOrder         ExtraIngredientInProductOrder[]
+  optionalBaseInProductOrder  OptionalBaseIngredientInProductOrder[]
 }
 
 model IngredientCategory {

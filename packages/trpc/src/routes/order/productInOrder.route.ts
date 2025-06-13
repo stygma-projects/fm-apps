@@ -10,8 +10,10 @@ export const productInOrderRouter = router({
       },
       include: {
         mandatory: true,
-        optionalBase: true,
         extraIngredients: {
+          include: { ingredient: true },
+        },
+        optionalBaseIngredient: {
           include: { ingredient: true },
         },
         product: {
@@ -25,6 +27,7 @@ export const productInOrderRouter = router({
       },
     })
   }),
+
   getById: publicProcedure
     .input(
       z.object({
@@ -37,8 +40,10 @@ export const productInOrderRouter = router({
         where: { id },
         include: {
           mandatory: true,
-          optionalBase: true,
           extraIngredients: {
+            include: { ingredient: true },
+          },
+          optionalBaseIngredient: {
             include: { ingredient: true },
           },
           product: {
@@ -52,6 +57,7 @@ export const productInOrderRouter = router({
         },
       })
     }),
+
   getByOrderId: publicProcedure
     .input(
       z.object({
@@ -64,8 +70,10 @@ export const productInOrderRouter = router({
         where: { orderId: id },
         include: {
           mandatory: true,
-          optionalBase: true,
           extraIngredients: {
+            include: { ingredient: true },
+          },
+          optionalBaseIngredient: {
             include: { ingredient: true },
           },
           product: {
@@ -79,6 +87,7 @@ export const productInOrderRouter = router({
         },
       })
     }),
+
   create: publicProcedure
     .input(
       z.object({
@@ -86,7 +95,6 @@ export const productInOrderRouter = router({
         productId: z.string(),
         orderId: z.string(),
         mandatory: z.array(z.string()).default([]),
-        optionalBase: z.array(z.string()).default([]),
         extra: z
           .array(
             z.object({
@@ -95,10 +103,18 @@ export const productInOrderRouter = router({
             }),
           )
           .default([]),
+        optionalBase: z
+          .array(
+            z.object({
+              ingredientId: z.string(),
+              isSelected: z.boolean().default(true),
+            }),
+          )
+          .default([]),
       }),
     )
     .mutation(async ({ input }) => {
-      const { mandatory, optionalBase, extra, ...data } = input
+      const { mandatory, extra, optionalBase, ...data } = input
 
       return await prisma.productInOrder.create({
         data: {
@@ -106,18 +122,22 @@ export const productInOrderRouter = router({
           mandatory: {
             connect: mandatory.map((id) => ({ id })),
           },
-          optionalBase: {
-            connect: optionalBase.map((id) => ({ id })),
-          },
           extraIngredients: {
             create: extra.map((item) => ({
               ingredientId: item.ingredientId,
               quantity: item.quantity,
             })),
           },
+          optionalBaseIngredient: {
+            create: optionalBase.map((item) => ({
+              ingredientId: item.ingredientId,
+              isSelected: item.isSelected,
+            })),
+          },
         },
       })
     }),
+
   createMany: publicProcedure
     .input(
       z.array(
@@ -126,8 +146,22 @@ export const productInOrderRouter = router({
           productId: z.string(),
           orderId: z.string(),
           mandatory: z.array(z.string()).default([]),
-          optionalBase: z.array(z.string()).default([]),
-          extra: z.array(z.string()).default([]),
+          extra: z
+            .array(
+              z.object({
+                ingredientId: z.string(),
+                quantity: z.number().int().positive().default(1),
+              }),
+            )
+            .default([]),
+          optionalBase: z
+            .array(
+              z.object({
+                ingredientId: z.string(),
+                isSelected: z.boolean().default(true),
+              }),
+            )
+            .default([]),
         }),
       ),
     )
@@ -136,7 +170,7 @@ export const productInOrderRouter = router({
         const results = []
 
         for (const item of input) {
-          const { mandatory, optionalBase, extra, ...data } = item
+          const { mandatory, extra, optionalBase, ...data } = item
 
           const created = await tx.productInOrder.create({
             data: {
@@ -144,11 +178,17 @@ export const productInOrderRouter = router({
               mandatory: {
                 connect: mandatory.map((id) => ({ id })),
               },
-              optionalBase: {
-                connect: optionalBase.map((id) => ({ id })),
-              },
               extraIngredients: {
-                connect: extra.map((id) => ({ id })),
+                create: extra.map((extraItem) => ({
+                  ingredientId: extraItem.ingredientId,
+                  quantity: extraItem.quantity,
+                })),
+              },
+              optionalBaseIngredient: {
+                create: optionalBase.map((optionalItem) => ({
+                  ingredientId: optionalItem.ingredientId,
+                  isSelected: optionalItem.isSelected,
+                })),
               },
             },
           })
@@ -159,19 +199,34 @@ export const productInOrderRouter = router({
         return results
       })
     }),
+
   update: publicProcedure
     .input(
       z.object({
         id: z.string(),
         productId: z.string().optional(),
         orderId: z.string().optional(),
-        mandatory: z.array(z.string()).default([]).optional(),
-        optionalBase: z.array(z.string()).default([]).optional(),
-        extra: z.array(z.string()).default([]).optional(),
+        mandatory: z.array(z.string()).optional(),
+        extra: z
+          .array(
+            z.object({
+              ingredientId: z.string(),
+              quantity: z.number().int().positive().default(1),
+            }),
+          )
+          .optional(),
+        optionalBase: z
+          .array(
+            z.object({
+              ingredientId: z.string(),
+              isSelected: z.boolean(),
+            }),
+          )
+          .optional(),
       }),
     )
     .mutation(async ({ input }) => {
-      const { id, mandatory, optionalBase, extra, ...data } = input
+      const { id, mandatory, extra, optionalBase, ...data } = input
 
       return await prisma.productInOrder.update({
         where: { id },
@@ -182,19 +237,28 @@ export const productInOrderRouter = router({
                 set: mandatory.map((id) => ({ id })),
               }
             : undefined,
-          optionalBase: optionalBase
-            ? {
-                set: optionalBase.map((id) => ({ id })),
-              }
-            : undefined,
           extraIngredients: extra
             ? {
-                set: extra.map((id) => ({ id })),
+                deleteMany: {},
+                create: extra.map((item) => ({
+                  ingredientId: item.ingredientId,
+                  quantity: item.quantity,
+                })),
+              }
+            : undefined,
+          optionalBaseIngredient: optionalBase
+            ? {
+                deleteMany: {},
+                create: optionalBase.map((item) => ({
+                  ingredientId: item.ingredientId,
+                  isSelected: item.isSelected,
+                })),
               }
             : undefined,
         },
       })
     }),
+
   delete: publicProcedure
     .input(
       z.object({
@@ -206,6 +270,7 @@ export const productInOrderRouter = router({
         where: { id: input.id },
       })
     }),
+
   deleteMany: publicProcedure
     .input(z.array(z.string()))
     .mutation(async ({ input }) => {
