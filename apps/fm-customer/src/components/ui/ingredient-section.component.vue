@@ -31,14 +31,16 @@
               <span class="text-gray-700 text-sm lg:text-base">
                 {{ item.label }}
                 <span
-                  v-if="item.quantity > 1"
+                  v-if="item.quantity > 0"
                   class="font-semibold text-gray-900 ml-1"
                 >
-                  x{{ item.quantity }}
+                  {{ isOptionalBase ? '-' : 'x' }}{{ item.quantity }}
                 </span>
               </span>
               <span
-                v-if="!isMandatory && item.price > 0"
+                v-if="
+                  !isMandatory && item.price > 0 && !isOptionalBaseRemoved(item)
+                "
                 class="font-medium text-red-700 text-sm lg:text-base"
               >
                 {{ item.totalPrice.toFixed(2) }} €
@@ -62,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import Button from './button.component.vue' // Ajuste le chemin selon ton architecture
+import Button from '~/components/ui/button.component.vue'
 import { Severity, Width } from '~/types/primevue.type'
 
 interface IngredientWithQuantity {
@@ -71,7 +73,7 @@ interface IngredientWithQuantity {
     label: string
     price: number
   }
-  quantity: number
+  quantity: number | boolean
 }
 
 interface SimpleIngredient {
@@ -97,19 +99,16 @@ interface Props {
   cardPt?: object
   isMandatory?: boolean
   inCart?: boolean
+  isOptionalBase?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   color: 'red',
+  isOptionalBase: false,
 })
 
 const isNewFormat = (item: any): item is IngredientWithQuantity => {
-  return (
-    item &&
-    typeof item === 'object' &&
-    'ingredient' in item &&
-    'quantity' in item
-  )
+  return item && 'quantity' in item
 }
 
 const displayItems = computed((): DisplayIngredient[] => {
@@ -123,7 +122,12 @@ const displayItems = computed((): DisplayIngredient[] => {
 
     if (isNewFormat(item)) {
       ingredient = item.ingredient
-      quantity = item.quantity
+      quantity =
+        typeof item.quantity === 'boolean'
+          ? item.quantity
+            ? 0
+            : 1
+          : item.quantity || 0
     } else {
       ingredient = item as SimpleIngredient
       quantity = 1
@@ -193,5 +197,9 @@ const emit = defineEmits<{
 
 const handleClick = () => {
   emit('click')
+}
+
+const isOptionalBaseRemoved = (item: DisplayIngredient): boolean => {
+  return props.isOptionalBase && item.quantity > 0
 }
 </script>

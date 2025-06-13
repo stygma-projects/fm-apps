@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Interface pour mandatory (unchanged) -->
     <Card
       v-if="stepperType === 'mandatory'"
       :items="ing"
@@ -52,7 +51,11 @@
           <Button
             size="small"
             icon="pi pi-minus"
-            :disabled="getIngredientQuantity(ingredient.id) === 0"
+            :disabled="
+              stepperType === 'optionalBase'
+                ? false
+                : getIngredientQuantity(ingredient.id) === 0
+            "
             :severity="Severity.SECONDARY"
             @click="decreaseQuantity(ingredient)"
             data-cy="decrease-ingredient-button"
@@ -66,6 +69,7 @@
           </span>
 
           <Button
+            v-if="stepperType === 'extra'"
             size="small"
             icon="pi pi-plus"
             :severity="Severity.WARNING"
@@ -73,11 +77,12 @@
             @click="increaseQuantity(ingredient)"
             data-cy="increase-ingredient-button"
           />
+          <div v-else class="w-8"></div>
         </div>
       </div>
 
       <div
-        v-if="totalSelectedPrice > 0"
+        v-if="totalSelectedPrice > 0 && stepperType === 'extra'"
         class="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg"
       >
         <div class="flex justify-between items-center">
@@ -114,7 +119,7 @@ const props = defineProps<{
 const maxQuantity = computed(() => props.maxQuantityPerIngredient || 10)
 
 const selectedIngredients = ref<Ingredient[]>([])
-const ingredientQuantities = ref<Record<string, number>>({})
+const ingredientQuantities = ref<Record<string, number | boolean>>({})
 const isUpdatingFromProps = ref(false)
 
 const ing = computed(() => {
@@ -143,10 +148,11 @@ const totalSelectedPrice = computed(() => {
   let total = 0
   Object.entries(ingredientQuantities.value).forEach(
     ([ingredientId, quantity]) => {
-      if (quantity > 0) {
+      const qty = getSafeQuantity(quantity)
+      if (qty > 0) {
         const ingredient = ing.value.find((i) => i.id === ingredientId)
-        if (ingredient && ingredient.price) {
-          total += ingredient.price * quantity
+        if (ingredient?.price) {
+          total += ingredient.price * qty
         }
       }
     },
@@ -154,7 +160,6 @@ const totalSelectedPrice = computed(() => {
   return total
 })
 
-// Nom dynamique selon le type
 const totalSectionName = computed(() => {
   switch (stepperType.value) {
     case 'extra':
@@ -167,14 +172,26 @@ const totalSectionName = computed(() => {
 })
 
 const getIngredientQuantity = (ingredientId: string): number => {
-  return ingredientQuantities.value[ingredientId] || 0
+  const quantity = ingredientQuantities.value[ingredientId]
+  if (stepperType.value === 'optionalBase') {
+    return quantity === false ? 1 : 0
+  }
+  return typeof quantity === 'number' ? quantity : 0
+}
+
+const getSafeQuantity = (quantity: number | boolean | undefined): number => {
+  if (quantity === undefined) return 0
+  return typeof quantity === 'boolean' ? (quantity ? 1 : 0) : quantity
 }
 
 const hasMaxQuantity = (ingredientId: string): boolean => {
-  return getIngredientQuantity(ingredientId) >= maxQuantity.value
+  const currentQty = getSafeQuantity(ingredientQuantities.value[ingredientId])
+  return currentQty >= maxQuantity.value
 }
 
 const increaseQuantity = (ingredient: Ingredient) => {
+  if (stepperType.value !== 'extra') return
+
   const currentQuantity = getIngredientQuantity(ingredient.id)
   if (currentQuantity < maxQuantity.value) {
     ingredientQuantities.value[ingredient.id] = currentQuantity + 1
@@ -183,41 +200,108 @@ const increaseQuantity = (ingredient: Ingredient) => {
 }
 
 const decreaseQuantity = (ingredient: Ingredient) => {
-  const currentQuantity = getIngredientQuantity(ingredient.id)
-  if (currentQuantity > 0) {
-    ingredientQuantities.value[ingredient.id] = currentQuantity - 1
+  if (stepperType.value === 'optionalBase') {
+    ingredientQuantities.value = {
+      ...ingredientQuantities.value,
+      [ingredient.id]: true,
+    }
     updateSelectedIngredientsFromQuantities()
+  } else if (stepperType.value === 'extra') {
+    const currentQty = getSafeQuantity(
+      ingredientQuantities.value[ingredient.id],
+    )
+    if (currentQty > 0) {
+      ingredientQuantities.value = {
+        ...ingredientQuantities.value,
+        [ingredient.id]: currentQty - 1,
+      }
+      updateSelectedIngredientsFromQuantities()
+    }
   }
 }
 
 const updateSelectedIngredientsFromQuantities = () => {
   const newSelection: Ingredient[] = []
 
-  Object.entries(ingredientQuantities.value).forEach(
-    ([ingredientId, quantity]) => {
-      if (quantity > 0) {
-        const ingredient = ing.value.find((i) => i.id === ingredientId)
-        if (ingredient) {
-          for (let i = 0; i < quantity; i++) {
-            newSelection.push(ingredient)
-          }
-        }
+  if (stepperType.value === 'optionalBase') {
+    ing.value.forEach((ingredient) => {
+      if (ingredientQuantities.value[ingredient.id] === true) {
+        newSelection.push(ingredient)
       }
-    },
-  )
+    })
+  } else {
+    Object.entries(ingredientQuantities.value).forEach(
+      ([ingredientId, quantity]) => {
+        const ingredient = ing.value.find((i) => i.id === ingredientId)
+        if (!ingredient) return
+
+        const qty = typeof quantity === 'number' ? quantity : 0
+        for (let i = 0; i < qty; i++) {
+          newSelection.push(ingredient)
+        }
+      },
+    )
+  }
 
   selectedIngredients.value = newSelection
 }
 
 const updateQuantitiesFromSelections = (selections: Ingredient[]) => {
-  // Reset quantities
-  ingredientQuantities.value = {}
+  if (stepperType.value === 'optionalBase') {
+    const newQuantities = { ...ingredientQuantities.value }
+    ing.value.forEach((ingredient) => {
+      newQuantities[ingredient.id] = selections.some(
+        (s) => s.id === ingredient.id,
+      )
+    })
+    ingredientQuantities.value = newQuantities
+  } else {
+    ingredientQuantities.value = {}
+    selections.forEach((ingredient) => {
+      const currentQty = getSafeQuantity(
+        ingredientQuantities.value[ingredient.id],
+      )
+      ingredientQuantities.value[ingredient.id] = currentQty + 1
+    })
+  }
+}
 
-  // Count occurrences of each ingredient
-  selections.forEach((ingredient) => {
-    ingredientQuantities.value[ingredient.id] =
-      (ingredientQuantities.value[ingredient.id] || 0) + 1
-  })
+const initializeOptionalBase = () => {
+  if (stepperType.value === 'optionalBase') {
+    const newQuantities = { ...ingredientQuantities.value }
+    let hasChanges = false
+
+    ing.value.forEach((ingredient) => {
+      if (!(ingredient.id in newQuantities)) {
+        newQuantities[ingredient.id] = false
+        hasChanges = true
+      }
+    })
+
+    if (hasChanges) {
+      ingredientQuantities.value = newQuantities
+      updateSelectedIngredientsFromQuantities()
+    }
+  }
+}
+
+const selectIngredient = (ingredient: Ingredient) => {
+  if (stepperType.value === 'mandatory') {
+    selectedIngredients.value = [ingredient]
+  } else if (stepperType.value === 'optionalBase') {
+    const currentValue = ingredientQuantities.value[ingredient.id]
+    ingredientQuantities.value[ingredient.id] = !currentValue
+    updateSelectedIngredientsFromQuantities()
+  } else {
+    const index = selectedIngredients.value.findIndex(
+      (item) => item.id === ingredient.id,
+    )
+    if (index > -1) {
+      selectedIngredients.value.splice(index, 1)
+    } else {
+      selectedIngredients.value.push(ingredient)
+    }
+  }
 }
 
 watch(
@@ -237,6 +321,20 @@ watch(
 )
 
 watch(
+  () => [ing.value, stepperType.value],
+  () => {
+    if (stepperType.value === 'optionalBase' && ing.value.length > 0) {
+      const hasExistingSelections =
+        Object.keys(ingredientQuantities.value).length > 0
+      if (!hasExistingSelections) {
+        initializeOptionalBase()
+      }
+    }
+  },
+  { immediate: true },
+)
+
+watch(
   selectedIngredients,
   (newSelection: Ingredient[]) => {
     if (!isUpdatingFromProps.value) {
@@ -245,21 +343,6 @@ watch(
   },
   { deep: true },
 )
-
-const selectIngredient = (ingredient: Ingredient) => {
-  if (stepperType.value === 'mandatory') {
-    selectedIngredients.value = [ingredient]
-  } else {
-    const index = selectedIngredients.value.findIndex(
-      (item) => item.id === ingredient.id,
-    )
-    if (index > -1) {
-      selectedIngredients.value.splice(index, 1)
-    } else {
-      selectedIngredients.value.push(ingredient)
-    }
-  }
-}
 
 const emit = defineEmits<{
   (e: 'update-selection', selection: Ingredient[]): void

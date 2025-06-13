@@ -59,7 +59,6 @@ const { mutate: createOrder } = useCreateOrder()
 const { mutate: createProductInOrder } = useCreateProductInOrder()
 const { mutate: createManyProductInOrder } = useCreateManyProductInOrder()
 
-// redirect to categorie page if he deleted everything in the cart
 watch(
   () => cartStore.items.length,
   (actualLength: number) => {
@@ -70,28 +69,17 @@ watch(
 )
 
 const handleConfirmCreateOrder = async () => {
-  try {
-    const orderData = cartStore.getOrderData()
-    const createdOrder = await createOrder(orderData)
+  const orderData = cartStore.getOrderData()
+  const createdOrder = await createOrder(orderData)
 
-    const productInOrderData = cartStore.getProductInOrderData(createdOrder.id)
+  const productInOrderData = cartStore.getProductInOrderData(createdOrder.id)
 
-    console.log(
-      'Data sent to API:',
-      JSON.stringify(productInOrderData, null, 2),
-    )
+  const create =
+    productInOrderData.length > 1
+      ? await createManyProductInOrder(productInOrderData)
+      : await createProductInOrder(productInOrderData[0])
 
-    const create =
-      productInOrderData.length > 1
-        ? await createManyProductInOrder(productInOrderData)
-        : await createProductInOrder(productInOrderData[0])
-
-    console.log('API Response:', create)
-
-    cartStore.clearCart()
-    await navigateTo('/')
-  } catch (error) {
-    console.error('Error creating order:', error)
-  }
+  cartStore.clearCart()
+  await navigateTo('/')
 }
 </script>

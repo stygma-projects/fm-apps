@@ -125,12 +125,25 @@ const handleStepperOpen = async () => {
 
 const handleDirectAdd = async () => {
   hasAddedDirectly.value = true
-  cartStore.addItemDirectly(props.item)
+
+  if (
+    stepperType.value === 'optionalBase' &&
+    props.item?.optionalBase?.length > 0
+  ) {
+    const defaultSelections = { optionalBase: [...props.item.optionalBase] }
+    cartStore.addItem(props.item, defaultSelections, stepperType.value)
+  } else {
+    cartStore.addItemDirectly(props.item)
+  }
 
   emit('complete', {
     item: props.item,
     step: '1',
-    selections: {},
+    selections:
+      stepperType.value === 'optionalBase' &&
+      props.item?.optionalBase?.length > 0
+        ? { optionalBase: [...props.item.optionalBase] }
+        : {},
     stepperType: stepperType.value,
   })
 

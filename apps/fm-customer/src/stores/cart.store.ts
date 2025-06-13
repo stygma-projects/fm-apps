@@ -3,10 +3,11 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { StepperItem, StepperType } from '~/types/stepper.type'
 
-// Interface pour les ingrédients avec quantité
+type IngredientQuantity = number | boolean
+
 interface IngredientWithQuantity {
   ingredient: Ingredient
-  quantity: number
+  quantity: IngredientQuantity
 }
 
 type CartItem = {
@@ -24,7 +25,6 @@ export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>([])
   const stepperSelections = ref<Record<string, Record<string, any[]>>>({})
 
-  // Fonction helper pour convertir un tableau d'ingrédients en ingrédients avec quantités
   const groupIngredientsByQuantity = (
     ingredients: Ingredient[],
   ): IngredientWithQuantity[] => {
@@ -34,7 +34,10 @@ export const useCartStore = defineStore('cart', () => {
       const key = ingredient.id
 
       if (grouped.has(key)) {
-        grouped.get(key)!.quantity += 1
+        const existing = grouped.get(key)!
+        if (typeof existing.quantity === 'number') {
+          existing.quantity += 1
+        }
       } else {
         grouped.set(key, {
           ingredient,
@@ -163,15 +166,19 @@ export const useCartStore = defineStore('cart', () => {
 
   const totalPrice = computed(() => {
     return items.value.reduce((total, item) => {
-      let itemTotal = 0
+      let itemTotal = item.product.price ?? 0
 
-      itemTotal += item.product.price ?? 0
+      const calculateIngredientPrice = (
+        ingredient: Ingredient,
+        quantity: number | boolean,
+      ) => {
+        const quantityValue =
+          typeof quantity === 'boolean' ? (quantity ? 1 : 0) : quantity
+        return (ingredient.price ?? 0) * quantityValue
+      }
 
-      item.optionalBase.forEach(({ ingredient, quantity }) => {
-        itemTotal += (ingredient.price ?? 0) * quantity
-      })
       item.extra.forEach(({ ingredient, quantity }) => {
-        itemTotal += (ingredient.price ?? 0) * quantity
+        itemTotal += calculateIngredientPrice(ingredient, quantity)
       })
 
       return total + itemTotal
@@ -217,13 +224,40 @@ export const useCartStore = defineStore('cart', () => {
     ): string[] => {
       const expanded: string[] = []
       ingredientsWithQty.forEach(({ ingredient, quantity }) => {
-        // Gestion des objets réactifs Vue
         const ingredientId = toRaw(ingredient)?.id || ingredient.id
-        for (let i = 0; i < quantity; i++) {
+        const count =
+          typeof quantity === 'boolean' ? (quantity ? 1 : 0) : quantity
+        for (let i = 0; i < count; i++) {
           expanded.push(ingredientId)
         }
       })
       return expanded
+    }
+
+    const convertExtraToQuantityFormat = (
+      ingredientsWithQty: IngredientWithQuantity[],
+    ) => {
+      return ingredientsWithQty.map(({ ingredient, quantity }) => {
+        const quantityValue =
+          typeof quantity === 'boolean' ? (quantity ? 1 : 0) : quantity
+        return {
+          ingredientId: toRaw(ingredient)?.id || ingredient.id,
+          quantity: quantityValue,
+        }
+      })
+    }
+
+    const convertOptionalBase = (
+      ingredientsWithQty: IngredientWithQuantity[],
+    ) => {
+      return ingredientsWithQty.map(({ ingredient, quantity }) => {
+        const quantityValue =
+          typeof quantity === 'boolean' ? (quantity ? 1 : 0) : quantity
+        return {
+          ingredientId: toRaw(ingredient)?.id || ingredient.id,
+          quantity: quantityValue,
+        }
+      })
     }
 
     return items.value.map((item) => ({
@@ -231,8 +265,8 @@ export const useCartStore = defineStore('cart', () => {
       productId: item.productId,
       orderId: orderId,
       mandatory: expandIngredients(item.mandatory),
-      optionalBase: expandIngredients(item.optionalBase),
-      extra: expandIngredients(item.extra),
+      optionalBase: convertOptionalBase(item.optionalBase),
+      extra: convertExtraToQuantityFormat(item.extra),
     }))
   }
 

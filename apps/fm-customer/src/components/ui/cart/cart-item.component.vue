@@ -62,6 +62,7 @@
               :title="fr.cart.info.optionalBaseIngredients"
               :items="item.optionalBase"
               :in-cart="true"
+              :is-optional-base="true"
               @click="handleIngredientClick('optionalBase')"
               color="blue"
             />

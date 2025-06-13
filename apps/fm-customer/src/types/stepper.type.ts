@@ -50,7 +50,7 @@ export interface NavigationProps {
 }
 
 export interface StepInfo {
-  category: IngredientCategory | { id: string; label: string }
+  category: IngredientCategory
   originalIndex: number
   stepIndex: number
   isExtra?: boolean
@@ -64,12 +64,11 @@ export interface StepperCompletionData {
   stepperType?: StepperType
 }
 
-// Interface pour les props des composants desktop/mobile
 export interface BaseStepperProps {
   visible: boolean
   availableSteps: StepInfo[]
   currentCategoryName: string
-  currentStepSelections: any[]
+  currentStepSelections: number[]
   canProceed: boolean
   hasAllMandatorySelections: boolean
   item: StepperItem
@@ -84,16 +83,14 @@ export interface MobileStepperProps extends BaseStepperProps {
   activeTabIndex: number
 }
 
-// Interface pour StepInfo
 export interface StepInfo {
-  category: IngredientCategory | { id: string; label: string }
+  category: IngredientCategory
   originalIndex: number
   stepIndex: number
   isExtra?: boolean
   isOptionalBase?: boolean
 }
 
-// Types pour la navigation
 export interface NavigationProps {
   isFirstStep: boolean
   isLastStep: boolean
