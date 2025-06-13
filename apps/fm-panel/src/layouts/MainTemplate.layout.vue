@@ -91,11 +91,15 @@ const menuItems = ref([
     ],
   },
   {
-    category: t('sidebarMenu.accounts.label'),
+    category: t('sidebarMenu.administration.label'),
     subcategory: [
       {
-        label: t('sidebarMenu.accounts.subCategories.usersPanel'),
+        label: t('sidebarMenu.administration.subCategories.usersPanel'),
         to: '/user/list',
+      },
+      {
+        label: t('sidebarMenu.administration.subCategories.schedulePanel'),
+        to: '/schedule/management',
       },
     ],
   },

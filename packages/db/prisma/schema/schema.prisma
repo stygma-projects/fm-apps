@@ -71,3 +71,27 @@ model Verification {
 
   @@map("verification")
 }
+
+enum Days {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY 
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+model OpeningHour {
+  id            String          @id @default(uuid())
+  startTime     DateTime
+  endTime       DateTime
+  schedule      Schedule[]      @relation(name: "usedInDay")
+}
+
+model Schedule {
+  id                String            @id @default(uuid())
+  day               Days              @unique
+  openingHours      OpeningHour[]     @relation(name: "usedInDay")
+  opened            Boolean           @default(false)
+}

@@ -35,10 +35,11 @@ export const fr = {
         commande: 'Commandes',
       },
     },
-    accounts : {
+    administration : {
       label: 'Administration',
       subCategories: {
         usersPanel: 'Gestion des utilisateurs',
+        schedulePanel: 'Gestion des horaires',
       },
     },
   },
@@ -258,5 +259,52 @@ export const fr = {
       searchPlaceholder: 'Rechercher',
       deleteManyButton: 'Supprimer',
     },
-  }
+  },
+  schedule: {
+    table: {
+      headers: {
+        day: 'Jour',
+        openingHours: 'Horaires',
+        opened: 'Ouvert',
+      },
+    },
+    toolBar: {
+      addButton: 'Nouveau produit',
+      deleteManyButton: 'Supprimer',
+    },
+    title: 'Horaires d\'ouvertures',
+    dialogs: {
+      editDialog: {
+        title: 'Modification des horaires',
+      },
+      deleteDialog: {
+        title: 'Confirmation de la suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer ?',
+      },
+      createDialog: {
+        title: 'Nouvel horaire',
+      },
+      deleteManyDialog: {
+        title: 'Confirmation de la suppression',
+      },
+    },
+    booleanValues: {
+      true: 'Oui',
+      false: 'Non',
+    },
+    opened: {
+      open: 'Ouvert',
+      closed: 'Fermé',
+    },
+    noOpeningHours: 'Pas d\'horaires disponibles',
+    days: {
+      MONDAY: 'Lundi',
+      TUESDAY: 'Mardi',
+      WEDNESDAY: 'Mercredi',
+      THURSDAY: 'Jeudi',
+      FRIDAY: 'Vendredi',
+      SATURDAY: 'Samedi',
+      SUNDAY: 'Dimanche'
+    }
+  },
 }

@@ -3,11 +3,13 @@ import { inventoryRouter } from './routes/inventory/inventory.route'
 import { orderRouter } from './routes/order/order.route'
 import { inferRouterInputs, inferRouterOutputs } from '@trpc/server'
 import { authRouter } from "./routes/auth/auth.route"
+import { administrationRouter } from './routes/administration/administration.route'
 
 export const appRouter = router({
   inventory: inventoryRouter,
   order: orderRouter,
-  auth: authRouter
+  auth: authRouter, 
+  administration: administrationRouter
 })
 
 export type AppRouter = typeof appRouter

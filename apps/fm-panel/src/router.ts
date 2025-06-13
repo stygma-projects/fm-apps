@@ -6,6 +6,7 @@ import IngredientInventoryPage from './pages/IngredientInventory.page.vue'
 import ProductPage from './pages/ProductsInventory.page.vue'
 import CommandeInventoryPage from './pages/OrderInventory.page.vue'
 import UsersPanelPage from './pages/UsersPanel.page.vue'
+import SchedulePanelPage from './pages/SchedulePanel.page.vue'
 
 const routes = [
   {
@@ -55,6 +56,16 @@ const routes = [
           },
         ],
       },
+      {
+        path: 'schedule',
+        children: [
+          { path: '', redirect: '/schedule/management' },
+          {
+            path: 'management',
+            component: SchedulePanelPage,
+          },
+        ],
+      }
     ],
   },
 ]
